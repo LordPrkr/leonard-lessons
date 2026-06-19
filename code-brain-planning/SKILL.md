@@ -7,19 +7,21 @@ description: "Code Brain planning for broad, risky, cross-cutting, or approval-f
 
 Use this for durable planning, not ordinary edits. Store artifacts in `~/Documents/Code Brain/<project>/`, where `<project>` is the current repo/worktree name. Create the vault directory if missing.
 
+When planning sharpens domain language or records architectural decisions, invoke `domain-modeling`; its glossary and ADR source of truth is the Code Brain, not the repo.
+
 ## Steps
 
 ### 1. Scout
 
 Inspect relevant code directly or with a scout subagent when the area is large.
 
-Done when `canvases/<TOPIC>.canvas` or `notes/<TOPIC> Context.md` records the current setup and every likely touchpoint is named.
+Done when `canvases/<TOPIC>.canvas` or `notes/<TOPIC> Context.md` records the current setup, every likely touchpoint is named, and any domain-modeling questions are queued.
 
 ### 2. Plan
 
-Write `plans/<00X_TOPIC>.md` with the goal, files to change, test strategy, verification commands, risks, and links to scout artifacts. Add Mermaid diagrams in `diagrams/` only when they clarify execution, state, or data flow.
+Write `plans/<00X_TOPIC>.md` with the goal, files to change, test strategy, verification commands, risks, links to scout artifacts, and links to any Code Brain ADRs. Add Mermaid diagrams in `diagrams/` only when they clarify execution, state, or data flow.
 
-Done when the plan is specific enough for another agent to implement without rediscovering the design.
+Done when the plan is specific enough for another agent to implement without rediscovering the design, and any resolved domain terms or decisions are linked from `domain/`.
 
 ### 3. Review
 

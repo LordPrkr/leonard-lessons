@@ -2,6 +2,8 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
+These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, and ADRs. They treat the code repository as evidence and implementation, not the documentation store.
+
 ## Install
 
 List available skills:
@@ -31,7 +33,22 @@ npx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent claud
 ## Skills
 
 - `effective-engineer` — tight inspect, test, implement, verify, and summarize loop for non-trivial code changes.
+
+  ```bash
+  npx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
+  ```
+
 - `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes.
+
+  ```bash
+  npx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
+  ```
+
+- `domain-modeling` — Code Brain glossary and ADR capture for domain language and durable decisions.
+
+  ```bash
+  npx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
+  ```
 
 ## Other Useful Skills
 
@@ -47,12 +64,6 @@ npx skills@latest add mattpocock/skills/skills/engineering/tdd
 
 ```
 npx skills@latest add mattpocock/skills/skills/productivity/grilling
-```
-
-- `domain-modeling` - Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.
-
-```
-npx skills@latest add mattpocock/skills/skills/engineering/domain-modeling
 ```
 
 - `grill-with-docs` - a relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.
