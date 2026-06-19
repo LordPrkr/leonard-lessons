@@ -30,12 +30,12 @@ npx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent claud
 
 ## Skills
 
-- `effective-engineer` — plan, review, implement, verify, and review substantial code changes with explicit artifacts.
+- `effective-engineer` — tight inspect, test, implement, verify, and summarize loop for non-trivial code changes.
+- `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes.
 
 ## Other Useful Skills
 
 ### [mattpocock/skills](mattpocock/skills)
-
 
 - `tdd` - test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 
