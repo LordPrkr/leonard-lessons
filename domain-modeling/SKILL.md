@@ -1,11 +1,11 @@
 ---
 name: domain-modeling
-description: "Code Brain domain modeling. Use when planning reveals domain language, ubiquitous language, bounded contexts, or architectural decisions that should be captured in the Code Brain instead of the repo."
+description: "Code Brain domain modeling. Use with /code-brain when planning reveals domain language, bounded contexts, or architectural decisions to capture outside the repo."
 ---
 
 # Domain Modeling
 
-Build the domain model in the Code Brain project folder's `domain/` directory, not in the source repo. Resolve that folder using `../CODE_BRAIN_LOCATION.md`; this matters in git worktrees. Treat code as evidence, not the storage location.
+Build the domain model in `/code-brain`'s project folder under `domain/`, not in the source repo. Treat code as evidence, not the storage location.
 
 ## Files
 

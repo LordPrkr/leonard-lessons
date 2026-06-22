@@ -1,11 +1,11 @@
 ---
 name: code-brain-planning
-description: "Code Brain planning for broad, risky, cross-cutting, or approval-first code changes. Use when the user asks for Code Brain, durable planning artifacts, design review, scout/oracle review, or an implementation plan before coding."
+description: "Code Brain planning for broad, risky, cross-cutting, or approval-first code changes. Use with /code-brain when the user asks for durable planning artifacts, design review, scout/oracle review, or an implementation plan before coding."
 ---
 
 # Code Brain Planning
 
-Use this for durable planning, not ordinary edits. Store artifacts in the Code Brain project folder. Resolve that folder using `../CODE_BRAIN_LOCATION.md`; this matters in git worktrees. Create the vault directory if missing.
+Use this for durable planning, not ordinary edits. Store artifacts using `/code-brain` project folder conventions. Create the vault directory if missing.
 
 When planning sharpens domain language or records architectural decisions, invoke `domain-modeling`; its glossary and ADR source of truth is the Code Brain, not the repo.
 

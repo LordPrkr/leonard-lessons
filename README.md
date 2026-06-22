@@ -2,7 +2,7 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
-These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, and ADRs. Project folders are resolved by canonical repo name; see [`CODE_BRAIN_LOCATION.md`](CODE_BRAIN_LOCATION.md) for worktree-safe rules. They treat the code repository as evidence and implementation, not the documentation store.
+These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, ADRs, resources, and review notes. The `/code-brain` skill owns folder structure and worktree-safe repo resolution. They treat the code repository as evidence and implementation, not the documentation store.
 
 ## Install
 
@@ -32,21 +32,29 @@ npx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent claud
 
 ## Skills
 
+- `code-brain` — shared Code Brain structure and worktree-safe project folder conventions.
+
+  ```bash
+  npx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  ```
+
 - `effective-engineer` — tight inspect, test, implement, verify, and summarize loop for non-trivial code changes.
 
   ```bash
   npx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
-- `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes.
+- `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes. Depends on `/code-brain`.
 
   ```bash
+  npx skills add LordPrkr/leonard-lessons --skill code-brain --global
   npx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
-- `domain-modeling` — Code Brain glossary and ADR capture for domain language and durable decisions.
+- `domain-modeling` — Code Brain glossary and ADR capture for domain language and durable decisions. Depends on `/code-brain`.
 
   ```bash
+  npx skills add LordPrkr/leonard-lessons --skill code-brain --global
   npx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   ```
 
