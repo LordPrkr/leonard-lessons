@@ -2,7 +2,7 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
-These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, and ADRs. They treat the code repository as evidence and implementation, not the documentation store.
+These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, and ADRs. Project folders are resolved by canonical repo name; see [`CODE_BRAIN_LOCATION.md`](CODE_BRAIN_LOCATION.md) for worktree-safe rules. They treat the code repository as evidence and implementation, not the documentation store.
 
 ## Install
 

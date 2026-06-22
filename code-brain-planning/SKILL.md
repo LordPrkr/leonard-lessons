@@ -5,7 +5,7 @@ description: "Code Brain planning for broad, risky, cross-cutting, or approval-f
 
 # Code Brain Planning
 
-Use this for durable planning, not ordinary edits. Store artifacts in `~/Documents/Code Brain/<project>/`, where `<project>` is the current repo/worktree name. Create the vault directory if missing.
+Use this for durable planning, not ordinary edits. Store artifacts in the Code Brain project folder. Resolve that folder using `../CODE_BRAIN_LOCATION.md`; this matters in git worktrees. Create the vault directory if missing.
 
 When planning sharpens domain language or records architectural decisions, invoke `domain-modeling`; its glossary and ADR source of truth is the Code Brain, not the repo.
 

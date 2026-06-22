@@ -5,7 +5,7 @@ description: "Code Brain domain modeling. Use when planning reveals domain langu
 
 # Domain Modeling
 
-Build the domain model in `~/Documents/Code Brain/<project>/domain/`, not in the source repo. Treat code as evidence, not the storage location.
+Build the domain model in the Code Brain project folder's `domain/` directory, not in the source repo. Resolve that folder using `../CODE_BRAIN_LOCATION.md`; this matters in git worktrees. Treat code as evidence, not the storage location.
 
 ## Files
 
