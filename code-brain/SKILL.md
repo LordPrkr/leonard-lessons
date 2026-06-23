@@ -7,6 +7,8 @@ description: "Code Brain conventions for storing durable project docs. Use when 
 
 Use `~/Documents/Code Brain/<repo>/` as the project folder. Code Brain stores durable memory; source repos stay evidence and implementation.
 
+Use Obsidian tools directly for Code Brain work: `obsidian_read`, `obsidian_write`, `obsidian_list_notes`, `obsidian_search`, `obsidian_create_mermaid`, and `obsidian_create_canvas`.
+
 ## Repo Resolution
 
 Resolve `<repo>` by canonical repository name, not worktree directory name:
@@ -24,6 +26,8 @@ Never use generic worktree folder names like `main`, `develop`, `review`, or `te
 ~/Documents/Code Brain/<repo>/
 ├── plans/       # numbered implementation plans
 ├── notes/       # scout/context notes
+├── canvases/    # current/new behavior sketches
+├── diagrams/    # Mermaid diagrams
 ├── domain/      # glossary, context maps, ADRs
 ├── resources/   # reusable references, checklists, docs
 └── review/      # ingested PR review comments
