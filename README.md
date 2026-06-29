@@ -97,5 +97,5 @@ bunx skills add manaflow-ai/cmux -g -y
 - `conventional-commit-message` - generate high-quality Conventional Commit messages.
 
 ```bash
-bunx skills@latest add conventional-changelog/skills/conventional-commit-message
+bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
 ```
