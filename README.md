@@ -44,6 +44,13 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
+- `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
+  assess them, and plan replies or fixes.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
+  ```
+
 - `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes. Depends on `/code-brain`.
 
   ```bash
