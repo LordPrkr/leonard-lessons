@@ -19,9 +19,9 @@ Done when `canvases/<TOPIC>.canvas` or `notes/<TOPIC> Context.md` records the cu
 
 ### 2. Plan
 
-Write `plans/<00X_TOPIC>.md` as a standalone handoff artifact for a worker with no prior knowledge: goal, relevant context, files to change, test strategy, verification commands, risks, links to scout artifacts, and links to any Code Brain ADRs. Do not mention prior plan versions, rejected directions, or how the plan changed. Use `obsidian_create_canvas` to sketch proposed behavior in `canvases/<TOPIC> Proposed.canvas` when comparing old vs new behavior would prevent rediscovery. Always create a Mermaid call-stack diagram in `diagrams/<TOPIC> Callstack.md`; add other Mermaid diagrams only when they clarify execution, state, or data flow.
+Write `plans/<00X_TOPIC>.md` as a standalone handoff artifact for a worker with no prior knowledge: goal, relevant context, files to change, TDD-first implementation steps, test strategy, verification commands, risks, links to scout artifacts, and links to any Code Brain ADRs. Include important new code snippets that show the intended end product, such as core business logic, database queries, API shapes, or component trees. Do not mention prior plan versions, rejected directions, or how the plan changed. Use `obsidian_create_canvas` to sketch proposed behavior in `canvases/<TOPIC> Proposed.canvas` when comparing old vs new behavior would prevent rediscovery. Always create a Mermaid call-stack diagram in `diagrams/<TOPIC> Callstack.md`; add other Mermaid diagrams only when they clarify execution, state, or data flow.
 
-Done when the plan can be handed to a fresh-context worker with no explanation, the call-stack diagram is linked, current/new behavior sketches are linked when created, and any resolved domain terms or decisions are linked from `domain/`.
+Done when the plan can be handed to a fresh-context worker with no explanation, the TDD path is clear, snippets make the intended final shape concrete, the call-stack diagram is linked, current/new behavior sketches are linked when created, and any resolved domain terms or decisions are linked from `domain/`.
 
 ### 3. Review
 

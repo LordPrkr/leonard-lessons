@@ -76,6 +76,13 @@ Dependencies: install `code-brain` before `domain-modeling`,
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
+- `pragmatic-plan` — lightweight approval-first planning with concrete code
+  snippets showing the intended end state.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
+  ```
+
 - `domain-modeling` — Code Brain glossary and ADR capture for domain language
   and durable decisions. Depends on `/code-brain`.
 
