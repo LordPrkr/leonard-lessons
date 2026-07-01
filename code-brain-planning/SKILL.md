@@ -19,15 +19,15 @@ Done when `canvases/<TOPIC>.canvas` or `notes/<TOPIC> Context.md` records the cu
 
 ### 2. Plan
 
-Write `plans/<00X_TOPIC>.md` with the goal, files to change, test strategy, verification commands, risks, links to scout artifacts, and links to any Code Brain ADRs. Use `obsidian_create_canvas` to sketch proposed behavior in `canvases/<TOPIC> Proposed.canvas` when comparing old vs new behavior would prevent rediscovery. Always create a Mermaid call-stack diagram in `diagrams/<TOPIC> Callstack.md`; add other Mermaid diagrams only when they clarify execution, state, or data flow.
+Write `plans/<00X_TOPIC>.md` as a standalone handoff artifact for a worker with no prior knowledge: goal, relevant context, files to change, test strategy, verification commands, risks, links to scout artifacts, and links to any Code Brain ADRs. Do not mention prior plan versions, rejected directions, or how the plan changed. Use `obsidian_create_canvas` to sketch proposed behavior in `canvases/<TOPIC> Proposed.canvas` when comparing old vs new behavior would prevent rediscovery. Always create a Mermaid call-stack diagram in `diagrams/<TOPIC> Callstack.md`; add other Mermaid diagrams only when they clarify execution, state, or data flow.
 
-Done when the plan is specific enough for another agent to implement without rediscovering the design, the call-stack diagram is linked, current/new behavior sketches are linked when created, and any resolved domain terms or decisions are linked from `domain/`.
+Done when the plan can be handed to a fresh-context worker with no explanation, the call-stack diagram is linked, current/new behavior sketches are linked when created, and any resolved domain terms or decisions are linked from `domain/`.
 
 ### 3. Review
 
 Get an adversarial review from an oracle/reviewer subagent when risk is meaningful; otherwise self-review against the plan.
 
-Done when accepted feedback is edited into the plan and rejected feedback has a short reason.
+Done when accepted feedback is edited into the plan with no revision-history residue, and rejected feedback has a short reason outside the plan.
 
 ### 4. Approval Gate
 
