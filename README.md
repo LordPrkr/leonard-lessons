@@ -32,16 +32,31 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-- `code-brain` — shared Code Brain structure and worktree-safe project folder conventions.
+Dependencies: install `code-brain` before `domain-modeling`,
+`code-brain-planning`, or `tracer-bullet`. Install `domain-modeling` with
+`code-brain-planning` when plans need glossary or ADR capture.
+
+- `code-brain` — shared Code Brain structure and worktree-safe project
+  folder conventions.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   ```
 
-- `effective-engineer` — tight inspect, test, implement, verify, and summarize loop for non-trivial code changes.
+- `effective-engineer` — tight inspect, test, implement, verify, and
+  summarize loop for non-trivial code changes.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
+  ```
+
+- `tracer-bullet` — disposable prototype workflow for proving a plan's
+  technical path, then recording findings in Code Brain notes. Depends on
+  `/code-brain`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
@@ -51,14 +66,18 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
   ```
 
-- `code-brain-planning` — durable Code Brain planning workflow for broad, risky, cross-cutting, or approval-first changes. Depends on `/code-brain`.
+- `code-brain-planning` — durable Code Brain planning workflow for broad,
+  risky, cross-cutting, or approval-first changes. Depends on `/code-brain`;
+  pairs with `/domain-modeling` when planning reveals domain terms or ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
-- `domain-modeling` — Code Brain glossary and ADR capture for domain language and durable decisions. Depends on `/code-brain`.
+- `domain-modeling` — Code Brain glossary and ADR capture for domain language
+  and durable decisions. Depends on `/code-brain`.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
