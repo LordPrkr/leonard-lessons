@@ -32,6 +32,6 @@ Done when the plan can be handed to a fresh-context worker with no explanation, 
 
 ### 3. Approval Gate
 
-Present the plan and wait. Do not implement it yet.
+Present the plan and wait. Do not implement it yet. If the user asks for changes, update the plan so it still stands on its own; do not mention prior plan versions, rejected directions, or how the plan changed.
 
 Done only when the user approves implementation or asks for plan changes.
