@@ -24,11 +24,14 @@ Write a standalone plan for a worker with no prior knowledge. Include:
 - TDD-first implementation steps
 - important code snippets that show the intended end product, such as core business logic, database queries, API shapes, or component trees
 - test strategy and verification commands
-- risks or open questions
+- risks
+- questions for the user that must be answered before implementation
+
+Do not leave conditional forks in the worker plan. If the plan would say "if X, do Y; if not, do Z," stop and ask the user which branch to plan for instead.
 
 Do not mention prior plan versions, rejected directions, or how the plan changed.
 
-Done when the plan can be handed to a fresh-context worker with no explanation, the TDD path is clear, and the snippets make the intended final shape concrete.
+Done when the plan can be handed to a fresh-context worker with no explanation, the TDD path is clear, snippets make the intended final shape concrete, and every remaining branch is raised as a user question rather than embedded as an if/then instruction.
 
 ### 3. Approval Gate
 
