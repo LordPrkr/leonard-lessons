@@ -10,6 +10,8 @@ A dream is a synthesis pass over past sessions. It turns scattered transcript ev
 
 Use `/code-brain` repo resolution and store artifacts in `~/Documents/Code Brain/<repo>/`. Treat transcripts as evidence, not memory.
 
+Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or architectural decisions worth promoting.
+
 ## Steps
 
 ### 1. Select Sessions
@@ -75,7 +77,7 @@ Done when the dream note is written and every durable memory links back to trans
 
 ### 4. Promote Canonical Memories
 
-Update canonical Code Brain files only for high-confidence insights that clearly belong there:
+Update canonical Code Brain files only for high-confidence insights that clearly belong there. Use `domain-modeling` for domain terms, bounded contexts, and ADR-worthy decisions:
 
 - `domain/CONTEXT.md` for domain terms
 - `resources/Agent Memory.md` for Parker or repo workflow preferences

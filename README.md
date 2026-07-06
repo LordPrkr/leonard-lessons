@@ -33,8 +33,9 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 ## Skills
 
 Dependencies: install `code-brain` before `domain-modeling`,
-`code-brain-planning`, or `tracer-bullet`. Install `domain-modeling` with
-`code-brain-planning` when plans need glossary or ADR capture.
+`code-brain-planning`, `dreaming`, or `tracer-bullet`. Install
+`domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams
+need glossary or ADR capture.
 
 - `code-brain` — shared Code Brain structure and worktree-safe project
   folder conventions.
@@ -92,10 +93,12 @@ Dependencies: install `code-brain` before `domain-modeling`,
   ```
 
 - `dreaming` — synthesize local Pi session transcripts into durable Code Brain
-  memory. Depends on `/code-brain`.
+  memory. Depends on `/code-brain`; pair with `/domain-modeling` for domain
+  terms and ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill dreaming --global
   ```
 
