@@ -91,6 +91,14 @@ Dependencies: install `code-brain` before `domain-modeling`,
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   ```
 
+- `dreaming` — synthesize local Pi session transcripts into durable Code Brain
+  memory. Depends on `/code-brain`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill dreaming --global
+  ```
+
 ## Other Useful Skills
 
 ### [mattpocock/skills](mattpocock/skills)
