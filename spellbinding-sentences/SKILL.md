@@ -1,6 +1,6 @@
 ---
 name: spellbinding-sentences
-description: "Spellbinding sentences for technical writing: design docs, PR descriptions, ADRs, incident writeups, architecture notes, and engineering proposals aimed at senior software engineers."
+description: "Use when drafting or revising technical writing for senior engineers: design docs, PR descriptions, ADRs, incident writeups, architecture notes, or engineering proposals."
 ---
 
 # Spellbinding Sentences
@@ -9,53 +9,53 @@ Write for a senior software engineer who already knows the domain model and code
 
 ## Steps
 
-### 1. Lead with the point
+### 1. Preserve the facts
+
+If revising, keep the original claims, scope, and uncertainty unless the user asks for new substance.
+
+Done when every changed claim is either present in the source or explicitly requested.
+
+### 2. Lead with the point
 
 Start each section with what is true, what changed, or what you propose.
 
 Done when no section opens with background, throat-clearing, or a tour of concepts the reader already knows.
 
-### 2. Name the mechanism
+### 3. Ground claims in mechanisms
 
-Refer to existing code by name: classes, services, modules, jobs, tables, APIs, and call paths.
+Name the code path, service, metric, failure mode, dependency, or operational condition behind important claims.
 
-Done when every important claim is tied to a named code path, system, metric, or failure mode.
+Done when every important claim has a concrete anchor.
 
-### 3. Name the tradeoff
+### 4. State the tradeoff
 
-State what the choice buys, what it costs, and which alternative you rejected. Tie recommendations to conditions, not verdicts: "X is cheaper when..." rather than "X is better."
+Say what the choice buys, what it costs, when it wins, and what alternative it rejects. Tie recommendations to conditions, not verdicts: "X is cheaper when..." rather than "X is better."
 
-Done when every non-obvious recommendation names its conditions and rejected alternative.
+Done when every non-obvious recommendation is conditional and names its rejected alternative.
 
-### 4. Motivate only the surprising part
+### 5. Cut inherited context
 
-Explain counterintuitive constraints, subtle failure modes, and interactions that are easy to miss. Skip definitions of standard terms and project concepts.
+Explain only the surprising constraint, subtle failure mode, or decision-moving detail. Skip definitions of standard terms and project concepts.
 
 Done when no paragraph restates context the target reader already has.
 
-### 5. Build one concept at a time
+### 6. Make paragraphs linear
 
-Each sentence should rest on the previous one. Do not stack several unexplained ideas in one sentence.
+Each paragraph should make one claim. Each sentence should support, qualify, or advance that claim.
 
-Done when dense paragraphs can be read linearly without requiring the reader to reorder the argument.
+Done when no sentence introduces an unexplained second argument.
 
-### 6. Prefer intent over pedantry
+### 7. Prefer intent over pedantry
 
 Use the technically precise version when precision changes the decision. Otherwise use the simpler sentence.
 
 Done when edits make the reader's next action clearer, not merely more formally correct.
 
-### 7. Say when there is no clean answer
+### 8. Tighten from the kernel sentence
 
-If the tradeoff is genuinely situational, say so plainly. Explain which conditions move the decision.
+Reduce each dense sentence to its simplest true claim, then add back only the condition, mechanism, number, or tradeoff that changes the reader's decision.
 
-Done when ambiguous decisions are not forced into tidy verdicts.
-
-### 8. Start from the kernel sentence
-
-Write the simplest true sentence first. Add only the condition, mechanism, number, or tradeoff that changes the reader's decision.
-
-Done when each dense sentence can be reduced to a clear core claim without losing the argument.
+Done when every sentence is precise without becoming ceremonial.
 
 ## Style rules
 
