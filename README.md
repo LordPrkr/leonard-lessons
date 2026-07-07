@@ -34,8 +34,9 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 Dependencies: install `code-brain` before `domain-modeling`,
 `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install
-`domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams
-need glossary or ADR capture.
+`conventional-commit-message` with `code-brain-planning` or `pragmatic-plan`.
+Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans
+or dreams need glossary or ADR capture.
 
 - `code-brain` — shared Code Brain structure and worktree-safe project
   folder conventions.
@@ -68,19 +69,23 @@ need glossary or ADR capture.
   ```
 
 - `code-brain-planning` — durable Code Brain planning workflow for broad,
-  risky, cross-cutting, or approval-first changes. Depends on `/code-brain`;
-  pairs with `/domain-modeling` when planning reveals domain terms or ADRs.
+  risky, cross-cutting, or approval-first changes. Depends on `/code-brain` and
+  `/conventional-commit-message`; pairs with `/domain-modeling` when planning
+  reveals domain terms or ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
+  bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
 - `pragmatic-plan` — lightweight approval-first planning with concrete code
-  snippets showing the intended end state.
+  snippets showing the intended end state. Depends on
+  `/conventional-commit-message` for its commit step.
 
   ```bash
+  bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 

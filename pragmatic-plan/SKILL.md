@@ -38,3 +38,18 @@ Done when the plan can be handed to a fresh-context worker with no explanation, 
 Present the plan and wait. Do not implement it yet. If the user asks for changes, update the plan so it still stands on its own; do not mention prior plan versions, rejected directions, or how the plan changed.
 
 Done only when the user approves implementation or asks for plan changes.
+
+### 4. Implement
+
+After approval, implement the approved plan and run its verification commands.
+
+Done when the implementation matches the approved plan and every planned
+verification command passes, or a failing command is reported with the smallest
+useful failure detail.
+
+### 5. Commit
+
+Invoke `/conventional-commit-message`, then commit the verified implementation
+with the generated Conventional Commit message.
+
+Done when `git status` shows no uncommitted changes from the implementation.

@@ -66,3 +66,12 @@ Done only when the user approves implementation or changes the plan.
 After approval, hand the approved plan to a worker with fresh context, explicit acceptance criteria, and verification commands.
 
 Done when the fresh-context worker starts from the approved plan, not a new implicit one.
+
+### 6. Commit
+
+After the worker finishes and verification passes, invoke
+`/conventional-commit-message`, then commit the implementation and related Code
+Brain artifact updates with the generated Conventional Commit message.
+
+Done when `git status` shows no uncommitted changes from the implementation or
+Code Brain artifact updates.
