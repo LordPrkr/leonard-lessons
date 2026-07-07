@@ -84,6 +84,13 @@ need glossary or ADR capture.
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 
+- `spellbinding-sentences` — write technical docs for senior engineers with
+  concrete mechanisms, explicit tradeoffs, and plain intent over pedantry.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  ```
+
 - `domain-modeling` — Code Brain glossary and ADR capture for domain language
   and durable decisions. Depends on `/code-brain`.
 
