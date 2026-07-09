@@ -24,17 +24,21 @@ Never use generic worktree folder names like `main`, `develop`, `review`, or `te
 
 ```txt
 ~/Documents/Code Brain/<repo>/
-├── plans/       # numbered implementation plans
-├── notes/       # scout/context notes
-├── canvases/    # current/new behavior sketches
-├── diagrams/    # Mermaid diagrams
+├── plans/
+│   └── 001_TOPIC/
+│       ├── plan.md
+│       ├── notes.md
+│       ├── call-stack.diagram.md
+│       ├── current.canvas
+│       └── proposed.canvas
+├── notes/       # durable notes unrelated to a specific plan
 ├── domain/      # glossary, context maps, ADRs
 ├── resources/   # reusable references, checklists, docs
 └── review/      # ingested PR review comments
 ```
 
-Create folders lazily.
+Keep each plan and its notes, diagrams, and canvases together in its named folder. Use descriptive kebab-case names for optional `.diagram.md` and `.canvas` files. Create folders and optional artifacts lazily.
 
 ## Numbering
 
-Number plans by scanning `plans/` and incrementing the highest prefix: `001_TOPIC.md`, `002_TOPIC.md`, etc.
+Number plan folders by scanning `plans/` and incrementing the highest prefix across both folders and legacy plan files: `001_TOPIC/`, `002_TOPIC/`, etc. Do not migrate legacy plans unless asked.

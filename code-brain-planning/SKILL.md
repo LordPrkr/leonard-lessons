@@ -9,6 +9,21 @@ Use this for durable planning, not ordinary edits. Store artifacts using `/code-
 
 When planning sharpens domain language or records architectural decisions, invoke `domain-modeling`; its glossary and ADR source of truth is the Code Brain, not the repo.
 
+## Plan Folder
+
+Before writing artifacts, create the next numbered `plans/<00X_TOPIC>/` folder using `/code-brain` numbering. Keep all artifacts for that plan together:
+
+```txt
+plans/<00X_TOPIC>/
+├── plan.md
+├── notes.md
+├── call-stack.diagram.md
+├── current.canvas
+└── proposed.canvas
+```
+
+Create optional artifacts only when useful. Give additional diagrams and canvases descriptive kebab-case names ending in `.diagram.md` and `.canvas`. In `plan.md`, link every created sibling with a relative Markdown link such as `[Context notes](./notes.md)`.
+
 ## Steps
 
 Launch subagents asynchronously unless a foreground run is intentionally needed. Keep the parent session responsible for decisions, artifact persistence, and orchestration.
@@ -17,7 +32,7 @@ Launch subagents asynchronously unless a foreground run is intentionally needed.
 
 Use a `scout` for bounded local codebase recon. For broad or cross-cutting work, use one or more fresh-context `context-builder` subagents with distinct scopes and output paths. Add a `researcher` only when external docs, recent changes, benchmarks, or primary sources materially affect the plan.
 
-The parent persists the useful findings in `canvases/<TOPIC>.canvas` or `notes/<TOPIC> Context.md`. Use `obsidian_create_canvas` when flow, state, ownership, or boundaries matter.
+The parent persists useful findings in the plan folder's `notes.md` or a named `.canvas` sibling. Use `obsidian_create_canvas` when flow, state, ownership, or boundaries matter.
 
 Done when the context artifact records the current setup, every likely touchpoint is named, external evidence is linked when relevant, and any domain-modeling questions are queued.
 
@@ -29,7 +44,7 @@ Done when the parent has accepted or rejected the oracle's recommendations befor
 
 ### 3. Plan
 
-Give the gathered context and approved direction to a `planner`. The planner reads and produces a concrete implementation plan without editing project code. The parent then persists and refines `plans/<00X_TOPIC>.md` as a standalone handoff artifact for a worker with no prior knowledge. Include:
+Give the gathered context and approved direction to a `planner`. The planner reads and produces a concrete implementation plan without editing project code. The parent then persists and refines the plan folder's `plan.md` as a standalone handoff artifact for a worker with no prior knowledge. Include:
 
 - goal and relevant context
 - files to change
@@ -45,9 +60,9 @@ Do not leave conditional forks in the worker plan. If the plan would say "if X, 
 
 Do not mention prior plan versions, rejected directions, or how the plan changed.
 
-Use `obsidian_create_canvas` to sketch proposed behavior in `canvases/<TOPIC> Proposed.canvas` when comparing old vs new behavior would prevent rediscovery.
+Use `obsidian_create_canvas` to sketch proposed behavior in `proposed.canvas`, with `current.canvas` when comparing old and new behavior would prevent rediscovery.
 
-Always create a Mermaid call-stack diagram in `diagrams/<TOPIC> Callstack.md`; add other Mermaid diagrams only when they clarify execution, state, or data flow.
+Always create a Mermaid call-stack diagram in `call-stack.diagram.md`; add other named `.diagram.md` siblings only when they clarify execution, state, or data flow.
 
 Done when:
 
@@ -55,6 +70,7 @@ Done when:
 - the TDD path is clear
 - snippets make the intended final shape concrete
 - every remaining branch is raised as a user question rather than embedded as an if/then instruction
+- every created sibling artifact is linked with a relative path
 - the call-stack diagram is linked
 - current/new behavior sketches are linked when created
 - any resolved domain terms or decisions are linked from `domain/`
@@ -63,7 +79,7 @@ Done when:
 
 For meaningful risk, use a fresh-context `reviewer` to adversarially review the plan against the request and gathered evidence. The reviewer must inspect the artifacts directly and must not edit code or planning artifacts. Otherwise self-review.
 
-Done when the parent edits accepted feedback into the plan with no revision-history residue.
+Done when the parent edits accepted feedback into the plan with no revision-history residue, and records a short reason outside the plan for rejected feedback.
 
 ### 5. Approval Gate
 
