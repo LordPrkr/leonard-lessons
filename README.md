@@ -52,6 +52,13 @@ or dreams need glossary or ADR capture.
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
+- `agents-md` — create or refactor AGENTS.md files with progressive
+  disclosure: tiny root, linked task-specific guidance, and deletion flags.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill agents-md --global
+  ```
+
 - `tracer-bullet` — disposable prototype workflow for proving a plan's
   technical path, then recording findings in Code Brain notes. Depends on
   `/code-brain`.
