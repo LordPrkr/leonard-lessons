@@ -33,8 +33,9 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 ## Skills
 
 Dependencies: install `code-brain` before `domain-modeling`,
-`code-brain-planning`, `dreaming`, or `tracer-bullet`. Install
-`conventional-commit-message` with `code-brain-planning` or `pragmatic-plan`.
+`code-brain-diagramming`, `code-brain-planning`, `dreaming`, or
+`tracer-bullet`. Install `conventional-commit-message` with
+`code-brain-planning` or `pragmatic-plan`.
 Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans
 or dreams need glossary or ADR capture.
 
@@ -85,6 +86,14 @@ or dreams need glossary or ADR capture.
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
+  ```
+
+- `code-brain-diagramming` — add Mermaid diagrams and Obsidian canvases to an
+  existing Code Brain plan. Depends on `/code-brain`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
 
 - `pragmatic-plan` — lightweight approval-first planning with concrete code

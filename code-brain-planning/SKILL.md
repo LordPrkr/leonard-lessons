@@ -16,13 +16,15 @@ Before writing artifacts, create the next numbered `plans/<00X_TOPIC>/` folder u
 ```txt
 plans/<00X_TOPIC>/
 ├── plan.md
-├── notes.md
-├── call-stack.diagram.md
-├── current.canvas
-└── proposed.canvas
+└── notes.md
 ```
 
-Create optional artifacts only when useful. Give additional diagrams and canvases descriptive kebab-case names ending in `.diagram.md` and `.canvas`. In `plan.md`, link every created sibling with a relative Markdown link such as `[Context notes](./notes.md)`.
+Create `notes.md` only when useful. Before creating `plan.md`, read
+[`references/TEMPLATE.md`](references/TEMPLATE.md) and use its structure. Set
+`date` to the plan's creation date, replace placeholders, and omit inapplicable
+reference entries. In `plan.md`, link every created sibling with a relative
+Markdown link such as
+`[Context notes](./notes.md)`.
 
 ## Steps
 
@@ -32,7 +34,7 @@ Launch subagents asynchronously unless a foreground run is intentionally needed.
 
 Use a `scout` for bounded local codebase recon. For broad or cross-cutting work, use one or more fresh-context `context-builder` subagents with distinct scopes and output paths. Add a `researcher` only when external docs, recent changes, benchmarks, or primary sources materially affect the plan.
 
-The parent persists useful findings in the plan folder's `notes.md` or a named `.canvas` sibling. Use `obsidian_create_canvas` when flow, state, ownership, or boundaries matter.
+The parent persists useful findings in the plan folder's `notes.md`.
 
 Done when the context artifact records the current setup, every likely touchpoint is named, external evidence is linked when relevant, and any domain-modeling questions are queued.
 
@@ -60,10 +62,6 @@ Do not leave conditional forks in the worker plan. If the plan would say "if X, 
 
 Do not mention prior plan versions, rejected directions, or how the plan changed.
 
-Use `obsidian_create_canvas` to sketch proposed behavior in `proposed.canvas`, with `current.canvas` when comparing old and new behavior would prevent rediscovery.
-
-Always create a Mermaid call-stack diagram in `call-stack.diagram.md`; add other named `.diagram.md` siblings only when they clarify execution, state, or data flow.
-
 Done when:
 
 - the plan can be handed to a fresh-context worker with no explanation
@@ -71,8 +69,6 @@ Done when:
 - snippets make the intended final shape concrete
 - every remaining branch is raised as a user question rather than embedded as an if/then instruction
 - every created sibling artifact is linked with a relative path
-- the call-stack diagram is linked
-- current/new behavior sketches are linked when created
 - any resolved domain terms or decisions are linked from `domain/`
 
 ### 4. Review the Plan
@@ -84,6 +80,9 @@ Done when the parent edits accepted feedback into the plan with no revision-hist
 ### 5. Approval Gate
 
 Present the plan and wait. If the user asks for changes, update the plan so it still stands on its own; do not mention prior plan versions, rejected directions, or how the plan changed.
+
+Set `approved: true` in `plan.md` only after explicit user approval. Keep it
+`false` while drafting or revising.
 
 Done only when the user approves implementation or changes the plan.
 
