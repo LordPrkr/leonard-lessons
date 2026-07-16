@@ -5,15 +5,15 @@ description: Review code changes with parallel, fresh-context subagents. Use whe
 
 # Parallel PR Review
 
-Run an adversarial, read-only review with five independent reviewers.
+Run an adversarial, read-only review with five independent reviewers. Prefer `/parallel-pr-review <PR#>` to review that GitHub pull request; without a number, review the current branch's PR or its merge base.
 
 ## 1. Establish the review target
 
-Identify the repository root, current branch, associated pull request, base SHA, head SHA, merge base, and commit list. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. If no pull request exists, review the local branch against its merge base. Do not substitute conversation history for repository evidence.
+When given `<PR#>`, run `gh pr view <PR#>` to capture its number, URL, title, body, base and head refs, base and head SHAs, commits, changed files, and discussion. Otherwise identify the current branch's associated PR; if none exists, review the local branch against its merge base. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. Do not substitute conversation history for repository evidence.
 
-Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly.
+Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly. Extract the PR's claimed big-picture goal from those sources.
 
-**Complete when:** the immutable review target, exact non-empty diff command, commit list, and available intent and standards sources are known.
+**Complete when:** the immutable review target, exact non-empty diff command, commit list, claimed goal, and available intent and standards sources are known.
 
 ## 2. Discover subagents
 
@@ -37,7 +37,7 @@ Every task must tell the reviewer to:
 
 Assign exactly one requirement to each reviewer:
 
-1. **Intent conformance:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. Flag missing, partial, contradictory, or unrequested behavior.
+1. **Intent conformance:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. For each claimed goal, trace the changed entry point through its implementation to its intended observable outcome. Flag missing, partial, contradictory, unrequested, or causally unsupported behavior.
 2. **Test coverage:** Account for every changed production file. Flag changed behavior without corresponding tests when this repository has precedent for testing that behavior or file area; check changed tests against nearby test structure and helpers.
 3. **Code precedent:** Review changed production code against explicit repository standards, nearby style, and shared utilities; flag duplicated local machinery when an established utility already fits.
 4. **Correctness:** Find concrete bugs, regressions, unsafe edge cases, and contract violations introduced by the diff.
@@ -48,7 +48,7 @@ Use this execution shape, replacing `<reviewer>` and `<target>` with discovered 
 ```typescript
 subagent({
   tasks: [
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for intent, acceptance-criteria, and scope-creep conformance only. ..." },
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for intent, acceptance-criteria, goal-to-mechanism evidence, and scope-creep conformance only. ..." },
     { agent: "<reviewer>", task: "Review immutable diff <diff-command> for test coverage and test-file precedent only. ..." },
     { agent: "<reviewer>", task: "Review immutable diff <diff-command> for standards, production-code precedent, and shared utilities only. ..." },
     { agent: "<reviewer>", task: "Review immutable diff <diff-command> for correctness only. ..." },
@@ -66,13 +66,13 @@ subagent({
 
 Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
 
-Deduplicate findings by root cause. Reject findings unsupported by the diff or repository precedent. Present:
+Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. Complete the template in the response:
 
-1. confirmed findings, ordered by severity, with file/line evidence and smallest safe fix;
-2. dismissed or deferred feedback with a brief reason;
-3. coverage of all five roles, including explicit `No findings` results;
-4. any unavailable PR metadata or failed reviewer run.
+- state the big-picture goal and a concise, evidence-backed implementation path;
+- map each claimed goal to its mechanism, file/line evidence, and whether that causal path is demonstrated;
+- ask causal questions only where evidence cannot establish that a mechanism achieves its goal; each must name the goal, mechanism, and missing proof;
+- include confirmed findings ordered by severity, dismissed or deferred feedback, all five role results including `No findings`, and unavailable evidence.
 
-Do not edit code unless the user separately authorizes fixes.
+Omit inapplicable template sections and placeholders. Do not write a report file unless the user asks. Do not edit code unless the user separately authorizes fixes.
 
-**Complete when:** every role is accounted for and every retained finding is evidence-backed.
+**Complete when:** every role is accounted for, every retained finding is evidence-backed, and every claimed goal is mapped to demonstrated evidence or a precise causal question.
