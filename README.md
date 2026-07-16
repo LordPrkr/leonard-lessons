@@ -14,7 +14,7 @@ Idea → clarify
 Delivery → parallel-pr-review
 ```
 
-Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Durable plans use fresh workers and, when necessary, context-sized execution slices; bounded work stays in the current session.
+Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Durable plans use fresh workers and, when necessary, context-sized execution slices; bounded work stays in the current session. If the route is unclear, invoke `mystical-tutor`.
 
 ## Code Brain workflow
 
@@ -98,7 +98,14 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture.
+Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+
+- `mystical-tutor` — choose and invoke the narrowest Leonard Lessons workflow
+  for the task at hand.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill mystical-tutor --global
+  ```
 
 - `code-brain` — canonical project spine, Git-native repository resolution,
   Kanban ownership, and durable evidence conventions.
