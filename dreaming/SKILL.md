@@ -1,94 +1,55 @@
 ---
 name: dreaming
 disable-model-invocation: true
-description: "Curate local Pi session transcripts into Code Brain memory."
+description: "Idempotently curate local Pi session transcripts into durable Code Brain memory."
 ---
 
 # Dreaming
 
-A dream is a synthesis pass over past sessions. It turns scattered transcript evidence from `~/.pi/agent/sessions/` into durable Code Brain memory.
+A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into durable Code Brain memory. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts are local evidence, not canonical memory.
 
-Use `/code-brain` repo resolution and store artifacts in `~/Documents/Code Brain/<repo>/`. Treat transcripts as evidence, not memory.
-
-Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or architectural decisions worth promoting.
+Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or ADR-worthy decisions.
 
 ## Steps
 
-### 1. Select Sessions
+### 1. Select sessions
 
-Resolve the current repo with `/code-brain`. Find session JSONL files under `~/.pi/agent/sessions/` whose opening `session.cwd` belongs to the repo or one of its worktrees.
+Find session JSONL files whose opening `session.cwd` belongs to the resolved repository or one of its worktrees. Use the opening `session.id` as the stable key; only when it is absent use the resolved JSONL path. Sort sessions by opening timestamp, then stable key.
 
-Default to the latest 10 matching sessions unless the user gives a count, date range, repo, or explicit paths. Ignore sessions with no meaningful user/assistant work.
+Default to the latest 10 matching meaningful sessions unless the user gives a count, range, repository, or explicit paths. When today's dream note already exists, combine its recorded sessions with newly selected sessions so synthesis covers the complete same-day set rather than overwriting it.
 
-Done when every selected session is listed with path, timestamp, cwd, and a one-line topic.
+Done when each selected session has stable key, path, opening timestamp, cwd, and one-line topic.
 
-### 2. Dream
+### 2. Synthesize the complete set
 
-Read the selected transcripts and extract only durable memory:
+Recompute candidate memories across the complete session set whenever sessions are added. Extract only durable preferences, repeated workflows, repository architecture or domain discoveries, reusable commands and patterns, recurring failures, and decisions.
 
-- Parker preferences
-- repeated workflow habits
-- repo-specific architecture or domain discoveries
-- commands, tests, or verification loops worth reusing
-- recurring failure modes
-- decisions worth remembering
-- useful reusable plans or patterns
+Drop one-off chatter, transient logs, guesses, secrets, and memories already canonical. Deduplicate identical evidence entries by stable key. Deduplicate insights by normalized heading plus normalized claim text. Each retained insight needs evidence, applicability boundary, and `high`, `medium`, or `low` confidence.
 
-Drop one-off debugging chatter, transient logs, failed guesses, secrets, and duplicates already captured in Code Brain.
+Done when every retained insight has evidence, an applicability boundary, and confidence, and rerunning with the same sessions produces no duplicate session, evidence, or insight entry.
 
-Every insight must cite at least one session path plus timestamp or message summary.
+### 3. Merge the dream note
 
-Done when each candidate insight has evidence, an applicability boundary, and confidence: `high`, `medium`, or `low`.
+Read [`references/TEMPLATE.md`](references/TEMPLATE.md). Create or merge `notes/dreams/YYYY-MM-DD Dream.md`; never replace a same-day note wholesale. Preserve useful human edits and recompute the structured session and candidate-memory content from the complete set.
 
-### 3. Write the Dream Note
+Apply `/code-brain`'s evidence convention when the note makes source-backed or external claims. Session evidence uses stable session IDs as local-only leads, with durable claims summarized in the note.
 
-Create `notes/dreams/YYYY-MM-DD Dream.md` in the repo's Code Brain folder.
+Done when the note covers the complete same-day set and every insight points to deduplicated evidence.
 
-Template:
+### 4. Reconcile canonical memory
 
-```md
-# Dream — YYYY-MM-DD
-
-## Sessions Dreamed
-
-- `<path>` — timestamp — topic
-
-## Durable Memories
-
-### Preference / Pattern / Architecture / Workflow
-
-- Insight:
-- Evidence:
-- Applies when:
-- Confidence: high | medium | low
-
-## Contradictions or Stale Memories
-
-- Existing memory:
-- New evidence:
-- Suggested replacement:
-
-## Follow-up Work
-
-- [ ] Optional cleanup or documentation task
-```
-
-Done when the dream note is written and every durable memory links back to transcript evidence.
-
-### 4. Promote Canonical Memories
-
-Update canonical Code Brain files only for high-confidence insights that clearly belong there. Use `domain-modeling` for domain terms, bounded contexts, and ADR-worthy decisions:
+Promote only high-confidence insights that clearly belong in canonical files:
 
 - `domain/CONTEXT.md` for domain terms
-- `resources/Agent Memory.md` for Parker or repo workflow preferences
+- `resources/Agent Memory.md` for user or repository workflow preferences
 - `notes/<topic>.md` for reusable project context
 
-Do not promote low-confidence or one-off insights. The dream note is the reviewable staging area.
+Before replacing or removing contradicted high-confidence canonical memory, show the user the exact existing text, proposed replacement or removal, and supporting evidence. Change it only after confirmation. Update glossary definitions in place and use `domain-modeling` for ADR supersession. Low-confidence and one-off insights remain only in the dream note.
 
-Done when every promoted insight has one source of truth, and unpromoted insights remain only in the dream note.
+Done when each promoted insight has one source of truth and no contradicted canonical statement was silently retained or changed.
 
 ### 5. Report
 
-Summarize the dream note path, promoted files, skipped stale or duplicate items, and any follow-up tasks.
+Report the dream note path, newly merged session keys, promoted files, deduplicated or stale items skipped, contradictions awaiting confirmation, and follow-up work.
 
-Done when the user can review the dream without rereading the transcripts.
+Done when the user can review merged sessions, promotions, skips, and pending contradictions without rereading transcripts.

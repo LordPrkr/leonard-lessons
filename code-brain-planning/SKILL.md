@@ -1,108 +1,94 @@
 ---
 name: code-brain-planning
-description: "Code Brain planning for broad, risky, cross-cutting, or approval-first code changes. Use with /code-brain when the user asks for durable planning artifacts, design review, scout/oracle review, or an implementation plan before coding."
+description: "Durable Code Brain planning and execution. Use when broad, risky, or cross-cutting work needs artifacts or execution state to persist across sessions."
 ---
 
 # Code Brain Planning
 
-Use this for durable planning, not ordinary edits. Store artifacts using `/code-brain` project folder conventions. Create the vault directory if missing.
+Use this workflow for durable work. Use `pragmatic-plan` instead for a lightweight in-session plan with no Code Brain artifacts. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence.
 
-When planning sharpens domain language or records architectural decisions, invoke `domain-modeling`; its glossary and ADR source of truth is the Code Brain, not the repo.
+The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`; subagents never update project navigation or workflow state. Code Brain vault files are not source-repository commits.
 
-## Plan Folder
+## Before planning
 
-Before writing artifacts, create the next numbered `plans/<00X_TOPIC>/` folder using `/code-brain` numbering. Keep all artifacts for that plan together:
+Assume the Code Brain project is initialized. If `VISION.md` does not exist, invoke `/code-brain` and complete project bootstrap before planning. Then scan `plans/` and create the next `plans/<NNN_TOPIC>/` folder.
 
-```txt
-plans/<00X_TOPIC>/
-├── plan.md
-└── notes.md
-```
+Read [`references/TEMPLATE.md`](references/TEMPLATE.md) before writing `plan.md`. Set its creation date and `status: draft`, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
 
-Create `notes.md` only when useful. Before creating `plan.md`, read
-[`references/TEMPLATE.md`](references/TEMPLATE.md) and use its structure. Set
-`date` to the plan's creation date, replace placeholders, and omit inapplicable
-reference entries. In `plan.md`, link every created sibling with a relative
-Markdown link such as
-`[Context notes](./notes.md)`.
+Capture each affected source repository's full `HEAD` independently before implementation. Do not modify a repository with unrelated staged or unstaged work unless the user explicitly approves that boundary.
+
+## Lifecycle
+
+The board lane is workflow state; plan frontmatter is design lifecycle. New plans use `draft`, `approved`, `implemented`, `abandoned`, or `superseded`. Only explicit user approval sets `approved`. Any substantive design revision returns the plan to `draft`, reruns review, and waits for approval. Read legacy `approved:` through `/code-brain`'s mapping but never write it.
+
+| Event | Plan status | Kanban lane | Machine edge |
+| --- | --- | --- | --- |
+| Untriaged task captured | no plan | Inbox | outside machine |
+| Plan folder created / drafting | `draft` | In Progress | `context-ready` → `draft_plan` |
+| Plan sent for adversarial review | `draft` | Review | `draft-ready` → `review_plan` |
+| Review requires changes | `draft` | In Progress | `changes-needed` → `draft_plan` |
+| Plan ready for user decision | `draft` | Review | `plan-ready` → `approval_gate` |
+| User approves | `approved` | Ready | `user-approved` → `approved_ready` |
+| User requests substantive revision | `draft` | In Progress | `revision-requested` → `draft_plan` |
+| Implementation starts from Ready | `approved` | In Progress | `start-implementation` → `implement` |
+| Recovery retries unchanged plan | `approved` | In Progress | `retry-approved-plan` → `implement` |
+| Implementation reaches review | `approved` | Review | `implementation-ready` → `review_implementation` |
+| Review finds approved fixes | `approved` | In Progress | `fixes-needed` → `apply_fixes` |
+| Implementation or review cannot continue | `approved` | Blocked | `blocked` → `persist_receipt` |
+| Attempt is partial | `approved` | Blocked | `partial` → `persist_receipt` |
+| Delivered implementation is reverted | `approved` | Blocked | `reverted` → `persist_receipt` |
+| Review accepts delivery | `approved` | Review | `accepted` → `commit_decision` |
+| Accepted receipt persisted | `implemented` | Done | `receipt-accepted` → `done` |
+| Blocked/partial/reverted receipt persisted | `approved` | Blocked | matching receipt edge → `await_recovery` |
+| User abandons work | `abandoned` | Done | `abandon` → `done` |
+| User replaces plan | `superseded` | Done | `supersede` → `done` |
+| Recovery changes design | `draft` | In Progress | `revise-plan` → `draft_plan` |
+| User pauses blocked work | `approved` | Blocked | `pause` → end |
+
+For abandonment or supersession, retain the card in Done with `— abandoned` or `— superseded`; the linked plan carries canonical status.
 
 ## Steps
 
-Launch subagents asynchronously unless a foreground run is intentionally needed. Keep the parent session responsible for decisions, artifact persistence, and orchestration.
+### 1. Build context
 
-### 1. Build Context
+Use bounded local reconnaissance and external research only when it materially affects the plan. Persist useful findings in `notes.md`. Apply `/code-brain` evidence conventions to source-backed or external claims. Invoke `domain-modeling` when planning resolves domain language or an ADR-worthy decision.
 
-Use a `scout` for bounded local codebase recon. For broad or cross-cutting work, use one or more fresh-context `context-builder` subagents with distinct scopes and output paths. Add a `researcher` only when external docs, recent changes, benchmarks, or primary sources materially affect the plan.
+Done when every likely touchpoint, constraint, material source, and unresolved decision is explicit.
 
-The parent persists useful findings in the plan folder's `notes.md`.
+### 2. Challenge direction
 
-Done when the context artifact records the current setup, every likely touchpoint is named, external evidence is linked when relevant, and any domain-modeling questions are queued.
+Use a read-only second opinion when assumptions, architecture, scope, or trajectory need it. Accept or reject recommendations before drafting.
 
-### 2. Challenge Direction
+Done when no directional decision is implicit.
 
-Use a forked `oracle` when inherited assumptions, architecture, scope, or trajectory need a second opinion. The oracle is advisory and must not edit code or planning artifacts. Skip it when the gathered context leaves no meaningful directional decision.
+### 3. Draft and review
 
-Done when the parent has accepted or rejected the oracle's recommendations before planning.
+Write a standalone worker handoff with goal, context, exact files, TDD-first steps, important end-state snippets, tests, verification, risks, questions, and artifact links. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
 
-### 3. Plan
+Done when a fresh worker can execute the plan and the card is in Review awaiting a user decision.
 
-Give the gathered context and approved direction to a `planner`. The planner reads and produces a concrete implementation plan without editing project code. The parent then persists and refines the plan folder's `plan.md` as a standalone handoff artifact for a worker with no prior knowledge. Include:
+### 4. Approval gate
 
-- goal and relevant context
-- files to change
-- TDD-first implementation steps
-- important new code snippets that show the intended end product, such as core business logic, database queries, API shapes, or component trees
-- test strategy and verification commands
-- risks
-- questions for the user that must be answered before implementation
-- links to context artifacts
-- links to any Code Brain ADRs
+Present the plan and wait. Explicit approval changes only `status` to `approved` and moves the card to Ready; it does not start implementation. Requested substantive changes restore `draft`, In Progress, review, and this gate.
 
-Do not leave conditional forks in the worker plan. If the plan would say "if X, do Y; if not, do Z," stop and ask the user which branch to plan for instead.
+Done when the approved plan is Ready or work ends explicitly.
 
-Do not mention prior plan versions, rejected directions, or how the plan changed.
+### 5. Implement and review
 
-Done when:
+Only `start-implementation` moves an approved Ready card to In Progress. Give a fresh worker the approved plan, acceptance criteria, verification commands, base revisions, and a required handoff containing changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
 
-- the plan can be handed to a fresh-context worker with no explanation
-- the TDD path is clear
-- snippets make the intended final shape concrete
-- every remaining branch is raised as a user question rather than embedded as an if/then instruction
-- every created sibling artifact is linked with a relative path
-- any resolved domain terms or decisions are linked from `domain/`
+Move the card to Review when implementation is ready. Read-only reviewers cover correctness, validation, and simplicity. Approved fixes return it to In Progress and then Review. If implementation or review is blocked, partial, or reverted, skip commits and persist the attempt receipt immediately.
 
-### 4. Review the Plan
+Done when review accepts delivery or an honest non-accepted receipt is required.
 
-For meaningful risk, use a fresh-context `reviewer` to adversarially review the plan against the request and gathered evidence. The reviewer must inspect the artifacts directly and must not edit code or planning artifacts. Otherwise self-review.
+### 6. Commit decision and receipt
 
-Done when the parent edits accepted feedback into the plan with no revision-history residue, and records a short reason outside the plan for rejected feedback.
+Read [`references/RECEIPT.md`](references/RECEIPT.md). Create `receipt.md` once and append one chronological section after every attempt; frontmatter always reflects the latest attempt.
 
-### 5. Approval Gate
+For accepted work, ask whether the user authorizes source commits, naming every changed repository. Commit only explicitly authorized repositories, before persisting accepted evidence. Record the resulting full commit SHA and `none` as its change-set hash. For each repository left uncommitted, record `uncommitted` and the deterministic complete change-set hash. Never identify pre-change `HEAD` as delivered source and never claim the non-Git vault was committed.
 
-Present the plan and wait. If the user asks for changes, update the plan so it still stands on its own; do not mention prior plan versions, rejected directions, or how the plan changed.
+For blocked, partial, or reverted work, immediately record every affected repository's base SHA, `uncommitted`, and complete change-set hash. Leave plan status `approved` and the card Blocked. Recovery may retry the unchanged design, revise it through draft/review/approval, abandon, supersede, or pause.
 
-Set `approved: true` in `plan.md` only after explicit user approval. Keep it
-`false` while drafting or revising.
+Only after accepted evidence covers every changed repository set `status: implemented` and move the card to Done. A later authorized commit appends a commit-finalization entry and updates that repository's evidence row without rewriting the earlier attempt body.
 
-Done only when the user approves implementation or changes the plan.
-
-### 6. Implement
-
-After approval, launch a fresh-context `worker` asynchronously with the approved plan, explicit acceptance criteria, verification commands, and a required handoff covering changed files, commands and exit codes, validation evidence, residual risks, and decisions needing approval.
-
-Done when the worker implements from the approved plan rather than inventing a new implicit one.
-
-### 7. Review the Implementation
-
-Launch fresh-context `reviewer` subagents with distinct, read-only angles such as correctness, validation, and simplicity. The parent synthesizes their findings. If fixes are worth doing now, launch one forked `worker` asynchronously to apply only the accepted fixes; review again when those fixes are substantial.
-
-Done when no blocker or approved fix remains, focused verification passes, and the parent has inspected the final diff.
-
-### 8. Commit
-
-After the worker finishes and verification passes, invoke
-`/conventional-commit-message`, then commit the implementation and related Code
-Brain artifact updates with the generated Conventional Commit message.
-
-Done when `git status` shows no uncommitted changes from the implementation or
-Code Brain artifact updates.
+Done when `receipt.md` contains the appended attempt, every changed repository has source evidence, and plan status plus Kanban lane match the accepted or non-accepted outcome.

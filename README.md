@@ -2,7 +2,9 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
-These skills use a "Code Brain" Obsidian vault at `~/Documents/Code Brain` for planning, domain notes, ADRs, resources, and review notes. The `/code-brain` skill owns folder structure and worktree-safe repo resolution. They treat the code repository as evidence and implementation, not the documentation store.
+These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
+
+Durable projects have a human-owned `VISION.md`, an agent-maintained `AGENTS.md` router, and a plain-Markdown `KANBAN.md` work board rendered by the [Obsidian Kanban plugin](https://github.com/obsidian-community/obsidian-kanban). Install and enable that community plugin in Obsidian. Durable planning invokes Code Brain bootstrap with the user's confirmation when `VISION.md` is missing; existing vault content is not bulk-migrated. Plans own design lifecycle, Kanban lanes own task state, and appendable receipts own execution results.
 
 ## Install
 
@@ -32,15 +34,10 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: install `code-brain` before `domain-modeling`,
-`code-brain-diagramming`, `code-brain-planning`, `dreaming`, or
-`tracer-bullet`. Install `conventional-commit-message` with
-`code-brain-planning` or `pragmatic-plan`.
-Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans
-or dreams need glossary or ADR capture.
+Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture.
 
-- `code-brain` — shared Code Brain structure and worktree-safe project
-  folder conventions.
+- `code-brain` — canonical project spine, Git-native repository resolution,
+  Kanban ownership, and durable evidence conventions.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -76,15 +73,14 @@ or dreams need glossary or ADR capture.
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
   ```
 
-- `code-brain-planning` — durable Code Brain planning workflow for broad,
-  risky, cross-cutting, or approval-first changes. Depends on `/code-brain` and
-  `/conventional-commit-message`; pairs with `/domain-modeling` when planning
-  reveals domain terms or ADRs.
+- `code-brain-planning` — durable Code Brain planning and execution lifecycle
+  for broad, risky, cross-cutting, or approval-first changes, including board
+  transitions and implementation receipts. Depends on `/code-brain`; pairs
+  with `/domain-modeling` when planning reveals domain terms or ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
-  bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
@@ -96,12 +92,10 @@ or dreams need glossary or ADR capture.
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
 
-- `pragmatic-plan` — lightweight approval-first planning with concrete code
-  snippets showing the intended end state. Depends on
-  `/conventional-commit-message` for its commit step.
+- `pragmatic-plan` — lightweight in-session planning with no durable Code
+  Brain artifacts and no automatic commit.
 
   ```bash
-  bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 
@@ -132,7 +126,7 @@ or dreams need glossary or ADR capture.
 
 ## Other Useful Skills
 
-### [mattpocock/skills](mattpocock/skills)
+### [mattpocock/skills](https://github.com/mattpocock/skills)
 
 - `tdd` - test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 

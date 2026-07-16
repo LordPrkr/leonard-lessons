@@ -1,55 +1,38 @@
 ---
 name: pragmatic-plan
-description: "Pragmatic planning for lightweight approval-first code changes. Use when the user wants a standalone implementation plan before coding, especially with code snippets showing the intended end state."
+description: "Lightweight in-session planning with no Code Brain artifacts. Use when the user wants a concrete plan and approval loop for a bounded change that need not persist across sessions."
 ---
 
 # Pragmatic Plan
 
-Use this for lightweight planning that must be approved before implementation. Do not edit implementation files while this skill is active unless the user explicitly approves the plan.
+Use this for lightweight planning held in the current session. Do not create Code Brain artifacts; use `code-brain-planning` when durable plans, board state, receipts, or cross-session execution are required. Do not edit implementation files until the user explicitly approves the current plan.
 
 ## Steps
 
 ### 1. Scout
 
-Inspect relevant code directly. Use a scout subagent when the area is large or cross-cutting.
+Inspect the relevant code directly. Use bounded reconnaissance only when the area is large or cross-cutting.
 
-Done when every likely touchpoint is named and the current flow is understood well enough to avoid rediscovery during implementation.
+Done when every likely touchpoint and the current flow are understood.
 
-### 2. Plan
+### 2. Plan and review
 
-Write a standalone plan for a worker with no prior knowledge. Include:
+Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, TDD-first steps, important end-state snippets, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
 
-- goal and relevant context
-- files to change
-- TDD-first implementation steps
-- important code snippets that show the intended end product, such as core business logic, database queries, API shapes, or component trees
-- test strategy and verification commands
-- risks
-- questions for the user that must be answered before implementation
+Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan.
 
-Do not leave conditional forks in the worker plan. If the plan would say "if X, do Y; if not, do Z," stop and ask the user which branch to plan for instead.
+Done when the plan is concrete, executable, and ready for a user decision.
 
-Do not mention prior plan versions, rejected directions, or how the plan changed.
+### 3. Approval gate
 
-Done when the plan can be handed to a fresh-context worker with no explanation, the TDD path is clear, snippets make the intended final shape concrete, and every remaining branch is raised as a user question rather than embedded as an if/then instruction.
+Present the plan and wait. Explicit approval applies only to the presented version. A substantive revision loops back through plan review and this approval gate; a change request is not approval.
 
-### 3. Approval Gate
+Done when the user explicitly approves the current plan or ends the work.
 
-Present the plan and wait. Do not implement it yet. If the user asks for changes, update the plan so it still stands on its own; do not mention prior plan versions, rejected directions, or how the plan changed.
+### 4. Implement and verify
 
-Done only when the user approves implementation or asks for plan changes.
+Implement only the approved plan and run its verification commands. Review any corrective changes against the same scope; a design change requires a revised plan and approval.
 
-### 4. Implement
+Done when implementation matches the plan and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
-After approval, implement the approved plan and run its verification commands.
-
-Done when the implementation matches the approved plan and every planned
-verification command passes, or a failing command is reported with the smallest
-useful failure detail.
-
-### 5. Commit
-
-Invoke `/conventional-commit-message`, then commit the verified implementation
-with the generated Conventional Commit message.
-
-Done when `git status` shows no uncommitted changes from the implementation.
+Do not commit automatically. Commit only when the user separately authorizes it.

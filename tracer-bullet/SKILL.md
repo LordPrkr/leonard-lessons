@@ -1,62 +1,42 @@
 ---
 name: tracer-bullet
 description: >-
-  Tracer bullet prototype workflow. Use when the user gives a plan and wants to
-  prove technical feasibility, spike implementation details, or fire a
-  disposable end-to-end path before committing to the full build.
+  Tracer bullet workflow. Use when a plan needs a disposable end-to-end
+  prototype to prove or disprove its risky technical path.
 ---
 
 # Tracer Bullet
 
-Create a disposable prototype from the plan to prove technical feasibility and
-expose implementation details. This is a spike, not the final feature: prefer
-the shortest end-to-end path, hardcode safe values, skip polish, and keep the
-diff easy to delete.
-
-Use `/code-brain` project folder conventions for all durable notes.
+Build the shortest disposable path that proves or disproves a plan's technical risk. Use `/code-brain` for durable findings. A tracer is not the final feature.
 
 ## Steps
 
-### 1. Locate the Plan
+### 1. Locate the plan and baseline
 
-Find the plan text from the prompt or Code Brain `plans/`. If the user names a
-plan, search `~/Documents/Code Brain/<repo>/plans/` using `/code-brain` repo
-resolution.
+Resolve the repository and named Code Brain plan. If no plan file exists, retain the prompt plan in the findings note.
 
-Done when you have the plan content, or you can name that no Code Brain plan
-file exists and will reference only the prompt plan.
+Use an isolated Git worktree by default. If isolation is unavailable, do not edit until the existing working tree is clean. Before tracer work, capture the baseline branch, full `HEAD`, `git status --short`, tracked binary diff, and untracked paths.
 
-### 2. Fire the Tracer Bullet
+Done when the plan and an isolation boundary are explicit and the baseline is saved outside the working tree.
 
-Build the smallest disposable prototype that exercises the risky path named by
-the plan. Reuse existing code and installed dependencies; add no new dependency
-unless the prototype cannot run without it. Mark prototype-only code with
-`tracer-bullet:` comments or keep it on an isolated branch/file so deletion is
-obvious.
+### 2. Fire the tracer
 
-Done when the prototype runs far enough to prove or disprove the technical path
-and records the concrete files, APIs, commands, errors, and decisions
-encountered.
+Build the smallest end-to-end prototype for the risky path. Reuse existing code and dependencies; add a dependency only when the path cannot run without it. Mark prototype-only code with `tracer-bullet:` comments or keep it in isolated files so ownership is unambiguous.
 
-### 3. Verify the Path
+Done when the prototype runs far enough to record concrete files, APIs, commands, failures, and decisions.
 
-Run the smallest command that demonstrates the tracer bullet. Prefer an existing
-targeted script, test, or manual command over new test scaffolding.
+### 3. Verify and record findings
 
-Done when the command result is captured, including any failure that proves
-infeasibility or names the next blocking unknown.
+Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the plan link (or prompt plan), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings note from the plan.
 
-### 4. Write Findings
+If findings substantively change an approved plan, the parent sets its status back to `draft`, moves its card to In Progress, and sends the revised plan through review and approval again.
 
-Invoke `/code-brain`, then write `notes/<TOPIC> Tracer Bullet.md` with:
+Done when evidence supports keep going, change plan, or stop.
 
-- link to the plan file when one exists; otherwise paste the prompt plan at
-  the top
-- goal and scope of the tracer bullet
-- prototype location and how to run it
-- findings: what worked, what failed, implementation details discovered
-- recommendation: keep going, change plan, or stop
-- cleanup list for disposable code
+### 4. Clean up exactly
 
-Done when the note exists in Code Brain `notes/` and either links back to the
-plan file or includes the prompt plan at the top.
+Remove or restore only tracer-owned files and hunks. Never use broad restore or clean commands where pre-existing work could exist. Remove the isolated worktree and tracer branch when they were created solely for the spike.
+
+Compare final branch, `HEAD`, status, tracked diff, and untracked paths with the captured baseline. Account for the durable Code Brain findings separately from source cleanup.
+
+Done only when the source repository matches its baseline exactly or every intentional retained difference has the user's explicit approval.

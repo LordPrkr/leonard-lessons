@@ -1,11 +1,11 @@
 ---
 name: domain-modeling
-description: "Code Brain domain modeling. Use with /code-brain when planning reveals domain language, bounded contexts, or architectural decisions to capture outside the repo."
+description: "Direct Code Brain glossary and terse ADR work, plus domain capture during durable planning and dreaming. Use when language, bounded contexts, or architectural decisions need a durable source of truth."
 ---
 
 # Domain Modeling
 
-Build the domain model in `/code-brain`'s project folder under `domain/`, not in the source repo. Treat code as evidence, not the storage location.
+Build the domain model in `/code-brain`'s project folder under `domain/`, not in the source repository. Treat code as evidence and follow `/code-brain`'s evidence convention for source-backed or external claims.
 
 ## Files
 
@@ -22,19 +22,19 @@ Multiple contexts:
 ```txt
 domain/
 ├── CONTEXT-MAP.md
-├── docs/adr/                 # system-wide decisions
+├── docs/adr/
 └── contexts/
     ├── ordering/CONTEXT.md
     └── billing/CONTEXT.md
 ```
 
-Create files lazily: first resolved term creates `CONTEXT.md`; first qualifying decision creates `docs/adr/0001-*.md`.
+Create files lazily. The first resolved term creates `CONTEXT.md`; the first qualifying decision creates `docs/adr/0001-*.md`. Update an existing glossary term in place rather than adding a competing definition.
 
 ## ADRs
 
-ADRs live in Code Brain, not the repo. Use `domain/docs/adr/` for system-wide decisions and `domain/contexts/<context>/docs/adr/` for context-specific decisions. Number by scanning the target `docs/adr/` directory and incrementing the highest `NNNN-*` file.
+Use `domain/docs/adr/` for system-wide decisions and `domain/contexts/<context>/docs/adr/` for context-specific decisions. Number by scanning the target directory and incrementing its highest `NNNN-*` file.
 
-Template:
+Keep ADRs terse:
 
 ```md
 # {Short title}
@@ -42,42 +42,20 @@ Template:
 {1-3 sentences: context, decision, and why.}
 ```
 
-Optional sections (`Status`, `Considered Options`, `Consequences`) are allowed only when they add useful memory.
-
-## During Planning
-
-### Challenge language
-
-When a term conflicts with the Code Brain glossary, call it out immediately.
-
-Done when the user chooses the canonical meaning or name.
-
-### Sharpen terms
-
-When language is fuzzy or overloaded, propose one canonical term and avoided names.
-
-Done when the term can be added as `**Term**: definition` plus optional `_Avoid_:` names.
-
-### Cross-check code
-
-When the user states how the domain works, check the source code for agreement.
-
-Done when contradictions are surfaced as questions, not silently encoded.
-
-### Update Code Brain
-
-Write resolved terms to the relevant Code Brain `domain/**/CONTEXT.md` immediately. Keep implementation details out.
-
-Done when every resolved domain term from the session is captured in the Code Brain.
-
-### Offer ADRs sparingly
-
-Create a Code Brain ADR only when all three are true:
+Optional `Status`, `Considered Options`, `Consequences`, and evidence sections are allowed only when they add useful memory. Create an ADR only when the decision is all three:
 
 1. Hard to reverse.
 2. Surprising without context.
 3. A real trade-off with reasonable alternatives.
 
-Good ADRs capture architectural shape, integration boundaries, lock-in technology choices, ownership boundaries, non-obvious constraints, and rejected alternatives worth remembering. Skip easy, obvious, or no-alternative decisions.
+When a decision changes, create a replacement ADR. Mark the old ADR `Superseded by <relative Markdown link to new ADR>` and add `Supersedes <relative Markdown link to old ADR>` to the replacement. Do not rewrite the historical decision as though it never happened.
 
-Done when qualifying decisions are recorded under `domain/docs/adr/` or the relevant context's `docs/adr/` and linked from the plan.
+## Workflow
+
+1. Challenge terms that conflict with the glossary; let the user choose the canonical meaning or name.
+2. For fuzzy or overloaded language, propose one `**Term**: definition` and optional `_Avoid_:` names.
+3. Cross-check claims against source and surface contradictions as questions rather than silently encoding them.
+4. Update resolved terms immediately in the relevant `domain/**/CONTEXT.md`.
+5. Offer ADRs only at the threshold above and link created ADRs from the active plan or dream.
+
+Done when each resolved term has one definition, each changed decision has reciprocal supersession links, and material claims have durable evidence.
