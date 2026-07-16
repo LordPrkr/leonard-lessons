@@ -1,8 +1,8 @@
 ---
 name: tracer-bullet
 description: >-
-  Tracer bullet workflow. Use when a plan needs a disposable end-to-end
-  prototype to prove or disprove its risky technical path.
+  Tracer bullet workflow. Use when a Code Brain plan or Wayfinder ticket needs
+  a disposable end-to-end prototype to prove or disprove its risky technical path.
 ---
 
 # Tracer Bullet
@@ -11,9 +11,9 @@ Build the shortest disposable path that proves or disproves a plan's technical r
 
 ## Steps
 
-### 1. Locate the plan and baseline
+### 1. Locate the target and baseline
 
-Resolve the repository and named Code Brain plan. If no plan file exists, retain the prompt plan in the findings note. State one falsifiable question, the observable evidence that answers it, and what outcomes mean continue, revise, or stop.
+Resolve the repository and named Code Brain plan or Wayfinder ticket. If no durable target exists, retain the prompt target in the findings note. State one falsifiable question, the observable evidence that answers it, and what outcomes mean continue, revise, or stop.
 
 Use an isolated Git worktree by default. If isolation is unavailable, do not edit until the existing working tree is clean. Before tracer work, capture the baseline branch, full `HEAD`, `git status --short`, tracked binary diff, and untracked paths.
 
@@ -27,7 +27,7 @@ Done when the prototype runs far enough to record concrete files, APIs, commands
 
 ### 3. Verify and record findings
 
-Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the question, decision threshold, plan link (or prompt plan), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings note from the plan.
+Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the question, decision threshold, target link (or prompt target), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings from the plan or Wayfinder ticket.
 
 If findings substantively change an approved plan, the parent sets its status back to `draft`, moves its card to In Progress, and sends the revised plan through review and approval again.
 

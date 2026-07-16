@@ -5,7 +5,7 @@ description: "Durable Code Brain planning and execution. Use when broad, risky, 
 
 # Code Brain Planning
 
-Use this workflow for durable work. Use `pragmatic-plan` instead for a lightweight in-session plan with no Code Brain artifacts. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence.
+Use this workflow for durable work with a clear implementation route. Use `/code-brain-wayfinder` first when material decisions still obscure that route. Use `pragmatic-plan` instead for a lightweight in-session plan with no Code Brain artifacts. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence.
 
 The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`; subagents never update project navigation or workflow state. Code Brain vault files are not source-repository commits.
 

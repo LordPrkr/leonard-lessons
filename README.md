@@ -10,6 +10,7 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 Idea → clarify
        ├─ ordinary implementation → effective-engineer
        ├─ bounded, approval-first work → pragmatic-plan
+       ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
 Delivery → parallel-pr-review
@@ -33,6 +34,7 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── AGENTS.md                 # agent-maintained router to active memory
 ├── KANBAN.md                 # durable managed-work state
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
+├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
 ├── todo/                     # durable context for unplanned work
 ├── domain/                   # glossary, context maps, and ADRs
 ├── notes/                    # reusable project knowledge
@@ -68,6 +70,7 @@ Source commits require separate user authorization. Committed work records the d
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` keeps Mermaid diagrams and canvases beside the plan they explain.
+- `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 
@@ -99,7 +102,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -120,6 +123,15 @@ Dependencies: these workflows require Pi and Obsidian. Install `code-brain` befo
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
+  ```
+
+- `code-brain-wayfinder` — chart uncertain, multi-session work as decision
+  tickets on the Code Brain Kanban board, then hand the resolved route to
+  `code-brain-planning`. Depends on `/code-brain`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-wayfinder --global
   ```
 
 - `agents-md` — create or refactor AGENTS.md files with progressive

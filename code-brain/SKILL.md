@@ -29,6 +29,7 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── AGENTS.md
 ├── KANBAN.md
 ├── plans/<NNN_TOPIC>/
+├── wayfinding/<NNN_TOPIC>/
 ├── todo/
 ├── domain/
 ├── notes/
@@ -41,6 +42,7 @@ Create optional directories and artifacts lazily. Keep each plan and its notes, 
 - `VISION.md` is human-owned strategic intent. Read it before durable planning and ask the user before changing it.
 - `AGENTS.md` is the short agent-maintained router to canonical memory, active plans, the board, and project-specific Code Brain rules. It is not a backlog.
 - `KANBAN.md` is the authoritative workflow state for durable Code Brain-managed work. Ordinary work that needs no durable artifact may remain outside it. Its lanes are Inbox, Ready, In Progress, Review, Blocked, and Done.
+- `wayfinding/` holds decision maps and ticket notes for uncertain work; `KANBAN.md` holds their status.
 - `todo/` holds durable context for unplanned work, not one-line task stubs. Simple tasks stay inline on the board.
 - Plans preserve approved design. Appendable `receipt.md` files preserve execution truth.
 

@@ -14,13 +14,14 @@ For work that changes code:
 
 - **Ordinary implementation** → `/effective-engineer`.
 - **Bounded work requiring a plan and approval first** → `/pragmatic-plan`.
-- **Broad, risky, cross-cutting, or cross-session work** → `/code-brain-planning`.
+- **Broad, risky, cross-cutting, or cross-session work with a clear route** → `/code-brain-planning`.
+- **Broad work with a clear destination but material unresolved decisions** → `/code-brain-wayfinder`.
 
 Keep bounded work in the current session. Durable planning uses Code Brain and fresh workers for context-sized execution slices.
 
 ## Detour
 
-When a plan depends on a technical question that conversation cannot answer, route to `/tracer-bullet`. Its runnable evidence returns to the plan; the prototype is not the deliverable.
+When a plan or Wayfinder ticket depends on a technical question that conversation cannot answer, route to `/tracer-bullet`. Its runnable evidence returns to that target; the prototype is not the deliverable.
 
 ## On-ramps
 
