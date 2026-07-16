@@ -11,9 +11,9 @@ The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`
 
 ## Before planning
 
-Assume the Code Brain project is initialized. If `VISION.md` does not exist, invoke `/code-brain` and complete project bootstrap before planning. Then scan `plans/` and create the next `plans/<NNN_TOPIC>/` folder.
+Assume the Code Brain project is initialized. If `VISION.md` does not exist, invoke `/code-brain` and complete project bootstrap before planning. Then scan `plans/` and create the next `plans/<NNN_TOPIC>/` folder. Add its `plan.md` to `AGENTS.md` under Active plans, and move its existing board card to In Progress or create one there.
 
-Read [`references/TEMPLATE.md`](references/TEMPLATE.md) before writing `plan.md`. Set its creation date and `status: draft`, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
+Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before writing `plan.md`. Set its creation date and `status: draft`, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
 
 Capture each affected source repository's full `HEAD` independently before implementation. Do not modify a repository with unrelated staged or unstaged work unless the user explicitly approves that boundary.
 
@@ -45,7 +45,7 @@ The board lane is workflow state; plan frontmatter is design lifecycle. New plan
 | Recovery changes design | `draft` | In Progress | `revise-plan` → `draft_plan` |
 | User pauses blocked work | `approved` | Blocked | `pause` → end |
 
-For abandonment or supersession, retain the card in Done with `— abandoned` or `— superseded`; the linked plan carries canonical status.
+For abandonment or supersession, retain the card in Done with `— abandoned` or `— superseded`; the linked plan carries canonical status. Remove implemented, abandoned, and superseded plans from `AGENTS.md`; approved Blocked plans remain active.
 
 ## Steps
 
@@ -83,7 +83,7 @@ Done when review accepts delivery or an honest non-accepted receipt is required.
 
 ### 6. Commit decision and receipt
 
-Read [`references/RECEIPT.md`](references/RECEIPT.md). Create `receipt.md` once and append one chronological section after every attempt; frontmatter always reflects the latest attempt.
+Read [`references/RECEIPT.md`](./references/RECEIPT.md). Create `receipt.md` once, add `[Implementation receipt](./receipt.md)` to the plan's References, and append one chronological section after every attempt; frontmatter always reflects the latest attempt.
 
 For accepted work, ask whether the user authorizes source commits, naming every changed repository. Commit only explicitly authorized repositories, before persisting accepted evidence. Record the resulting full commit SHA and `none` as its change-set hash. For each repository left uncommitted, record `uncommitted` and the deterministic complete change-set hash. Never identify pre-change `HEAD` as delivered source and never claim the non-Git vault was committed.
 

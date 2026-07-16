@@ -4,7 +4,59 @@ Public agent skills from Leonard the Orange 🐦‍🔥
 
 These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
 
-Durable projects have a human-owned `VISION.md`, an agent-maintained `AGENTS.md` router, and a plain-Markdown `KANBAN.md` work board rendered by the [Obsidian Kanban plugin](https://github.com/obsidian-community/obsidian-kanban). Install and enable that community plugin in Obsidian. Durable planning invokes Code Brain bootstrap with the user's confirmation when `VISION.md` is missing; existing vault content is not bulk-migrated. Plans own design lifecycle, Kanban lanes own task state, and appendable receipts own execution results.
+## Code Brain workflow
+
+Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
+
+Use Code Brain for work that must survive the current session: broad changes, risky migrations, architectural decisions, or implementation that needs an approval gate. Use `pragmatic-plan` or `effective-engineer` for bounded work that does not need durable artifacts. Ordinary work does not need a Kanban card.
+
+### Project spine
+
+Each initialized project has three entry points:
+
+```text
+$CODE_BRAIN_ROOT/<repo>/
+├── VISION.md                 # human-owned strategy and agent authority
+├── AGENTS.md                 # agent-maintained router to active memory
+├── KANBAN.md                 # durable managed-work state
+├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
+├── todo/                     # durable context for unplanned work
+├── domain/                   # glossary, context maps, and ADRs
+├── notes/                    # reusable project knowledge
+├── resources/                # references and checklists
+└── review/                   # ingested review material
+```
+
+Run `code-brain` from the target source repository or one of its worktrees. It resolves `<repo>` from Git so every worktree shares one project folder. A bare invocation audits an existing project and offers a concrete reconciliation without changing the vault first. The first durable workflow bootstraps the spine when `VISION.md` is missing: it reads existing repository and vault context, interviews the user one question at a time, and writes `VISION.md` only after explicit confirmation. Projects are reconciled individually, never bulk-migrated.
+
+`VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links the board, active plans, and canonical notes; it does not hold task state. `KANBAN.md` is a plain-Markdown board rendered by the [Obsidian Kanban plugin](https://github.com/obsidian-community/obsidian-kanban). Install and enable that plugin to use the board UI.
+
+### Durable planning lifecycle
+
+`code-brain-planning` owns the lifecycle for planned work:
+
+```text
+Inbox → In Progress → Review → Ready → In Progress → Review → Done
+                      approval      implementation
+
+Blocked or partial implementation → receipt → Blocked
+```
+
+1. The orchestrator gathers source context and records material claims with repository revisions or external URLs.
+2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
+3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
+4. A fresh worker implements the approved plan. Read-only reviewers check correctness, validation, and simplicity.
+5. The orchestrator appends an implementation attempt to `receipt.md`, including changed files, verification results, review findings, deviations, and source evidence for every changed repository.
+6. Accepted work becomes `implemented` and moves to Done. Blocked, partial, or reverted work keeps its approved design and moves to Blocked with an honest receipt.
+
+Source commits require separate user authorization. Committed work records the delivered commit SHA; uncommitted work records a deterministic hash of the complete Git change set. Plans preserve design intent, Kanban lanes preserve managed-work state, and receipts preserve what actually happened.
+
+### Supporting workflows
+
+- `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
+- `code-brain-diagramming` keeps Mermaid diagrams and canvases beside the plan they explain.
+- `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
+- `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 
 ## Install
 
