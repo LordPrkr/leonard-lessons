@@ -1,6 +1,6 @@
 # Initialize or Reconcile Code Brain
 
-Use this branch when `VISION.md` is missing or the user asks to initialize, audit, repair, or reconcile a Code Brain project.
+Use this branch on bare `/code-brain`, when `VISION.md` is missing, or when the user asks to initialize, audit, repair, or reconcile a Code Brain project.
 
 ## Reconcile an existing project
 

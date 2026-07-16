@@ -115,8 +115,8 @@ Dependencies: these workflows require Pi and Obsidian. Install `code-brain` befo
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   ```
 
-- `effective-engineer` — tight inspect, test, implement, verify, and
-  summarize loop for non-trivial code changes.
+- `effective-engineer` — tight inspect, red-green implementation, verification,
+  and final-review loop for non-trivial code changes.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global

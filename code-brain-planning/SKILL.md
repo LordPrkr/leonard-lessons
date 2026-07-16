@@ -63,9 +63,9 @@ Done when no directional decision is implicit.
 
 ### 3. Draft and review
 
-Write a standalone worker handoff with goal, context, observable acceptance criteria, exact files, TDD-first steps, important end-state snippets, tests, verification, risks, questions, and artifact links. For work that exceeds one fresh worker context, add ordered execution slices that reference their implementation steps, acceptance criteria, dependencies, and verification; otherwise omit them. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
+Write a standalone worker handoff with problem, goal, out-of-scope boundary, context, observable acceptance criteria, exact files, the highest existing public test seam, one red-green step per observable behavior, important end-state snippets, tests, verification, risks, questions, and artifact links. For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
 
-Done when a fresh worker can execute the plan, every acceptance criterion is covered by its implementation and verification, each required slice fits one fresh context, and the card is in Review awaiting a user decision.
+Done when a fresh worker can execute the plan, the problem and scope boundary are explicit, every acceptance criterion is covered by its implementation and verification, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
 
 ### 4. Approval gate
 
@@ -75,7 +75,7 @@ Done when the approved plan is Ready or work ends explicitly.
 
 ### 5. Implement and review
 
-Only `start-implementation` moves an approved Ready card to In Progress. Implement each execution slice in order with a fresh worker; a plan without slices is one slice. Give each worker the approved plan, its slice, acceptance criteria, verification commands, base revisions, and a required handoff containing changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
+Only `start-implementation` moves an approved Ready card to In Progress. Implement unblocked execution slices with a fresh worker; a plan without slices is one slice. Give each worker the approved plan, its slice, acceptance criteria, verification commands, base revisions, and a required handoff containing changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
 
 Move the card to Review when implementation is ready. Read-only reviewers check every acceptance criterion against the delivered source, then check correctness, validation, simplicity, and repository standards. Approved fixes return it to In Progress and then Review. If implementation or review is blocked, partial, or reverted, skip commits and persist the attempt receipt immediately.
 

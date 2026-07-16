@@ -9,11 +9,11 @@ Delegate evidence collection; keep classification with the orchestrator.
 
 ## 1. Establish scope
 
-Use `gh` to identify the current branch's pull request, head SHA, base branch, changed files, and non-successful check runs. Include cancelled or skipped jobs only when the user asks or they block the PR.
+Use `gh` to identify the current branch's pull request, immutable head SHA, base branch, changed files, and check runs. Classify only terminal failing conclusions; report queued, in-progress, cancelled, and skipped checks separately unless the user asks to triage them.
 
-If there is no linked pull request, stop and report that. If every relevant check passed, report that no triage is needed.
+If there is no linked pull request, stop and report that. If every relevant terminal check passed, report that no triage is needed.
 
-**Complete when:** every relevant non-successful job has its name, conclusion, details URL, and run/job identifier when available.
+**Complete when:** every relevant terminal failure has its name, conclusion, details URL, and run/job identifier when available.
 
 ## 2. Discover scouts
 
@@ -25,7 +25,7 @@ Call `subagent({ action: "list" })`. Select an executable `scout`; stop and repo
 
 Launch one read-only scout per job in a single parallel `subagent` call with `context: "fresh"`, `async: true`, and bounded concurrency. Scouts must not edit files or launch subagents.
 
-Give each scout the repository, PR number, head SHA, job name, details URL, and identifiers. Require it to use `gh` to inspect the check, workflow run, job metadata, annotations, and logs. It may inspect the PR diff and nearby repository code only to connect log evidence to changed files.
+Give each scout the repository, PR number, head SHA, job name, details URL, and identifiers. Require it to use `gh` to inspect the check, workflow run, job metadata, annotations, and logs, then attempt the smallest safe reproduction when one is available. It may inspect the PR diff and nearby repository code only to connect log evidence to changed files.
 
 Each scout returns:
 
@@ -36,6 +36,7 @@ Failure: <exact failing command, test, or step>
 Evidence: <short quoted log/annotation excerpts with URLs or run/job ids>
 Change overlap: <changed files/symbols plausibly connected, or none>
 History: <rerun/previous-run evidence of intermittence, or unknown>
+Reproduction: <smallest safe command and result, or infeasible reason>
 Missing evidence: <anything gh could not retrieve>
 ```
 
@@ -70,6 +71,6 @@ The orchestrator—not the scouts—assigns exactly one classification:
 - **Related:** the failing path overlaps changed behavior or dependencies and the evidence provides a credible causal link.
 - **Inconclusive:** evidence cannot safely support any classification above. Request the smallest next action, such as rerunning one job or retrieving unavailable logs.
 
-For each job, report the classification, confidence, decisive evidence, and next action. Separate facts from inference and link the run or job.
+For each job, report the classification, confidence, decisive evidence, reproduction result, and next action. Separate facts from inference and link the run or job. For a related failure, the next action must name focused validation, repository-prescribed broader checks, and `/parallel-pr-review` after a fix.
 
 **Complete when:** every scoped job is classified or explicitly marked inconclusive, and every classification cites decisive evidence.

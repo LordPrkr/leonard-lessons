@@ -17,7 +17,7 @@ Done when every likely touchpoint and the current flow are understood.
 
 ### 2. Plan and review
 
-Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, TDD-first steps, important end-state snippets, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
+Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, important end-state snippets, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
 
 Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan.
 
@@ -31,8 +31,8 @@ Done when the user explicitly approves the current plan or ends the work.
 
 ### 4. Implement and verify
 
-Implement only the approved plan and run its verification commands. Review any corrective changes against the same scope; a design change requires a revised plan and approval.
+Implement only the approved plan and run its verification commands. Review the final diff against the approved plan, repository standards, correctness, and simplicity; re-run affected checks after fixes. A design change requires a revised plan and approval.
 
-Done when implementation matches the plan and verification passes, or the smallest useful failure detail and remaining risk are reported.
+Done when implementation matches the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
 Do not commit automatically. Commit only when the user separately authorizes it.

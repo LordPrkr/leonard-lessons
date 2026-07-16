@@ -1,17 +1,24 @@
 # Dream — YYYY-MM-DD
 
+<!-- Managed sessions: regenerate only entries between these markers. -->
+<!-- BEGIN MANAGED SESSIONS -->
 ## Sessions Dreamed
 
-- `<stable session key>` — `<path>` — timestamp — topic
+- `session:<stable session key>` — `<path>` — timestamp — topic
+<!-- END MANAGED SESSIONS -->
 
+<!-- Managed memories: regenerate only entries between these markers. -->
+<!-- BEGIN MANAGED MEMORIES -->
 ## Durable Memories
 
 ### Preference / Pattern / Architecture / Workflow
 
-- Insight:
-- Evidence:
-- Applies when:
-- Confidence: high | medium | low
+- `memory:<normalized stable ID>`
+  - Insight:
+  - Evidence:
+  - Applies when:
+  - Confidence: high | medium | low
+<!-- END MANAGED MEMORIES -->
 
 ## Contradictions or Stale Memories
 

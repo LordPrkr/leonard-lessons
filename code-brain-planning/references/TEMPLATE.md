@@ -5,9 +5,17 @@ status: draft
 
 # <Plan title>
 
+## Problem
+
+<The current user or system problem this plan resolves.>
+
 ## Goal
 
 <The outcome this plan must deliver.>
+
+## Out of Scope
+
+- <Consciously excluded work, or "None.">
 
 ## Context
 
@@ -25,6 +33,8 @@ status: draft
 
 ### 1. <Step name>
 
+**Seam:** <Highest existing public seam that observes this behavior.>
+
 **Red:** <Test that fails for the intended reason.>
 
 **Green:** <Smallest implementation that passes the test.>
@@ -35,7 +45,7 @@ status: draft
 
 <!-- Omit when the plan fits one fresh worker context. -->
 
-1. **<Slice title>** — implementation steps <N–N>; acceptance criteria <items>; verify with `<command>`.
+1. **<Slice title>** — delivers <observable behavior>; implementation steps <N–N>; acceptance criteria <items>; blocked by <slices or None>; verify with `<command>`.
 
 ## Test Strategy
 

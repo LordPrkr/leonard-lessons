@@ -28,7 +28,7 @@ domain/
     └── billing/CONTEXT.md
 ```
 
-Create files lazily. The first resolved term creates `CONTEXT.md`; the first qualifying decision creates `docs/adr/0001-*.md`. Update an existing glossary term in place rather than adding a competing definition.
+Create files lazily. The first resolved term creates `CONTEXT.md`; the first qualifying decision creates `docs/adr/0001-*.md`. Update an existing glossary term in place rather than adding a competing definition. Read [`references/CONTEXT-FORMAT.md`](./references/CONTEXT-FORMAT.md) before creating or changing a glossary.
 
 ## ADRs
 
@@ -54,8 +54,9 @@ When a decision changes, create a replacement ADR. Mark the old ADR `Superseded 
 
 1. Challenge terms that conflict with the glossary; let the user choose the canonical meaning or name.
 2. For fuzzy or overloaded language, propose one `**Term**: definition` and optional `_Avoid_:` names.
-3. Cross-check claims against source and surface contradictions as questions rather than silently encoding them.
-4. Update resolved terms immediately in the relevant `domain/**/CONTEXT.md`.
-5. Offer ADRs only at the threshold above and link created ADRs from the active plan or dream.
+3. Stress-test fuzzy relationships with concrete edge-case scenarios that force their boundaries to become explicit.
+4. Cross-check claims against source and surface contradictions as questions rather than silently encoding them.
+5. Update resolved terms immediately in the relevant `domain/**/CONTEXT.md`.
+6. Offer ADRs only at the threshold above and link created ADRs from the active plan or dream.
 
 Done when each resolved term has one definition, each changed decision has reciprocal supersession links, and material claims have durable evidence.

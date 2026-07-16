@@ -13,11 +13,11 @@ Build the shortest disposable path that proves or disproves a plan's technical r
 
 ### 1. Locate the plan and baseline
 
-Resolve the repository and named Code Brain plan. If no plan file exists, retain the prompt plan in the findings note.
+Resolve the repository and named Code Brain plan. If no plan file exists, retain the prompt plan in the findings note. State one falsifiable question, the observable evidence that answers it, and what outcomes mean continue, revise, or stop.
 
 Use an isolated Git worktree by default. If isolation is unavailable, do not edit until the existing working tree is clean. Before tracer work, capture the baseline branch, full `HEAD`, `git status --short`, tracked binary diff, and untracked paths.
 
-Done when the plan and an isolation boundary are explicit and the baseline is saved outside the working tree.
+Done when the question, decision threshold, plan, and isolation boundary are explicit and the baseline is saved outside the working tree.
 
 ### 2. Fire the tracer
 
@@ -27,7 +27,7 @@ Done when the prototype runs far enough to record concrete files, APIs, commands
 
 ### 3. Verify and record findings
 
-Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the plan link (or prompt plan), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings note from the plan.
+Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the question, decision threshold, plan link (or prompt plan), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings note from the plan.
 
 If findings substantively change an approved plan, the parent sets its status back to `draft`, moves its card to In Progress, and sends the revised plan through review and approval again.
 

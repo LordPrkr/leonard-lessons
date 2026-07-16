@@ -1,115 +1,57 @@
 ---
 name: gh-pr-review-plan
-description: "GitHub PR review planning with gh: pull human reviewer comments from the current branch's associated pull request, assess each comment's validity, plan valid fixes, and draft concise pushback for invalid comments."
+description: "GitHub PR review planning with gh: collect complete review context, assess human comments, plan valid fixes, and draft concise evidence-backed replies."
 ---
 
 # GH PR Review Plan
 
-Use `gh` to turn human reviewer comments on the current branch's associated
-pull request into a response plan. Do not implement fixes in this skill.
+Use `gh` to turn human reviewer feedback on the current branch's pull request into a response plan. Do not implement fixes in this skill.
 
 ## Steps
 
-### 1. Locate the PR
+### 1. Pin the PR
 
 Run:
 
 ```bash
-gh pr view --json number,url,headRefName,baseRefName,title,author
+gh pr view --json number,url,headRefName,baseRefName,headRefOid,baseRefOid,title,author
 ```
 
-If no PR is associated with the current branch, ask for the PR URL or number.
+Resolve and record the PR head SHA, base SHA, merge base, `git diff <merge-base>...<head-sha>`, and commit list. If no PR is associated with the current branch, ask for its URL or number.
 
-Done when the PR number and URL are known.
+Done when the PR number, URL, and immutable base/head review target are known.
 
-### 2. Pull human review comments
+### 2. Collect complete review context
 
-Get review threads, review summaries, and issue comments. Prefer this GraphQL
-query because it preserves resolved state and inline locations:
+Collect review threads, every nested thread comment, review summaries, and issue comments. Use GraphQL cursor loops: page `reviewThreads`, `reviews`, and issue `comments` until each `hasNextPage` is false; then page every thread's `comments` independently until exhausted. Include each comment's author, body, URL, timestamp, commit OID, path, line, original line, outdated state, and thread resolved state.
 
-```bash
-OWNER=$(gh repo view --json owner --jq .owner.login)
-REPO=$(gh repo view --json name --jq .name)
-PR=$(gh pr view --json number --jq .number)
+Preserve PR-author and bot replies as context. Select only eligible human reviewer requests as actionable items unless the user asks otherwise. Keep resolved threads when their context affects an actionable request or explains reviewer intent.
 
-gh api graphql -f owner="$OWNER" -f repo="$REPO" -F number="$PR" -f query='
-query($owner: String!, $repo: String!, $number: Int!) {
-  repository(owner: $owner, name: $repo) {
-    pullRequest(number: $number) {
-      url
-      reviewThreads(first: 100) {
-        pageInfo { hasNextPage endCursor }
-        nodes {
-          isResolved
-          path
-          line
-          originalLine
-          comments(first: 50) {
-            pageInfo { hasNextPage endCursor }
-            nodes {
-              author { login }
-              body
-              createdAt
-              url
-            }
-          }
-        }
-      }
-      reviews(first: 100) {
-        pageInfo { hasNextPage endCursor }
-        nodes {
-          author { login }
-          state
-          body
-          submittedAt
-          url
-        }
-      }
-      comments(first: 100) {
-        pageInfo { hasNextPage endCursor }
-        nodes {
-          author { login }
-          body
-          createdAt
-          url
-        }
-      }
-    }
-  }
-}'
-```
-
-If any `pageInfo.hasNextPage` is true, rerun with cursors before judging.
-Ignore comments from bots and the PR author unless the user asks otherwise.
-Keep resolved threads only when they contain unresolved follow-up or explain
-reviewer intent.
-
-Done when every page is exhausted and every human reviewer comment is listed
-once with author, URL, file/line when present, and resolved/unresolved state.
+Done when every connection and nested thread-comment page is exhausted and every actionable request retains its complete conversational context.
 
 ### 3. Assess validity
 
-For each comment, inspect the referenced code before judging. Classify it:
+For each actionable request, inspect the referenced source at the pinned head before judging. Classify it:
 
-- `valid` — the reviewer found a real bug, risk, requirement miss,
-  maintainability issue, or clearer fit with existing patterns.
-- `invalid` — the suggestion is factually wrong, already handled, conflicts
-  with requirements, or costs more complexity than it saves.
-- `needs clarification` — the comment cannot be fairly judged from repo evidence.
+- `valid` — the reviewer found a real bug, risk, requirement miss, maintainability issue, or clearer fit with existing patterns.
+- `invalid` — the suggestion is factually wrong, already handled, conflicts with requirements, or costs more complexity than it saves.
+- `needs clarification` — repository evidence cannot fairly decide the request.
 
-Done when every comment has a classification and a one-sentence evidence note.
+Done when every actionable request has a classification, one-sentence evidence note, and links to its source comment and relevant code.
 
 ### 4. Make the response plan
 
-For each comment:
+Group duplicate requests under one canonical item while retaining every source URL. For each item include:
 
-- If `valid`, write the smallest plan to address it: files to change,
-  intended diff, and the smallest verification command.
-- If `invalid`, draft a concise GitHub reply explaining why not to address it,
-  with evidence.
-- If `needs clarification`, draft the exact question to ask.
+```text
+Sources: <comment URLs>
+Classification: valid | invalid | needs clarification
+Evidence: <source and code evidence>
+Current → desired behavior: <only when valid>
+Smallest change: <files and intended diff, only when valid>
+Acceptance check: <independently verifiable command or observation, only when valid>
+Reply: <concise evidence-backed GitHub response>
+Question: <exact question, only when clarification is needed>
+```
 
-Group duplicate comments under one plan item.
-
-Done when the final plan covers every human reviewer comment exactly once and
-contains no implementation changes.
+Done when the final plan covers every actionable human request exactly once, preserves contextual replies, and contains no implementation changes.

@@ -24,13 +24,13 @@ Done when each selected session has stable key, path, opening timestamp, cwd, an
 
 Recompute candidate memories across the complete session set whenever sessions are added. Extract only durable preferences, repeated workflows, repository architecture or domain discoveries, reusable commands and patterns, recurring failures, and decisions.
 
-Drop one-off chatter, transient logs, guesses, secrets, and memories already canonical. Deduplicate identical evidence entries by stable key. Deduplicate insights by normalized heading plus normalized claim text. Each retained insight needs evidence, applicability boundary, and `high`, `medium`, or `low` confidence.
+Drop one-off chatter, transient logs, guesses, secrets, and memories already canonical. Deduplicate identical evidence entries by stable key. Deduplicate insights by normalized heading plus normalized claim text. Each retained insight needs evidence, applicability boundary, and confidence: `high` for an explicit user decision, authoritative source, or repeated corroboration; `medium` for one clear session observation; `low` for inference or a tentative pattern.
 
-Done when every retained insight has evidence, an applicability boundary, and confidence, and rerunning with the same sessions produces no duplicate session, evidence, or insight entry.
+Done when every retained insight has evidence, an applicability boundary, and evidence-based confidence, and rerunning with the same sessions produces no duplicate session, evidence, or insight entry.
 
 ### 3. Merge the dream note
 
-Read [`references/TEMPLATE.md`](references/TEMPLATE.md). Create or merge `notes/dreams/YYYY-MM-DD Dream.md`; never replace a same-day note wholesale. Preserve useful human edits and recompute the structured session and candidate-memory content from the complete set.
+Read [`references/TEMPLATE.md`](references/TEMPLATE.md). Create or merge `notes/dreams/YYYY-MM-DD Dream.md`; never replace a same-day note wholesale. Regenerate only the marked managed entries keyed by stable session or insight ID; preserve all text outside those entries as human-owned.
 
 Apply `/code-brain`'s evidence convention when the note makes source-backed or external claims. Session evidence uses stable session IDs as local-only leads, with durable claims summarized in the note.
 
@@ -40,7 +40,7 @@ Done when the note covers the complete same-day set and every insight points to 
 
 Promote only high-confidence insights that clearly belong in canonical files:
 
-- `domain/CONTEXT.md` for domain terms
+- the context selected by `domain-modeling` for domain terms
 - `resources/Agent Memory.md` for user or repository workflow preferences
 - `notes/<topic>.md` for reusable project context
 

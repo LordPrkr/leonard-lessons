@@ -5,7 +5,7 @@ description: "Use when drafting or revising technical writing for senior enginee
 
 # Spellbinding Sentences
 
-Write for a senior software engineer who already knows the domain model and codebase.
+Write for the audience the user names. Otherwise write for a senior software engineer who may not know the local domain or codebase.
 
 ## Steps
 
@@ -35,7 +35,7 @@ Done when every non-obvious recommendation is conditional and names its rejected
 
 ### 5. Cut inherited context
 
-Explain only the surprising constraint, subtle failure mode, or decision-moving detail. Skip definitions of standard terms and project concepts.
+Explain only the surprising constraint, subtle failure mode, or decision-moving detail the target reader does not already know. Skip definitions of standard terms.
 
 Done when no paragraph restates context the target reader already has.
 

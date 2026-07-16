@@ -9,9 +9,11 @@ Run an adversarial, read-only review with five independent reviewers.
 
 ## 1. Establish the review target
 
-Identify the repository root, current branch, base branch, and associated pull request. If no pull request exists, review the local branch diff against its merge base. Do not substitute conversation history for repository evidence.
+Identify the repository root, current branch, associated pull request, base SHA, head SHA, merge base, and commit list. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. If no pull request exists, review the local branch against its merge base. Do not substitute conversation history for repository evidence.
 
-**Complete when:** the exact diff and available PR metadata are known.
+Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly.
+
+**Complete when:** the immutable review target, exact non-empty diff command, commit list, and available intent and standards sources are known.
 
 ## 2. Discover subagents
 
@@ -25,8 +27,9 @@ Call the `subagent` tool once in parallel mode with `async: true`, `context: "fr
 
 Every task must tell the reviewer to:
 
-- inspect the target directly with `git`;
+- inspect the exact diff command and immutable base/head SHAs with `git`;
 - inspect the associated PR with `gh` when one exists, including its base and discussion relevant to the assigned role;
+- read the supplied intent and standards sources relevant to its role;
 - infer repository precedent from nearby code and tests;
 - report only actionable, evidence-backed findings;
 - cite file and line, explain impact, and propose the smallest safe fix;
@@ -34,9 +37,9 @@ Every task must tell the reviewer to:
 
 Assign exactly one requirement to each reviewer:
 
-1. **Intent conformance:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. Flag missing, partial, or contradictory behavior.
+1. **Intent conformance:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. Flag missing, partial, contradictory, or unrequested behavior.
 2. **Test coverage:** Account for every changed production file. Flag changed behavior without corresponding tests when this repository has precedent for testing that behavior or file area; check changed tests against nearby test structure and helpers.
-3. **Code precedent:** Review changed production code only for consistency with nearby style and shared utilities; flag duplicated local machinery when an established repository utility already fits.
+3. **Code precedent:** Review changed production code against explicit repository standards, nearby style, and shared utilities; flag duplicated local machinery when an established utility already fits.
 4. **Correctness:** Find concrete bugs, regressions, unsafe edge cases, and contract violations introduced by the diff.
 5. **Design fit:** Check whether the changes follow established repository design patterns. Flag missing patterns only when they prevent a concrete problem; also flag speculative abstractions or pattern overuse.
 
@@ -45,11 +48,11 @@ Use this execution shape, replacing `<reviewer>` and `<target>` with discovered 
 ```typescript
 subagent({
   tasks: [
-    { agent: "<reviewer>", task: "Review <target> for intent and acceptance-criteria conformance only. ..." },
-    { agent: "<reviewer>", task: "Review <target> for test coverage and test-file precedent only. ..." },
-    { agent: "<reviewer>", task: "Review <target> for production-code precedent and shared utilities only. ..." },
-    { agent: "<reviewer>", task: "Review <target> for correctness only. ..." },
-    { agent: "<reviewer>", task: "Review <target> for established design-pattern fit only. ..." }
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for intent, acceptance-criteria, and scope-creep conformance only. ..." },
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for test coverage and test-file precedent only. ..." },
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for standards, production-code precedent, and shared utilities only. ..." },
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for correctness only. ..." },
+    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for established design-pattern fit only. ..." }
   ],
   context: "fresh",
   concurrency: 5,
@@ -61,7 +64,7 @@ subagent({
 
 ## 4. Collect and synthesize
 
-Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
+Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
 
 Deduplicate findings by root cause. Reject findings unsupported by the diff or repository precedent. Present:
 

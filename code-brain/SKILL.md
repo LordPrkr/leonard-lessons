@@ -44,6 +44,8 @@ Create optional directories and artifacts lazily. Keep each plan and its notes, 
 - `todo/` holds durable context for unplanned work, not one-line task stubs. Simple tasks stay inline on the board.
 - Plans preserve approved design. Appendable `receipt.md` files preserve execution truth.
 
+Before a Code-Brain-aware workflow plans or implements, read the relevant `domain/` context and ADRs, use their canonical vocabulary, and surface any conflict with source evidence or the requested direction.
+
 Cards are plain Markdown tasks with an optional wikilink:
 
 ```md
@@ -56,7 +58,7 @@ Each managed task appears in exactly one lane. The card lane is its only task-st
 
 ## Initialization and reconciliation
 
-When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
+On bare `/code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
 
 ## Numbering and compatibility
 

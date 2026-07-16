@@ -70,9 +70,9 @@ If the user asked for a plan, output:
 - deletion list
 - unresolved questions
 
-If the user asked you to edit the repo, create or update the files.
+If the user asked you to edit the repo, preserve unrelated existing content, update known sections in place, and create only the disclosed files needed by the approved structure. Verify every relative Markdown link resolves.
 
-Done when the root AGENTS.md is a router and every disclosed file is linked from it.
+Done when the root AGENTS.md is a router, every disclosed file is linked from it, every relative link resolves, and unrelated content is preserved.
 
 ## Root shape
 
