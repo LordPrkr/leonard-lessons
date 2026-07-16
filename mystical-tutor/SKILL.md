@@ -1,29 +1,58 @@
 ---
 name: mystical-tutor
-description: "Choose the Leonard Lessons skill that best fits the user's task."
+description: "Find the Leonard Lessons skill or flow that fits your situation."
 disable-model-invocation: true
 ---
 
 # Mystical Tutor
 
-Route the request to the narrowest fitting skill. State the chosen route in one sentence, then invoke it. Ask one focused question only when the route depends on missing information.
+A tutor finds the next spell; it does not cast it. Recommend the route, then stop.
 
-| Request | Route |
-| --- | --- |
-| Change code with a tight implementation loop | `/effective-engineer` |
-| Make a bounded, approval-first plan | `/pragmatic-plan` |
-| Plan or execute broad, risky, or cross-session work | `/code-brain-planning` |
-| Initialize, audit, or reconcile Code Brain | `/code-brain` |
-| Prove a risky technical path before implementation | `/tracer-bullet` |
-| Capture domain terms, bounded contexts, or ADRs | `/domain-modeling` |
-| Add diagrams to an existing Code Brain plan | `/code-brain-diagramming` |
-| Create or refactor AGENTS.md | `/agents-md` |
-| Draft or revise senior-engineer technical writing | `/spellbinding-sentences` |
-| Curate Pi sessions into durable memory | `/dreaming` |
-| Review a pull request or branch | `/parallel-pr-review` |
-| Assess human review comments and plan responses | `/gh-pr-review-plan` |
-| Triage failed pull-request jobs | `/gh-pr-job-triage` |
+## Main flow
 
-When several routes fit, choose the route matching the user's requested artifact. Use `/effective-engineer` for ordinary code changes and escalate only when durability, approval, or technical uncertainty requires it.
+For work that changes code:
 
-Done when one primary route is selected and invoked, or one blocking routing question is asked.
+- **Ordinary implementation** → `/effective-engineer`.
+- **Bounded work requiring a plan and approval first** → `/pragmatic-plan`.
+- **Broad, risky, cross-cutting, or cross-session work** → `/code-brain-planning`.
+
+Keep bounded work in the current session. Durable planning uses Code Brain and fresh workers for context-sized execution slices.
+
+## Detour
+
+When a plan depends on a technical question that conversation cannot answer, route to `/tracer-bullet`. Its runnable evidence returns to the plan; the prototype is not the deliverable.
+
+## On-ramps
+
+- **Review a pull request or branch** → `/parallel-pr-review`.
+- **Assess human review comments and plan responses** → `/gh-pr-review-plan`.
+- **Triage failed pull-request jobs** → `/gh-pr-job-triage`.
+
+Do not substitute `/gh-pr-review-plan` for code review or `/parallel-pr-review` for assessing reviewer feedback.
+
+## Supporting skills
+
+Route directly when the named artifact or discipline is the user's goal:
+
+- **Initialize, audit, or reconcile Code Brain** → `/code-brain`.
+- **Capture domain terms, bounded contexts, or ADRs** → `/domain-modeling`.
+- **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
+- **Create or refactor AGENTS.md** → `/agents-md`.
+- **Draft or revise senior-engineer technical writing** → `/spellbinding-sentences`.
+- **Curate Pi sessions into durable memory** → `/dreaming`.
+
+`/domain-modeling` and `/code-brain-diagramming` support another flow unless their artifact is the requested outcome. `/code-brain` prepares or repairs the workspace; use `/code-brain-planning` for the work itself.
+
+## Answer
+
+Use the request and visible repository context to answer:
+
+```text
+Next: `/<skill>`
+Why: <request-specific reason>
+Then: <next skill or handoff, or "None">
+```
+
+Recommend one immediate next skill, even when showing a longer flow. Ask one focused question only when missing information changes that choice. Do not inspect deeply, mutate files, or begin the target skill's work.
+
+Done when one immediate next skill is named, its boundary is clear, the following handoff is stated, and no target work has started.

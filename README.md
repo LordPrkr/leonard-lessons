@@ -8,7 +8,8 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 
 ```text
 Idea → clarify
-       ├─ bounded, single-session work → pragmatic-plan → effective-engineer
+       ├─ ordinary implementation → effective-engineer
+       ├─ bounded, approval-first work → pragmatic-plan
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
 Delivery → parallel-pr-review
@@ -100,8 +101,8 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
-- `mystical-tutor` — choose and invoke the narrowest Leonard Lessons workflow
-  for the task at hand.
+- `mystical-tutor` — recommend the next Leonard Lessons skill and show where
+  it leads without starting the work.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill mystical-tutor --global
