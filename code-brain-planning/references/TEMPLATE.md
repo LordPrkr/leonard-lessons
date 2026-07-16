@@ -13,6 +13,10 @@ status: draft
 
 <Current behavior, constraints, and evidence needed by a fresh-context worker.>
 
+## Acceptance Criteria
+
+- <Observable condition that must hold when the plan is complete.>
+
 ## Files
 
 - `<path>` — <change and reason>
@@ -26,6 +30,12 @@ status: draft
 **Green:** <Smallest implementation that passes the test.>
 
 <Important end-state code snippet, API shape, query, or component tree.>
+
+## Execution Slices
+
+<!-- Omit when the plan fits one fresh worker context. -->
+
+1. **<Slice title>** — implementation steps <N–N>; acceptance criteria <items>; verify with `<command>`.
 
 ## Test Strategy
 

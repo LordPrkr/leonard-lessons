@@ -4,6 +4,18 @@ Public agent skills from Leonard the Orange 🐦‍🔥
 
 These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
 
+## Main flow
+
+```text
+Idea → clarify
+       ├─ bounded, single-session work → pragmatic-plan → effective-engineer
+       ├─ broad, risky, or cross-session work → code-brain-planning
+       └─ uncertain technical path → tracer-bullet → return to the plan
+Delivery → parallel-pr-review
+```
+
+Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Durable plans use fresh workers and, when necessary, context-sized execution slices; bounded work stays in the current session.
+
 ## Code Brain workflow
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
@@ -123,6 +135,20 @@ Dependencies: these workflows require Pi and Obsidian. Install `code-brain` befo
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
+  ```
+
+- `gh-pr-job-triage` — classify failed pull-request jobs with parallel,
+  evidence-gathering scouts.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
+  ```
+
+- `parallel-pr-review` — review a pull request or branch with five fresh,
+  read-only reviewers covering intent, correctness, validation, and design fit.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
   ```
 
 - `code-brain-planning` — durable Code Brain planning and execution lifecycle
