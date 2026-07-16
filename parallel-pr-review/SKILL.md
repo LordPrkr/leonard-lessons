@@ -31,6 +31,7 @@ Every task must tell the reviewer to:
 - inspect the associated PR with `gh` when one exists, including its base and discussion relevant to the assigned role;
 - read the supplied intent and standards sources relevant to its role;
 - infer repository precedent from nearby code and tests;
+- do not run build, test, lint, typecheck, or other validation commands; assume they pass and inspect source only;
 - report only actionable, evidence-backed findings;
 - cite file and line, explain impact, and propose the smallest safe fix;
 - return `No findings` when its requirement is satisfied.
