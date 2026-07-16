@@ -31,8 +31,10 @@ Done when the user explicitly approves the current plan or ends the work.
 
 ### 4. Implement and verify
 
-Implement only the approved plan and run its verification commands. Review the final diff against the approved plan, repository standards, correctness, and simplicity; re-run affected checks after fixes. A design change requires a revised plan and approval.
+Spawn exactly one `worker` subagent with `context: "fresh"`. Give it the approved plan verbatim as its task and no parent conversation or supplementary implementation direction. The worker reads the repository as needed, implements only that plan, runs its verification commands, and reports changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
 
-Done when implementation matches the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
+Wait for the worker before reviewing the diff against the approved plan, repository standards, correctness, and simplicity. Re-run affected checks after accepted fixes. A design change requires a revised plan and approval.
+
+Done when the worker report and final diff match the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
 Do not commit automatically. Commit only when the user separately authorizes it.

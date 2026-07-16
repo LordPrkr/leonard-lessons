@@ -16,7 +16,7 @@ Idea → clarify
 Delivery → parallel-pr-review
 ```
 
-Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Durable plans use fresh workers and, when necessary, context-sized execution slices; bounded work stays in the current session. If the route is unclear, invoke `mystical-tutor`.
+Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
 
 ## Code Brain workflow
 
