@@ -12,18 +12,23 @@ Accept exactly one pull-request number. Run from any checkout of the target GitH
 
 From the current checkout, use `gh repo view` to resolve `nameWithOwner` and the repository name. Use `gh pr view <PR#> --repo <nameWithOwner>` to capture the PR URL, title, base ref and OID, head ref and OID, and state. Stop if the PR is not open.
 
-Set the canonical clone to `~/code/<repository-name>`. If that directory is absent, not a Git repository, or its `gh repo view` identity differs from `nameWithOwner`, flag it and stop; do not clone or substitute another checkout.
+Resolve the canonical source worktree under `~/code/<repository-name>`:
 
-**Complete when:** the open PR, immutable base/head OIDs, and matching canonical clone are known.
+- If that path is a Git worktree, use it and set the disposable path to `~/code/<repository-name>-pr-<PR#>-review`.
+- If that path is a container for multiple worktrees, use its `main` worktree at `~/code/<repository-name>/main` and set the disposable path to `~/code/<repository-name>/pr-<PR#>-review`.
+
+If the expected source worktree is absent, not a Git repository, or its `gh repo view` identity differs from `nameWithOwner`, flag it and stop; do not clone or substitute another checkout.
+
+**Complete when:** the open PR, immutable base/head OIDs, matching canonical source worktree, and disposable path are known.
 
 ## 2. Create the review worktree
 
-Use `~/code/<repository-name>-pr-<PR#>-review` as the disposable worktree path. Stop rather than reuse or overwrite an existing path.
+Stop rather than reuse or overwrite the disposable path.
 
-Fetch the PR into a detached worktree without disturbing the canonical clone:
+Fetch the PR into a detached worktree without disturbing the canonical source worktree:
 
-1. Fetch the PR base ref in the canonical clone and verify the pinned base OID exists.
-2. Run `git worktree add --detach <worktree> <base-oid>` from the canonical clone.
+1. Fetch the PR base ref in the canonical source worktree and verify the pinned base OID exists.
+2. Run `git worktree add --detach <worktree> <base-oid>` from the canonical source worktree.
 3. In the new worktree, run `gh pr checkout <PR#> --repo <nameWithOwner> --detach`.
 4. Verify `HEAD` equals the pinned head OID. On setup failure, remove only the worktree created by this run and stop.
 
@@ -57,6 +62,6 @@ Do not post dismissed findings, causal questions, or `No findings` results unles
 
 Beginning with the review result, end every response in this session with one cleanup question while the created worktree exists: `Clean up the review worktree now?`
 
-Do not busy-loop. If the user declines or discusses something else, ask once again at the end of the next response. On approval, run `git -C <canonical-clone> worktree remove <worktree>` without `--force`. If removal reports changes, show them and ask separately before any forced deletion. Never remove a worktree that this run did not create.
+Do not busy-loop. If the user declines or discusses something else, ask once again at the end of the next response. On approval, run `git -C <canonical-source-worktree> worktree remove <worktree>` without `--force`. If removal reports changes, show them and ask separately before any forced deletion. Never remove a worktree that this run did not create.
 
 **Complete when:** the created worktree no longer exists, or the session ends with cleanup still explicitly offered.
