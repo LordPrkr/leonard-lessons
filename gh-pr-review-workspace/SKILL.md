@@ -12,13 +12,13 @@ Accept exactly one pull-request number. Run from any checkout of the target GitH
 
 From the current checkout, use `gh repo view` to resolve `nameWithOwner` and the repository name. Use `gh pr view <PR#> --repo <nameWithOwner>` to capture the PR URL, title, base ref and OID, head ref and OID, and state. Stop if the PR is not open.
 
-Set the canonical clone to `~/dev/<repository-name>`. If that directory is absent, not a Git repository, or its `gh repo view` identity differs from `nameWithOwner`, flag it and stop; do not clone or substitute another checkout.
+Set the canonical clone to `~/code/<repository-name>`. If that directory is absent, not a Git repository, or its `gh repo view` identity differs from `nameWithOwner`, flag it and stop; do not clone or substitute another checkout.
 
 **Complete when:** the open PR, immutable base/head OIDs, and matching canonical clone are known.
 
 ## 2. Create the review worktree
 
-Use `~/dev/<repository-name>-pr-<PR#>-review` as the disposable worktree path. Stop rather than reuse or overwrite an existing path.
+Use `~/code/<repository-name>-pr-<PR#>-review` as the disposable worktree path. Stop rather than reuse or overwrite an existing path.
 
 Fetch the PR into a detached worktree without disturbing the canonical clone:
 
