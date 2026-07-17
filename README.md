@@ -13,7 +13,7 @@ Idea → clarify
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
-Delivery → parallel-pr-review
+Delivery → gh-pr-review-workspace → parallel-pr-review
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -102,7 +102,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -162,6 +162,16 @@ Dependencies: these workflows require Pi and Obsidian. Install `code-brain` befo
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
+  ```
+
+- `gh-pr-review-workspace` — check out a numbered GitHub PR into a disposable
+  worktree, open its diff in a cmux workspace, run `parallel-pr-review`, post
+  selected feedback after confirmation, and keep offering cleanup. Depends on
+  `/parallel-pr-review` and the external cmux skill.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-workspace --global
   ```
 
 - `parallel-pr-review` — review a pull request or branch with five fresh,
