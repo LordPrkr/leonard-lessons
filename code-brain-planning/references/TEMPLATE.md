@@ -39,12 +39,13 @@ status: draft
 
 **Green:** <Smallest implementation that passes the test.>
 
-<For every concrete addition, repeat this path-labeled visual example. Show the full contents of small new files.>
+<For every code change in this step, name each affected path and show a unified diff with enough context to distinguish current code from proposed code. Use /dev/null and show the full contents for a small new file.>
 
 **`<repository-relative/path.ext>`**
 
-```text
-<intended end-state code, API shape, schema, query, configuration, or component tree>
+```diff
+-<current code, API shape, schema, query, configuration, or component tree>
++<proposed replacement>
 ```
 
 ## Execution Slices

@@ -17,11 +17,20 @@ Done when every likely touchpoint and the current flow are understood.
 
 ### 2. Plan and review
 
-Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, important end-state snippets, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
+Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
+
+Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. The diff must include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code; never present proposed code as an unmarked end-state snippet. Use `/dev/null` for a new or deleted file, and include the full contents of a small new file.
+
+**`src/example.ts`**
+
+```diff
+-export const example = "current"
++export const example = "proposed"
+```
 
 Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan.
 
-Done when the plan is concrete, executable, and ready for a user decision.
+Done when the plan is concrete, executable, every code-changing step has path-labeled before/after diffs, and the plan is ready for a user decision.
 
 ### 3. Approval gate
 
