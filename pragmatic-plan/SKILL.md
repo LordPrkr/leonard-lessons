@@ -37,4 +37,4 @@ Wait for the worker before reviewing the diff against the approved plan, reposit
 
 Done when the worker report and final diff match the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
-Do not commit automatically. Commit only when the user separately authorizes it.
+Commit the completed work with a Conventional Commit message, but do not push.
