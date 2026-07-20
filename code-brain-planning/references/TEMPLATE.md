@@ -39,7 +39,13 @@ status: draft
 
 **Green:** <Smallest implementation that passes the test.>
 
-<Important end-state code snippet, API shape, query, or component tree.>
+<For every concrete addition, repeat this path-labeled visual example. Show the full contents of small new files.>
+
+**`<repository-relative/path.ext>`**
+
+```text
+<intended end-state code, API shape, schema, query, configuration, or component tree>
+```
 
 ## Execution Slices
 

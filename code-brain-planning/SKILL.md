@@ -63,9 +63,19 @@ Done when no directional decision is implicit.
 
 ### 3. Draft and review
 
-Write a standalone worker handoff with problem, goal, out-of-scope boundary, context, observable acceptance criteria, exact files, the highest existing public test seam, one red-green step per observable behavior, important end-state snippets, tests, verification, risks, questions, and artifact links. For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
+Write a standalone worker handoff with problem, goal, out-of-scope boundary, context, observable acceptance criteria, exact files, the highest existing public test seam, one red-green step per observable behavior, important end-state snippets, tests, verification, risks, questions, and artifact links.
 
-Done when a fresh worker can execute the plan, the problem and scope boundary are explicit, every acceptance criterion is covered by its implementation and verification, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
+Make new additions visual. Whenever the plan introduces a file, API, type, schema, query, component, configuration block, or other concrete structure, show its intended end state in a fenced code block immediately below its repository-relative path. Include the full contents of small new files and enough separate path-labeled examples that a fresh worker can see how the additions connect. Use this shape:
+
+**`src/example.ts`**
+
+```ts
+export const example = "intended end state"
+```
+
+For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
+
+Done when a fresh worker can execute the plan, the problem and scope boundary are explicit, every acceptance criterion is covered by its implementation and verification, every concrete addition has a path-labeled code example, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
 
 ### 4. Approval gate
 
