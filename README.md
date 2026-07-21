@@ -242,6 +242,12 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
 bunx skills@latest add mattpocock/skills/skills/engineering/tdd
 ```
 
+- `resolving-merge-conflicts` - use when you need to resolve an in-progress git merge/rebase conflict.
+
+```bash
+bunx skills@latest add mattpocock/skills/skills/productivity/resolving-merge-conflicts
+```
+
 - `grilling` - interview the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.
 
 ```
