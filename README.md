@@ -13,6 +13,7 @@ Idea → clarify
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
+Documentation → jira-ticket (Jira) / github-pr-description (GitHub) / work-documentation-generator (both)
 Delivery → gh-pr-review-workspace → parallel-pr-review
 ```
 
@@ -102,7 +103,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `github-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -148,6 +149,34 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
+  ```
+
+- `jira-ticket` — create a Jira task from repository context without preparing
+  a pull request. Depends on `/spellbinding-sentences`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
+  ```
+
+- `github-pr-description` — create or update a GitHub pull-request description
+  from the branch diff and repository template. Depends on
+  `/spellbinding-sentences`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill github-pr-description --global
+  ```
+
+- `work-documentation-generator` — create or resolve a Jira issue, prepare the
+  GitHub pull-request description, and link both artifacts. Depends on
+  `/jira-ticket`, `/github-pr-description`, and `/spellbinding-sentences`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
+  bunx skills add LordPrkr/leonard-lessons --skill github-pr-description --global
+  bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
   ```
 
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
