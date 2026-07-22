@@ -13,6 +13,7 @@ Idea → clarify
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
+Implementation → finalize-implementation → GitHub PR + optional Jira
 Documentation → jira-ticket (Jira) / gh-pr-description (GitHub) / work-documentation-generator (both)
 Delivery → gh-pr-review-workspace → parallel-pr-review
 ```
@@ -62,10 +63,10 @@ Blocked or partial implementation → receipt → Blocked
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
 4. A fresh worker implements the approved plan. Read-only reviewers check correctness, validation, and simplicity.
-5. The orchestrator appends an implementation attempt to `receipt.md`, including changed files, verification results, review findings, deviations, and source evidence for every changed repository.
-6. Accepted work becomes `implemented` and moves to Done. Blocked, partial, or reverted work keeps its approved design and moves to Blocked with an honest receipt.
+5. Accepted work invokes `finalize-implementation` to commit, push, prepare the pull request, and resolve Jira.
+6. The orchestrator appends an implementation attempt to `receipt.md`, including source evidence for every changed repository. Accepted work becomes `implemented` and moves to Done; blocked, partial, reverted, or unfinalized work remains `approved` and moves to Blocked.
 
-Source commits require separate user authorization. Committed work records the delivered commit SHA; uncommitted work records a deterministic hash of the complete Git change set. Plans preserve design intent, Kanban lanes preserve managed-work state, and receipts preserve what actually happened.
+Receipts record the actual commit SHA or a deterministic hash of the complete uncommitted Git change set. Plans preserve design intent, Kanban lanes preserve managed-work state, and receipts preserve what actually happened.
 
 ### Supporting workflows
 
@@ -103,7 +104,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -179,6 +180,20 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
   bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
   ```
 
+- `finalize-implementation` — choose the feature branch, commit and push the
+  verified change, prepare its pull request, and resolve optional Jira work.
+  Depends on `/conventional-commit-message`, `/gh-pr-description`, and
+  `/work-documentation-generator`.
+
+  ```bash
+  bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message --global
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
+  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
+  bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
+  bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
+  ```
+
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
   assess them, and plan replies or fixes.
 
@@ -212,12 +227,14 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
 
 - `code-brain-planning` — durable Code Brain planning and execution lifecycle
   for broad, risky, cross-cutting, or approval-first changes, including board
-  transitions and implementation receipts. Depends on `/code-brain`; pairs
-  with `/domain-modeling` when planning reveals domain terms or ADRs.
+  transitions and implementation receipts. Depends on `/code-brain` and
+  `/finalize-implementation`; pairs with `/domain-modeling` when planning
+  reveals domain terms or ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
+  bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
@@ -230,9 +247,10 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
   ```
 
 - `pragmatic-plan` — lightweight in-session planning with no durable Code
-  Brain artifacts and no automatic commit.
+  Brain artifacts, ending in `/finalize-implementation`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 

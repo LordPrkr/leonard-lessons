@@ -87,12 +87,13 @@ print(hash_.hexdigest())
 PY
 ```
 
-For a later authorized commit, update that repository's evidence row to the delivered commit SHA and `none`, then append:
+For later successful finalization, update that repository's evidence row to the delivered commit SHA and `none`, then append:
 
 ```md
-## Commit finalization — <YYYY-MM-DD HH:MM timezone>
+## Finalization — <YYYY-MM-DD HH:MM timezone>
 
 - Repository: `<name>`
 - Result revision: `<full commit SHA>`
-- Authorization: <what the user authorized>
+- Pull request: <URL>
+- Jira: <URL or none>
 ```

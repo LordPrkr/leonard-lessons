@@ -46,4 +46,8 @@ Wait for the worker before reviewing the diff against the approved plan, reposit
 
 Done when the worker report and final diff match the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
-Commit the completed work with a Conventional Commit message, but do not push.
+### 5. Finalize implementation
+
+Invoke `/finalize-implementation` for verified work.
+
+Done when it returns the pull-request and Jira results, or the smallest useful blocker.

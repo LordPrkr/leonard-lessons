@@ -37,7 +37,7 @@ The board lane is workflow state; plan frontmatter is design lifecycle. New plan
 | Implementation or review cannot continue | `approved` | Blocked | `blocked` → `persist_receipt` |
 | Attempt is partial | `approved` | Blocked | `partial` → `persist_receipt` |
 | Delivered implementation is reverted | `approved` | Blocked | `reverted` → `persist_receipt` |
-| Review accepts delivery | `approved` | Review | `accepted` → `commit_decision` |
+| Review accepts delivery | `approved` | Review | `accepted` → `finalize_implementation` |
 | Accepted receipt persisted | `implemented` | Done | `receipt-accepted` → `done` |
 | Blocked/partial/reverted receipt persisted | `approved` | Blocked | matching receipt edge → `await_recovery` |
 | User abandons work | `abandoned` | Done | `abandon` → `done` |
@@ -92,14 +92,14 @@ Move the card to Review when implementation is ready. Read-only reviewers check 
 
 Done when every acceptance criterion is accounted for and review accepts delivery, or an honest non-accepted receipt is required.
 
-### 6. Commit decision and receipt
+### 6. Finalize implementation and receipt
 
 Read [`references/RECEIPT.md`](./references/RECEIPT.md). Create `receipt.md` once, add `[Implementation receipt](./receipt.md)` to the plan's References, and append one chronological section after every attempt; frontmatter always reflects the latest attempt.
 
-For accepted work, ask whether the user authorizes source commits, naming every changed repository. Commit only explicitly authorized repositories, before persisting accepted evidence. Record the resulting full commit SHA and `none` as its change-set hash. For each repository left uncommitted, record `uncommitted` and the deterministic complete change-set hash. Never identify pre-change `HEAD` as delivered source and never claim the non-Git vault was committed.
+For accepted work, invoke `/finalize-implementation` in every changed source repository before persisting evidence. Record each resulting full commit SHA and `none` as its change-set hash. Never identify pre-change `HEAD` as delivered source and never claim the non-Git vault was committed. If finalization cannot complete, persist the actual committed or uncommitted evidence, leave plan status `approved`, and move the card to Blocked.
 
 For blocked, partial, or reverted work, immediately record every affected repository's base SHA, `uncommitted`, and complete change-set hash. Leave plan status `approved` and the card Blocked. Recovery may retry the unchanged design, revise it through draft/review/approval, abandon, supersede, or pause.
 
-Only after accepted evidence covers every changed repository set `status: implemented` and move the card to Done. A later authorized commit appends a commit-finalization entry and updates that repository's evidence row without rewriting the earlier attempt body.
+Only after accepted evidence covers every changed repository and finalization succeeds, set `status: implemented` and move the card to Done.
 
 Done when `receipt.md` contains the appended attempt, every changed repository has source evidence, and plan status plus Kanban lane match the accepted or non-accepted outcome.
