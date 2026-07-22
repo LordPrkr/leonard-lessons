@@ -1,5 +1,5 @@
 ---
-name: github-pr-description
+name: gh-pr-description
 description: Create or update GitHub pull-request descriptions. Use when the user wants a PR opened, its body written, or its description refreshed from the branch diff.
 ---
 
@@ -27,7 +27,7 @@ Use the repository-named template in `references/` when present:
 
 Otherwise use the repository's configured pull-request template. If neither exists, use `Summary` and `Test plan` sections. Preserve the selected template's heading order exactly, replace every comment and placeholder, and delete only sections the template explicitly marks as optional.
 
-If the user or calling skill supplies an issue URL, place it at the top in the template's issue field or as `**Issue**: <url>`.
+Begin without an issue link. If the user or calling skill explicitly supplies an issue URL, place it at the top in the template's issue field or as `**Issue**: <url>`.
 
 **Complete when:** the body contains no unresolved placeholders, describes the change at reviewer level rather than line by line, and includes every known validation result.
 

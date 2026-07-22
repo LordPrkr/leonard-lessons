@@ -1,5 +1,3 @@
-**Issue**: <https://grammarly.atlassian.net/browse/GOECO-###>
-
 ## Context and Problem Statement
 
 <!-- Explain motivation and problem being solved by this PR -->

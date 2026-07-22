@@ -5,7 +5,7 @@ description: Prepare linked Jira and GitHub work documentation. Use when a branc
 
 # Work Documentation Generator
 
-Coordinate `/jira-ticket` and `/github-pr-description`; keep their artifact rules in those skills.
+Coordinate `/jira-ticket` and `/gh-pr-description`; keep their artifact rules in those skills.
 
 ## 1. Resolve the Jira issue
 
@@ -15,7 +15,7 @@ Use an issue supplied by the user or referenced by the branch or existing pull r
 
 ## 2. Prepare the pull request
 
-Invoke `/github-pr-description` with the Jira URL and require the issue link at the top of the body.
+Invoke `/gh-pr-description` with the Jira URL and require the issue link at the top of the body.
 
 **Complete when:** the current branch has one open pull request whose finished body links the Jira issue.
 
