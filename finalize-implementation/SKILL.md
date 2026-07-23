@@ -21,9 +21,9 @@ Invoke `/conventional-commit-message`, stage only the intended changes, and crea
 
 ## 3. Ensure the pull request exists
 
-Use `gh` to find an open pull request for the current branch. If none exists, create one against the default branch and retain its URL. Stop and ask the user to authenticate if `gh` cannot access GitHub.
+Use `gh` to find an open pull request for the current branch. If none exists, create one against the default branch and retain its URL. Give the new pull request a Conventional Commit title based on the complete branch diff. When one package is the main target, use its package name as the scope; otherwise omit the scope unless repository precedent supplies one. Stop and ask the user to authenticate if `gh` cannot access GitHub.
 
-**Complete when:** exactly one open pull request targets the default branch.
+**Complete when:** exactly one open pull request targets the default branch, and any newly created pull request has a Conventional Commit title with the main package as its scope when applicable.
 
 ## 4. Resolve Jira and describe the pull request
 
