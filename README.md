@@ -15,7 +15,7 @@ Idea → clarify
        └─ uncertain technical path → tracer-bullet → return to the plan
 Implementation → finalize-implementation → GitHub PR + optional Jira
 Documentation → jira-ticket (Jira) / gh-pr-description (GitHub) / work-documentation-generator (both)
-Delivery → gh-pr-review-workspace → parallel-pr-review
+Delivery → interactive-review (Hunk) / gh-pr-review-workspace → parallel-pr-review
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -104,7 +104,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -225,6 +225,25 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
   bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
   ```
 
+- `interactive-review` — choose the latest commit or a branch comparison, open
+  it in a Hunk pane beside the caller terminal, and hand off to `hunk-review`.
+  Depends on cmux and the external `hunk-review` skill.
+
+  ```bash
+  bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill interactive-review --global
+  ```
+
+- `interactive-walkthrough` — explain every changed block in a commit or branch
+  comparison through a live Hunk session. Depends on cmux, the external
+  `hunk-review` skill, and `/spellbinding-sentences`.
+
+  ```bash
+  bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill interactive-walkthrough --global
+  ```
+
 - `code-brain-planning` — durable Code Brain planning and execution lifecycle
   for broad, risky, cross-cutting, or approval-first changes, including board
   transitions and implementation receipts. Depends on `/code-brain` and
@@ -280,6 +299,14 @@ Dependencies: these workflows require Pi and Obsidian. `gh-pr-review-workspace` 
   ```
 
 ## Other Useful Skills
+
+### [modem-dev/hunk](https://github.com/modem-dev/hunk)
+
+- `hunk-review` - walk through a changeset or review code using Hunk.
+
+```bash
+bunx skills@latest add modem-dev/hunk/skills/hunk-review
+```
 
 ### [mattpocock/skills](https://github.com/mattpocock/skills)
 
