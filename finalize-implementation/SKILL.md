@@ -15,7 +15,7 @@ If the current branch is the default branch, create a feature branch whose shape
 
 ## 2. Commit and push
 
-Invoke `/conventional-commit-message`, stage only the intended changes, and create one coherent commit. If the work is already committed, do not create an empty commit. Push the branch to `origin` and set its upstream without force-pushing. Stop with the authentication or remote error if the push fails.
+Invoke `/conventional-commit-message`, stage only the intended changes, and create one coherent commit without amending any existing commit. If the work is already committed, do not create an empty commit. Push the branch to `origin` and set its upstream without force-pushing. Stop with the authentication or remote error if the push fails.
 
 **Complete when:** the intended commit exists on the tracked GitHub branch.
 
@@ -27,18 +27,18 @@ Use `gh` to find an open pull request for the current branch. If none exists, cr
 
 ## 4. Resolve Jira and describe the pull request
 
-Ask the user for one of: an existing Jira key or URL, permission to create a Jira ticket, or `none`.
+Assume `Jira: none` without prompting unless the user has already mentioned a Jira ticket or asked to create one.
 
-- For `none`, invoke `/gh-pr-description`.
+- For no Jira ticket, invoke `/gh-pr-description`.
 - To create a ticket, invoke `/work-documentation-generator`.
 - For an existing ticket, resolve its URL and invoke `/gh-pr-description` with that URL.
 
 When the pull request already existed, require its updated description to cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out.
 
-**Complete when:** the pull-request description matches the branch, links the selected Jira ticket when one exists, and contains no unresolved placeholders.
+**Complete when:** the pull-request description matches the branch, links the user-mentioned Jira ticket when one exists, and contains no unresolved placeholders.
 
 ## 5. Return the artifacts
 
-Read the published pull request back with `gh`. Return the pull-request URL and the Jira URL, or state `Jira: none` when the user declined one.
+Read the published pull request back with `gh`. Return the pull-request URL and the Jira URL, or state `Jira: none` when there is no ticket.
 
 **Complete when:** the user has working links to every created or updated artifact.
