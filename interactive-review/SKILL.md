@@ -24,13 +24,14 @@ are known.
 
 ## 2. Open Hunk beside the caller terminal
 
-Use `cmux_open_terminal` with `placement: "right"` to open a pane in the current
-cmux tab. Set its working directory in the command with shell-safe quoting and
-run exactly one target:
+Resolve `hunk` to an absolute path with `command -v hunk` in the caller's
+shell before opening the terminal. Use `cmux_open_terminal` with placement
+`"right"` to open a pane in the current cmux tab. Shell-quote the working
+directory and resolved path, then run exactly one target:
 
 ```bash
-cd -- <repository-root> && hunk show <commit-sha>
-cd -- <repository-root> && hunk diff <base-sha>...<head-sha>
+cd -- '<repository-root>' && '<absolute-hunk-path>' show <commit-sha>
+cd -- '<repository-root>' && '<absolute-hunk-path>' diff <base-sha>...<head-sha>
 ```
 
 Title the pane `Hunk Review`. Do not run the Hunk TUI in the agent's terminal or
