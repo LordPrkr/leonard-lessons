@@ -38,15 +38,21 @@ Present the plan and wait. Explicit approval applies only to the presented versi
 
 Done when the user explicitly approves the current plan or ends the work.
 
-### 4. Implement and verify
+### 4. Choose the branch
 
-Spawn exactly one `worker` subagent with `context: "fresh"`. Give it the approved plan verbatim as its task and no parent conversation or supplementary implementation direction. The worker reads the repository as needed, implements only that plan, runs its verification commands, and reports changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
+Invoke `/feature-branch` with the approved plan before implementation.
+
+Done when the work is assigned to the current feature branch.
+
+### 5. Implement and verify
+
+Spawn exactly one `worker` subagent with `context: "fresh"`. Its task contains the approved plan verbatim plus an instruction to invoke `/effective-engineer` before executing it; include no parent conversation or other implementation direction. The worker reports changed files, command exit codes, validation evidence, deviations, residual risks, and blockers.
 
 Wait for the worker before reviewing the diff against the approved plan, repository standards, correctness, and simplicity. Re-run affected checks after accepted fixes. A design change requires a revised plan and approval.
 
 Done when the worker report and final diff match the plan, every retained diff hunk is justified by it, and verification passes, or the smallest useful failure detail and remaining risk are reported.
 
-### 5. Finalize implementation
+### 6. Finalize implementation
 
 Invoke `/finalize-implementation` for verified work.
 

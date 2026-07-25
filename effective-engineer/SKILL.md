@@ -1,11 +1,11 @@
 ---
 name: effective-engineer
-description: "Tight implementation loop for non-trivial code changes: inspect, test, implement, verify, summarize. Use when changing code unless the user asks for Code Brain planning, durable design artifacts, or approval-first execution."
+description: "Implement code changes through a tight inspect, test, implement, verify, and review loop. Use for direct changes or when another workflow delegates an approved plan."
 ---
 
 # Effective Engineer
 
-Use the tight loop. Escalate to `code-brain-planning` only when the change is broad, risky, cross-cutting, or the user asks for a plan/design artifact.
+Use the tight loop. When executing an approved plan, treat it as the scope and implementation direction. Escalate unplanned broad, risky, or cross-cutting work to `code-brain-planning`.
 
 ## Steps
 
