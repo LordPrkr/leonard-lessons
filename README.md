@@ -13,7 +13,8 @@ Idea → clarify
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
-Implementation → finalize-implementation → GitHub PR + optional Jira
+Approved plan → feature-branch → effective-engineer
+Verified work → finalize-implementation → GitHub PR + optional Jira
 Documentation → jira-ticket (Jira) / gh-pr-description (GitHub) / work-documentation-generator (both)
 Delivery → interactive-review (Hunk) / gh-pr-review-workspace → parallel-pr-review
 ```
@@ -104,7 +105,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -125,6 +126,13 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
+  ```
+
+- `feature-branch` — select or create an appropriately named feature branch
+  before implementation or finalization.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   ```
 
 - `code-brain-wayfinder` — chart uncertain, multi-session work as decision
@@ -180,12 +188,13 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
   ```
 
-- `finalize-implementation` — choose the feature branch, commit and push the
+- `finalize-implementation` — confirm the feature branch, commit and push the
   verified change, prepare its pull request, and resolve optional Jira work.
-  Depends on `/conventional-commit-message`, `/gh-pr-description`, and
-  `/work-documentation-generator`.
+  Depends on `/feature-branch`, `/conventional-commit-message`,
+  `/gh-pr-description`, and `/work-documentation-generator`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
@@ -246,13 +255,15 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `code-brain-planning` — durable Code Brain planning and execution lifecycle
   for broad, risky, cross-cutting, or approval-first changes, including board
-  transitions and implementation receipts. Depends on `/code-brain` and
-  `/finalize-implementation`; pairs with `/domain-modeling` when planning
-  reveals domain terms or ADRs.
+  transitions and implementation receipts. Depends on `/code-brain`,
+  `/feature-branch`, `/effective-engineer`, and `/finalize-implementation`;
+  pairs with `/domain-modeling` when planning reveals domain terms or ADRs.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
+  bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
+  bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
@@ -266,9 +277,12 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `pragmatic-plan` — lightweight in-session planning with no durable Code
-  Brain artifacts, ending in `/finalize-implementation`.
+  Brain artifacts, delegating implementation to `/effective-engineer` before
+  ending in `/finalize-implementation`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
+  bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```

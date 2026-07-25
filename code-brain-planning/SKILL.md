@@ -86,7 +86,7 @@ Done when the approved plan is Ready or work ends explicitly.
 
 ### 5. Implement and review
 
-Only `start-implementation` moves an approved Ready card to In Progress. For each unblocked execution slice, spawn exactly one `worker` with `context: "fresh"`; a plan without slices is one slice. Its task contains only the approved `plan.md` path and slice identifier. The worker reads the plan for acceptance criteria, verification commands, base revisions, and implementation direction, then returns changed files, command exit codes, validation evidence, deviations, residual risks, and blockers. The parent remains the sole writer of plan metadata and board state.
+Only `start-implementation` moves an approved Ready card to In Progress. Invoke `/feature-branch` in each affected source repository before spawning workers. For each unblocked execution slice, spawn exactly one `worker` with `context: "fresh"`; a plan without slices is one slice. Its task contains only an instruction to invoke `/effective-engineer`, the approved `plan.md` path, and the slice identifier. The worker returns changed files, command exit codes, validation evidence, deviations, residual risks, and blockers. The parent remains the sole writer of plan metadata and board state.
 
 Move the card to Review when implementation is ready. Read-only reviewers check every acceptance criterion against the delivered source, then check correctness, validation, simplicity, and repository standards. Approved fixes return it to In Progress and then Review. If implementation or review is blocked, partial, or reverted, skip commits and persist the attempt receipt immediately.
 

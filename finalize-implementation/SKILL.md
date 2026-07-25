@@ -5,13 +5,11 @@ description: Finalize verified implementation changes by choosing a feature bran
 
 # Finalize Implementation
 
-## 1. Choose the branch
+## 1. Confirm the branch
 
-Inspect the intended diff, current and default branches, open pull request, and recent local, remote, and merged-PR branch names. Do not include unrelated changes.
+Invoke `/feature-branch` with the intended diff.
 
-If the current branch is the default branch, create a feature branch whose shape follows repository precedent. If the current branch is already a feature branch and the changes clearly belong to its existing commits or pull request, keep it. If ownership is unclear, ask whether to use the current branch or create a new one before changing branches. Ask for a branch name only when repository precedent is insufficient.
-
-**Complete when:** every intended change and no unrelated change is assigned to one current feature branch.
+**Complete when:** the intended work is assigned to the current feature branch.
 
 ## 2. Commit and push
 
