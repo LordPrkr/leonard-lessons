@@ -1,88 +1,105 @@
 ---
 name: spellbinding-sentences
-description: "Use when drafting or revising technical writing for senior engineers: design docs, PR descriptions, ADRs, incident writeups, architecture notes, or engineering proposals."
+description: "Draft or revise explanatory technical writing for senior engineers, including design docs, PR descriptions, ADRs, incident writeups, architecture notes, and engineering proposals."
 ---
 
 # Spellbinding Sentences
 
-Write for the audience the user names. Otherwise write for a senior software engineer who may not know the local domain or codebase.
+Write for the audience the user names. Otherwise assume a technically strong reader who does not know the local codebase and wants to understand it quickly.
+
+Concise writing removes information the reader does not need. It does not compress reasoning into slogans. When a mechanism, dependency, or consequence takes three sentences to explain, use three sentences.
 
 ## Steps
 
-### 1. Preserve the facts
+### 1. Establish the claim
 
-If revising, keep the original claims, scope, and uncertainty unless the user asks for new substance.
+Identify what the reader should understand, decide, or do. If revising, preserve the source's facts, scope, and uncertainty unless the user asks for new substance.
 
-Done when every changed claim is either present in the source or explicitly requested.
+Done when the main claim is explicit and every changed factual claim comes from the source or the user's request.
 
-### 2. Lead with the point
+### 2. Explain the mechanism
 
-Start each section with what is true, what changed, or what you propose.
+Present the idea in the order a reader needs it:
 
-Done when no section opens with background, throat-clearing, or a tour of concepts the reader already knows.
+1. the concrete problem or claim;
+2. how the relevant system behaves;
+3. the consequence of that behavior;
+4. the conditions, tradeoffs, or example that make the consequence useful.
 
-### 3. Ground claims in mechanisms
+Use only the parts the subject requires. A simple fact may need one sentence; a design choice may need all four.
 
-Name the code path, service, metric, failure mode, dependency, or operational condition behind important claims.
+Done when the reader can follow each important conclusion from cause to effect without supplying missing reasoning.
 
-Done when every important claim has a concrete anchor.
+### 3. Spend words on decision-making information
 
-### 4. State the tradeoff
+Keep constraints, failure modes, assumptions, numbers, named dependencies, and real code paths. Remove familiar setup and repeated conclusions. Define a term when its local meaning is unfamiliar or narrower than its usual meaning.
 
-Say what the choice buys, what it costs, when it wins, and what alternative it rejects. Tie recommendations to conditions, not verdicts: "X is cheaper when..." rather than "X is better."
+Expand any quip, metaphor, or compressed phrase that carries unstated reasoning. A memorable line may summarize an explanation; it may not replace one.
 
-Done when every non-obvious recommendation is conditional and names its rejected alternative.
+Done when every remaining sentence either explains the claim or changes how the reader should interpret or act on it.
 
-### 5. Cut inherited context
+### 4. Test the explanation
 
-Explain only the surprising constraint, subtle failure mode, or decision-moving detail the target reader does not already know. Skip definitions of standard terms.
+Check that recommendations state when they apply, alternatives receive a fair comparison, and examples expose the mechanism rather than merely decorate the prose.
 
-Done when no paragraph restates context the target reader already has.
+Done when a technically strong reader can state what happens, why it happens, and under which conditions the conclusion changes.
 
-### 6. Make paragraphs linear
+## Writing patterns
 
-Each paragraph should make one claim. Each sentence should support, qualify, or advance that claim.
+- Use plain verbs and precise technical nouns.
+- Put the main claim early, then earn it with mechanism and evidence.
+- Prefer concrete causality: “The worker retries after the lease expires, so the handler may run twice.”
+- Give numbers or observable conditions when magnitude matters.
+- Let sentence length follow the reasoning. Short sentences suit simple claims; connected clauses suit connected ideas.
+- Use transitions that name the relationship: because, therefore, however, for example, and in contrast.
+- End with the consequence or decision, not a catchphrase.
 
-Done when no sentence introduces an unexplained second argument.
+## Examples
 
-### 7. Prefer intent over pedantry
+These are original examples modeled on the explanatory methods used by Martin Kleppmann, Martin Fowler, and Robert Nystrom.
 
-Use the technically precise version when precision changes the decision. Otherwise use the simpler sentence.
+### Explain a pattern from baseline to consequence
 
-Done when edits make the reader's next action clearer, not merely more formally correct.
+Compressed:
 
-### 8. Tighten from the kernel sentence
+> CQRS splits reads from writes. Simple idea, big consequences.
 
-Reduce each dense sentence to its simplest true claim, then add back only the condition, mechanism, number, or tradeoff that changes the reader's decision.
+Explanatory:
 
-Done when every sentence is precise without becoming ceremonial.
+> A conventional CRUD model uses the same representation for reads and writes. CQRS separates them: commands update a write model, while queries read from a model shaped for display or retrieval. This can simplify a domain whose validation rules and query shapes pull the shared model in different directions. It also introduces synchronization and consistency work, so it is usually justified only for the parts of a system where those benefits exceed the added complexity.
 
-## Style rules
+The second version defines the baseline, describes the mechanism, and states both the benefit and its limit. This follows Fowler’s progression in [CQRS](https://martinfowler.com/bliki/CQRS.html).
 
-- Use active voice.
-- Prefer short declarative sentences.
-- Use precise technical terms, with plain connecting prose.
-- Use compressed lines rarely, where they land hard.
-- Ground claims in specifics: actual latency, throughput, queue depth, retry behavior, storage cost, incident symptoms, named dependencies, or real call paths.
-- Replace vague qualifiers like "large," "slow," or "scalable" with numbers or observable conditions.
+### Follow the hidden mechanism
 
-## Do not
+Compressed:
 
-- Open with throat-clearing: "In today's world...", "To understand X...", "X didn't happen overnight..."
-- Use contrast cliches: "not just X, but Y" or "isn't merely X — it's Y."
-- End paragraphs on hollow punch lines: "The gap is real" or "That changes everything."
-- Narrate the document's reasoning: "This is significant because...", "This reinforces...", or "It is important to note..."
-- Use filler vocabulary: leverage, robust, seamless, powerful, crucially, ultimately, notably, landscape, navigate, delve.
-- Restate the reader's own context back to them.
+> Caches trade consistency for speed.
+
+Explanatory:
+
+> A cache makes reads faster by keeping a second copy of data closer to the caller. Once that copy exists, an update to the primary store and an update to the cache may occur at different times or one may fail. Expiration limits how long stale data can survive, but shorter expiration also sends more traffic to the primary store. The right policy depends on the consequence of staleness: an old profile photo may be acceptable, while an old account balance may not be.
+
+The second version turns a slogan into a model the reader can use to reason about failure and choose a policy. This reflects the mechanism-and-tradeoff method used throughout Kleppmann’s *Designing Data-Intensive Applications*.
+
+### Use an example to make an abstraction operational
+
+Compressed:
+
+> A closure is a function with a backpack of variables.
+
+Explanatory:
+
+> A closure pairs a function with the environment in which the function was declared. If the function refers to a local variable and escapes its declaring scope, that environment must remain available after the outer call returns. Two closures created by separate calls therefore retain separate instances of the same local variable. The implementation must preserve those captured bindings rather than treating them like ordinary stack locals.
+
+The metaphor may help memory, but the explanation tells the reader what must persist and why the runtime needs special handling. This follows the concrete-to-implementation progression in Nystrom’s [Crafting Interpreters](https://craftinginterpreters.com/closures.html).
 
 ## Voice target
 
-Match Martin Kleppmann's technical clarity: direct, conditional, concrete, and honest about tradeoffs.
+Aim for the shared strengths of these writers:
 
-Good pattern:
+- **Kleppmann:** explain internal behavior, then compare designs by workload and failure mode.
+- **Fowler:** introduce the ordinary model before the pattern that departs from it; state where the pattern is a poor fit.
+- **Nystrom:** build intuition with a concrete example, then connect it to the implementation.
 
-> Whether using a cloud service is cheaper depends on your ops skills and workload shape. If load is predictable and the team already runs similar systems, owning the machines can be cheaper. If demand spikes unpredictably or operational ownership is thin, the managed service buys elasticity and fewer failure modes at the cost of vendor coupling and higher steady-state spend.
-
-Bad pattern:
-
-> Cloud services are not just infrastructure, but a powerful way to navigate today's scalability landscape.
+Use their explanatory discipline, not their mannerisms.
