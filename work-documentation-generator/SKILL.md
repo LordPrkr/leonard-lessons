@@ -21,10 +21,12 @@ Invoke `/gh-pr-description` with the Jira URL and require the issue link at the 
 
 ## 3. Link Jira back to GitHub
 
-Read the Jira comments. If none links the pull request, add one concise comment with its URL; do not add a duplicate.
+Read the Jira description, comments, issue links, and remote links. If none links the pull request, add one concise comment with its URL.
 
 **Complete when:** the Jira issue links the pull request and the pull-request body links the Jira issue.
 
-## Result
+## 4. Verify and report
 
-Return the Jira and pull-request URLs and state whether each artifact was created or updated.
+Read both artifacts back. Return the Jira and pull-request URLs and state whether each artifact was created or updated.
+
+**Complete when:** both reciprocal links resolve and the user has working URLs for each artifact.

@@ -28,7 +28,7 @@ domain/
     └── billing/CONTEXT.md
 ```
 
-Create files lazily. The first resolved term creates `CONTEXT.md`; the first qualifying decision creates `docs/adr/0001-*.md`. Update an existing glossary term in place rather than adding a competing definition. Read [`references/CONTEXT-FORMAT.md`](./references/CONTEXT-FORMAT.md) before creating or changing a glossary.
+Create files lazily. Before writing the first term, use [`references/CONTEXT-FORMAT.md`](./references/CONTEXT-FORMAT.md) to select its context. A system-wide or single-context term creates `domain/CONTEXT.md`; a context-specific term creates `domain/contexts/<context>/CONTEXT.md`. Create `domain/CONTEXT-MAP.md` when the project has multiple bounded contexts. The first qualifying decision creates the appropriate `docs/adr/0001-*.md`. Update an existing glossary term in place rather than adding a competing definition.
 
 ## ADRs
 
@@ -52,11 +52,32 @@ When a decision changes, create a replacement ADR. Mark the old ADR `Superseded 
 
 ## Workflow
 
-1. Challenge terms that conflict with the glossary; let the user choose the canonical meaning or name.
-2. For fuzzy or overloaded language, propose one `**Term**: definition` and optional `_Avoid_:` names.
-3. Stress-test fuzzy relationships with concrete edge-case scenarios that force their boundaries to become explicit.
-4. Cross-check claims against source and surface contradictions as questions rather than silently encoding them.
-5. Update resolved terms immediately in the relevant `domain/**/CONTEXT.md`.
-6. Offer ADRs only at the threshold above and link created ADRs from the active plan or dream.
+### 1. Resolve language
 
-Done when each resolved term has one definition, each changed decision has reciprocal supersession links, and material claims have durable evidence.
+Challenge terms that conflict with the glossary and let the user choose the canonical meaning or name. For fuzzy or overloaded language, propose one `**Term**: definition` and optional `_Avoid_:` names.
+
+Done when each candidate term has one agreed meaning or one explicit blocking question.
+
+### 2. Test boundaries
+
+Stress-test fuzzy relationships with concrete edge-case scenarios that force their boundaries to become explicit.
+
+Done when each resolved relationship has an applicability boundary.
+
+### 3. Verify claims
+
+Cross-check claims against source and present contradictions as questions for resolution.
+
+Done when each material claim has durable evidence or an explicit unresolved contradiction.
+
+### 4. Persist the model
+
+Select the context using `CONTEXT-FORMAT.md`, then update resolved terms immediately in the relevant `domain/**/CONTEXT.md`.
+
+Done when each resolved term has one definition in exactly one context glossary.
+
+### 5. Capture decisions
+
+Offer ADRs only at the threshold above and link created ADRs from the active plan or dream.
+
+Done when each qualifying decision is recorded, and each changed decision has reciprocal supersession links.

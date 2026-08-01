@@ -1,6 +1,6 @@
 ---
 name: gh-pr-review-plan
-description: "GitHub PR review planning with gh: collect complete review context, assess human comments, plan valid fixes, and draft concise evidence-backed replies."
+description: "Assess GitHub pull-request feedback with gh. Use when human reviewers request changes, ask implementation questions, or need evidence-backed replies."
 ---
 
 # GH PR Review Plan
@@ -25,7 +25,7 @@ Done when the PR number, URL, immutable base/head review target, and review arti
 
 Collect review threads, every nested thread comment, review summaries, and issue comments. Use GraphQL cursor loops: page `reviewThreads`, `reviews`, and issue `comments` until each `hasNextPage` is false; then page every thread's `comments` independently until exhausted. Include each comment's author, body, URL, timestamp, commit OID, path, line, original line, outdated state, and thread resolved state.
 
-Preserve PR-author and bot replies as context. Select only eligible human reviewer requests as actionable items unless the user asks otherwise. Keep resolved threads when their context affects an actionable request or explains reviewer intent.
+An actionable request is human feedback that asks for a code change, clarification, or decision. Preserve PR-author and bot replies as context rather than independent requests. Treat a human question that requires an answer as actionable; classify ambiguous feedback as `needs clarification`. Keep resolved requests only when they remain relevant at the pinned head, and retain other resolved threads when they explain an actionable request or reviewer intent.
 
 Done when every connection and nested thread-comment page is exhausted and every actionable request retains its complete conversational context.
 

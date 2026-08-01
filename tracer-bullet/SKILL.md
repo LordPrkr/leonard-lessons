@@ -17,7 +17,7 @@ Resolve the repository and named Code Brain plan or Wayfinder ticket. If no dura
 
 Use an isolated Git worktree by default. If isolation is unavailable, do not edit until the existing working tree is clean. Before tracer work, capture the baseline branch, full `HEAD`, `git status --short`, tracked binary diff, and untracked paths.
 
-Done when the question, decision threshold, plan, and isolation boundary are explicit and the baseline is saved outside the working tree.
+Done when the question, decision threshold, durable or prompt target, isolation boundary, and baseline are explicit and the baseline is saved outside the working tree.
 
 ### 2. Fire the tracer
 
@@ -27,11 +27,11 @@ Done when the prototype runs far enough to record concrete files, APIs, commands
 
 ### 3. Verify and record findings
 
-Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the question, decision threshold, target link (or prompt target), scope, prototype location and command, findings, recommendation, and cleanup inventory. Link the findings from the plan or Wayfinder ticket.
+Run the smallest existing test, script, or manual command that proves the result. Write `notes/<TOPIC> Tracer Bullet.md` with the question, decision threshold, target link or prompt target, scope, prototype location and command, findings, recommendation, and cleanup inventory. When a durable plan or Wayfinder ticket exists, link the findings note from it; otherwise return the findings note directly.
 
 If findings substantively change an approved plan, the parent sets its status back to `draft`, moves its card to In Progress, and sends the revised plan through review and approval again.
 
-Done when evidence supports keep going, change plan, or stop.
+Done when evidence supports keep going, change plan, or stop, and the durable target links the findings note when such a target exists.
 
 ### 4. Clean up exactly
 

@@ -100,18 +100,35 @@ bunx skills add LordPrkr/leonard-lessons
 Install one skill globally:
 
 ```bash
-bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
+bunx skills add LordPrkr/leonard-lessons --skill agents-md --global
 ```
 
 Install for a specific agent:
 
 ```bash
-bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent claude-code --global
+bunx skills add LordPrkr/leonard-lessons --skill agents-md --agent claude-code --global
 ```
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `code-brain`, `code-brain-writeback`, `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-distill`, `code-brain-writeback`, `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, `gh-pr-review-plan`, `parallel-pr-review`, `pragmatic-plan`, or `tracer-bullet`. `gh-pr-review-plan` and `parallel-pr-review` also require `code-brain-writeback`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Install the full repository to satisfy dependencies between Leonard Lessons skills. External skills and tools remain separate requirements. For selective installation, use this table; the per-skill commands below are copyable installation bundles.
+
+| Skill or workflow | Required skills and tools |
+| --- | --- |
+| `/code-brain` | Pi and Obsidian |
+| `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain` |
+| `/effective-engineer` | External `/tdd` skill |
+| `/jira-ticket`, `/gh-pr-description` | `/spellbinding-sentences`; Jira integration or `gh`, respectively |
+| `/work-documentation-generator` | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences` |
+| `/finalize-implementation` | `/feature-branch`, `/conventional-commit-message`, `/gh-pr-description`, and `/work-documentation-generator` |
+| `/pragmatic-plan`, `/code-brain-planning` | `/code-brain`, `/code-brain-writeback`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/gh-pr-review-plan`, `/parallel-pr-review` | `gh`, `/code-brain`, and `/code-brain-writeback` |
+| `/gh-pr-job-triage` | `gh` and Pi subagents |
+| `/gh-pr-review-workspace` | `gh`, cmux, and `/parallel-pr-review` |
+| `/interactive-review` | cmux and external `/hunk-review` |
+| `/interactive-walkthrough` | cmux, external `/hunk-review`, and `/spellbinding-sentences` |
+
+`/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -128,8 +145,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `code-brain-writeback` — write material findings through to a Code Brain
-  activity artifact before continuing exploration or assessment. Depends on
-  `/code-brain`.
+  activity artifact before continuing exploration or assessment.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -138,7 +154,6 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `code-brain-distill` — classify reusable plan, review, and dream findings with
   the Diátaxis compass and promote them into canonical Code Brain documentation.
-  Depends on `/code-brain`.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -149,6 +164,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   and final-review loop for non-trivial code changes.
 
   ```bash
+  bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
@@ -161,7 +177,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `code-brain-wayfinder` — chart uncertain, multi-session work as decision
   tickets on the Code Brain Kanban board, then hand the resolved route to
-  `code-brain-planning`. Depends on `/code-brain`.
+  `code-brain-planning`.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -176,8 +192,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `tracer-bullet` — disposable prototype workflow for proving a plan's
-  technical path, then recording findings in Code Brain notes. Depends on
-  `/code-brain`.
+  technical path, then recording findings in Code Brain notes.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -185,7 +200,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `jira-ticket` — create a Jira task from repository context without preparing
-  a pull request. Depends on `/spellbinding-sentences`.
+  a pull request.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
@@ -193,8 +208,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `gh-pr-description` — create or update a GitHub pull-request description
-  from the branch diff and repository template. Depends on
-  `/spellbinding-sentences`.
+  from the branch diff and repository template.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
@@ -202,8 +216,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `work-documentation-generator` — create or resolve a Jira issue, prepare the
-  GitHub pull-request description, and link both artifacts. Depends on
-  `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences`.
+  GitHub pull-request description, and link both artifacts.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
@@ -214,8 +227,6 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `finalize-implementation` — confirm the feature branch, commit and push the
   verified change, prepare its pull request, and resolve optional Jira work.
-  Depends on `/feature-branch`, `/conventional-commit-message`,
-  `/gh-pr-description`, and `/work-documentation-generator`.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
@@ -229,7 +240,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
   persist each assessment and reusable lesson in Code Brain, and plan replies
-  or fixes. Depends on `/code-brain` and `/code-brain-writeback`.
+  or fixes.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -246,8 +257,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `gh-pr-review-workspace` — check out a numbered GitHub PR into a disposable
   worktree, open its diff in a cmux workspace, run `parallel-pr-review`, post
-  selected feedback after confirmation, and keep offering cleanup. Depends on
-  `/parallel-pr-review` and the external cmux skill.
+  selected feedback after confirmation, and keep offering cleanup.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -258,8 +268,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `parallel-pr-review` — review a pull request or branch with five fresh,
   read-only reviewers covering intent, correctness, validation, and design fit,
-  while persisting feedback and reusable lessons. Depends on `/code-brain` and
-  `/code-brain-writeback`.
+  while persisting feedback and reusable lessons.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -269,7 +278,6 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `interactive-review` — choose the latest commit or a branch comparison, open
   it in a Hunk pane beside the caller terminal, and hand off to `hunk-review`.
-  Depends on cmux and the external `hunk-review` skill.
 
   ```bash
   bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
@@ -277,8 +285,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `interactive-walkthrough` — explain every changed block in a commit or branch
-  comparison through a live Hunk session. Depends on cmux, the external
-  `hunk-review` skill, and `/spellbinding-sentences`.
+  comparison through a live Hunk session.
 
   ```bash
   bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
@@ -288,10 +295,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
 - `code-brain-planning` — durable Code Brain planning and execution lifecycle
   for broad, risky, cross-cutting, or approval-first changes, including board
-  transitions and implementation receipts. Depends on `/code-brain`,
-  `/code-brain-writeback`, `/feature-branch`, `/effective-engineer`, and
-  `/finalize-implementation`;
-  pairs with `/domain-modeling` when planning reveals domain terms or ADRs.
+  transitions and implementation receipts.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -304,7 +308,7 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `code-brain-diagramming` — add Mermaid diagrams and Obsidian canvases to an
-  existing Code Brain plan. Depends on `/code-brain`.
+  existing Code Brain plan.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -332,16 +336,16 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `domain-modeling` — Code Brain glossary and ADR capture for domain language
-  and durable decisions. Depends on `/code-brain`.
+  and durable decisions.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   ```
 
-- `dreaming` — synthesize local Pi session transcripts into durable Code Brain
-  memory. Depends on `/code-brain`; pair with `/domain-modeling` for domain
-  terms and ADRs.
+- `dreaming` — synthesize local Pi session transcripts into evidence-backed
+  Code Brain provenance, then route high-confidence findings to their durable
+  owners.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global

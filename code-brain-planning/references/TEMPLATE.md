@@ -39,7 +39,7 @@ status: draft
 
 **Green:** <Smallest implementation that passes the test.>
 
-<For every code change in this step, name each affected path and show a unified diff with enough context to distinguish current code from proposed code. Use /dev/null and show the full contents for a small new file.>
+<Add the path-labeled unified diffs required by /code-brain's plan authoring contract.>
 
 **`<repository-relative/path.ext>`**
 
@@ -79,5 +79,5 @@ status: draft
 
 ## References
 
-- [Context notes](./notes.md)
+- <When notes.md exists, include a relative Context notes link.>
 - <Relevant Code Brain ADR or sibling artifact.>

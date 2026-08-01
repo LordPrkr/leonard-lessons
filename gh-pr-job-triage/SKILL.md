@@ -25,7 +25,7 @@ Call `subagent({ action: "list" })`. Select an executable `scout`; stop and repo
 
 Launch one read-only scout per job in a single parallel `subagent` call with `context: "fresh"`, `async: true`, and bounded concurrency. Scouts must not edit files or launch subagents.
 
-Give each scout the repository, PR number, head SHA, job name, details URL, and identifiers. Require it to use `gh` to inspect the check, workflow run, job metadata, annotations, and logs, then attempt the smallest safe reproduction when one is available. It may inspect the PR diff and nearby repository code only to connect log evidence to changed files.
+Give each scout the repository, PR number, head SHA, job name, details URL, and identifiers. Require it to use `gh` to inspect the check, workflow run, job metadata, annotations, and logs. It may inspect the PR diff and nearby repository code only to connect log evidence to changed files. It then attempts the smallest repository-prescribed, non-mutating reproduction; when no such command is safe or available, it reports the exact infeasibility reason.
 
 Each scout returns:
 
@@ -49,7 +49,7 @@ subagent({
   tasks: [
     {
       agent: "<scout>",
-      task: "Collect evidence for GitHub PR <pr> job <job>. Repository: <repo>. Head SHA: <sha>. Details: <url>. Use gh to inspect metadata, annotations, and logs. Inspect the diff only for change overlap. Do not classify or modify files. Return the required evidence format."
+      task: "Collect evidence for GitHub PR <pr> job <job>. Repository: <repo>. Head SHA: <sha>. Details: <url>. Use gh to inspect metadata, annotations, and logs. Inspect the diff only for change overlap. Attempt the smallest repository-prescribed, non-mutating reproduction; otherwise state why none is safe or feasible. Collect evidence without classifying, modifying files, or launching subagents. Return every field in the required evidence format."
     }
   ],
   context: "fresh",

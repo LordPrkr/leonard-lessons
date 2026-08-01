@@ -1,12 +1,12 @@
 ---
 name: dreaming
 disable-model-invocation: true
-description: "Idempotently curate local Pi session transcripts into durable Code Brain memory."
+description: "Idempotently curate local Pi session transcripts into evidence-backed Code Brain provenance."
 ---
 
 # Dreaming
 
-A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into durable Code Brain memory. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts are local evidence, not canonical memory.
+A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into evidence-backed Code Brain provenance. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts and dream notes are not canonical memory.
 
 Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or ADR-worthy decisions.
 
@@ -24,7 +24,7 @@ Done when each selected session has stable key, path, opening timestamp, cwd, an
 
 Recompute candidate memories across the complete session set whenever sessions are added. Extract only durable preferences, repeated workflows, repository architecture or domain discoveries, reusable commands and patterns, recurring failures, and decisions.
 
-Drop one-off chatter, transient logs, guesses, secrets, and memories already canonical. Deduplicate identical evidence entries by stable key. Deduplicate insights by normalized heading plus normalized claim text. Each retained insight needs evidence, applicability boundary, and confidence: `high` for an explicit user decision, authoritative source, or repeated corroboration; `medium` for one clear session observation; `low` for inference or a tentative pattern.
+Drop one-off chatter, transient logs, guesses, secrets, and memories already canonical. Deduplicate identical evidence entries by stable key. Deduplicate insights by normalized heading plus normalized claim text. Give each insight a stable ID: `memory:` followed by the first 12 hexadecimal characters of the SHA-256 hash of its lowercased, whitespace-collapsed heading and claim joined with a newline. Each retained insight needs evidence, applicability boundary, and confidence: `high` for an explicit user decision, authoritative source, or repeated corroboration; `medium` for one clear session observation; `low` for inference or a tentative pattern.
 
 Done when every retained insight has evidence, an applicability boundary, and evidence-based confidence, and rerunning with the same sessions produces no duplicate session, evidence, or insight entry.
 
@@ -36,17 +36,17 @@ Apply `/code-brain`'s evidence convention when the note makes source-backed or e
 
 Done when the note covers the complete same-day set and every insight points to deduplicated evidence.
 
-### 4. Reconcile canonical memory
+### 4. Reconcile durable memory
 
-Promote only high-confidence insights that clearly belong in canonical files:
+Route only high-confidence insights to their durable owner:
 
-- the context selected by `domain-modeling` for domain terms
-- `resources/Agent Memory.md` for user or repository workflow preferences
-- `notes/<topic>.md` for reusable project context
+- invoke `/domain-modeling` for domain terms and qualifying decisions;
+- update `resources/Agent Memory.md` for user or repository workflow preferences;
+- send reusable repository architecture, behavior, procedures, hazards, and explanations through `/code-brain-distill` into canonical `docs/`.
 
-Before replacing or removing contradicted high-confidence canonical memory, show the user the exact existing text, proposed replacement or removal, and supporting evidence. Change it only after confirmation. Update glossary definitions in place and use `domain-modeling` for ADR supersession. Low-confidence and one-off insights remain only in the dream note.
+Keep scoped context that does not justify canonical documentation in the dream note as provenance. Before replacing or removing contradicted high-confidence memory, show the user the exact existing text, proposed replacement or removal, and supporting evidence. Apply the change only after confirmation. Update glossary definitions in place and use `domain-modeling` for ADR supersession. Low-confidence and one-off insights remain only in the dream note.
 
-Done when each promoted insight has one source of truth and no contradicted canonical statement was silently retained or changed.
+Done when each promoted insight has one durable owner, each repo-wide candidate has been distilled or explicitly deferred, and every contradiction is preserved pending confirmation or resolved with the user's approval.
 
 ### 5. Report
 
