@@ -5,7 +5,7 @@ description: Review code changes with parallel, fresh-context subagents. Use whe
 
 # Parallel PR Review
 
-Run an adversarial, read-only review with five independent reviewers. Follow `/code-brain` for repository identity, evidence, and the canonical review artifact. Prefer `/parallel-pr-review <PR#>` to review that GitHub pull request; without a number, review the current branch's PR or its merge base.
+Run an adversarial, read-only review with five independent reviewers. Follow `/code-brain` for repository identity and evidence, and `/code-brain-writeback` while producing the canonical review artifact. Prefer `/parallel-pr-review <PR#>` to review that GitHub pull request; without a number, review the current branch's PR or its merge base.
 
 ## 1. Establish the review target
 
@@ -69,13 +69,13 @@ subagent({
 
 Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
 
-Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. As each finding is confirmed, dismissed, or deferred, persist it in the template before evaluating the next report. Complete the same template in the review artifact and response:
+Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. Apply `/code-brain-writeback` as each finding is confirmed, dismissed, or deferred. Complete the same template in the review artifact and response:
 
 - state the big-picture goal and a concise, evidence-backed implementation path;
 - map each claimed goal to its mechanism, file/line evidence, and whether that causal path is demonstrated;
 - ask causal questions only where evidence cannot establish that a mechanism achieves its goal; each must name the goal, mechanism, and missing proof;
 - include confirmed findings ordered by severity, dismissed or deferred feedback, all five role results including `No findings`, and unavailable evidence;
-- record under `Lessons` only evidence-backed repository patterns worth applying beyond this review, linked to the finding or dismissal that established them.
+- record reusable-candidate pointers under `Lessons`.
 
 Omit inapplicable template sections and placeholders. Report the artifact path. Do not edit code unless the user separately authorizes fixes.
 

@@ -5,7 +5,7 @@ description: "GitHub PR review planning with gh: collect complete review context
 
 # GH PR Review Plan
 
-Use `gh` to turn human reviewer feedback on the current branch's pull request into a response plan. Follow `/code-brain` for repository identity, evidence, and the canonical `review/pr-<number>-<short-head-sha>-feedback.md` artifact. Do not implement fixes in this skill.
+Use `gh` to turn human reviewer feedback on the current branch's pull request into a response plan. Follow `/code-brain` for repository identity, evidence, and the canonical `review/pr-<number>-<short-head-sha>-feedback.md` artifact. Apply `/code-brain-writeback` while assessing feedback. Do not implement fixes in this skill.
 
 ## Steps
 
@@ -37,7 +37,7 @@ For each actionable request, inspect the referenced source at the pinned head be
 - `invalid` — the suggestion is factually wrong, already handled, conflicts with requirements, or costs more complexity than it saves.
 - `needs clarification` — repository evidence cannot fairly decide the request.
 
-Immediately after classifying each actionable request, persist its classification, evidence note, source URL, and relevant code under `Feedback` before assessing the next request. Update that entry if later context changes the assessment.
+Apply `/code-brain-writeback` with each classification, evidence note, source URL, and relevant code under `Feedback`.
 
 Done when every actionable request has a persisted classification, one-sentence evidence note, and links to its source comment and relevant code.
 
@@ -56,6 +56,6 @@ Reply: <concise evidence-backed GitHub response>
 Question: <exact question, only when clarification is needed>
 ```
 
-Replace the artifact's `Feedback` section with the deduplicated response plan. Add `Lessons` only for evidence-backed repository patterns worth applying beyond this PR; link each lesson to the feedback that established it. Report the artifact path with the response plan.
+Apply `/code-brain-writeback` to the deduplicated response plan under `Feedback` and reusable-candidate pointers under `Lessons`. Report the artifact path with the response plan.
 
 Done when the persisted plan covers every actionable human request exactly once, preserves contextual replies, contains no implementation changes, and records every reusable lesson or explicitly has none.
