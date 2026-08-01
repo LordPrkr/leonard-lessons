@@ -41,6 +41,7 @@ Route directly when the named artifact or discipline is the user's goal:
 - **Create or refactor AGENTS.md** → `/agents-md`.
 - **Draft or revise senior-engineer technical writing** → `/spellbinding-sentences`.
 - **Curate Pi sessions into durable memory** → `/dreaming`.
+- **Distill plan, review, or dream artifacts into repo-wide documentation** → `/code-brain-distill`.
 
 `/domain-modeling` and `/code-brain-diagramming` support another flow unless their artifact is the requested outcome. `/code-brain` prepares or repairs the workspace; use `/code-brain-planning` for the work itself.
 

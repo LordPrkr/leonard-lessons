@@ -5,7 +5,7 @@ description: "GitHub PR review planning with gh: collect complete review context
 
 # GH PR Review Plan
 
-Use `gh` to turn human reviewer feedback on the current branch's pull request into a response plan. Do not implement fixes in this skill.
+Use `gh` to turn human reviewer feedback on the current branch's pull request into a response plan. Follow `/code-brain` for repository identity, evidence, and the canonical `review/pr-<number>-<short-head-sha>-feedback.md` artifact. Do not implement fixes in this skill.
 
 ## Steps
 
@@ -17,9 +17,9 @@ Run:
 gh pr view --json number,url,headRefName,baseRefName,headRefOid,baseRefOid,title,author
 ```
 
-Resolve and record the PR head SHA, base SHA, merge base, `git diff <merge-base>...<head-sha>`, and commit list. If no PR is associated with the current branch, ask for its URL or number.
+Resolve and record the PR head SHA, base SHA, merge base, `git diff <merge-base>...<head-sha>`, and commit list. If no PR is associated with the current branch, ask for its URL or number. Create the review artifact with the immutable target and source links before assessing feedback.
 
-Done when the PR number, URL, and immutable base/head review target are known.
+Done when the PR number, URL, immutable base/head review target, and review artifact are known.
 
 ### 2. Collect complete review context
 
@@ -37,7 +37,9 @@ For each actionable request, inspect the referenced source at the pinned head be
 - `invalid` — the suggestion is factually wrong, already handled, conflicts with requirements, or costs more complexity than it saves.
 - `needs clarification` — repository evidence cannot fairly decide the request.
 
-Done when every actionable request has a classification, one-sentence evidence note, and links to its source comment and relevant code.
+Immediately after classifying each actionable request, persist its classification, evidence note, source URL, and relevant code under `Feedback` before assessing the next request. Update that entry if later context changes the assessment.
+
+Done when every actionable request has a persisted classification, one-sentence evidence note, and links to its source comment and relevant code.
 
 ### 4. Make the response plan
 
@@ -54,4 +56,6 @@ Reply: <concise evidence-backed GitHub response>
 Question: <exact question, only when clarification is needed>
 ```
 
-Done when the final plan covers every actionable human request exactly once, preserves contextual replies, and contains no implementation changes.
+Replace the artifact's `Feedback` section with the deduplicated response plan. Add `Lessons` only for evidence-backed repository patterns worth applying beyond this PR; link each lesson to the feedback that established it. Report the artifact path with the response plan.
+
+Done when the persisted plan covers every actionable human request exactly once, preserves contextual replies, contains no implementation changes, and records every reusable lesson or explicitly has none.

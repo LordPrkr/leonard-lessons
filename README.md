@@ -25,7 +25,7 @@ Use `domain-modeling` when clarification settles durable terminology or an archi
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that must survive the current session: broad changes, risky migrations, architectural decisions, or implementation that needs an approval gate. Use `pragmatic-plan` or `effective-engineer` for bounded work that does not need durable artifacts. Ordinary work does not need a Kanban card.
+Use Code Brain for work that must survive the current session: broad changes, risky migrations, architectural decisions, or implementation that needs an approval gate. `pragmatic-plan` leaves one lightweight field note for bounded approval-first work; `effective-engineer` handles ordinary work without durable artifacts. Ordinary work does not need a Kanban card.
 
 ### Project spine
 
@@ -36,13 +36,14 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md                 # human-owned strategy and agent authority
 ├── AGENTS.md                 # agent-maintained router to active memory
 ├── KANBAN.md                 # durable managed-work state
+├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
 ├── todo/                     # durable context for unplanned work
 ├── domain/                   # glossary, context maps, and ADRs
 ├── notes/                    # reusable project knowledge
 ├── resources/                # references and checklists
-└── review/                   # ingested review material
+└── review/                   # review feedback and reusable lessons
 ```
 
 Run `code-brain` from the target source repository or one of its worktrees. It resolves `<repo>` from Git so every worktree shares one project folder. A bare invocation audits an existing project and offers a concrete reconciliation without changing the vault first. The first durable workflow bootstraps the spine when `VISION.md` is missing: it reads existing repository and vault context, interviews the user one question at a time, and writes `VISION.md` only after explicit confirmation. Projects are reconciled individually, never bulk-migrated.
@@ -60,7 +61,7 @@ Inbox → In Progress → Review → Ready → In Progress → Review → Done
 Blocked or partial implementation → receipt → Blocked
 ```
 
-1. The orchestrator gathers source context and records material claims with repository revisions or external URLs.
+1. The orchestrator gathers source context and immediately records each useful finding with repository revisions or external URLs before continuing exploration.
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
 4. A fresh worker implements the approved plan. Read-only reviewers check correctness, validation, and simplicity.
@@ -76,6 +77,8 @@ Receipts record the actual commit SHA or a deterministic hash of the complete un
 - `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
+- `gh-pr-review-plan` and `parallel-pr-review` persist feedback and evidence-backed lessons under `review/`.
+- `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
 
@@ -105,7 +108,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `code-brain`, `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-distill`, `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, `gh-pr-review-plan`, `parallel-pr-review`, `pragmatic-plan`, or `tracer-bullet`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -119,6 +122,15 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  ```
+
+- `code-brain-distill` — classify reusable plan, review, and dream findings with
+  the Diátaxis compass and promote them into canonical Code Brain documentation.
+  Depends on `/code-brain`.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-distill --global
   ```
 
 - `effective-engineer` — tight inspect, red-green implementation, verification,
@@ -204,9 +216,11 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
-  assess them, and plan replies or fixes.
+  persist each assessment and reusable lesson in Code Brain, and plan replies
+  or fixes. Depends on `/code-brain`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
   ```
 
@@ -223,14 +237,17 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   `/parallel-pr-review` and the external cmux skill.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-workspace --global
   ```
 
 - `parallel-pr-review` — review a pull request or branch with five fresh,
-  read-only reviewers covering intent, correctness, validation, and design fit.
+  read-only reviewers covering intent, correctness, validation, and design fit,
+  while persisting feedback and reusable lessons. Depends on `/code-brain`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
   ```
 
@@ -276,11 +293,12 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
 
-- `pragmatic-plan` — lightweight in-session planning with no durable Code
-  Brain artifacts, delegating implementation to `/effective-engineer` before
-  ending in `/finalize-implementation`.
+- `pragmatic-plan` — lightweight approval-first planning that immediately
+  writes material findings, the reviewed plan, and its outcome to one Code
+  Brain field note before delegating implementation to `/effective-engineer`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global

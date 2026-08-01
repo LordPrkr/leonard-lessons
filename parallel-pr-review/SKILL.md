@@ -5,7 +5,7 @@ description: Review code changes with parallel, fresh-context subagents. Use whe
 
 # Parallel PR Review
 
-Run an adversarial, read-only review with five independent reviewers. Prefer `/parallel-pr-review <PR#>` to review that GitHub pull request; without a number, review the current branch's PR or its merge base.
+Run an adversarial, read-only review with five independent reviewers. Follow `/code-brain` for repository identity, evidence, and the canonical review artifact. Prefer `/parallel-pr-review <PR#>` to review that GitHub pull request; without a number, review the current branch's PR or its merge base.
 
 ## 1. Establish the review target
 
@@ -13,7 +13,9 @@ When given `<PR#>`, run `gh pr view <PR#>` to capture its number, URL, title, bo
 
 Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly. Extract the PR's claimed big-picture goal from those sources.
 
-**Complete when:** the immutable review target, exact non-empty diff command, commit list, claimed goal, and available intent and standards sources are known.
+Create `review/pr-<number>-<short-head-sha>-review.md` for a pull request or `review/branch-<short-head-sha>-review.md` for a local branch. Record the immutable target and available intent sources before launching reviewers.
+
+**Complete when:** the immutable review target, exact non-empty diff command, commit list, claimed goal, available intent and standards sources, and review artifact are known.
 
 ## 2. Discover subagents
 
@@ -67,13 +69,14 @@ subagent({
 
 Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
 
-Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. Complete the template in the response:
+Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. As each finding is confirmed, dismissed, or deferred, persist it in the template before evaluating the next report. Complete the same template in the review artifact and response:
 
 - state the big-picture goal and a concise, evidence-backed implementation path;
 - map each claimed goal to its mechanism, file/line evidence, and whether that causal path is demonstrated;
 - ask causal questions only where evidence cannot establish that a mechanism achieves its goal; each must name the goal, mechanism, and missing proof;
-- include confirmed findings ordered by severity, dismissed or deferred feedback, all five role results including `No findings`, and unavailable evidence.
+- include confirmed findings ordered by severity, dismissed or deferred feedback, all five role results including `No findings`, and unavailable evidence;
+- record under `Lessons` only evidence-backed repository patterns worth applying beyond this review, linked to the finding or dismissal that established them.
 
-Omit inapplicable template sections and placeholders. Do not write a report file unless the user asks. Do not edit code unless the user separately authorizes fixes.
+Omit inapplicable template sections and placeholders. Report the artifact path. Do not edit code unless the user separately authorizes fixes.
 
-**Complete when:** every role is accounted for, every retained finding is evidence-backed, and every claimed goal is mapped to demonstrated evidence or a precise causal question.
+**Complete when:** every role is accounted for, every retained finding is evidence-backed, every claimed goal is mapped to demonstrated evidence or a precise causal question, and every reusable lesson is persisted or explicitly absent.

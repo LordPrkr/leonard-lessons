@@ -40,9 +40,12 @@
 - Correctness: [finding summary or No findings]
 - Design fit: [finding summary or No findings]
 
+## Lessons
+
+- [Evidence-backed repository pattern worth applying beyond this review, linked to the finding or dismissal that established it.]
+
 ## Unavailable Evidence
 
 - [missing PR metadata, intent source, or incomplete reviewer run]
 
-_Omit inapplicable sections and all placeholders. Do not create this as a file
-unless requested._
+_Omit inapplicable sections and all placeholders._
