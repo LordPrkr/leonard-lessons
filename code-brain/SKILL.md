@@ -28,6 +28,7 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md
 ├── AGENTS.md
 ├── KANBAN.md
+├── docs/
 ├── plans/<NNN_TOPIC>/
 ├── wayfinding/<NNN_TOPIC>/
 ├── todo/
@@ -39,11 +40,21 @@ $CODE_BRAIN_ROOT/<repo>/
 
 Create optional directories and artifacts lazily. Keep each plan and its notes, diagrams, canvases, and receipt in its numbered folder.
 
+Activity artifacts under `plans/`, `review/`, and `notes/dreams/` preserve provenance. Repo-wide documentation under `docs/` is canonical: update an existing topic document instead of copying the same lesson into another artifact. Create `docs/README.md` with links grouped by reader need when the first canonical document is promoted; link only that landing page from `AGENTS.md` when the router exists.
+
+- `docs/tutorials/` teaches through a guided learning experience.
+- `docs/how-to/` gives steps for accomplishing a real task.
+- `docs/reference/` describes factual contracts and should mirror the machinery it documents.
+- `docs/explanation/` connects concepts, constraints, tradeoffs, and reasons.
+
+Use these as a Diátaxis compass, not a mandatory four-folder scheme: create only the category and topic documents the project needs.
+
 - `VISION.md` is human-owned strategic intent. Read it before durable planning and ask the user before changing it.
 - `AGENTS.md` is the short agent-maintained router to canonical memory, active plans, the board, and project-specific Code Brain rules. It is not a backlog.
 - `KANBAN.md` is the authoritative workflow state for durable Code Brain-managed work. Ordinary work that needs no durable artifact may remain outside it. Its lanes are Inbox, Ready, In Progress, Review, Blocked, and Done.
 - `wayfinding/` holds decision maps and ticket notes for uncertain work; `KANBAN.md` holds their status.
 - `todo/` holds durable context for unplanned work, not one-line task stubs. Simple tasks stay inline on the board.
+- `review/` holds review feedback and evidence-backed lessons. Use `review/pr-<number>-<short-head-sha>-feedback.md` for human feedback assessment, `review/pr-<number>-<short-head-sha>-review.md` for code review, and `review/branch-<short-head-sha>-review.md` for local branch review. Update the same immutable-target artifact across repeated runs of a workflow instead of creating session copies.
 - Plans preserve approved design. Appendable `receipt.md` files preserve execution truth.
 
 Before a Code-Brain-aware workflow plans or implements, read the relevant `domain/` context and ADRs, use their canonical vocabulary, and surface any conflict with source evidence or the requested direction.
@@ -86,6 +97,7 @@ When a durable artifact makes a source-backed or external claim, use:
 - repo: `relative/path.ts` @ `<full SHA>` — inspected YYYY-MM-DD
 - external: <https://example.com/spec> — accessed YYYY-MM-DD
 - session: `<session id>` — local-only; durable claim summarized above
+- code-brain: [source artifact](../relative/path.md) — distilled YYYY-MM-DD
 ```
 
-Before relying on a material repository claim, compare the recorded path at its source revision with current `HEAD`. Re-read changed or unavailable evidence. Temporary or absolute machine paths may remain as labeled local leads, but never as the sole evidence for a durable claim. Do not add freshness timers, generated manifests, or automatic rewriting.
+Before relying on a material repository claim, compare the recorded path at its source revision with current `HEAD`. Code Brain artifact links preserve provenance but never replace the underlying repository or external evidence for a material claim. Re-read changed or unavailable evidence. Temporary or absolute machine paths may remain as labeled local leads, but never as the sole evidence for a durable claim. Do not add freshness timers, generated manifests, or automatic rewriting.

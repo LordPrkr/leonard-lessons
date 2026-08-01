@@ -1,11 +1,13 @@
 ---
 name: pragmatic-plan
-description: "Lightweight in-session planning with no Code Brain artifacts. Use when the user wants a concrete plan and approval loop for a bounded change that need not persist across sessions."
+description: "Lightweight planning with immediate Code Brain writeback. Use when the user wants a concrete plan and approval loop for a bounded change without a managed planning lifecycle."
 ---
 
 # Pragmatic Plan
 
-Use this for lightweight planning held in the current session. Do not create Code Brain artifacts; use `code-brain-planning` when durable plans, board state, receipts, or cross-session execution are required. Do not edit implementation files until the user explicitly approves the current plan.
+Use this for lightweight planning with one durable field note. Follow `/code-brain` for vault resolution, repository identity, and evidence. Use `code-brain-planning` when board state, formal receipts, execution slices, or cross-session orchestration are required. Do not edit implementation files until the user explicitly approves the current plan.
+
+Keep the field note at `notes/plans/YYYY-MM-DD-<topic>.md`. Create it on the first material finding, then maintain four sections: `Exploration`, `Documentation candidates`, `Plan`, and `Outcome`. A material finding affects scope or design, resolves uncertainty, or would be costly to rediscover; routine file listings and transient dead ends stay in the session.
 
 ## Steps
 
@@ -13,7 +15,9 @@ Use this for lightweight planning held in the current session. Do not create Cod
 
 Inspect the relevant code directly. Use bounded reconnaissance only when the area is large or cross-cutting.
 
-Done when every likely touchpoint and the current flow are understood.
+Immediately after establishing each material finding, persist it under `Exploration` with `/code-brain` evidence before making another exploratory tool call. When it is reusable beyond this change, also add one concise item under `Documentation candidates`; do not promote it during planning. Update an existing finding instead of duplicating it when later evidence sharpens or disproves it.
+
+Done when every likely touchpoint and the current flow are understood, and every material finding is already present in the field note.
 
 ### 2. Plan and review
 
@@ -28,9 +32,9 @@ Every implementation step that adds, removes, or modifies code must name each af
 +export const example = "proposed"
 ```
 
-Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan.
+Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan. Write the reviewed plan under `Plan` before presenting it to the user; replace that section after substantive revisions rather than preserving revision residue.
 
-Done when the plan is concrete, executable, every code-changing step has path-labeled before/after diffs, and the plan is ready for a user decision.
+Done when the field note contains the exact concrete, executable plan presented for approval, every code-changing step has path-labeled before/after diffs, and the plan is ready for a user decision.
 
 ### 3. Approval gate
 
@@ -54,6 +58,6 @@ Done when the worker report and final diff match the plan, every retained diff h
 
 ### 6. Finalize implementation
 
-Invoke `/finalize-implementation` for verified work.
+Invoke `/finalize-implementation` for verified work. Record the resulting changed files, verification, pull request, Jira result, deviations, and residual risks under `Outcome`; record blockers honestly when finalization does not complete.
 
-Done when it returns the pull-request and Jira results, or the smallest useful blocker.
+Done when finalization returns and the field note records its outcome or smallest useful blocker.

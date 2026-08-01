@@ -5,7 +5,7 @@ description: "Durable Code Brain planning and execution. Use when broad, risky, 
 
 # Code Brain Planning
 
-Use this workflow for durable work with a clear implementation route. Use `/code-brain-wayfinder` first when material decisions still obscure that route. Use `pragmatic-plan` instead for a lightweight in-session plan with no Code Brain artifacts. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence.
+Use this workflow for durable work with a clear implementation route. Use `/code-brain-wayfinder` first when material decisions still obscure that route. Use `pragmatic-plan` instead when one lightweight field note is enough and the work needs no board state, formal receipt, execution slices, or cross-session orchestration. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence.
 
 The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`; subagents never update project navigation or workflow state. Code Brain vault files are not source-repository commits.
 
@@ -51,9 +51,9 @@ For abandonment or supersession, retain the card in Done with `— abandoned` or
 
 ### 1. Build context
 
-Use bounded local reconnaissance and external research only when it materially affects the plan. Persist useful findings in `notes.md`. Apply `/code-brain` evidence conventions to source-backed or external claims. Invoke `domain-modeling` when planning resolves domain language or an ADR-worthy decision.
+Use bounded local reconnaissance and external research only when it materially affects the plan. Immediately after establishing each useful finding, persist it in `notes.md` with `/code-brain` evidence before making another exploratory tool call. Keep a `Documentation candidates` section for findings reusable beyond this plan; promotion belongs to `/code-brain-distill`. Update an existing finding instead of duplicating it when later evidence sharpens or disproves it. Invoke `domain-modeling` when planning resolves domain language or an ADR-worthy decision.
 
-Done when every likely touchpoint, constraint, material source, and unresolved decision is explicit.
+Done when every likely touchpoint, constraint, material source, and unresolved decision is explicit, and every useful finding is already present in `notes.md`.
 
 ### 2. Challenge direction
 
