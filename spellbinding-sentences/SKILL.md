@@ -1,11 +1,11 @@
 ---
 name: spellbinding-sentences
-description: "Draft or revise explanatory technical writing for senior engineers, including design docs, PR descriptions, ADRs, incident writeups, architecture notes, and engineering proposals."
+description: "Draft or revise explanatory technical writing, including design docs, PR descriptions, ADRs, incident writeups, architecture notes, and engineering proposals."
 ---
 
 # Spellbinding Sentences
 
-Write for the audience the user names. Otherwise write for a senior software engineer who may not know the local domain or codebase.
+Write for the audience the user names. Otherwise assume the reader is technical, has strong engineering fundamentals, and may not know the local domain or codebase.
 
 Concise writing removes information the reader does not need. It does not compress reasoning into slogans. When a mechanism, dependency, or consequence takes three sentences to explain, use three sentences.
 
