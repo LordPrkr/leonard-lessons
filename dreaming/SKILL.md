@@ -1,12 +1,12 @@
 ---
 name: dreaming
 disable-model-invocation: true
-description: "Idempotently curate local Pi session transcripts into durable Code Brain memory."
+description: "Idempotently curate local Pi session transcripts into evidence-backed Code Brain provenance."
 ---
 
 # Dreaming
 
-A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into durable Code Brain memory. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts are local evidence, not canonical memory.
+A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into evidence-backed Code Brain provenance. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts and dream notes are not canonical memory.
 
 Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or ADR-worthy decisions.
 

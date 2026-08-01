@@ -32,10 +32,9 @@ Create only artifacts that answer a distinct question:
 - `current.canvas` and `proposed.canvas` for a clarifying structural comparison
 - a descriptive `*.canvas` for another spatial view
 
-Create Mermaid Markdown or Obsidian Canvas artifacts beside the plan. When Pi's
-Obsidian adapters are available, use `obsidian_create_mermaid` and
-`obsidian_create_canvas`. Use descriptive kebab-case names for additional
-artifacts.
+Create Mermaid Markdown or Obsidian Canvas artifacts beside the plan with
+`obsidian_create_mermaid` and `obsidian_create_canvas`. Use descriptive
+kebab-case names for additional artifacts.
 
 Done when each artifact is legible on its own, matches the grounded evidence,
 and contributes information not already clear from another artifact.

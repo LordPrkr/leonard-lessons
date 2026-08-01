@@ -21,20 +21,9 @@ Done when every likely touchpoint and the current flow are understood, and every
 
 ### 2. Plan and review
 
-Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification commands, risks, and blocking questions. Resolve each implementation branch before approval; record an unresolved choice as a blocking question. Present the current plan without superseded alternatives.
+Apply `/code-brain`'s plan authoring contract. Adversarially self-review meaningful risk, incorporate accepted findings into the standalone plan, and apply `/code-brain-writeback` to the reviewed `Plan` before presenting it.
 
-Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. These diffs express human-reviewed design intent; acceptance criteria govern delivery, and workers report evidence-backed implementation deviations. Include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code. Mark new and deleted files with `/dev/null`, and include the full contents of a small new file.
-
-**`src/example.ts`**
-
-```diff
--export const example = "current"
-+export const example = "proposed"
-```
-
-Adversarially self-review meaningful risk. Incorporate accepted findings into the standalone plan. Apply `/code-brain-writeback` to the reviewed `Plan` before presenting it.
-
-Done when the field note contains the exact concrete, executable plan presented for approval, every code-changing step has path-labeled before/after diffs, and the plan is ready for a user decision.
+Done when the field note contains the exact plan presented for approval, the plan satisfies `/code-brain`'s authoring contract, and it is ready for a user decision.
 
 ### 3. Approval gate
 

@@ -69,6 +69,10 @@ Cards are plain Markdown tasks with an optional wikilink:
 
 Each managed task appears in exactly one lane. The card lane is its only task-status source; task notes do not copy lane state into frontmatter, and plan status describes design lifecycle rather than board lane. When promoting a todo note, move its useful context into the plan folder, delete the todo note, and replace the card target with the plan. Direct block links are exceptional.
 
+## Plan authoring
+
+When a Code Brain workflow creates or revises an implementation plan, read and apply the [plan authoring contract](./references/PLAN-CONTRACT.md). The calling workflow owns approval, lifecycle, execution slices, and receipts.
+
 ## Initialization and reconciliation
 
 On bare `/code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.

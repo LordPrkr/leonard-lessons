@@ -63,20 +63,11 @@ Done when each directional decision is explicit and every review trigger is hand
 
 ### 3. Draft and review
 
-Write a standalone worker handoff with problem, goal, out-of-scope boundary, context, observable acceptance criteria, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification, risks, questions, and artifact links.
+Apply `/code-brain`'s plan authoring contract.
 
-Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. These diffs express human-reviewed design intent; acceptance criteria govern delivery, and workers report evidence-backed implementation deviations. Include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code. Mark new and deleted files with `/dev/null`, include the full contents of a small new file, and provide enough separate path-labeled diffs to show how connected changes fit together. Use this shape:
+For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Move the card to Review through the lifecycle table's `draft-ready` transition, then incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
 
-**`src/example.ts`**
-
-```diff
--export const example = "current"
-+export const example = "proposed"
-```
-
-For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Resolve each implementation branch before approval; record an unresolved choice as a blocking question. Move the card to Review through the lifecycle table's `draft-ready` transition, then incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
-
-Done when a fresh worker can execute the plan, the problem and scope boundary are explicit, every acceptance criterion is covered by its implementation and verification, every code-changing step has path-labeled before/after diffs, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
+Done when the plan satisfies `/code-brain`'s plan authoring contract, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
 
 ### 4. Approval gate
 
