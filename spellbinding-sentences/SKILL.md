@@ -5,63 +5,87 @@ description: "Draft or revise explanatory technical writing for senior engineers
 
 # Spellbinding Sentences
 
-Write for the audience the user names. Otherwise assume a technically strong reader who does not know the local codebase and wants to understand it quickly.
+Write for the audience the user names. Otherwise write for a senior software engineer who may not know the local domain or codebase.
 
 Concise writing removes information the reader does not need. It does not compress reasoning into slogans. When a mechanism, dependency, or consequence takes three sentences to explain, use three sentences.
 
 ## Steps
 
-### 1. Establish the claim
+### 1. Preserve the facts
 
-Identify what the reader should understand, decide, or do. If revising, preserve the source's facts, scope, and uncertainty unless the user asks for new substance.
+If revising, keep the original claims, scope, and uncertainty unless the user asks for new substance.
 
-Done when the main claim is explicit and every changed factual claim comes from the source or the user's request.
+Done when every changed claim is either present in the source or explicitly requested.
 
-### 2. Explain the mechanism
+### 2. Lead with the point
 
-Present the idea in the order a reader needs it:
+Start each section with what is true, what changed, or what you propose.
 
-1. the concrete problem or claim;
-2. how the relevant system behaves;
-3. the consequence of that behavior;
-4. the conditions, tradeoffs, or example that make the consequence useful.
+Done when no section opens with generic background or a tour of concepts the reader already knows.
 
-Use only the parts the subject requires. A simple fact may need one sentence; a design choice may need all four.
+### 3. Ground claims in mechanisms
 
-Done when the reader can follow each important conclusion from cause to effect without supplying missing reasoning.
+Name the code path, service, metric, failure mode, dependency, or operational condition behind important claims. Explain the relevant chain of cause and effect: what the system does, why it does it, and what follows.
 
-### 3. Spend words on information that affects decisions
+Done when every important claim has a concrete anchor and the reader can follow its conclusion without supplying missing reasoning.
 
-Keep constraints, failure modes, assumptions, numbers, named dependencies, and real code paths. Remove familiar setup and repeated conclusions. Define a term when its local meaning is unfamiliar or narrower than its usual meaning.
+### 4. State the tradeoff
 
-Expand any quip, metaphor, or compressed phrase that carries unstated reasoning. A memorable line may summarize an explanation; it may not replace one.
+Say what the choice buys, what it costs, when it wins, and what alternative it rejects. Tie recommendations to conditions, not verdicts: "X is cheaper when..." rather than "X is better."
 
-Done when every remaining sentence either explains the claim or changes how the reader should interpret or act on it.
+Done when every recommendation that requires judgment is conditional and names its rejected alternative.
 
-### 4. Test the explanation
+### 5. Cut inherited context
 
-Check that recommendations state when they apply, alternatives receive a fair comparison, and examples expose the mechanism rather than merely decorate the prose.
+Explain only the surprising constraint, subtle failure mode, or detail that changes the decision and that the target reader does not already know. Skip definitions of standard terms.
 
-Done when a technically strong reader can state what happens, why it happens, and under which conditions the conclusion changes.
+Done when no paragraph restates context the target reader already has.
 
-## Writing patterns
+### 6. Make paragraphs linear
 
-- Use plain verbs and precise technical nouns.
+Each paragraph should make one claim. Each sentence should support, qualify, or advance that claim.
+
+Done when no sentence introduces an unexplained second argument.
+
+### 7. Prefer intent over pedantry
+
+Use the technically precise version when precision changes the decision. Otherwise use the simpler sentence.
+
+Done when edits make the reader's next action clearer, not merely more formally correct.
+
+### 8. Tighten from the kernel sentence
+
+Reduce each dense sentence to its simplest true claim, then add back the condition, mechanism, number, or tradeoff needed to explain it. Expand any quip, metaphor, or compound modifier that hides a relationship the reader needs. A memorable phrase may summarize an explanation; it may not replace one.
+
+Done when every sentence is precise, every necessary relationship is explicit, and no sentence becomes a slogan through editing.
+
+## Style rules
+
+- Use active voice.
+- Prefer direct declarative sentences. Let sentence length follow the reasoning.
+- Use precise technical terms, with plain connecting prose.
 - State relationships as clauses. Write “start with an example, then explain the implementation” so the reader does not have to unpack a compound modifier.
-- Put the main claim early, then earn it with mechanism and evidence.
-- Prefer concrete causality: “The worker retries after the lease expires, so the handler may run twice.”
-- Give numbers or observable conditions when magnitude matters.
-- Let sentence length follow the reasoning. Short sentences suit simple claims; connected clauses suit connected ideas.
+- Use compressed lines rarely, after the prose has explained what they mean.
+- Ground claims in specifics: actual latency, throughput, queue depth, retry behavior, storage cost, incident symptoms, named dependencies, or real call paths.
+- Replace vague qualifiers like "large," "slow," or "scalable" with numbers or observable conditions.
 - Use transitions that name the relationship: because, therefore, however, for example, and in contrast.
-- End with the consequence or decision, not a catchphrase.
+
+## Do not
+
+- Open with generic background: "In today's world...", "To understand X...", "X didn't happen overnight..."
+- Use contrast cliches: "not just X, but Y" or "isn't merely X — it's Y."
+- End paragraphs on hollow punch lines: "The gap is real" or "That changes everything."
+- Narrate the document's reasoning: "This is significant because...", "This reinforces...", or "It is important to note..."
+- Use filler vocabulary: leverage, robust, seamless, powerful, crucially, ultimately, notably, landscape, navigate, delve.
+- Restate the reader's own context back to them.
 
 ## Examples
 
 These are original examples modeled on the explanatory methods used by Martin Kleppmann, Martin Fowler, and Robert Nystrom.
 
-### Explain a pattern from baseline to consequence
+### Explain a pattern from its baseline
 
-Compressed:
+Too compressed:
 
 > CQRS splits reads from writes. Simple idea, big consequences.
 
@@ -69,11 +93,11 @@ Explanatory:
 
 > A conventional CRUD model uses the same representation for reads and writes. CQRS separates them: commands update a write model, while queries read from a model shaped for display or retrieval. This can simplify a domain whose validation rules and query shapes pull the shared model in different directions. It also introduces synchronization and consistency work, so it is usually justified only for the parts of a system where those benefits exceed the added complexity.
 
-The second version defines the baseline, describes the mechanism, and states both the benefit and its limit. This follows Fowler’s progression in [CQRS](https://martinfowler.com/bliki/CQRS.html).
+The second version defines the ordinary model, describes what CQRS changes, and states both the benefit and its limit. Fowler uses this sequence in [CQRS](https://martinfowler.com/bliki/CQRS.html).
 
-### Follow the hidden mechanism
+### Follow the mechanism to its consequence
 
-Compressed:
+Too compressed:
 
 > Caches trade consistency for speed.
 
@@ -81,11 +105,11 @@ Explanatory:
 
 > A cache makes reads faster by keeping a second copy of data closer to the caller. Once that copy exists, an update to the primary store and an update to the cache may occur at different times or one may fail. Expiration limits how long stale data can survive, but shorter expiration also sends more traffic to the primary store. The right policy depends on the consequence of staleness: an old profile photo may be acceptable, while an old account balance may not be.
 
-The second version turns a slogan into a model the reader can use to reason about failure and choose a policy. Kleppmann uses this approach throughout *Designing Data-Intensive Applications*: explain how the system works, then compare the available choices and their costs.
+The second version gives the reader a model for reasoning about failure and choosing a policy. Kleppmann uses this approach throughout *Designing Data-Intensive Applications*: explain how the system works, then compare the available choices and their costs.
 
-### Use an example to make an abstraction operational
+### Connect an abstraction to its implementation
 
-Compressed:
+Too compressed:
 
 > A closure is a function with a backpack of variables.
 
