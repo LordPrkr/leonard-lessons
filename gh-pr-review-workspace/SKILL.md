@@ -12,23 +12,20 @@ Accept exactly one pull-request number. Run from any checkout of the target GitH
 
 From the current checkout, use `gh repo view` to resolve `nameWithOwner` and the repository name. Use `gh pr view <PR#> --repo <nameWithOwner>` to capture the PR URL, title, base ref and OID, head ref and OID, and state. Stop if the PR is not open.
 
-Resolve the canonical source worktree under `~/code/<repository-name>`:
+Resolve the shared repository from the invoking checkout with `git rev-parse --path-format=absolute --git-common-dir`. Use the first `worktree` entry from `git worktree list --porcelain` as the source worktree; Git lists the main worktree first. Verify its `gh repo view` identity equals `nameWithOwner`.
 
-- If that path is a Git worktree, use it and set the disposable path to `~/code/<repository-name>-pr-<PR#>-review`.
-- If that path is a container for multiple worktrees, use its `main` worktree at `~/code/<repository-name>/main` and set the disposable path to `~/code/<repository-name>/pr-<PR#>-review`.
+Place the disposable worktree beside the source worktree as `<repository-name>-pr-<PR#>-review`; if that path already exists, stop and report it. Use only the invoking repository's Git metadata—cloning or substituting an unrelated checkout is outside this workflow.
 
-If the expected source worktree is absent, not a Git repository, or its `gh repo view` identity differs from `nameWithOwner`, flag it and stop; do not clone or substitute another checkout.
-
-**Complete when:** the open PR, immutable base/head OIDs, matching canonical source worktree, and disposable path are known.
+**Complete when:** the open PR, immutable base/head OIDs, verified source worktree, and unused disposable path are known.
 
 ## 2. Create the review worktree
 
 Stop rather than reuse or overwrite the disposable path.
 
-Fetch the PR into a detached worktree without disturbing the canonical source worktree:
+Fetch the PR into a detached worktree without disturbing the source worktree:
 
-1. Fetch the PR base ref in the canonical source worktree and verify the pinned base OID exists.
-2. Run `git worktree add --detach <worktree> <base-oid>` from the canonical source worktree.
+1. Fetch the PR base ref in the source worktree and verify the pinned base OID exists.
+2. Run `git worktree add --detach <worktree> <base-oid>` from the source worktree.
 3. In the new worktree, run `gh pr checkout <PR#> --repo <nameWithOwner> --detach`.
 4. Verify `HEAD` equals the pinned head OID. On setup failure, remove only the worktree created by this run and stop.
 
@@ -54,14 +51,14 @@ After synthesis, number every confirmed finding. Ask which finding numbers, if a
 gh pr review <PR#> --repo <nameWithOwner> --comment --body-file -
 ```
 
-Do not post dismissed findings, causal questions, or `No findings` results unless the user explicitly selects them.
+Post only the confirmed finding numbers the user explicitly selects; include other material only when the user explicitly requests it.
 
 **Complete when:** all review roles are accounted for and the user has either posted confirmed selected feedback or declined to post feedback.
 
-## 5. Keep offering cleanup
+## 5. Complete cleanup
 
 Beginning with the review result, end every response in this session with one cleanup question while the created worktree exists: `Clean up the review worktree now?`
 
-Do not busy-loop. If the user declines or discusses something else, ask once again at the end of the next response. On approval, run `git -C <canonical-source-worktree> worktree remove <worktree>` without `--force`. If removal reports changes, show them and ask separately before any forced deletion. Never remove a worktree that this run did not create.
+If the user declines or discusses something else, ask once again at the end of the next response rather than polling. On approval, run `git -C <source-worktree> worktree remove <worktree>` without `--force`. If removal reports changes, show them and ask separately before any forced deletion. Remove only the worktree created by this run.
 
 **Complete when:** the created worktree no longer exists, or the session ends with cleanup still explicitly offered.

@@ -9,7 +9,7 @@ Run an adversarial, read-only review with five independent reviewers. Follow `/c
 
 ## 1. Establish the review target
 
-When given `<PR#>`, run `gh pr view <PR#>` to capture its number, URL, title, body, base and head refs, base and head SHAs, commits, changed files, and discussion. Otherwise identify the current branch's associated PR; if none exists, review the local branch against its merge base. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. Do not substitute conversation history for repository evidence.
+When given `<PR#>`, run `gh pr view <PR#>` to capture its number, URL, title, body, base and head refs, base and head SHAs, commits, changed files, and discussion. Otherwise identify the current branch's associated PR; if none exists, review the local branch against its merge base. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. Establish intent from repository, PR, issue, or approved-plan evidence; use conversation history only to locate those sources.
 
 Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly. Extract the PR's claimed big-picture goal from those sources.
 
@@ -27,16 +27,18 @@ Call `subagent({ action: "list" })`. Use an executable `reviewer` agent from the
 
 Call the `subagent` tool once in parallel mode with `async: true`, `context: "fresh"`, `concurrency: 5`, and one task per role below. Reviewers are read-only: they must not modify project/source files or launch subagents.
 
-Every task must tell the reviewer to:
+Build one shared task prefix containing the PR number and URL when present, immutable base/head SHAs, exact diff command, claimed goal, intent and standards source paths, and these rules:
 
-- inspect the exact diff command and immutable base/head SHAs with `git`;
-- inspect the associated PR with `gh` when one exists, including its base and discussion relevant to the assigned role;
-- read the supplied intent and standards sources relevant to its role;
+- inspect the immutable target with `git` and the associated PR with `gh` when one exists;
+- read the supplied intent and standards sources relevant to the assigned role;
 - infer repository precedent from nearby code and tests;
-- do not run build, test, lint, typecheck, or other validation commands; assume they pass and inspect source only;
+- inspect source without running build, test, lint, typecheck, or other validation commands;
 - report only actionable, evidence-backed findings;
 - cite file and line, explain impact, and propose the smallest safe fix;
-- return `No findings` when its requirement is satisfied.
+- return `No findings` when the role requirement is satisfied;
+- keep the review read-only and finish without modifying files or launching subagents.
+
+Append exactly one role requirement below to that complete shared prefix.
 
 Assign exactly one requirement to each reviewer:
 
@@ -46,16 +48,18 @@ Assign exactly one requirement to each reviewer:
 4. **Correctness:** Find concrete bugs, regressions, unsafe edge cases, and contract violations introduced by the diff.
 5. **Design fit:** Check whether the changes follow established repository design patterns. Flag missing patterns only when they prevent a concrete problem; also flag speculative abstractions or pattern overuse.
 
-Use this execution shape, replacing `<reviewer>` and `<target>` with discovered values:
+Use this execution shape after replacing every placeholder:
 
 ```typescript
+const shared = `Review PR <number-or-none> <url-or-none> at immutable base <base-sha> and head <head-sha>. Diff: <exact-diff-command>. Claimed goal: <goal>. Intent sources: <paths-or-unavailable>. Standards sources: <paths-or-unavailable>. Inspect the target with git and the PR with gh when present; read relevant supplied sources and nearby precedent. Remain read-only, launch no subagents, and run no validation commands. Return only actionable findings with file/line, impact, and smallest safe fix; otherwise return No findings.`
+
 subagent({
   tasks: [
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for intent, acceptance-criteria, goal-to-mechanism evidence, and scope-creep conformance only. ..." },
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for test coverage and test-file precedent only. ..." },
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for standards, production-code precedent, and shared utilities only. ..." },
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for correctness only. ..." },
-    { agent: "<reviewer>", task: "Review immutable diff <diff-command> for established design-pattern fit only. ..." }
+    { agent: "<reviewer>", task: `${shared}\nRole: Intent conformance. <full requirement 1>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Test coverage. <full requirement 2>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Code precedent. <full requirement 3>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Correctness. <full requirement 4>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Design fit. <full requirement 5>` }
   ],
   context: "fresh",
   concurrency: 5,
@@ -67,7 +71,7 @@ subagent({
 
 ## 4. Collect and synthesize
 
-Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })`; do not silently omit a role.
+Continue any useful parent-side inspection, then call `wait({ all: true })` when no independent work remains. Before synthesis, re-read the PR head SHA; if it moved, discard the reports and restart from target establishment. Inspect failed or incomplete runs with `subagent({ action: "status", id: "..." })` and account for every role in the synthesis.
 
 Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before reporting. Deduplicate findings by root cause and reject findings unsupported by the diff or repository precedent. Apply `/code-brain-writeback` as each finding is confirmed, dismissed, or deferred. Complete the same template in the review artifact and response:
 

@@ -37,7 +37,7 @@ Done when each candidate has exactly one destination or an explicit skip reason.
 
 ## 4. Promote
 
-Write or update the canonical document in place. Preserve useful existing content, remove duplication, apply `/code-brain` evidence, and link the source artifact as provenance. Ask before replacing contradicted canonical memory. When at least one canonical `docs/` document exists after promotion, create or update `docs/README.md` with short, reader-oriented links grouped by the categories that actually exist. When `AGENTS.md` exists, keep one Canonical memory link to that landing page; never create missing spine files as a side effect.
+Write or update the canonical document in place. Preserve useful existing content, remove duplication, apply `/code-brain` evidence, and link the source artifact as provenance. Ask before replacing contradicted canonical memory. When at least one canonical `docs/` document exists after promotion, create or update `docs/README.md` with short, reader-oriented links grouped by the categories that actually exist. When `AGENTS.md` exists, keep one Canonical memory link to that landing page. Preserve the existing project spine; initialization owns any missing spine files.
 
 Done when every promoted claim has one source of truth, current material evidence, source provenance, and—when canonical docs exist—a route from `docs/README.md`.
 

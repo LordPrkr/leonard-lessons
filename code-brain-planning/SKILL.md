@@ -57,15 +57,15 @@ Done when every likely touchpoint, constraint, material source, and unresolved d
 
 ### 2. Challenge direction
 
-Use a read-only second opinion when assumptions, architecture, scope, or trajectory need it. Accept or reject recommendations before drafting.
+Use a read-only second opinion for an irreversible migration, external contract change, ownership or security boundary, unresolved architectural choice, or cross-repository coordination. Accept or reject recommendations before drafting; otherwise record that none of these triggers applies.
 
-Done when no directional decision is implicit.
+Done when each directional decision is explicit and every review trigger is handled or explicitly absent.
 
 ### 3. Draft and review
 
 Write a standalone worker handoff with problem, goal, out-of-scope boundary, context, observable acceptance criteria, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification, risks, questions, and artifact links.
 
-Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. The diff must include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code; never present proposed code as an unmarked end-state snippet. Use `/dev/null` for a new or deleted file, and include the full contents of a small new file. Provide enough separate path-labeled diffs that a fresh worker can see how connected changes fit together. Use this shape:
+Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. These diffs express human-reviewed design intent; acceptance criteria govern delivery, and workers report evidence-backed implementation deviations. Include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code. Mark new and deleted files with `/dev/null`, include the full contents of a small new file, and provide enough separate path-labeled diffs to show how connected changes fit together. Use this shape:
 
 **`src/example.ts`**
 
@@ -74,7 +74,7 @@ Every implementation step that adds, removes, or modifies code must name each af
 +export const example = "proposed"
 ```
 
-For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Do not leave conditional implementation branches. Move the card to Review for adversarial review, then incorporate accepted findings without revision-history residue. Changes return the card to In Progress while editing.
+For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Resolve each implementation branch before approval; record an unresolved choice as a blocking question. Move the card to Review through the lifecycle table's `draft-ready` transition, then incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
 
 Done when a fresh worker can execute the plan, the problem and scope boundary are explicit, every acceptance criterion is covered by its implementation and verification, every code-changing step has path-labeled before/after diffs, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
 
@@ -86,9 +86,9 @@ Done when the approved plan is Ready or work ends explicitly.
 
 ### 5. Implement and review
 
-Only `start-implementation` moves an approved Ready card to In Progress. Invoke `/feature-branch` in each affected source repository before spawning workers. For each unblocked execution slice, spawn exactly one `worker` with `context: "fresh"`; a plan without slices is one slice. Its task contains only an instruction to invoke `/effective-engineer`, the approved `plan.md` path, and the slice identifier. The worker returns changed files, command exit codes, validation evidence, deviations, residual risks, and blockers. The parent remains the sole writer of plan metadata and board state.
+Use the lifecycle table's `start-implementation` transition to move an approved Ready card to In Progress. Invoke `/feature-branch` in each affected source repository before spawning workers. For each unblocked execution slice, spawn exactly one `worker` with `context: "fresh"`; a plan without slices is one slice. Its task contains only an instruction to invoke `/effective-engineer`, the approved `plan.md` path, and the slice identifier. The worker returns changed files, command exit codes, validation evidence, deviations, residual risks, and blockers. The parent remains the sole writer of plan metadata and board state.
 
-Move the card to Review when implementation is ready. Read-only reviewers check every acceptance criterion against the delivered source, then check correctness, validation, simplicity, and repository standards. Approved fixes return it to In Progress and then Review. If implementation or review is blocked, partial, or reverted, skip commits and persist the attempt receipt immediately.
+Use the lifecycle table's `implementation-ready` transition when implementation reaches review. Read-only reviewers check every acceptance criterion against the delivered source, then check correctness, validation, simplicity, and repository standards. Apply accepted fixes through `fixes-needed`, then return through `implementation-ready`. A blocked, partial, or reverted result follows its matching table transition and persists the attempt receipt immediately.
 
 Done when every acceptance criterion is accounted for and review accepts delivery, or an honest non-accepted receipt is required.
 

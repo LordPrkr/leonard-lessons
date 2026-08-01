@@ -21,9 +21,9 @@ Done when every likely touchpoint and the current flow are understood, and every
 
 ### 2. Plan and review
 
-Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification commands, risks, and blocking questions. Do not leave conditional implementation branches or revision-history residue.
+Write a standalone plan for a worker with no prior context. Include goal, relevant context, exact files, the highest existing public test seam, one red-green step per observable behavior, tests, verification commands, risks, and blocking questions. Resolve each implementation branch before approval; record an unresolved choice as a blocking question. Present the current plan without superseded alternatives.
 
-Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. The diff must include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code; never present proposed code as an unmarked end-state snippet. Use `/dev/null` for a new or deleted file, and include the full contents of a small new file.
+Every implementation step that adds, removes, or modifies code must name each affected repository-relative path and immediately show the relevant change as a fenced unified diff. These diffs express human-reviewed design intent; acceptance criteria govern delivery, and workers report evidence-backed implementation deviations. Include enough unchanged context and `-`/`+` lines to distinguish current code from proposed code. Mark new and deleted files with `/dev/null`, and include the full contents of a small new file.
 
 **`src/example.ts`**
 

@@ -19,9 +19,9 @@ Search Jira and the branch name for an existing issue before creating one. If th
 
 Write a concise summary and a description centered on background, user or operational impact, and the intended outcome. Do not narrate implementation details that belong in a pull request.
 
-Unless the user says otherwise, create a Task assigned to Parker in the active sprint and move it to In Progress. If any default is unavailable, preserve the created ticket and report the unmet field rather than guessing.
+Unless the user says otherwise, create a Task using the Jira project's defaults for assignee, sprint, and status. Leave a field unset when no default exists, and report the resulting assignment and workflow state.
 
-**Complete when:** the draft explains why the work matters and every requested or default field has a concrete value.
+**Complete when:** the draft explains why the work matters and every requested field is concrete; defaulted and unset fields are explicit.
 
 ## 3. Create and verify
 

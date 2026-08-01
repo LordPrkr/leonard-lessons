@@ -7,8 +7,8 @@ description: "Feature-branch selection for repository work. Use before implement
 
 ## Choose the branch
 
-Inspect the intended work, repository status, current and default branches, any open pull request, and recent local, remote, and merged-pull-request branch names. Keep unrelated changes outside the work branch.
+Inspect the intended work, repository status, current and default branches, any open pull request, and recent local, remote, and merged-pull-request branch names. Classify existing changes as related, unrelated, or unclear. Keep related changes with the intended work. For unrelated changes, use a clean worktree or ask before switching or creating branches; ask for ownership when the relationship is unclear.
 
-If the current branch is the default branch, create a feature branch whose name follows repository precedent and describes the work. If the current branch is already a feature branch and the work clearly belongs to its commits or pull request, keep it. If ownership is unclear, ask whether to use the current branch or create a new one. Ask for a branch name only when repository precedent and the work provide no clear name.
+If the current branch is the default branch and the worktree boundary is safe, create a feature branch whose name follows repository precedent and describes the work. If the current branch is already a feature branch and the work clearly belongs to its commits or pull request, keep it. If ownership is unclear, ask whether to use the current branch or create a new one. Ask for a branch name only when repository precedent and the work provide no clear name.
 
 **Complete when:** every intended change and no unrelated change is assigned to the current feature branch.

@@ -111,7 +111,7 @@ bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --agent clau
 
 ## Skills
 
-Dependencies: these workflows require Pi and Obsidian. `interactive-review` requires cmux and the external `hunk-review` skill. `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `code-brain`, `code-brain-writeback`, `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-distill`, `code-brain-writeback`, `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, `gh-pr-review-plan`, `parallel-pr-review`, `pragmatic-plan`, or `tracer-bullet`. `gh-pr-review-plan` and `parallel-pr-review` also require `code-brain-writeback`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
+Code Brain workflows require Pi and Obsidian. GitHub workflows require `gh`; Jira workflows require an available Jira integration. `effective-engineer` requires the external `tdd` skill. `interactive-review` requires cmux and the external `hunk-review` skill; `interactive-walkthrough` also requires `spellbinding-sentences`. `gh-pr-review-workspace` requires cmux and `parallel-pr-review`. `jira-ticket` and `gh-pr-description` require `spellbinding-sentences`; `work-documentation-generator` requires all three. `finalize-implementation` requires `feature-branch`, `conventional-commit-message`, `gh-pr-description`, and `work-documentation-generator`; `pragmatic-plan` and `code-brain-planning` require `code-brain`, `code-brain-writeback`, `feature-branch`, `effective-engineer`, and `finalize-implementation`. Install `code-brain` before `code-brain-distill`, `code-brain-writeback`, `code-brain-wayfinder`, `domain-modeling`, `code-brain-diagramming`, `code-brain-planning`, `dreaming`, `gh-pr-review-plan`, `parallel-pr-review`, `pragmatic-plan`, or `tracer-bullet`. `gh-pr-review-plan` and `parallel-pr-review` also require `code-brain-writeback`. Install `domain-modeling` with `code-brain-planning` or `dreaming` when plans or dreams need glossary or ADR capture. Install the skills you want `mystical-tutor` to route to, or install the full repository.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -146,9 +146,11 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   ```
 
 - `effective-engineer` — tight inspect, red-green implementation, verification,
-  and final-review loop for non-trivial code changes.
+  and final-review loop for non-trivial code changes. Depends on the external
+  `/tdd` skill.
 
   ```bash
+  bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
@@ -339,8 +341,9 @@ Dependencies: these workflows require Pi and Obsidian. `interactive-review` requ
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   ```
 
-- `dreaming` — synthesize local Pi session transcripts into durable Code Brain
-  memory. Depends on `/code-brain`; pair with `/domain-modeling` for domain
+- `dreaming` — synthesize local Pi session transcripts into evidence-backed
+  Code Brain provenance, then route high-confidence findings to their durable
+  owners. Depends on `/code-brain`; pair with `/domain-modeling` for domain
   terms and ADRs.
 
   ```bash

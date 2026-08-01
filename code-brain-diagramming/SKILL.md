@@ -14,9 +14,11 @@ and plan numbering. Keep every artifact beside the target `plan.md`.
 
 ### 1. Ground the Diagram
 
-Use the plan named by the user, defaulting to the latest numbered plan folder.
-Read its `plan.md`, linked context notes, and the relevant source files before
-choosing a diagram.
+Use the plan named by the user. Without a named plan, list active plans and
+continue automatically only when exactly one exists; otherwise ask the user to
+choose. Exclude implemented, abandoned, and superseded plans from automatic
+selection. Read the selected `plan.md`, linked context notes, and relevant source
+files before choosing a diagram.
 
 Done when the target plan exists and every flow, state, ownership boundary, or
 comparison to depict is grounded in the plan or source.
@@ -30,8 +32,10 @@ Create only artifacts that answer a distinct question:
 - `current.canvas` and `proposed.canvas` for a clarifying structural comparison
 - a descriptive `*.canvas` for another spatial view
 
-Use `obsidian_create_mermaid` for Mermaid and `obsidian_create_canvas` for
-canvases. Use descriptive kebab-case names for additional artifacts.
+Create Mermaid Markdown or Obsidian Canvas artifacts beside the plan. When Pi's
+Obsidian adapters are available, use `obsidian_create_mermaid` and
+`obsidian_create_canvas`. Use descriptive kebab-case names for additional
+artifacts.
 
 Done when each artifact is legible on its own, matches the grounded evidence,
 and contributes information not already clear from another artifact.

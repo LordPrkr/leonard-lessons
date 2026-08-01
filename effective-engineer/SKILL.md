@@ -23,7 +23,7 @@ Done when each intended behavior has gone red then green at a public seam, or th
 
 ### 3. Implement
 
-Make the smallest code change that satisfies the current red test. Do not add abstractions for future cases.
+Make the smallest code change that satisfies the current red test. Add only the structure required by the current observable behavior.
 
 Done when the requested behavior is implemented with the shortest maintainable diff.
 
