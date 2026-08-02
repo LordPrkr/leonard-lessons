@@ -4,7 +4,7 @@ Use this contract for Code Brain implementation plans. A plan is a standalone ha
 
 ## Required content
 
-State the problem, goal, out-of-scope boundary, relevant context, observable acceptance criteria, exact repository-relative files, the highest existing public test seam, tests, verification commands, risks, blocking questions, and artifact links.
+State the problem, goal, out-of-scope boundary, relevant context, observable acceptance criteria, exact repository-relative files, the highest existing public test seam, tests, verification commands, risks, blocking questions, and artifact links. Apply `/spellbinding-sentences` to the plan's explanatory prose.
 
 Give each observable behavior one red-green implementation step. Resolve implementation branches before approval; record any unresolved choice as a blocking question. Present the current plan without superseded alternatives.
 

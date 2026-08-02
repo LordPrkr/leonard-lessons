@@ -27,7 +27,9 @@ Done when no section opens with generic background or a tour of concepts the rea
 
 Name the code path, service, metric, failure mode, dependency, or operational condition behind important claims. Explain the relevant chain of cause and effect: what the system does, why it does it, and what follows.
 
-Done when every important claim has a concrete anchor and the reader can follow its conclusion without supplying missing reasoning.
+Treat every project-specific noun phrase as a claim with a referent. Identify the concrete code, schema, API, or behavior it denotes, or replace the phrase with a sentence that explains the mechanism.
+
+Done when every important claim has a concrete anchor, every project-specific noun phrase has a recoverable referent, and the reader can follow each conclusion without supplying missing reasoning.
 
 ### 4. State the tradeoff
 
