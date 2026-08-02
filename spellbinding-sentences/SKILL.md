@@ -63,6 +63,7 @@ Done when every sentence is precise, every necessary relationship is explicit, a
 
 ## Style rules
 
+- Use plain causal sentences. Do not invent compact lifecycle terms or nominalized jargon. Describe what happens, when it happens, and what follows.
 - Use active voice.
 - Prefer direct declarative sentences. Let sentence length follow the reasoning.
 - Use precise technical terms, with plain connecting prose.
