@@ -21,7 +21,7 @@ Done when every likely touchpoint and the current flow are understood, and every
 
 ### 2. Plan and review
 
-Apply `/code-brain`'s plan authoring contract. Adversarially self-review meaningful risk, incorporate accepted findings into the standalone plan, and apply `/code-brain-writeback` to the reviewed `Plan` before presenting it.
+Apply `/code-brain`'s plan authoring contract and `/spellbinding-sentences` to the plan's prose. Adversarially self-review meaningful risk, incorporate accepted findings into the standalone plan, and apply `/code-brain-writeback` to the reviewed `Plan` before presenting it.
 
 Done when the field note contains the exact plan presented for approval, the plan satisfies `/code-brain`'s authoring contract, and it is ready for a user decision.
 

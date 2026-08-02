@@ -121,7 +121,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/jira-ticket`, `/gh-pr-description` | `/spellbinding-sentences`; Jira integration or `gh`, respectively |
 | `/work-documentation-generator` | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences` |
 | `/finalize-implementation` | `/feature-branch`, `/conventional-commit-message`, `/gh-pr-description`, and `/work-documentation-generator` |
-| `/pragmatic-plan`, `/code-brain-planning` | `/code-brain`, `/code-brain-writeback`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/pragmatic-plan` | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/code-brain-planning` | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
 | `/gh-pr-review-plan`, `/parallel-pr-review` | `gh`, `/code-brain`, and `/code-brain-writeback` |
 | `/gh-pr-job-triage` | `gh` and Pi subagents |
 | `/gh-pr-review-workspace` | `gh`, cmux, and `/parallel-pr-review` |
@@ -301,6 +302,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
@@ -322,6 +324,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global

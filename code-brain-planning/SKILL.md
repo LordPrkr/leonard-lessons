@@ -65,9 +65,9 @@ Done when each directional decision is explicit and every review trigger is hand
 
 Apply `/code-brain`'s plan authoring contract.
 
-For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Move the card to Review through the lifecycle table's `draft-ready` transition, then incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
+For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Move the card to Review through the lifecycle table's `draft-ready` transition. The read-only plan reviewer must use only the plan and apply `/spellbinding-sentences`, including its referent check. Incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
 
-Done when the plan satisfies `/code-brain`'s plan authoring contract, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
+Done when the plan satisfies `/code-brain`'s plan authoring contract, the reviewer confirms that every project-specific phrase has a recoverable referent without relying on prior conversation, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
 
 ### 4. Approval gate
 
