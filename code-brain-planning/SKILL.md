@@ -13,13 +13,13 @@ The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`
 
 Assume the Code Brain project is initialized. If `VISION.md` does not exist, invoke `/code-brain` and complete project bootstrap before planning. Then scan `plans/` and create the next `plans/<NNN_TOPIC>/` folder. Add its `plan.md` to `AGENTS.md` under Active plans, and move its existing board card to In Progress or create one there.
 
-Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before writing `plan.md`. Set its creation date and `status: draft`, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
+Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before writing `plan.md`. Apply `/code-brain`'s plan authoring contract for frontmatter and status management, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
 
 Capture each affected source repository's full `HEAD` independently before implementation. Do not modify a repository with unrelated staged or unstaged work unless the user explicitly approves that boundary.
 
 ## Lifecycle
 
-The board lane is workflow state; plan frontmatter is design lifecycle. New plans use `draft`, `approved`, `implemented`, `abandoned`, or `superseded`. Only explicit user approval sets `approved`. Any substantive design revision returns the plan to `draft`, reruns review, and waits for approval. Read legacy `approved:` through `/code-brain`'s mapping but never write it.
+The board lane is workflow state; the plan authoring contract owns the shared frontmatter and design-status lifecycle. The table below maps that status to this workflow's Kanban lanes and machine edges.
 
 | Event | Plan status | Kanban lane | Machine edge |
 | --- | --- | --- | --- |

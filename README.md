@@ -54,7 +54,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 ### Durable planning lifecycle
 
-`code-brain-planning` owns the lifecycle for planned work:
+Both `pragmatic-plan` field notes and `code-brain-planning` plans use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. `code-brain-planning` additionally maps that lifecycle onto the managed board:
 
 ```text
 Inbox → In Progress → Review → Ready → In Progress → Review → Done

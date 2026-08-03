@@ -7,7 +7,7 @@ description: "Lightweight planning with immediate Code Brain writeback. Use when
 
 Use this for lightweight planning with one durable field note. Follow `/code-brain` for vault resolution, repository identity, and evidence, and `/code-brain-writeback` while producing the note. Use `code-brain-planning` when board state, formal receipts, execution slices, or cross-session orchestration are required. Do not edit implementation files until the user explicitly approves the current plan.
 
-Keep the field note at `notes/plans/YYYY-MM-DD-<topic>.md` with four sections: `Exploration`, `Documentation candidates`, `Plan`, and `Outcome`.
+Keep the field note at `notes/plans/YYYY-MM-DD-<topic>.md`. Read `/code-brain`'s plan authoring contract before creating it, use that contract's frontmatter and status lifecycle for the whole note, and give it four sections: `Exploration`, `Documentation candidates`, `Plan`, and `Outcome`.
 
 ## Steps
 
@@ -27,9 +27,9 @@ Done when the field note contains the exact plan presented for approval, every p
 
 ### 3. Approval gate
 
-Present the plan and wait. Explicit approval applies only to the presented version. A substantive revision loops back through plan review and this approval gate; a change request is not approval.
+Present the plan and wait. Explicit approval applies only to the presented version and sets `status: approved`. A substantive revision restores `status: draft`, then loops back through plan review and this approval gate; a change request is not approval. Apply the contract's terminal status when the user abandons or replaces the plan.
 
-Done when the user explicitly approves the current plan or ends the work.
+Done when the field note status matches the user's decision.
 
 ### 4. Choose the branch
 
@@ -47,6 +47,6 @@ Done when the worker report and final diff match the plan, every retained diff h
 
 ### 6. Finalize implementation
 
-Invoke `/finalize-implementation` for verified work. Record the resulting changed files, verification, pull request, Jira result, deviations, and residual risks under `Outcome`; record blockers honestly when finalization does not complete.
+Invoke `/finalize-implementation` for verified work. Record the resulting changed files, verification, pull request, Jira result, deviations, and residual risks under `Outcome`; record blockers honestly when finalization does not complete. Set `status: implemented` only when verified delivery and finalization succeed; otherwise retain `status: approved`.
 
-Done when finalization returns and the field note records its outcome or smallest useful blocker.
+Done when finalization returns, the field note records its outcome or smallest useful blocker, and its status matches the result.

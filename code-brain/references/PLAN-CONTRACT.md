@@ -2,6 +2,21 @@
 
 Use this contract for Code Brain implementation plans. A plan is a standalone handoff for a worker with no prior conversation.
 
+## Frontmatter and status
+
+Every plan starts with the same frontmatter:
+
+```yaml
+---
+date: YYYY-MM-DD
+status: draft
+---
+```
+
+Set `date` once when creating the plan. Use `draft`, `approved`, `implemented`, `abandoned`, or `superseded` for `status`: explicit user approval sets `approved`; a substantive design revision restores `draft` and requires review plus approval; completed, verified delivery sets `implemented`; an explicit decision to stop sets `abandoned`; and a replacement plan sets `superseded`. An implementation attempt that is blocked, partial, reverted, or not finalized remains `approved`.
+
+Read legacy `approved:` through `/code-brain`'s compatibility mapping, but never write it.
+
 ## Required content
 
 State the problem, goal, out-of-scope boundary, relevant context, observable acceptance criteria, exact repository-relative files, the highest existing public test seam, tests, verification commands, risks, blocking questions, and artifact links. Apply `/spellbinding-sentences` to the plan's explanatory prose.
