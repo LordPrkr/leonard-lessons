@@ -4,7 +4,7 @@ This repository publishes reusable agent skills, one skill per top-level directo
 
 ## Updating skills
 
-- Apply the `writing-great-skills` skill before changing any `SKILL.md`.
+- Apply [`writing-for-agents`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md) before changing any `SKILL.md`.
 - Keep descriptions trigger-focused and instructions general to any user or machine.
 - Give every workflow step a checkable completion criterion.
 - Keep each rule in one place; move branch-specific reference behind a relative
