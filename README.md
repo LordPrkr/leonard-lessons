@@ -392,10 +392,10 @@ bunx skills@latest add mattpocock/skills/skills/productivity/grilling
 bunx skills@latest add mattpocock/skills/skills/engineering/grill-with-docs
 ```
 
-- `writing-great-skills` - reference for writing and editing skills well — the vocabulary and principles that make a skill predictable.
+- [`writing-for-agents`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md) - reference for writing documents that agents consume, including skills and `AGENTS.md` files.
 
 ```bash
-bunx skills@latest add mattpocock/skills/skills/productivity/writing-great-skills
+bunx skills@latest add mattpocock/skills/skills/productivity/writing-for-agents
 ```
 
 ### [cmux](https://cmux.com/docs/skills)
