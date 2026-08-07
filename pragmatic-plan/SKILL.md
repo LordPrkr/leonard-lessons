@@ -27,7 +27,7 @@ Done when the field note contains the exact plan presented for approval, every p
 
 ### 3. Approval gate
 
-Present the plan and wait. Explicit approval applies only to the presented version and sets `status: approved`. A substantive revision restores `status: draft`, then loops back through plan review and this approval gate; a change request is not approval. Apply the contract's terminal status when the user abandons or replaces the plan.
+Present the plan and wait. Explicit approval applies only to the presented version and sets `status: approved`. Before implementation, a substantive revision restores `status: draft`, then loops back through plan review and this approval gate; a change request is not approval. Apply the contract's terminal status when the user abandons or replaces the plan. An implemented field note is immutable; start a new field note for later changes.
 
 Done when the field note status matches the user's decision.
 

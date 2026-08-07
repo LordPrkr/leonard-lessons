@@ -29,7 +29,7 @@ The board lane is workflow state; the plan authoring contract owns the shared fr
 | Review requires changes | `draft` | In Progress | `changes-needed` → `draft_plan` |
 | Plan ready for user decision | `draft` | Review | `plan-ready` → `approval_gate` |
 | User approves | `approved` | Ready | `user-approved` → `approved_ready` |
-| User requests substantive revision | `draft` | In Progress | `revision-requested` → `draft_plan` |
+| User requests substantive revision before implementation | `draft` | In Progress | `revision-requested` → `draft_plan` |
 | Implementation starts from Ready | `approved` | In Progress | `start-implementation` → `implement` |
 | Recovery retries unchanged plan | `approved` | In Progress | `retry-approved-plan` → `implement` |
 | Implementation reaches review | `approved` | Review | `implementation-ready` → `review_implementation` |
@@ -71,7 +71,7 @@ Done when the plan satisfies `/code-brain`'s plan authoring contract, the review
 
 ### 4. Approval gate
 
-Present the plan and wait. Explicit approval changes only `status` to `approved` and moves the card to Ready; it does not start implementation. Requested substantive changes restore `draft`, In Progress, review, and this gate.
+Present the plan and wait. Explicit approval changes only `status` to `approved` and moves the card to Ready; it does not start implementation. Before implementation, requested substantive changes restore `draft`, In Progress, review, and this gate. An implemented plan remains unchanged; later work starts a new plan.
 
 Done when the approved plan is Ready or work ends explicitly.
 
