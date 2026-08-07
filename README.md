@@ -113,21 +113,21 @@ bunx skills add LordPrkr/leonard-lessons --skill agents-md --agent claude-code -
 
 Install the full repository to satisfy dependencies between Leonard Lessons skills. External skills and tools remain separate requirements. For selective installation, use this table; the per-skill commands below are copyable installation bundles.
 
-| Skill or workflow | Required skills and tools |
-| --- | --- |
-| `/code-brain` | Pi and Obsidian |
-| `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain` |
-| `/effective-engineer` | External `/tdd` skill |
-| `/jira-ticket`, `/gh-pr-description` | `/spellbinding-sentences`; Jira integration or `gh`, respectively |
-| `/work-documentation-generator` | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences` |
-| `/finalize-implementation` | `/feature-branch`, `/conventional-commit-message`, `/gh-pr-description`, and `/work-documentation-generator` |
-| `/pragmatic-plan` | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
-| `/code-brain-planning` | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
-| `/gh-pr-review-plan`, `/parallel-pr-review` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/gh-pr-job-triage` | `gh` and Pi subagents |
-| `/gh-pr-review-workspace` | `gh`, cmux, and `/parallel-pr-review` |
-| `/interactive-review` | cmux and external `/hunk-review` |
-| `/interactive-walkthrough` | cmux, external `/hunk-review`, and `/spellbinding-sentences` |
+| Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
+| `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
+| `/effective-engineer`                                                                                                                                 | External `/tdd` skill                                                                                                                       |
+| `/jira-ticket`, `/gh-pr-description`                                                                                                                  | `/spellbinding-sentences`; Jira integration or `gh`, respectively                                                                           |
+| `/work-documentation-generator`                                                                                                                       | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences`                                                                         |
+| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/gh-pr-description`, and `/work-documentation-generator`                                |
+| `/pragmatic-plan`                                                                                                                                     | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/code-brain-planning`                                                                                                                                | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
+| `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
+| `/gh-pr-review-workspace`                                                                                                                             | `gh`, cmux, and `/parallel-pr-review`                                                                                                       |
+| `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
+| `/interactive-walkthrough`                                                                                                                            | cmux, external `/hunk-review`, and `/spellbinding-sentences`                                                                                |
 
 `/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
 
@@ -396,6 +396,26 @@ bunx skills@latest add mattpocock/skills/skills/engineering/grill-with-docs
 
 ```bash
 bunx skills@latest add mattpocock/skills/skills/productivity/writing-for-agents
+```
+
+### [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills)
+
+- `vercel-react-best-practices` - optimize React and Next.js performance.
+
+```bash
+bunx skills@latest add vercel-labs/agent-skills/skills/react-best-practices
+```
+
+- `vercel-composition-patterns` - design scalable React component APIs.
+
+```bash
+bunx skills@latest add vercel-labs/agent-skills/skills/composition-patterns
+```
+
+- `web-design-guidelines` - review UI accessibility, design, and UX.
+
+```bash
+bunx skills@latest add vercel-labs/agent-skills/skills/web-design-guidelines
 ```
 
 ### [cmux](https://cmux.com/docs/skills)
