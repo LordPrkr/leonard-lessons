@@ -47,6 +47,6 @@ Done when the worker report and final diff match the plan, every retained diff h
 
 ### 6. Finalize implementation
 
-Invoke `/finalize-implementation` for verified work. Record the resulting changed files, verification, pull request, Jira result, deviations, and residual risks under `Outcome`; record blockers honestly when finalization does not complete. Set `status: implemented` only when verified delivery and finalization succeed; otherwise retain `status: approved`.
+Invoke `/finalize-implementation` for verified work. Record the resulting changed files, verification, pull request, deviations, and residual risks under `Outcome`; record blockers honestly when finalization does not complete. Set `status: implemented` only when verified delivery and finalization succeed; otherwise retain `status: approved`.
 
 Done when finalization returns, the field note records its outcome or smallest useful blocker, and its status matches the result.

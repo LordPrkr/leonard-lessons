@@ -14,7 +14,7 @@ Idea → clarify
        ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
 Approved plan → feature-branch → effective-engineer
-Verified work → finalize-implementation → GitHub PR + optional Jira
+Verified work → finalize-implementation → GitHub PR
 Documentation → jira-ticket (Jira) / gh-pr-description (GitHub) / work-documentation-generator (both)
 Delivery → interactive-review (Hunk) / gh-pr-review-workspace → parallel-pr-review
 ```
@@ -67,7 +67,7 @@ Blocked or partial implementation → receipt → Blocked
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
 4. A fresh worker implements the approved plan. Read-only reviewers check correctness, validation, and simplicity.
-5. Accepted work invokes `finalize-implementation` to commit, push, prepare the pull request, and resolve Jira.
+5. Accepted work invokes `finalize-implementation` to commit, push, and prepare the pull request.
 6. The orchestrator appends an implementation attempt to `receipt.md`, including source evidence for every changed repository. Accepted work becomes `implemented` and moves to Done; blocked, partial, reverted, or unfinalized work remains `approved` and moves to Blocked.
 
 Receipts record the actual commit SHA or a deterministic hash of the complete uncommitted Git change set. Plans preserve design intent, Kanban lanes preserve managed-work state, and receipts preserve what actually happened.
@@ -120,7 +120,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/effective-engineer`                                                                                                                                 | External `/tdd` skill                                                                                                                       |
 | `/jira-ticket`, `/gh-pr-description`                                                                                                                  | `/spellbinding-sentences`; Jira integration or `gh`, respectively                                                                           |
 | `/work-documentation-generator`                                                                                                                       | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences`                                                                         |
-| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/gh-pr-description`, and `/work-documentation-generator`                                |
+| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, and `/gh-pr-description`                                                                 |
 | `/pragmatic-plan`                                                                                                                                     | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
 | `/code-brain-planning`                                                                                                                                | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
 | `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
@@ -227,15 +227,13 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `finalize-implementation` — confirm the feature branch, commit and push the
-  verified change, prepare its pull request, and resolve optional Jira work.
+  verified change, then create its pull request with a finished description.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
-  bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   ```
 
