@@ -329,8 +329,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 
-- `spellbinding-sentences` — write technical docs for senior engineers with
-  concrete mechanisms, explicit tradeoffs, and plain intent over pedantry.
+- `spellbinding-sentences` — write explanatory technical docs for readers with
+  strong engineering fundamentals, concrete mechanisms, explicit tradeoffs,
+  and plain intent over pedantry.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global

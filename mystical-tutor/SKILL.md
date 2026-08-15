@@ -41,7 +41,7 @@ Route directly when the named artifact or discipline is the user's goal:
 - **Capture domain terms, bounded contexts, or ADRs** → `/domain-modeling`.
 - **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `/agents-md`.
-- **Draft or revise senior-engineer technical writing** → `/spellbinding-sentences`.
+- **Draft or revise explanatory technical writing** → `/spellbinding-sentences`.
 - **Create a Jira issue only** → `/jira-ticket`.
 - **Create or refresh a pull-request description only** → `/gh-pr-description`.
 - **Create linked Jira and pull-request documentation** → `/work-documentation-generator`.

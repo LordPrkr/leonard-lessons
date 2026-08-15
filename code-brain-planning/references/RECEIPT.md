@@ -95,5 +95,5 @@ For later successful finalization, update that repository's evidence row to the 
 - Repository: `<name>`
 - Result revision: `<full commit SHA>`
 - Pull request: <URL>
-- Jira: <URL or none>
+- Jira (optional; created by a separate workflow): <URL or none>
 ```
