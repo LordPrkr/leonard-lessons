@@ -21,11 +21,11 @@ Compare the branch with the pull request's target branch. Read enough changed co
 
 ## 3. Fill the template
 
-For `frontend-web-monorepo`, read its [pull-request template](./references/frontend-web-monorepo.md). Otherwise use the repository's configured pull-request template. If neither exists, use `Summary` and `Test plan` sections. Preserve the selected template's heading order exactly, replace every comment and placeholder, and delete only sections the template explicitly marks as optional.
+For `frontend-web-monorepo`, read its [pull-request template](./references/frontend-web-monorepo.md). For `habit-hatchery`, read its [lightweight pull-request template](./references/habit-hatchery.md). Otherwise use the repository's configured pull-request template. If neither exists, use `Summary` and `Test plan` sections. Preserve the selected template's heading order exactly, replace every comment and placeholder, and delete only sections the template explicitly marks as optional.
 
 Include an issue URL only when the user or calling skill supplies one. Place it at the top in the template's issue field or as `**Issue**: <url>`.
 
-**Complete when:** the body contains no unresolved placeholders, describes the change at reviewer level rather than line by line, and includes every known validation result.
+**Complete when:** the body contains no unresolved placeholders, describes the change at reviewer level rather than line by line, and includes every validation result requested by the selected template.
 
 ## 4. Publish and verify
 
