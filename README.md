@@ -9,14 +9,12 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 ```text
 Idea → clarify
        ├─ ordinary implementation → effective-engineer
-       ├─ bounded, approval-first work → pragmatic-plan
+       ├─ approval-first work → code-brain-planning (lightweight or managed)
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
-       ├─ broad, risky, or cross-session work → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
-Documentation → jira-ticket (Jira) / gh-pr-description (GitHub) / work-documentation-generator (both)
-Delivery → interactive-review (Hunk) / gh-pr-review-workspace → parallel-pr-review
+Delivery → interactive-review (Hunk) → parallel-pr-review
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -25,7 +23,7 @@ Use `domain-modeling` when clarification settles durable terminology or an archi
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that must survive the current session: broad changes, risky migrations, architectural decisions, or implementation that needs an approval gate. `pragmatic-plan` leaves one lightweight field note for bounded approval-first work; `effective-engineer` handles ordinary work without durable artifacts. Ordinary work does not need a Kanban card.
+Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` selects a lightweight single-worker plan or a managed lifecycle from the work's coordination needs; `effective-engineer` handles ordinary work without durable artifacts. Lightweight plans do not need a Kanban card.
 
 ### Project spine
 
@@ -54,7 +52,9 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 ### Durable planning lifecycle
 
-Both `pragmatic-plan` field notes and `code-brain-planning` plans use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. `code-brain-planning` additionally maps that lifecycle onto the managed board:
+All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
+
+Lightweight plans record their exploration and delivery outcome in `plan.md`; they have no card or receipt. Managed plans additionally map that lifecycle onto the board:
 
 ```text
 Inbox → In Progress → Review → Ready → In Progress → Review → Done
@@ -63,10 +63,12 @@ Inbox → In Progress → Review → Ready → In Progress → Review → Done
 Blocked or partial implementation → receipt → Blocked
 ```
 
+For managed plans:
+
 1. The orchestrator gathers source context and immediately records each useful finding with repository revisions or external URLs before continuing exploration.
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
-4. A fresh worker implements the approved plan. Read-only reviewers check correctness, validation, and simplicity.
+4. Fresh workers implement their assigned slices. Read-only reviewers check correctness, validation, and simplicity.
 5. Accepted work invokes `finalize-implementation` to commit, push, and prepare the pull request.
 6. The orchestrator appends an implementation attempt to `receipt.md`, including source evidence for every changed repository. Accepted work becomes `implemented` and moves to Done; blocked, partial, reverted, or unfinalized work remains `approved` and moves to Blocked.
 
@@ -118,16 +120,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
 | `/effective-engineer`                                                                                                                                 | External `/tdd` skill                                                                                                                       |
-| `/jira-ticket`, `/gh-pr-description`                                                                                                                  | `/spellbinding-sentences`; Jira integration or `gh`, respectively                                                                           |
-| `/work-documentation-generator`                                                                                                                       | `/jira-ticket`, `/gh-pr-description`, and `/spellbinding-sentences`                                                                         |
-| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, and `/gh-pr-description`                                                                 |
-| `/pragmatic-plan`                                                                                                                                     | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
-| `/code-brain-planning`                                                                                                                                | `/code-brain`, `/code-brain-writeback`, `/spellbinding-sentences`, `/feature-branch`, `/effective-engineer`, and `/finalize-implementation` |
+| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, and `gh`                                                   |
+| `/code-brain-planning`                                                                                                                                | Core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet`                               |
 | `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
-| `/gh-pr-review-workspace`                                                                                                                             | `gh`, cmux, and `/parallel-pr-review`                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
-| `/interactive-walkthrough`                                                                                                                            | cmux, external `/hunk-review`, and `/spellbinding-sentences`                                                                                |
 
 `/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
 
@@ -200,32 +197,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
-- `jira-ticket` — create a Jira task from repository context without preparing
-  a pull request.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
-  ```
-
-- `gh-pr-description` — create or update a GitHub pull-request description
-  from the branch diff and repository template.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
-  ```
-
-- `work-documentation-generator` — create or resolve a Jira issue, prepare the
-  GitHub pull-request description, and link both artifacts.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill jira-ticket --global
-  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
-  bunx skills add LordPrkr/leonard-lessons --skill work-documentation-generator --global
-  ```
-
 - `finalize-implementation` — confirm the feature branch, commit and push the
   verified change, then create its pull request with a finished description.
 
@@ -233,7 +204,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   ```
 
@@ -254,17 +224,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
   ```
 
-- `gh-pr-review-workspace` — check out a numbered GitHub PR into a disposable
-  worktree, open its diff in a cmux workspace, run `parallel-pr-review`, post
-  selected feedback after confirmation, and keep offering cleanup.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
-  bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
-  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-workspace --global
-  ```
-
 - `parallel-pr-review` — review a pull request or branch with five fresh,
   read-only reviewers covering intent, correctness, validation, and design fit,
   while persisting feedback and reusable lessons.
@@ -283,18 +242,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill interactive-review --global
   ```
 
-- `interactive-walkthrough` — explain every changed block in a commit or branch
-  comparison through a live Hunk session.
-
-  ```bash
-  bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill interactive-walkthrough --global
-  ```
-
-- `code-brain-planning` — durable Code Brain planning and execution lifecycle
-  for broad, risky, cross-cutting, or approval-first changes, including board
-  transitions and implementation receipts.
+- `code-brain-planning` — approval-first Code Brain planning that chooses a
+  lightweight single-worker plan or a managed lifecycle with board transitions
+  and implementation receipts.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -304,6 +254,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
+  # Add only when the plan needs the corresponding branch.
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
+  bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
@@ -313,20 +266,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
-  ```
-
-- `pragmatic-plan` — lightweight approval-first planning that immediately
-  writes material findings, the reviewed plan, and its outcome to one Code
-  Brain field note before delegating implementation to `/effective-engineer`.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
-  bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
-  bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
-  bunx skills add LordPrkr/leonard-lessons --skill pragmatic-plan --global
   ```
 
 - `spellbinding-sentences` — write explanatory technical docs for readers with

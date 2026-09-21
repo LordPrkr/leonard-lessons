@@ -19,15 +19,15 @@ Invoke `/conventional-commit-message`, stage only the intended changes, and crea
 
 ## 3. Ensure the pull request exists
 
-Use `gh` to find an open pull request for the current branch. If none exists, create one against the default branch and retain its URL. Give the new pull request a Conventional Commit title based on the complete branch diff. When one package is the main target, use its package name as the scope; otherwise omit the scope unless repository precedent supplies one. Stop and ask the user to authenticate if `gh` cannot access GitHub.
+Use `gh` to find an open pull request for the current branch. If none exists, create one against the default branch and retain its URL. Give the new pull request a Conventional Commit title based on the complete branch diff. When one package is the main target, use its package name as the scope; otherwise omit the scope unless repository precedent supplies one. If an existing pull request title is not Conventional Commit style, update it before continuing. Stop and ask the user to authenticate if `gh` cannot access GitHub.
 
-**Complete when:** exactly one open pull request targets the default branch, and any newly created pull request has a Conventional Commit title with the main package as its scope when applicable.
+**Complete when:** exactly one open pull request targets the default branch, and its title uses Conventional Commit style with the main package as its scope when applicable.
 
 ## 4. Describe the pull request
 
-Invoke `/gh-pr-description`. When the pull request already existed, require its updated description to cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out.
+Invoke `/spellbinding-sentences` before drafting. Infer the body structure from the repository's pull-request guidance; when that guidance does not prescribe one, use recent comparable pull requests as precedent. If neither source supplies a structure, ask the user which body structure to use before drafting. Write from the complete branch diff and update it with `gh`; when the pull request already existed, cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out.
 
-**Complete when:** the pull-request description matches the branch and contains no unresolved placeholders.
+**Complete when:** the pull-request title uses Conventional Commit style, the description matches the branch and selected repository or user-provided structure, and neither contains unresolved placeholders.
 
 ## 5. Return the pull request
 
