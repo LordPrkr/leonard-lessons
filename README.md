@@ -121,6 +121,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
 | `/effective-engineer`                                                                                                                                 | External `/tdd` skill                                                                                                                       |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, and `gh`                                                   |
+| `/gh-pr-description`                                                                                                                                   | `/spellbinding-sentences` and `gh`                                                                                                       |
 | `/code-brain-planning`                                                                                                                                | Core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet`                               |
 | `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
@@ -207,6 +208,14 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   ```
 
+- `gh-pr-description` — create or update a GitHub pull-request description
+  from the branch diff and repository template.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill gh-pr-description --global
+  ```
+
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
   persist each assessment and reusable lesson in Code Brain, and plan replies
   or fixes.
@@ -268,8 +277,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
 
-- `spellbinding-sentences` — write technical docs for senior engineers with
-  concrete mechanisms, explicit tradeoffs, and plain intent over pedantry.
+- `spellbinding-sentences` — write explanatory technical docs for readers with
+  strong engineering fundamentals, concrete mechanisms, explicit tradeoffs,
+  and plain intent over pedantry.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global

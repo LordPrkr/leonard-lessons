@@ -39,7 +39,8 @@ Route directly when the named artifact or discipline is the user's goal:
 - **Capture domain terms, bounded contexts, or ADRs** → `/domain-modeling`.
 - **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `/agents-md`.
-- **Draft or revise senior-engineer technical writing** → `/spellbinding-sentences`.
+- **Draft or revise explanatory technical writing** → `/spellbinding-sentences`.
+- **Create or refresh a pull-request description only** → `/gh-pr-description`.
 - **Commit, push, and prepare verified work for review** → `/finalize-implementation`.
 - **Curate Pi sessions into durable memory** → `/dreaming`.
 - **Distill plan, review, or dream artifacts into repo-wide documentation** → `/code-brain-distill`.

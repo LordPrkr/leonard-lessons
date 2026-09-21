@@ -40,6 +40,8 @@ $CODE_BRAIN_ROOT/<repo>/
 
 Create optional directories and artifacts lazily. Keep each plan and its notes, diagrams, canvases, and receipt in its numbered folder.
 
+Whenever any workflow creates a Code Brain artifact, immediately report its resolved absolute filesystem path to the user. Report every path when one step creates several artifacts. Keep links inside Code Brain portable and relative; absolute paths belong in the user-facing creation report. An artifact-creation step is complete only after every new artifact's absolute path has been reported.
+
 Activity artifacts under `plans/`, `review/`, and `notes/dreams/` preserve provenance. Repo-wide documentation under `docs/` is canonical: update an existing topic document instead of copying the same lesson into another artifact. Create `docs/README.md` with links grouped by reader need when the first canonical document is promoted; link only that landing page from `AGENTS.md` when the router exists.
 
 - `docs/tutorials/` teaches through a guided learning experience.
