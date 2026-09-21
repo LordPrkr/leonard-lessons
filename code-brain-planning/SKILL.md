@@ -1,96 +1,56 @@
 ---
 name: code-brain-planning
-description: "Durable Code Brain planning and execution. Use when broad, risky, or cross-cutting work needs artifacts or execution state to persist across sessions."
+description: "Plan approval-first work in Code Brain, choosing a lightweight plan or managed lifecycle from the work's actual coordination needs."
 ---
 
 # Code Brain Planning
 
-Use this workflow for durable work with a clear implementation route. Use `/code-brain-wayfinder` first when material decisions still obscure that route. Use `pragmatic-plan` instead when one lightweight field note is enough and the work needs no board state, formal receipt, execution slices, or cross-session orchestration. Follow `/code-brain` for root resolution, repository identity, project ownership, and evidence, and `/code-brain-writeback` while producing activity artifacts.
+Use this for implementation work that needs a durable, user-approved plan. Follow `/code-brain` for vault resolution, repository identity, vocabulary, and evidence; use `/code-brain-writeback` as findings emerge. Do not edit implementation files until the user explicitly approves the current plan.
 
-The parent/orchestrator alone writes plan metadata, `AGENTS.md`, and `KANBAN.md`; subagents never update project navigation or workflow state. Code Brain vault files are not source-repository commits.
+Use `/code-brain-wayfinder` before planning when material decisions still obscure the implementation route. A clear route does not by itself require managed planning.
 
-## Before planning
+The parent owns plan metadata, `AGENTS.md`, and `KANBAN.md`; workers never change project navigation or workflow state. Code Brain artifacts are not source-repository commits.
 
-Assume the Code Brain project is initialized. If `VISION.md` does not exist, invoke `/code-brain` and complete project bootstrap before planning. Then scan `plans/` and create the next `plans/<NNN_TOPIC>/` folder. Add its `plan.md` to `AGENTS.md` under Active plans, and move its existing board card to In Progress or create one there.
+## 1. Size the plan
 
-Read [`references/TEMPLATE.md`](./references/TEMPLATE.md) before writing `plan.md`. Apply `/code-brain`'s plan authoring contract for frontmatter and status management, replace every placeholder, and omit inapplicable evidence, references, and optional siblings. Link every created sibling and relevant ADR with relative Markdown links. Create `notes.md` and optional artifacts only when useful.
+Inspect the request and enough local context to choose the smallest durable shape:
 
-Capture each affected source repository's full `HEAD` independently before implementation. Do not modify a repository with unrelated staged or unstaged work unless the user explicitly approves that boundary.
+- **Lightweight** — one bounded outcome fits one fresh worker; it needs an approval gate but no tracked handoff, formal receipt, execution slices, or coordination with another workstream.
+- **Managed** — any of those needs is present, or the work is broad, risky, cross-cutting, or likely to outlive this session.
+- **Wayfinding** — a material design, contract, ownership, security, or sequencing decision still prevents a responsible plan; hand off to `/code-brain-wayfinder`.
 
-## Lifecycle
+State the selected shape and why. If shape selection yields a material finding, stop and create the selected plan's draft `plan.md` before continuing reconnaissance so `/code-brain-writeback` has an activity artifact. For a lightweight plan, do not create a card, receipt, execution slices, or optional artifacts merely because managed planning supports them. For managed work, read [the managed lifecycle](./references/MANAGED-LIFECYCLE.md) before creating artifacts.
 
-The board lane is workflow state; the plan authoring contract owns the shared frontmatter and design-status lifecycle. The table below maps that status to this workflow's Kanban lanes and machine edges.
+Done when the route is clear and the plan shape is justified by concrete coordination needs rather than the task's apparent importance, or the work has been handed to `/code-brain-wayfinder` because a material decision still blocks planning.
 
-| Event | Plan status | Kanban lane | Machine edge |
-| --- | --- | --- | --- |
-| Untriaged task captured | no plan | Inbox | outside machine |
-| Plan folder created / drafting | `draft` | In Progress | `context-ready` → `draft_plan` |
-| Plan sent for adversarial review | `draft` | Review | `draft-ready` → `review_plan` |
-| Review requires changes | `draft` | In Progress | `changes-needed` → `draft_plan` |
-| Plan ready for user decision | `draft` | Review | `plan-ready` → `approval_gate` |
-| User approves | `approved` | Ready | `user-approved` → `approved_ready` |
-| User requests substantive revision before implementation | `draft` | In Progress | `revision-requested` → `draft_plan` |
-| Implementation starts from Ready | `approved` | In Progress | `start-implementation` → `implement` |
-| Recovery retries unchanged plan | `approved` | In Progress | `retry-approved-plan` → `implement` |
-| Implementation reaches review | `approved` | Review | `implementation-ready` → `review_implementation` |
-| Review finds approved fixes | `approved` | In Progress | `fixes-needed` → `apply_fixes` |
-| Implementation or review cannot continue | `approved` | Blocked | `blocked` → `persist_receipt` |
-| Attempt is partial | `approved` | Blocked | `partial` → `persist_receipt` |
-| Delivered implementation is reverted | `approved` | Blocked | `reverted` → `persist_receipt` |
-| Review accepts delivery | `approved` | Review | `accepted` → `finalize_implementation` |
-| Accepted receipt persisted | `implemented` | Done | `receipt-accepted` → `done` |
-| Blocked/partial/reverted receipt persisted | `approved` | Blocked | matching receipt edge → `await_recovery` |
-| User abandons work | `abandoned` | Done | `abandon` → `done` |
-| User replaces plan | `superseded` | Done | `supersede` → `done` |
-| Recovery changes design | `draft` | In Progress | `revise-plan` → `draft_plan` |
-| User pauses blocked work | `approved` | Blocked | `pause` → end |
+## 2. Create the plan
 
-For abandonment or supersession, retain the card in Done with `— abandoned` or `— superseded`; the linked plan carries canonical status. Remove implemented, abandoned, and superseded plans from `AGENTS.md`; approved Blocked plans remain active.
+Ensure the Code Brain project is initialized; invoke `/code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `/code-brain`'s plan authoring contract before writing `plan.md`. For Lightweight, use [the lightweight layout](./references/LIGHTWEIGHT.md); for Managed, read [`TEMPLATE.md`](./references/TEMPLATE.md).
 
-## Steps
+Capture each affected source repository's full `HEAD`, then link every non-closed `plan.md` from `AGENTS.md` under Active plans. Write only the sections and sibling artifacts that the selected shape needs. Every created artifact has a relative link from `plan.md`. For managed work, create and link `notes.md` with `Exploration` and `Documentation candidates` sections before recording its first material finding. Lightweight plans use their layout's sections and omit `notes.md` unless exploration outgrows them.
 
-### 1. Build context
+Invoke supporting skills only for their concrete artifact or decision:
 
-Use bounded local reconnaissance and external research only when it materially affects the plan. Apply `/code-brain-writeback` with findings in `notes.md` and reusable-candidate pointers under `Documentation candidates`. Invoke `domain-modeling` when planning resolves domain language or an ADR-worthy decision.
+- `/domain-modeling` when the plan settles shared language, a bounded context, or an ADR-worthy decision.
+- `/code-brain-diagramming` when a diagram makes a material flow, boundary, or choice easier to verify than prose.
+- `/tracer-bullet` when runnable evidence is required to choose an implementation path.
 
-Done when every likely touchpoint, constraint, material source, and unresolved decision is explicit, and every useful finding is already present in `notes.md`.
+For managed work, follow the lifecycle reference for the board card, review, slices, and receipt. Lightweight plans remain in `plans/` without a board card.
 
-### 2. Challenge direction
+Done when `plan.md` stands alone for a fresh worker, every material claim has evidence or an explicit question, and no artifact exists without serving the selected plan shape.
 
-Use a read-only second opinion for an irreversible migration, external contract change, ownership or security boundary, unresolved architectural choice, or cross-repository coordination. Accept or reject recommendations before drafting; otherwise record that none of these triggers applies.
+## 3. Review and approve
 
-Done when each directional decision is explicit and every review trigger is handled or explicitly absent.
+Apply `/spellbinding-sentences` to the plan. Label every proposed diff and give it an explicit `WHY` tied to the observed behavior or requested outcome. Adversarially review meaningful risks; use a read-only second opinion for an irreversible migration, external contract, ownership or security boundary, unresolved architectural choice, or cross-repository coordination.
 
-### 3. Draft and review
+Incorporate accepted findings, then present the exact standalone plan and wait. Explicit approval sets `status: approved`; a substantive revision restores `draft` and repeats review. For managed work, use the lifecycle reference's board transition. An implemented plan is immutable; later work receives a new folder.
 
-Apply `/code-brain`'s plan authoring contract.
+Done when the plan is approved and ready to execute, or its status honestly records abandonment or supersession.
 
-For work that exceeds one fresh worker context, add execution slices that each deliver observable behavior, reference their implementation steps, acceptance criteria, blockers, and verification; otherwise omit them. Work unblocked slices first. For a wide mechanical migration, use explicit expand–migrate–contract slices instead of forcing a false vertical delivery. Move the card to Review through the lifecycle table's `draft-ready` transition. The read-only plan reviewer must use only the plan and apply `/spellbinding-sentences`, including its referent check. Incorporate accepted findings into the current standalone plan. Use the table's `changes-needed` transition while editing.
+## 4. Implement, verify, and close
 
-Done when the plan satisfies `/code-brain`'s plan authoring contract, the reviewer confirms that every project-specific phrase has a recoverable referent without relying on prior conversation, each required slice is observable, blocker-aware, and fits one fresh context, and the card is in Review awaiting a user decision.
+Invoke `/feature-branch` before implementation. A lightweight plan is one fresh worker; managed work follows its execution slices. Give each worker only the approved `plan.md`, its assigned execution-slice identifier when applicable, and an instruction to invoke `/effective-engineer`; a managed worker implements only that slice. Review the delivered diff against the approved plan, repository standards, correctness, simplicity, and verification evidence. A design change requires a revised plan and approval.
 
-### 4. Approval gate
+Invoke `/finalize-implementation` for verified work. Record the outcome, changed files, verification, deviations, residual risks, and blockers in `plan.md` or `notes.md`; managed work also follows the receipt contract. Set `status: implemented` only after verified delivery and finalization succeed.
 
-Present the plan and wait. Explicit approval changes only `status` to `approved` and moves the card to Ready; it does not start implementation. Before implementation, requested substantive changes restore `draft`, In Progress, review, and this gate. An implemented plan remains unchanged; later work starts a new plan.
-
-Done when the approved plan is Ready or work ends explicitly.
-
-### 5. Implement and review
-
-Use the lifecycle table's `start-implementation` transition to move an approved Ready card to In Progress. Invoke `/feature-branch` in each affected source repository before spawning workers. For each unblocked execution slice, spawn exactly one `worker` with `context: "fresh"`; a plan without slices is one slice. Its task contains only an instruction to invoke `/effective-engineer`, the approved `plan.md` path, and the slice identifier. The worker returns changed files, command exit codes, validation evidence, deviations, residual risks, and blockers. The parent remains the sole writer of plan metadata and board state.
-
-Use the lifecycle table's `implementation-ready` transition when implementation reaches review. Read-only reviewers check every acceptance criterion against the delivered source, then check correctness, validation, simplicity, and repository standards. Apply accepted fixes through `fixes-needed`, then return through `implementation-ready`. A blocked, partial, or reverted result follows its matching table transition and persists the attempt receipt immediately.
-
-Done when every acceptance criterion is accounted for and review accepts delivery, or an honest non-accepted receipt is required.
-
-### 6. Finalize implementation and receipt
-
-Read [`references/RECEIPT.md`](./references/RECEIPT.md). Create `receipt.md` once, add `[Implementation receipt](./receipt.md)` to the plan's References, and append one chronological section after every attempt; frontmatter always reflects the latest attempt.
-
-For accepted work, invoke `/finalize-implementation` in every changed source repository before persisting evidence. Record each resulting full commit SHA and `none` as its change-set hash. Never identify pre-change `HEAD` as delivered source and never claim the non-Git vault was committed. If finalization cannot complete, persist the actual committed or uncommitted evidence, leave plan status `approved`, and move the card to Blocked.
-
-For blocked, partial, or reverted work, immediately record every affected repository's base SHA, `uncommitted`, and complete change-set hash. Leave plan status `approved` and the card Blocked. Recovery may retry the unchanged design, revise it through draft/review/approval, abandon, supersede, or pause.
-
-Only after accepted evidence covers every changed repository and finalization succeeds, set `status: implemented` and move the card to Done.
-
-Done when `receipt.md` contains the appended attempt, every changed repository has source evidence, and plan status plus Kanban lane match the accepted or non-accepted outcome.
+Done when every retained diff hunk is justified by the approved plan, delivery evidence is durable, and the plan status matches the result.

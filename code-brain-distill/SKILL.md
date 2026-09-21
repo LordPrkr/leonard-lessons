@@ -10,7 +10,7 @@ Turn activity-scoped evidence into canonical project documentation. Follow `/cod
 
 ## 1. Select sources
 
-Use explicit artifact paths when supplied. Otherwise scan `plans/**/notes.md`, `notes/plans/*.md`, `review/*.md`, and `notes/dreams/*.md`. Read existing `docs/`, relevant `domain/` context and ADRs, and `resources/` before extracting candidates.
+Use explicit artifact paths when supplied. Otherwise scan `plans/**/plan.md`, `plans/**/notes.md`, `review/*.md`, and `notes/dreams/*.md`. Read existing `docs/`, relevant `domain/` context and ADRs, and `resources/` before extracting candidates.
 
 Done when every selected artifact and existing canonical destination that could already own its lessons is known.
 

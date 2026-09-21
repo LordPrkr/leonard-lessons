@@ -13,8 +13,7 @@ A tutor finds the next spell; it does not cast it. Recommend the route, then sto
 For work that changes code:
 
 - **Ordinary implementation** → `/effective-engineer`.
-- **Bounded work requiring a plan and approval first** → `/pragmatic-plan`.
-- **Broad, risky, cross-cutting, or cross-session work with a clear route** → `/code-brain-planning`.
+- **Work requiring a durable plan and approval first** → `/code-brain-planning`; it selects a lightweight or managed shape from the coordination needs.
 - **Broad work with a clear destination but material unresolved decisions** → `/code-brain-wayfinder`.
 
 Keep bounded work in the current session. Durable planning uses Code Brain and fresh workers for context-sized execution slices.
@@ -27,7 +26,6 @@ When a plan or Wayfinder ticket depends on a technical question that conversatio
 
 - **Review a pull request or branch** → `/parallel-pr-review`.
 - **Review a diff interactively in Hunk** → `/interactive-review`.
-- **Explain a diff interactively in Hunk** → `/interactive-walkthrough`.
 - **Assess human review comments and plan responses** → `/gh-pr-review-plan`.
 - **Triage failed pull-request jobs** → `/gh-pr-job-triage`.
 
@@ -42,9 +40,6 @@ Route directly when the named artifact or discipline is the user's goal:
 - **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `/agents-md`.
 - **Draft or revise senior-engineer technical writing** → `/spellbinding-sentences`.
-- **Create a Jira issue only** → `/jira-ticket`.
-- **Create or refresh a pull-request description only** → `/gh-pr-description`.
-- **Create linked Jira and pull-request documentation** → `/work-documentation-generator`.
 - **Commit, push, and prepare verified work for review** → `/finalize-implementation`.
 - **Curate Pi sessions into durable memory** → `/dreaming`.
 - **Distill plan, review, or dream artifacts into repo-wide documentation** → `/code-brain-distill`.
