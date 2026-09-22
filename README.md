@@ -8,7 +8,7 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 
 ```text
 Idea → clarify
-       ├─ ordinary implementation → effective-engineer
+       ├─ ordinary implementation → effective-engineer → reviewable PR
        ├─ approval-first work → code-brain-planning (lightweight or managed)
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
@@ -119,9 +119,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
-| `/effective-engineer`                                                                                                                                 | External `/tdd` skill                                                                                                                       |
+| `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, and `gh`                                                   |
-| `/code-brain-planning`                                                                                                                                | Core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet`                               |
+| `/code-brain-planning`                                                                                                                                | `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
@@ -166,16 +166,16 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-distill --global
   ```
 
-- `effective-engineer` — tight inspect, red-green implementation, verification,
-  and final-review loop for non-trivial code changes.
+- `effective-engineer` — tight inspect, red-green implementation, validation-repair,
+  final-review, and default PR-delivery loop for non-trivial code changes.
 
   ```bash
   bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
-- `feature-branch` — select or create an appropriately named feature branch
-  before implementation or finalization.
+- `feature-branch` — select or create an appropriately named feature branch and
+  independently provisioned worktree before implementation or finalization.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
@@ -205,8 +205,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
-- `finalize-implementation` — confirm the feature branch, commit and push the
-  verified change, then create its pull request with a finished description.
+- `finalize-implementation` — review the delivery-ready branch, commit and push the
+  verified change, then create its labeled pull request with a finished description.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
