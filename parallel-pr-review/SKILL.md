@@ -34,7 +34,7 @@ Build one shared task prefix containing the PR number and URL when present, immu
 - infer repository precedent from nearby code and tests;
 - inspect source without running build, test, lint, typecheck, or other validation commands;
 - report only actionable, evidence-backed findings;
-- for every feedback item, propose a ready-to-post review comment and give its exact repository-relative filename and line number; explain impact and the smallest safe fix. Anchor the location to a changed line whenever possible; otherwise identify the nearest relevant line and ensure the comment clearly applies there;
+- for every feedback item, propose a ready-to-post review comment as a respectful question that invites discussion (for example, “Could we…?” or “Thoughts on…?”), rather than telling the author what to do; explain the impact and a possible safe fix. Give its exact repository-relative filename and line number. Anchor the location to a changed line whenever possible; otherwise identify the nearest relevant line and ensure the comment clearly applies there;
 - return `No findings` when the role requirement is satisfied;
 - keep the review read-only and finish without modifying files or launching subagents.
 
@@ -51,7 +51,7 @@ Assign exactly one requirement to each reviewer:
 Use this execution shape after replacing every placeholder:
 
 ```typescript
-const shared = `Review PR <number-or-none> <url-or-none> at immutable base <base-sha> and head <head-sha>. Diff: <exact-diff-command>. Claimed goal: <goal>. Linked PR dependencies: <evidence-or-none>. Intent sources: <paths-or-unavailable>. Standards sources: <paths-or-unavailable>. Inspect the target with git, the PR with gh when present, and linked PRs when relevant; read relevant supplied sources and nearby precedent. Remain read-only, launch no subagents, and run no validation commands. Return only actionable findings, each with a proposed ready-to-post review comment, exact repository-relative filename and line number, impact, and smallest safe fix; otherwise return No findings.`
+const shared = `Review PR <number-or-none> <url-or-none> at immutable base <base-sha> and head <head-sha>. Diff: <exact-diff-command>. Claimed goal: <goal>. Linked PR dependencies: <evidence-or-none>. Intent sources: <paths-or-unavailable>. Standards sources: <paths-or-unavailable>. Inspect the target with git, the PR with gh when present, and linked PRs when relevant; read relevant supplied sources and nearby precedent. Remain read-only, launch no subagents, and run no validation commands. Return only actionable findings, each with a ready-to-post review comment phrased as a respectful question inviting discussion (such as “Could we…?” or “Thoughts on…?”), exact repository-relative filename and line number, impact, and a possible safe fix; otherwise return No findings.`
 
 subagent({
   tasks: [
@@ -87,7 +87,7 @@ Omit inapplicable template sections and placeholders. Report the artifact path. 
 
 ## 5. Post findings as pending review comments
 
-After synthesis, post one GitHub pending review containing an inline comment for each confirmed finding. Call `gh api repos/OWNER/REPO/pulls/PR_NUMBER/reviews --method POST --input -` with JSON `body` and `comments` fields; each comment needs its exact `path`, `line`, `side`, and ready-to-post text. Use `RIGHT` for head-side lines and `LEFT` for base-side lines. Omit `event` so GitHub leaves the review pending; do not use `gh pr review --comment`, which submits immediately. Post comments only for confirmed findings, not dismissed feedback or causal questions. If there are no confirmed findings, do not create an empty review.
+After synthesis, post one GitHub pending review containing an inline comment for each confirmed finding. Set the review's root `body` to disclose that its inline comments are AI-generated and need human evaluation, such as: `The inline comments in this review were generated with AI and are offered for human evaluation.` Call `gh api repos/OWNER/REPO/pulls/PR_NUMBER/reviews --method POST --input -` with that `body` and a `comments` array; each comment needs its exact `path`, `line`, `side`, and ready-to-post text phrased as a respectful question inviting discussion, not a directive. Use `RIGHT` for head-side lines and `LEFT` for base-side lines. Omit `event` so GitHub leaves the review pending; do not use `gh pr review --comment`, which submits immediately. Post comments only for confirmed findings, not dismissed feedback or causal questions. If there are no confirmed findings, do not create an empty review.
 
 Use the API response to verify the review is pending and capture each inline comment's `html_url`. Update the artifact to link each confirmed finding to its posted comment rather than duplicating the comment text. If posting fails, the review is not pending, or a comment link is missing, record that precisely in the artifact and report it; never imply that a comment was posted when it was not.
 
