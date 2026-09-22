@@ -11,11 +11,11 @@ Run an adversarial, read-only review with five independent reviewers. Follow `/c
 
 When given `<PR#>`, run `gh pr view <PR#>` to capture its number, URL, title, body, base and head refs, base and head SHAs, commits, changed files, and discussion. Otherwise identify the current branch's associated PR; if none exists, review the local branch against its merge base. Verify both refs resolve, capture `git diff <merge-base>...<head-sha>`, and stop when the diff is empty. Establish intent from repository, PR, issue, or approved-plan evidence; use conversation history only to locate those sources.
 
-Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. Record unavailable sources explicitly. Extract the PR's claimed big-picture goal from those sources.
+Find the originating plan, spec, or issue plus applicable `AGENTS.md`, `CONTRIBUTING.md`, and relevant ADRs. From the PR body, issue, commits, and discussion, capture referenced sibling PRs and their stated dependency or landing order. Record unavailable sources explicitly. Extract the PR's claimed big-picture goal from those sources.
 
 Create `review/pr-<number>-<short-head-sha>-review.md` for a pull request or `review/branch-<short-head-sha>-review.md` for a local branch. Record the immutable target and available intent sources before launching reviewers.
 
-**Complete when:** the immutable review target, exact non-empty diff command, commit list, claimed goal, available intent and standards sources, and review artifact are known.
+**Complete when:** the immutable review target, exact non-empty diff command, commit list, claimed goal, linked-PR dependency evidence, available intent and standards sources, and review artifact are known.
 
 ## 2. Discover subagents
 
@@ -27,9 +27,9 @@ Call `subagent({ action: "list" })`. Use an executable `reviewer` agent from the
 
 Call the `subagent` tool once in parallel mode with `async: true`, `context: "fresh"`, `concurrency: 5`, and one task per role below. Reviewers are read-only: they must not modify project/source files or launch subagents.
 
-Build one shared task prefix containing the PR number and URL when present, immutable base/head SHAs, exact diff command, claimed goal, intent and standards source paths, and these rules:
+Build one shared task prefix containing the PR number and URL when present, immutable base/head SHAs, exact diff command, claimed goal, linked-PR dependency evidence, intent and standards source paths, and these rules:
 
-- inspect the immutable target with `git` and the associated PR with `gh` when one exists;
+- inspect the immutable target with `git`, the associated PR with `gh` when one exists, and linked PRs when the assigned role needs their contracts or landing order;
 - read the supplied intent and standards sources relevant to the assigned role;
 - infer repository precedent from nearby code and tests;
 - inspect source without running build, test, lint, typecheck, or other validation commands;
@@ -42,24 +42,24 @@ Append exactly one role requirement below to that complete shared prefix.
 
 Assign exactly one requirement to each reviewer:
 
-1. **Intent conformance:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. For each claimed goal, trace the changed entry point through its implementation to its intended observable outcome. Flag missing, partial, contradictory, unrequested, or causally unsupported behavior.
-2. **Test coverage:** Account for every changed production file. Flag changed behavior without corresponding tests when this repository has precedent for testing that behavior or file area; check changed tests against nearby test structure and helpers.
-3. **Code precedent:** Review changed production code against explicit repository standards, nearby style, and shared utilities; flag duplicated local machinery when an established utility already fits.
-4. **Correctness:** Find concrete bugs, regressions, unsafe edge cases, and contract violations introduced by the diff.
-5. **Design fit:** Check whether the changes follow established repository design patterns. Flag missing patterns only when they prevent a concrete problem; also flag speculative abstractions or pattern overuse.
+1. **Intent and release safety:** Check every acceptance criterion in the approved plan or spec against the delivered source. When neither exists, use the user request and PR description. For each claimed goal, trace the changed entry point through its intended observable outcome. Read [`references/RELEASE-SAFETY.md`](./references/RELEASE-SAFETY.md); check each relevant linked-PR landing order.
+2. **Test proof:** Account for every changed production file. Flag changed behavior without corresponding tests when this repository has precedent for testing that behavior or file area. Read [`references/TEST-PROOF.md`](./references/TEST-PROOF.md) and check changed tests, mocks, stories, fixtures, and helpers against nearby structure and the real contract.
+3. **Contract integration and precedent:** Read [`references/CONTRACT-INTEGRATION.md`](./references/CONTRACT-INTEGRATION.md). Trace changed contracts through their boundaries, compare equivalent implementations, and review against explicit standards, nearby style, and shared utilities. Flag duplicated local machinery when an established utility already fits.
+4. **State and data correctness:** Read [`references/STATE-DATA-CORRECTNESS.md`](./references/STATE-DATA-CORRECTNESS.md). Find concrete lifecycle, race, cache, pagination, and data-traversal regressions introduced by the diff.
+5. **Operational assurance and design fit:** Read [`references/OPERATIONAL-ASSURANCE.md`](./references/OPERATIONAL-ASSURANCE.md) when the diff changes automation, credentials, imports, release artifacts, runbooks, or telemetry. Check established design patterns only when their absence creates a concrete problem; also flag speculative abstractions or pattern overuse.
 
 Use this execution shape after replacing every placeholder:
 
 ```typescript
-const shared = `Review PR <number-or-none> <url-or-none> at immutable base <base-sha> and head <head-sha>. Diff: <exact-diff-command>. Claimed goal: <goal>. Intent sources: <paths-or-unavailable>. Standards sources: <paths-or-unavailable>. Inspect the target with git and the PR with gh when present; read relevant supplied sources and nearby precedent. Remain read-only, launch no subagents, and run no validation commands. Return only actionable findings with file/line, impact, and smallest safe fix; otherwise return No findings.`
+const shared = `Review PR <number-or-none> <url-or-none> at immutable base <base-sha> and head <head-sha>. Diff: <exact-diff-command>. Claimed goal: <goal>. Linked PR dependencies: <evidence-or-none>. Intent sources: <paths-or-unavailable>. Standards sources: <paths-or-unavailable>. Inspect the target with git, the PR with gh when present, and linked PRs when relevant; read relevant supplied sources and nearby precedent. Remain read-only, launch no subagents, and run no validation commands. Return only actionable findings with file/line, impact, and smallest safe fix; otherwise return No findings.`
 
 subagent({
   tasks: [
-    { agent: "<reviewer>", task: `${shared}\nRole: Intent conformance. <full requirement 1>` },
-    { agent: "<reviewer>", task: `${shared}\nRole: Test coverage. <full requirement 2>` },
-    { agent: "<reviewer>", task: `${shared}\nRole: Code precedent. <full requirement 3>` },
-    { agent: "<reviewer>", task: `${shared}\nRole: Correctness. <full requirement 4>` },
-    { agent: "<reviewer>", task: `${shared}\nRole: Design fit. <full requirement 5>` }
+    { agent: "<reviewer>", task: `${shared}\nRole: Intent and release safety. <full requirement 1>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Test proof. <full requirement 2>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Contract integration and precedent. <full requirement 3>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: State and data correctness. <full requirement 4>` },
+    { agent: "<reviewer>", task: `${shared}\nRole: Operational assurance and design fit. <full requirement 5>` }
   ],
   context: "fresh",
   concurrency: 5,

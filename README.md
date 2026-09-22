@@ -233,8 +233,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `parallel-pr-review` — review a pull request or branch with five fresh,
-  read-only reviewers covering intent, correctness, validation, and design fit,
-  while persisting feedback and reusable lessons.
+  read-only reviewers covering release safety, test proof, contract integration,
+  state and data correctness, plus operational assurance and design fit, while
+  persisting feedback and reusable lessons.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
