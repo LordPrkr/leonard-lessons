@@ -122,6 +122,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, and `gh`                                                   |
 | `/code-brain-planning`                                                                                                                                | `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
+| `/clarity` | `/spellbinding-sentences` |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
@@ -275,6 +276,14 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
+  ```
+
+- `clarity` — explain problems, solutions, and implementations with named
+  references, defined jargon, code excerpts, and concrete proposed diffs.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill clarity --global
   ```
 
 - `spellbinding-sentences` — write explanatory technical docs for readers with
