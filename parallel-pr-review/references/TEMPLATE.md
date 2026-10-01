@@ -24,13 +24,14 @@
 
 ## Confirmed Findings
 
-1. **[severity]: [title]** — `[file:line]`
+1. **[severity]: [title]** — `[repository-relative-file:line]`
+   - Pending review comment: [posted comment](GitHub comment URL)
    - Impact: [concrete consequence]
    - Smallest safe fix: [fix]
 
 ## Dismissed or Deferred Feedback
 
-- [finding or concern] — [why the evidence does not support it]
+- **[title]** — `[repository-relative-file:line]`. [Why the evidence does not support or defers the feedback.]
 
 ## Reviewer Coverage
 
