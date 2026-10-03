@@ -19,31 +19,37 @@ Review the complete branch diff against the request, repository standards, corre
 
 **Complete when:** every retained diff hunk is justified and required checks still pass.
 
-## 3. Refresh the base branch
+## 3. Commit the intended changes
 
-Determine whether the feature branch needs to refresh or rebase onto its base branch under repository practice. When it does, refresh it, resolve any conflicts, and rerun affected checks before delivery.
+Invoke `/conventional-commit-message`, stage only the intended changes, and create one coherent commit with repository hooks enabled, without amending any existing commit. If the work is already committed, do not create an empty commit.
 
-**Complete when:** the branch is current enough for repository delivery practice and any refresh has passing affected checks.
+**Complete when:** the intended changes are committed and the worktree is clean.
 
-## 4. Commit and push
+## 4. Rebase onto the latest base branch
 
-Invoke `/conventional-commit-message`, stage only the intended changes, and create one coherent commit with repository hooks enabled, without amending any existing commit. If the work is already committed, do not create an empty commit. Push the branch to `origin` and set its upstream without force-pushing.
+Identify the pull request's base branch, using the repository's default branch when no pull request exists. Fetch that branch from `origin`, then rebase the feature branch onto its freshly fetched remote-tracking ref. When merge conflicts occur, invoke `/resolving-merge-conflicts` and finish the rebase before continuing. Review the resulting branch diff and rerun checks affected by the incorporated base changes or conflict resolutions; repair any failures before pushing.
 
-**Complete when:** the intended commit exists on the tracked GitHub branch.
+**Complete when:** the fetched base commit is an ancestor of `HEAD`, the rebase is finished, the worktree is clean, every retained diff hunk is justified, and affected checks pass.
 
-## 5. Ensure the pull request exists
+## 5. Push the branch
 
-Use `gh` to find an open pull request for the current branch. If none exists, create one against the default branch and retain its URL. Give the new pull request a Conventional Commit title based on the complete branch diff. When one package is the main target, use its package name as the scope; otherwise omit the scope unless repository precedent supplies one. If an existing pull request title is not Conventional Commit style, update it before continuing.
+Push the branch to `origin` and set its upstream without force-pushing. If the rebase makes a normal push impossible, report the delivery blocker under this skill's blocker rule.
 
-**Complete when:** exactly one open pull request targets the default branch, and its title uses Conventional Commit style with the main package as its scope when applicable.
+**Complete when:** the tracked GitHub branch points to the verified local `HEAD`.
 
-## 6. Describe and label the pull request
+## 6. Ensure the pull request exists
+
+Use `gh` to find an open pull request for the current branch. If none exists, create one against the base branch selected in step 4 and retain its URL. Give the new pull request a Conventional Commit title based on the complete branch diff. When one package is the main target, use its package name as the scope; otherwise omit the scope unless repository precedent supplies one. If an existing pull request title is not Conventional Commit style, update it before continuing.
+
+**Complete when:** exactly one open pull request targets the base branch selected in step 4, and its title uses Conventional Commit style with the main package as its scope when applicable.
+
+## 7. Describe and label the pull request
 
 Invoke `/spellbinding-sentences` before drafting. Infer the body structure from the repository's pull-request guidance; when that guidance does not prescribe one, use recent comparable pull requests as precedent. If neither source supplies a structure, ask the user which body structure to use before drafting. Write from the complete branch diff and update it with `gh`; when the pull request already existed, cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out. Apply every label required by repository guidance.
 
 **Complete when:** the pull-request title uses Conventional Commit style, the description matches the branch and selected repository or user-provided structure, neither contains unresolved placeholders, and every required label is applied.
 
-## 7. Return the pull request
+## 8. Return the pull request
 
 Read the published pull request back with `gh` and return its URL and verification performed.
 

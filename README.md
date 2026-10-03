@@ -120,7 +120,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
-| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, and `gh`                                                   |
+| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
 | `/code-brain-planning`                                                                                                                                | `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
@@ -207,14 +207,17 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
-- `finalize-implementation` — review the delivery-ready branch, commit and push the
-  verified change, then create its labeled pull request with a finished description.
+- `finalize-implementation` — review and commit the delivery-ready branch, rebase
+  onto its latest base, verify and push, then create its labeled pull request with
+  a finished description.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills@latest add conventional-changelog/conventional-changelog/skills/conventional-commit-message --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
+  # Required when rebasing encounters conflicts.
+  bunx skills@latest add mattpocock/skills/skills/engineering/resolving-merge-conflicts --global
   ```
 
 - `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
