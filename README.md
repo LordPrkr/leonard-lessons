@@ -83,7 +83,7 @@ Receipts record the actual commit SHA or a deterministic hash of the complete un
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
-- `code-review` reports Standards and Spec findings with proposed diffs for a GitHub PR or committed changes since a supplied fixed point, and stages pending PR comments through `gh`.
+- `code-review` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
@@ -243,7 +243,10 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   commit, branch, tag, or merge-base with independent Standards and Spec
   reviewers. Uses `spellbinding-sentences` to explain the current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
-  diff and file names. GitHub reviews use `gh` to stage pending comments on
+  diff and file names. The final response opens with an overview and directs
+  manual review to backend API contracts, database queries and schemas,
+  frontend package contracts, and new network requests, with source snippets
+  and concrete checks. GitHub reviews use `gh` to stage pending comments on
   relevant lines or files. Skips Spec when the user confirms no spec exists.
   Adapted from [Matt Pocock’s code-review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
   with its [MIT license notice](./code-review/LICENSE).
