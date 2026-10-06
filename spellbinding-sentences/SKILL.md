@@ -1,9 +1,11 @@
 ---
 name: spellbinding-sentences
-description: "Draft or revise explanatory technical writing, including design docs, PR descriptions, ADRs, incident writeups, architecture notes, and engineering proposals."
+description: "Draft or revise explanatory technical writing, including design docs, PR descriptions, code review comments, ADRs, incident writeups, architecture notes, and engineering proposals."
 ---
 
 # Spellbinding Sentences
+
+Use *Designing Data-Intensive Applications* by Martin Kleppmann as the golden standard for explanatory technical writing.
 
 Write for the audience the user names. Otherwise assume the reader is technical, has strong engineering fundamentals, and may not know the local domain or codebase.
 
@@ -124,7 +126,7 @@ The metaphor may help memory, but the explanation tells the reader what must per
 
 ## Voice target
 
-Aim for the shared strengths of these writers:
+Apply these explanatory techniques:
 
 - **Kleppmann:** explain internal behavior, then compare designs by workload and failure mode.
 - **Fowler:** introduce the ordinary model before the pattern that departs from it; state where the pattern is a poor fit.
