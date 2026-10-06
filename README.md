@@ -14,7 +14,7 @@ Idea → clarify
        └─ uncertain technical path → tracer-bullet → return to the plan
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
-Delivery → interactive-review (Hunk) → parallel-pr-review
+Delivery → interactive-review (Hunk) → code-review <fixed-point>
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -82,7 +82,8 @@ Receipts record the actual commit SHA or a deterministic hash of the complete un
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
-- `gh-pr-review-plan` and `parallel-pr-review` persist feedback and evidence-backed lessons under `review/`.
+- `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
+- `code-review` reports Standards and Spec findings separately for committed changes since a supplied fixed point.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
@@ -125,7 +126,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
-| `/gh-pr-review-plan`, `/parallel-pr-review`                                                                                                           | `gh`, `/code-brain`, and `/code-brain-writeback`                                                                                            |
+| `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
+| `/code-review` | Git and parallel subagents; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 | `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
@@ -237,16 +239,20 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
   ```
 
-- `parallel-pr-review` — review a pull request or branch with five fresh,
-  read-only reviewers covering release safety, test proof, contract integration,
-  state and data correctness, plus operational assurance and design fit, while
-  persisting feedback and reusable lessons.
+- `code-review` — review committed changes since a supplied commit, branch,
+  tag, or merge-base with independent Standards and Spec reviewers. Reports
+  the axes separately and skips Spec when the user confirms no spec exists.
+  Adapted from [Matt Pocock’s code-review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
+  with its [MIT license notice](./code-review/LICENSE).
 
   ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
-  bunx skills add LordPrkr/leonard-lessons --skill parallel-pr-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
+
+  Invoke `/code-review main` to compare committed changes with the merge-base
+  of `main` and `HEAD`. A fixed point is required; staged and unstaged changes
+  are outside that comparison. Reinstall the replacement and remove any old
+  locally installed `parallel-pr-review` skill.
 
 - `interactive-review` — choose the latest commit or a branch comparison, open
   it in a Hunk pane beside the caller terminal, and hand off to `hunk-review`.
