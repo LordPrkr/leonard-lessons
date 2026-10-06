@@ -127,7 +127,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `/code-review` | `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 | `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
@@ -241,13 +241,15 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-review` — review a GitHub PR or committed changes since a supplied
   commit, branch, tag, or merge-base with independent Standards and Spec
-  reviewers. Reports each actionable finding with a proposed diff and file
-  names; GitHub reviews use `gh` to stage pending comments on relevant lines
-  or files. Skips Spec when the user confirms no spec exists.
+  reviewers. Uses `spellbinding-sentences` to explain the current behavior,
+  its consequence, and the intended behavior for each finding, with a proposed
+  diff and file names. GitHub reviews use `gh` to stage pending comments on
+  relevant lines or files. Skips Spec when the user confirms no spec exists.
   Adapted from [Matt Pocock’s code-review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
   with its [MIT license notice](./code-review/LICENSE).
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
 
@@ -310,7 +312,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `spellbinding-sentences` — write explanatory technical docs for readers with
   strong engineering fundamentals, concrete mechanisms, explicit tradeoffs,
-  and plain intent over pedantry.
+  and plain intent over pedantry, using Martin Kleppmann's *Designing
+  Data-Intensive Applications* as the golden standard.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global

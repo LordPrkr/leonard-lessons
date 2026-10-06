@@ -81,11 +81,11 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Check each actionable finding against the finding format, completing any missing proposed diff from the pinned source. Prepare the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 
-**Complete when:** every actionable finding includes a proposed diff with file names, Standards and Spec reports are ready separately, and the summary gives each axis's finding count and worst issue or explicitly records its skip or failure.
+**Complete when:** every actionable finding has passed the writing workflow and satisfies the finding format, Standards and Spec reports are ready separately, and the summary gives each axis's finding count and worst issue or explicitly records its skip or failure.
 
 ### 6. Stage GitHub PR comments
 
@@ -98,7 +98,7 @@ For a GitHub PR, follow [GitHub PR review — Stage pending comments](github-pr-
 Every actionable finding, on either axis and for every review target, includes:
 
 - The affected repository-relative file path and line or range when present in the reviewed revision.
-- The cited standard, baseline smell, or spec requirement, the observed problem, and why the proposed change addresses it.
+- An explanation that leads with the code's current state or behavior under a concrete condition and its consequence for users or maintainers. Then describe the intended state or behavior according to the review and how the proposed change closes that gap. Support the recommendation with the cited standard, baseline smell, or spec requirement; a smell label alone is insufficient. Keep the explanation proportional to the issue, with enough context for the author to understand why the change matters and decide what to do.
 - A concrete proposed unified diff in a `diff` fenced block, with `--- a/<path>` and `+++ b/<path>` file headers and hunk ranges. Include every file needed for the correction; use `/dev/null` for added or deleted files. Show replacement code rather than placeholders such as “fix this here.”
 
 Keep proposals consistent with the pinned source and label any unverified assumptions or validation limits. Propose changes for the user to assess; applying them is separate work. If an axis has no findings, say so without inventing a diff.
