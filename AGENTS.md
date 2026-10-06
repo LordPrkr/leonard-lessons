@@ -11,3 +11,5 @@ This repository publishes reusable agent skills, one skill per top-level directo
   Markdown link.
 - Update [README.md](./README.md) when adding, removing, renaming, or changing
   dependencies between skills.
+- Finalize verified changes with
+  [/finalize-implementation](./finalize-implementation/SKILL.md).
