@@ -83,7 +83,7 @@ Receipts record the actual commit SHA or a deterministic hash of the complete un
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
-- `code-review` reports Standards and Spec findings separately for committed changes since a supplied fixed point.
+- `code-review` reports Standards and Spec findings with proposed diffs for a GitHub PR or committed changes since a supplied fixed point, and stages pending PR comments through `gh`.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
@@ -127,7 +127,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | Git and parallel subagents; repository issue-tracker tooling when fetching an issue |
+| `/code-review` | Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 | `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
@@ -239,9 +239,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
   ```
 
-- `code-review` — review committed changes since a supplied commit, branch,
-  tag, or merge-base with independent Standards and Spec reviewers. Reports
-  the axes separately and skips Spec when the user confirms no spec exists.
+- `code-review` — review a GitHub PR or committed changes since a supplied
+  commit, branch, tag, or merge-base with independent Standards and Spec
+  reviewers. Reports each actionable finding with a proposed diff and file
+  names; GitHub reviews use `gh` to stage pending comments on relevant lines
+  or files. Skips Spec when the user confirms no spec exists.
   Adapted from [Matt Pocock’s code-review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
   with its [MIT license notice](./code-review/LICENSE).
 
@@ -250,8 +252,10 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
   Invoke `/code-review main` to compare committed changes with the merge-base
-  of `main` and `HEAD`. A fixed point is required; staged and unstaged changes
-  are outside that comparison. Reinstall the replacement and remove any old
+  of `main` and `HEAD`; staged and unstaged changes are outside that comparison.
+  Invoke `/code-review <PR URL>` to review the PR's own diff and save suggested
+  changes in a pending review for you to submit. Local reviews require a fixed
+  point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.
 
 - `interactive-review` — choose the latest commit or a branch comparison, open

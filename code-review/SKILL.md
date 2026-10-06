@@ -1,9 +1,9 @@
 ---
 name: code-review
-description: "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\"."
+description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Runs independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
 
-Two-axis review of the diff between `HEAD` and a fixed point the user supplies:
+Two-axis review of a GitHub PR or the diff between `HEAD` and a fixed point the user supplies:
 
 - **Standards**: does the code conform to this repo's documented coding standards?
 - **Spec**: does the code faithfully implement the originating issue / spec?
@@ -12,19 +12,19 @@ Both axes run as **parallel sub-agents** so they don't pollute each other's cont
 
 ## Process
 
-### 1. Pin the fixed point
+### 1. Pin the review scope
 
-Whatever the user said is the fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If they didn't specify one, ask for it.
+For a GitHub PR, use `gh` and follow [GitHub PR review — Pin the PR](github-pr-review.md#pin-the-pr). The PR supplies the comparison; a separate fixed point is unnecessary.
 
-Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
+For a local review, use the supplied fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If neither a PR nor a fixed point is specified, ask for the review target. Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
-Before going further, confirm the fixed point resolves (`git rev-parse <fixed-point>`) and the diff is non-empty. A bad ref or empty diff should fail here, not inside two parallel sub-agents.
+Before delegation, confirm local refs resolve (`git rev-parse <fixed-point>` and `git rev-parse HEAD`) or the PR snapshot is pinned, and the diff is non-empty. Record both local SHAs so reviewers use the same revisions even if the branch moves. Local comparisons cover committed changes.
 
-**Complete when:** the fixed point resolves, the exact non-empty diff command and commit list are captured, or the invalid ref or empty diff has been reported before delegation.
+**Complete when:** the target, pinned revisions, exact non-empty diff or saved PR diff, and commit list are captured, or a resolution failure or empty diff has been reported before delegation.
 
 ### 2. Identify the spec source
 
-Look for the originating spec, in this order:
+For a PR, start with its captured description and linked issues. Look for any remaining originating spec, in this order:
 
 1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched with the repository’s available issue-tracker tooling. Follow `docs/agents/issue-tracker.md` when that file exists.
 2. A path the user passed as an argument.
@@ -35,7 +35,7 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
+Read guidance at the pinned review revision that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
@@ -61,15 +61,17 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
+Give both sub-agents the pinned review scope from step 1 and paste the [finding format](#finding-format) below into their prompts. For a PR, pass the saved diff and PR metadata rather than a command against local `HEAD`. Each brief's word limit applies to prose; proposed diffs are additional.
+
 **Standards sub-agent prompt** should include:
 
-- The full diff command and commit list.
+- The saved diff or full diff command using pinned SHAs, and the commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
 - The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** should include:
 
-- The diff command and commit list.
+- The saved diff or diff command using pinned SHAs, and the commit list.
 - The path or fetched contents of the spec.
 - The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
 
@@ -79,11 +81,27 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Check each actionable finding against the finding format, completing any missing proposed diff from the pinned source. Prepare the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 
-**Complete when:** Standards and Spec are reported separately, each applicable axis is accounted for, and the summary gives each axis’s finding count and worst issue or explicitly records its skip or failure.
+**Complete when:** every actionable finding includes a proposed diff with file names, Standards and Spec reports are ready separately, and the summary gives each axis's finding count and worst issue or explicitly records its skip or failure.
+
+### 6. Stage GitHub PR comments
+
+For a GitHub PR, follow [GitHub PR review — Stage pending comments](github-pr-review.md#stage-pending-comments) with the completed findings. Include the pending review link and delivery status in the final report. For local reviews, the report is the deliverable.
+
+**Complete when:** every PR finding is accounted for in a verified pending review or an explicit delivery failure, or there are no actionable PR findings or the review is local and posting is skipped; the final report is delivered.
+
+## Finding format
+
+Every actionable finding, on either axis and for every review target, includes:
+
+- The affected repository-relative file path and line or range when present in the reviewed revision.
+- The cited standard, baseline smell, or spec requirement, the observed problem, and why the proposed change addresses it.
+- A concrete proposed unified diff in a `diff` fenced block, with `--- a/<path>` and `+++ b/<path>` file headers and hunk ranges. Include every file needed for the correction; use `/dev/null` for added or deleted files. Show replacement code rather than placeholders such as “fix this here.”
+
+Keep proposals consistent with the pinned source and label any unverified assumptions or validation limits. Propose changes for the user to assess; applying them is separate work. If an axis has no findings, say so without inventing a diff.
 
 ## Why two axes
 
