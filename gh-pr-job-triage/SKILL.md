@@ -71,6 +71,6 @@ The orchestrator—not the scouts—assigns exactly one classification:
 - **Related:** the failing path overlaps changed behavior or dependencies and the evidence provides a credible causal link.
 - **Inconclusive:** evidence cannot safely support any classification above. Request the smallest next action, such as rerunning one job or retrieving unavailable logs.
 
-For each job, report the classification, confidence, decisive evidence, reproduction result, and next action. Separate facts from inference and link the run or job. For a related failure, the next action must name focused validation, repository-prescribed broader checks, and `/parallel-pr-review` after a fix.
+For each job, report the classification, confidence, decisive evidence, reproduction result, and next action. Separate facts from inference and link the run or job. For a related failure, the next action must name focused validation, repository-prescribed broader checks, and `/code-review <base-branch>` after a fix, using the PR base branch captured in step 1 as the fixed point.
 
 **Complete when:** every scoped job is classified or explicitly marked inconclusive, and every classification cites decisive evidence.
