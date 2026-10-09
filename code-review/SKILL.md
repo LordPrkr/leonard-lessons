@@ -93,7 +93,7 @@ Record each axis's finding count and worst issue, or its skip or failure. Keep t
 
 For a GitHub PR, follow [GitHub PR review — Stage pending comments](github-pr-review.md#stage-pending-comments) with the completed findings. Capture the pending review link and delivery status for the final response. For local reviews, skip posting.
 
-**Complete when:** every PR finding is accounted for in a verified pending review or an explicit delivery failure, or there are no actionable PR findings or the review is local and posting is skipped.
+**Complete when:** every PR finding is accounted for in a verified pending review, a linked duplicate already raised by a reviewer, or an explicit delivery failure, or there are no actionable PR findings or the review is local and posting is skipped.
 
 ### 7. Deliver the review overview and manual review guide
 
@@ -106,8 +106,8 @@ Apply [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) to the whole
 Every actionable finding, on either axis and for every review target, includes:
 
 - The affected repository-relative file path and line or range when present in the reviewed revision.
-- An explanation that leads with the code's current state or behavior under a concrete condition and its consequence for users or maintainers. Then describe the intended state or behavior according to the review and how the proposed change closes that gap. Support the recommendation with the cited standard, baseline smell, or spec requirement; a smell label alone is insufficient. Keep the explanation proportional to the issue, with enough context for the author to understand why the change matters and decide what to do.
-- A concrete proposed unified diff in a `diff` fenced block, with `--- a/<path>` and `+++ b/<path>` file headers and hunk ranges. Include every file needed for the correction; use `/dev/null` for added or deleted files. Show replacement code rather than placeholders such as “fix this here.”
+- An explanation that leads with the code's current state or behavior under a concrete condition and its consequence for users or maintainers. Explain why that behavior needs further review and name the concrete condition or check the reviewer should confirm. Then describe the intended state or behavior according to the review and how the proposed change closes that gap. Support the recommendation with the cited standard, baseline smell, or spec requirement; a smell label alone is insufficient. Keep the explanation proportional to the issue, with enough context for the author to understand why the change matters and decide what to do.
+- A concrete proposed unified diff inside a collapsed `<details>` block with `<summary>Suggested diff</summary>` and a blank line before the `diff` fence and before `</details>`. The diff uses `--- a/<path>` and `+++ b/<path>` file headers and hunk ranges. Include every file needed for the correction; use `/dev/null` for added or deleted files. Show replacement code rather than placeholders such as “fix this here.”
 
 Keep proposals consistent with the pinned source and label any unverified assumptions or validation limits. Propose changes for the user to assess; applying them is separate work. If an axis has no findings, say so without inventing a diff.
 

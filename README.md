@@ -243,7 +243,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   commit, branch, tag, or merge-base with independent Standards and Spec
   reviewers. Uses `spellbinding-sentences` to explain the current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
-  diff and file names. The final response opens with an overview and directs
+  diff and file names. PR comments open with the explanation, put suggested
+  diffs in a collapsed block, and end with an agent confirmation note. Before
+  staging comments, the skill checks feedback from all reviewers and excludes concerns
+  already raised, with links to the existing feedback. The final response opens
+  with an overview and directs
   manual review to backend API contracts, database queries and schemas,
   frontend package contracts, and new network requests, with source snippets
   and concrete checks. GitHub reviews use `gh` to stage pending comments on
