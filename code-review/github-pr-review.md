@@ -16,15 +16,15 @@ Use `gh pr view`, `gh pr diff`, and `gh api` for GitHub review work. Resolve the
 
 If there are no actionable findings, report that result and skip posting.
 
-1. Map every finding to the reviewed PR. Follow the main skill's [finding format](SKILL.md#finding-format) for comment bodies and retain the Standards or Spec label. Use the repository-relative `path`, file `line`, and diff `side`: `RIGHT` for added/current lines and `LEFT` for removed lines. For ranges, supply the first line and side as well as the final line and side. Anchor to the smallest relevant range in the saved diff. For a changed file without a suitable line anchor, use a file-level thread; findings about files outside the PR belong in the review body with their file names and proposed diffs.
+1. Follow [Check existing feedback](#check-existing-feedback) and exclude findings already raised by any reviewer. Map each remaining finding to the reviewed PR. Compose bodies using [Comment body](#comment-body); keep axis labels in the review summary. Use the repository-relative `path`, file `line`, and diff `side`: `RIGHT` for added/current lines and `LEFT` for removed lines. For ranges, supply the first line and side as well as the final line and side. Anchor to the smallest relevant range in the saved diff. For a changed file without a suitable line anchor, use a file-level thread; findings about files outside the PR belong in the review body with their file names and proposed diffs.
 
-   For a self-contained replacement of an anchored `RIGHT` range, also include a GitHub `suggestion` fenced block containing exactly the replacement for that entire range. Broader changes retain their proposed unified diffs.
+   For a self-contained replacement of an anchored `RIGHT` range, also include a GitHub `suggestion` fenced block inside the same collapsed block, containing exactly the replacement for that entire range. Broader changes retain their proposed unified diffs.
 
-   **Complete when:** every finding has a valid line or file anchor, or is assigned to the review body, and every suggestion matches its anchored range.
+   **Complete when:** each finding is either excluded with a link to existing feedback or has a valid line or file anchor or review-body placement; every retained body meets the comment format and every suggestion matches its anchored range. If all findings are duplicates, skip writing and report their links.
 
-2. Re-read the PR base and head SHAs before writing. If either moved, refresh the review and revalidate findings and anchors. Use `gh api user` and paginated `gh api repos/<owner>/<repo>/pulls/<number>/reviews` to check for the authenticated user's existing `PENDING` review. Read its body and all comments before adding findings; preserve existing content and skip duplicate findings on retries. Reuse it when its `commit_id` matches the reviewed head; report a conflicting pending review instead of replacing another draft.
+2. Re-read the PR base and head SHAs before writing. If either moved, refresh the review and revalidate findings and anchors. Refresh the existing-feedback check immediately before writing, excluding any newly raised duplicates. If no new findings remain, skip writing and report the existing feedback links. If the check is incomplete or fails, report the delivery failure and keep findings local until duplicate coverage can be verified. Use `gh api user` and paginated `gh api repos/<owner>/<repo>/pulls/<number>/reviews` to check for the authenticated user's existing `PENDING` review. Read its body and all comments before adding findings; preserve existing content. Apply the same existing-feedback check to this draft to make retries idempotent. Reuse it when its `commit_id` matches the reviewed head; report a conflicting pending review instead of replacing another draft.
 
-   **Complete when:** the PR still matches the reviewed snapshot and any existing draft is accounted for, or a revision or draft conflict is reported.
+   **Complete when:** the PR still matches the reviewed snapshot, every retained finding has passed the refreshed existing-feedback check, and any existing draft is accounted for, or a feedback-fetch failure, revision conflict, or draft conflict is reported.
 
 3. If no pending review exists, write a JSON payload containing the pinned `commit_id` and a `body` with the two-axis summary and any unanchorable findings. Create the draft using:
 
@@ -40,9 +40,46 @@ If there are no actionable findings, report that result and skip posting.
 
    **Complete when:** every new finding is written into the pending review, or each failed write is recorded with its unsaved comment and proposed diff.
 
-4. Verify the review using `gh api repos/<owner>/<repo>/pulls/<number>/reviews/<review-id>` and its paginated `/comments` endpoint. Check `PENDING`, the reviewed `commit_id`, the review body findings, and every expected comment's body, path, line/range, or file subject. Recheck PR SHAs and report any movement during posting. Return the review URL and saved finding count; include unsaved findings and the failure reason if delivery was partial or blocked.
+4. Verify the review using `gh api repos/<owner>/<repo>/pulls/<number>/reviews/<review-id>` and its paginated `/comments` endpoint. Check `PENDING`, the reviewed `commit_id`, the review body findings, and every expected comment's body, path, line/range, or file subject. Recheck PR SHAs and report any movement during posting. Verify that newly saved finding bodies still follow [Comment body](#comment-body). Return the review URL, saved finding count, and links for excluded duplicates; include unsaved findings and the failure reason if delivery was partial or blocked.
 
    **Complete when:** all findings are accounted for in verified saved content or explicit failures, and the final report distinguishes pending comments from submitted reviews.
+
+## Check existing feedback
+
+Read all pages of the PR's inline review comments (including replies), submitted review bodies, and conversation comments using `gh api --paginate` on `repos/<owner>/<repo>/pulls/<number>/comments`, `repos/<owner>/<repo>/pulls/<number>/reviews`, and `repos/<owner>/<repo>/issues/<number>/comments`. Include all authors and retain feedback from resolved or outdated threads. Include the authenticated user's visible pending review and its comments; other reviewers' unpublished drafts may be inaccessible, so disclose that limit.
+
+Compare each finding by the affected behavior, triggering condition, and underlying concern, rather than exact wording, line number, review axis, or proposed patch. Exclude feedback that raises the same concern, even if the author proposes a different fix or the thread has moved or resolved. Record the existing comment or review URL and the reason for exclusion. A distinct concern in the same code may remain; explain the difference. Keep the independent axis reports, but stage a shared concern only once when both axes raise it.
+
+**Complete when:** all accessible feedback has been read, every finding is marked new or duplicate with evidence, and any inaccessible feedback or fetch failure is recorded.
+
+## Comment body
+
+Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) on the exact bodies that will be saved, including review-body findings, after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
+
+Use this order: explanation, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the explanation and note visible outside the collapsed block. Give individual comments no title, heading, severity prefix, or axis label; retain axis assessments in the review summary. For review-body findings, use a file-and-line link to locate the concern before the same prose-first body.
+
+Example layout for a hypothetical retry configuration finding:
+
+````markdown
+When `options.retries` is `0`, this fallback sets the retry count to `3`. A caller trying to disable retries therefore still sends repeated requests. Please confirm that zero is intended to disable retries; if it is, a nullish fallback preserves that setting while keeping the default for an omitted value.
+
+<details>
+<summary>Suggested diff</summary>
+
+```diff
+--- a/src/request.ts
++++ b/src/request.ts
+@@ -12 +12 @@
+-const retries = options.retries || 3;
++const retries = options.retries ?? 3;
+```
+
+</details>
+
+*This feedback was provided by an agent; please confirm the reasoning and suggested change.*
+````
+
+**Complete when:** each exact body passes the writing workflow, explains the current behavior and review check without a title, contains its complete suggested diff in a collapsed block, and ends with the agent confirmation note.
 
 ## API references
 
