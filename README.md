@@ -318,9 +318,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `spellbinding-sentences` — write explanatory technical docs for readers with
-  strong engineering fundamentals, concrete mechanisms, explicit tradeoffs,
-  and plain intent over pedantry, using Martin Kleppmann's *Designing
-  Data-Intensive Applications* as the golden standard.
+  strong engineering fundamentals. Verify facts, explain failures through a
+  concrete scenario, and state trade-offs when the reader needs to choose.
+  Keep uncertainty and the distinction between proposed and tested fixes clear.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
