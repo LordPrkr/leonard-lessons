@@ -5,8 +5,6 @@ description: "Draft or revise explanatory technical writing, including design do
 
 # Spellbinding Sentences
 
-Use *Designing Data-Intensive Applications* by Martin Kleppmann as the golden standard for explanatory technical writing.
-
 Write for the audience the user names. Otherwise assume the reader is technical, has strong engineering fundamentals, and may not know the local domain or codebase.
 
 Concise writing removes information the reader does not need. It does not compress reasoning into slogans. When a mechanism, dependency, or consequence takes three sentences to explain, use three sentences.
@@ -17,7 +15,9 @@ Concise writing removes information the reader does not need. It does not compre
 
 If revising, keep the original claims, scope, and uncertainty unless the user asks for new substance.
 
-Done when every changed claim is either present in the source or explicitly requested.
+Verify factual claims against the relevant source evidence, such as code, schemas, API contracts, or supplied material. Mark assumptions and claims that remain unverified.
+
+Done when every factual claim is supported by source evidence or marked unverified, and revisions preserve the original scope and uncertainty unless the user requested a change.
 
 ### 2. Lead with the point
 
@@ -29,15 +29,17 @@ Done when no section opens with generic background or a tour of concepts the rea
 
 Name the code path, service, metric, failure mode, dependency, or operational condition behind important claims. Explain the relevant chain of cause and effect: what the system does, why it does it, and what follows.
 
-Treat every project-specific noun phrase as a claim with a referent. Identify the concrete code, schema, API, or behavior it denotes, or replace the phrase with a sentence that explains the mechanism.
+Explain unfamiliar concepts the reader needs to understand the claim.
 
-Done when every important claim has a concrete anchor, every project-specific noun phrase has a recoverable referent, and the reader can follow each conclusion without supplying missing reasoning.
+When explaining a bug or proposing a fix, apply [Explaining failures and fixes](references/FAILURES.md).
 
-### 4. State the tradeoff
+Done when every important claim has a concrete anchor, necessary unfamiliar concepts are explained, and the reader can follow each conclusion without supplying missing reasoning. For a failure example, check: **Can the reader explain why the example fails without knowing the codebase?**
 
-Say what the choice buys, what it costs, when it wins, and what alternative it rejects. Tie recommendations to conditions, not verdicts: "X is cheaper when..." rather than "X is better."
+### 4. Explain trade-offs when the reader must choose
 
-Done when every recommendation that requires judgment is conditional and names its rejected alternative.
+When the reader needs to choose between options, explain what each relevant option buys, what it costs, and the conditions that favor it. A bug explanation can proceed directly from the failure to the fix when no choice needs explaining.
+
+Done when each choice the reader needs to make has enough trade-off information to decide, or the writing requires no choice between options.
 
 ### 5. Cut inherited context
 
@@ -59,19 +61,14 @@ Done when edits make the reader's next action clearer, not merely more formally 
 
 ### 8. Tighten from the kernel sentence
 
-Reduce each dense sentence to its simplest true claim, then add back the condition, mechanism, number, or tradeoff needed to explain it. Expand any quip, metaphor, or compound modifier that hides a relationship the reader needs. A memorable phrase may summarize an explanation; it may not replace one.
+Reduce each dense sentence to its simplest true claim, then add back the condition, mechanism, number, or trade-off needed to explain it. Use plain words and explicit clauses in place of invented jargon or compound modifiers that hide a relationship the reader needs. A memorable phrase may summarize an explanation; it may not replace one.
 
 Done when every sentence is precise, every necessary relationship is explicit, and no sentence becomes a slogan through editing.
 
 ## Style rules
 
-- Use plain causal sentences. Do not invent compact lifecycle terms or nominalized jargon. Describe what happens, when it happens, and what follows.
 - Use active voice.
 - Prefer direct declarative sentences. Let sentence length follow the reasoning.
-- Use precise technical terms, with plain connecting prose.
-- State relationships as clauses. Write “start with an example, then explain the implementation” so the reader does not have to unpack a compound modifier.
-- Use compressed lines rarely, after the prose has explained what they mean.
-- Ground claims in specifics: actual latency, throughput, queue depth, retry behavior, storage cost, incident symptoms, named dependencies, or real call paths.
 - Replace vague qualifiers like "large," "slow," or "scalable" with numbers or observable conditions.
 - Use transitions that name the relationship: because, therefore, however, for example, and in contrast.
 
@@ -82,11 +79,8 @@ Done when every sentence is precise, every necessary relationship is explicit, a
 - End paragraphs on hollow punch lines: "The gap is real" or "That changes everything."
 - Narrate the document's reasoning: "This is significant because...", "This reinforces...", or "It is important to note..."
 - Use filler vocabulary: leverage, robust, seamless, powerful, crucially, ultimately, notably, landscape, navigate, delve.
-- Restate the reader's own context back to them.
 
 ## Examples
-
-These are original examples modeled on the explanatory methods used by Martin Kleppmann, Martin Fowler, and Robert Nystrom.
 
 ### Explain a pattern from its baseline
 
@@ -98,7 +92,7 @@ Explanatory:
 
 > A conventional CRUD model uses the same representation for reads and writes. CQRS separates them: commands update a write model, while queries read from a model shaped for display or retrieval. This can simplify a domain whose validation rules and query shapes pull the shared model in different directions. It also introduces synchronization and consistency work, so it is usually justified only for the parts of a system where those benefits exceed the added complexity.
 
-The second version defines the ordinary model, describes what CQRS changes, and states both the benefit and its limit. Fowler uses this sequence in [CQRS](https://martinfowler.com/bliki/CQRS.html).
+The second version defines the ordinary model, describes what CQRS changes, and states both the benefit and its limit.
 
 ### Follow the mechanism to its consequence
 
@@ -110,7 +104,7 @@ Explanatory:
 
 > A cache makes reads faster by keeping a second copy of data closer to the caller. Once that copy exists, an update to the primary store and an update to the cache may occur at different times or one may fail. Expiration limits how long stale data can survive, but shorter expiration also sends more traffic to the primary store. The right policy depends on the consequence of staleness: an old profile photo may be acceptable, while an old account balance may not be.
 
-The second version gives the reader a model for reasoning about failure and choosing a policy. Kleppmann uses this approach throughout *Designing Data-Intensive Applications*: explain how the system works, then compare the available choices and their costs.
+The second version gives the reader a model for reasoning about failure and choosing a policy.
 
 ### Connect an abstraction to its implementation
 
@@ -122,14 +116,4 @@ Explanatory:
 
 > A closure pairs a function with the environment in which the function was declared. If the function refers to a local variable and escapes its declaring scope, that environment must remain available after the outer call returns. Two closures created by separate calls therefore retain separate instances of the same local variable. The implementation must preserve those captured bindings rather than treating them like ordinary stack locals.
 
-The metaphor may help memory, but the explanation tells the reader what must persist and why the runtime needs special handling. Nystrom uses this approach in [Crafting Interpreters](https://craftinginterpreters.com/closures.html): begin with a concrete example, then show how the implementation produces that behavior.
-
-## Voice target
-
-Apply these explanatory techniques:
-
-- **Kleppmann:** explain internal behavior, then compare designs by workload and failure mode.
-- **Fowler:** introduce the ordinary model before the pattern that departs from it; state where the pattern is a poor fit.
-- **Nystrom:** build intuition with a concrete example, then connect it to the implementation.
-
-Use their explanatory discipline, not their mannerisms.
+The metaphor may help memory, but the explanation tells the reader what must persist and why the runtime needs special handling.
