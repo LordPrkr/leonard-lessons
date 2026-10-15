@@ -1,3 +1,8 @@
+---
+name: follow-precedent
+description: "Use when planning, implementing, testing, or reviewing changes that must follow existing repository patterns."
+---
+
 # Follow precedent
 
 Existing patterns govern implementation choices unless an explicit task requirement or applicable documented repository rule overrides them. Prefer consistency over your preferred design. Apply this contract to plans, implementation, tests, and proposed review fixes.

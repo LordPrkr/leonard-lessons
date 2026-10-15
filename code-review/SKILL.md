@@ -3,7 +3,7 @@ name: code-review
 description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
 
-**Follow precedent.** Read and apply [Follow precedent](../effective-engineer/follow-precedent.md) before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
+**Follow precedent.** Invoke [/follow-precedent](../follow-precedent/SKILL.md) before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
 
 Two-axis review of a GitHub PR or the diff between `HEAD` and a fixed point the user supplies:
 
@@ -85,7 +85,7 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. If a pattern violation exposes an unchecked class of changes, have Standards inspect the remaining instances before completing the report. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 Inspect the pinned diff and supporting source for the [manual review priorities](review-summary.md#manual-review-priorities), including changes with no Standards or Spec findings. Trace affected contracts, consumers, database operations, and request call sites far enough to explain their consequences. Record changed, unchanged, or unverified status for every applicable category, with source evidence for each changed area.
 
