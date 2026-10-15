@@ -1,9 +1,11 @@
 ---
 name: effective-engineer
-description: "Implement code changes through a tight inspect, test, implement, verify, and review loop. Use for direct changes or when another workflow delegates an approved plan."
+description: "Implement code changes from applicable precedent through a tight inspect, test, implement, verify, and review loop. Use for direct changes or when another workflow delegates an approved plan."
 ---
 
 # Effective Engineer
+
+**Follow precedent.** Before inspecting or editing, invoke `/follow-precedent`. Its evidence and deviation requirements govern every step of this loop.
 
 Use the tight loop. When executing an approved plan, treat it as the scope and implementation direction. Escalate unplanned broad, risky, or cross-cutting work to `code-brain-planning`.
 
@@ -19,21 +21,21 @@ Ask for help before proceeding when repair requires credentials or private-regis
 
 ### 1. Inspect
 
-Read the smallest set of files needed to understand the change.
+Establish applicable precedent for the implementation and tests. Read the closest examples in the affected module, their callers, and existing tests. Cite paths and symbols for the helpers, validation owner, test seam, fixtures, setup and teardown, mocking, assertions, and verification commands you will reuse. Revalidate any precedent supplied by an approved plan against the implementation checkout.
 
-Done when you can name the files/functions to change, or you have one focused clarification question that blocks work.
+Done when the files/functions to change and applicable implementation and test precedent are identified, with search gaps, conflicts, and necessary deviations disclosed under the shared contract; affected work waits only where direction is still required.
 
 ### 2. Invoke `/tdd`
 
-For non-trivial logic, invoke `/tdd` at the highest existing public seam. For each observable behavior: write one test, confirm it fails for the intended reason, add the minimum green implementation, then repeat. Skip only for trivial wiring, docs, or mechanical edits.
+For non-trivial logic, invoke `/tdd` at the highest existing public seam. Extend the closest tests in the same module using the cited fixtures, lifecycle, mocking, and assertion conventions. If that module has no applicable tests, establish the nearest applicable testing precedent before adding them. For each observable behavior: write one test, confirm it fails for the intended reason, add the minimum green implementation, then repeat. Skip only for trivial wiring, docs, or mechanical edits.
 
-Done when each intended behavior has gone red then green at a public seam, or the skip reason is explicit.
+Done when each intended behavior has gone red then green at an established public seam using applicable test precedent or an authorized deviation, or the skip reason is explicit.
 
 ### 3. Implement
 
-Make the smallest code change that satisfies the current red test. Add only the structure required by the current observable behavior.
+Adapt the cited implementation to satisfy the current red test. Keep each substantive choice within its applicable pattern or an authorized deviation.
 
-Done when the requested behavior is implemented with the shortest maintainable diff.
+Done when the requested behavior is implemented with the smallest diff consistent with applicable precedent and authorized deviations.
 
 ### 4. Verify
 
@@ -49,9 +51,9 @@ Done when required checks pass, or a hard boundary has been escalated with the f
 
 ### 5. Review
 
-Review the final diff against the request, repository standards, correctness, and simplicity. Re-run affected checks after fixes.
+Audit the complete diff against the cited implementation and test precedent, the request, authorized deviations, repository standards, correctness, and simplicity. Re-run affected checks after fixes.
 
-Done when every retained change is justified by the request and no actionable review finding remains.
+Done when every substantive choice follows cited precedent or an explicitly authorized deviation and no actionable review finding remains.
 
 ### 6. Deliver or summarize
 

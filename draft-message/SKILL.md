@@ -10,7 +10,7 @@ Prepare a message for the user to send. Sending or posting is outside this workf
 
 ## 1. Draft
 
-Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to the message.
+Invoke `/spellbinding-sentences` and apply its writing workflow to the message.
 
 Use the supplied draft, facts, and conversation context to identify the recipient, what they already know, and the intended outcome. Ask a focused question if missing information would materially change the message; otherwise draft immediately. Match the user's requested tone, length, and channel, using a concise collegial tone by default.
 

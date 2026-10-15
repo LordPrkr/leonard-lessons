@@ -21,6 +21,16 @@ status: draft
 
 <Current behavior, constraints, and evidence needed by a fresh-context worker.>
 
+## Precedent
+
+<For each substantive choice: source path and symbol @ revision, why it applies,
+and the implementation, validation, or test pattern to reuse.>
+
+## Deviations
+
+<Necessary departures and authorization or requested decisions, using the
+Follow precedent disclosure fields; record conflicts and search gaps, or "None.">
+
 ## Acceptance Criteria
 
 - <Observable condition that must hold when the plan is complete.>

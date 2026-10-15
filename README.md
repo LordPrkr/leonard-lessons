@@ -120,14 +120,15 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
-| `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
+| `/follow-precedent` | Source repository access |
+| `/effective-engineer`                                                                                                                                 | `/follow-precedent`, `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `/code-brain-planning`                                                                                                                                | `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
+| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 | `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
@@ -170,11 +171,23 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-distill --global
   ```
 
+- `follow-precedent` — shared contract for establishing applicable implementation
+  and test patterns, disclosing necessary deviations, and auditing plans, code,
+  and proposed review fixes.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
+  ```
+
 - `effective-engineer` — tight inspect, red-green implementation, validation-repair,
   final-review, and default PR-delivery loop for non-trivial code changes.
+  Establishes implementation and test precedent before editing, extends tests
+  using the affected module's conventions, and audits the complete diff for
+  unauthorized departures. Uses the shared `/follow-precedent` contract.
 
   ```bash
   bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
+  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
@@ -241,7 +254,10 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-review` — review a GitHub PR or committed changes since a supplied
   commit, branch, tag, or merge-base with independent Standards and Spec
-  reviewers. Uses `spellbinding-sentences` to explain the current behavior,
+  reviewers. Standards enforces applicable pre-change implementation and test
+  precedent, checks deviation authorization, and makes smell recommendations
+  defer to established patterns. Uses `spellbinding-sentences` to explain the
+  current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
   diff and file names. PR comments open with the explanation, put suggested
   diffs in a collapsed block, and end with an agent confirmation note. Before
@@ -256,6 +272,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   with its [MIT license notice](./code-review/LICENSE).
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
@@ -277,7 +294,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-brain-planning` — approval-first Code Brain planning that chooses a
   lightweight single-worker plan or a managed lifecycle with board transitions
-  and implementation receipts.
+  and implementation receipts. Both plan shapes map substantive choices to
+  applicable precedent and disclose necessary deviations for approval.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -285,6 +303,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
+  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   # Add only when the plan needs the corresponding branch.
