@@ -5,7 +5,7 @@ description: "Implement code changes from applicable precedent through a tight i
 
 # Effective Engineer
 
-**Follow precedent.** Before inspecting or editing, invoke [/follow-precedent](../follow-precedent/SKILL.md). Its evidence and deviation requirements govern every step of this loop.
+**Follow precedent.** Before inspecting or editing, invoke `/follow-precedent`. Its evidence and deviation requirements govern every step of this loop.
 
 Use the tight loop. When executing an approved plan, treat it as the scope and implementation direction. Escalate unplanned broad, risky, or cross-cutting work to `code-brain-planning`.
 

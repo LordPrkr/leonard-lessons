@@ -12,6 +12,6 @@ This repository publishes reusable agent skills, one skill per top-level directo
 - Update [README.md](./README.md) when adding, removing, renaming, or changing
   dependencies between skills.
 - Conclude every verified skill change with
-  [/finalize-implementation](./finalize-implementation/SKILL.md), then run
+  `/finalize-implementation`, then run
   `bunx skills add . --global --all` from the finalized worktree's repository root.
   Complete only when finalization has finished and installation succeeds.

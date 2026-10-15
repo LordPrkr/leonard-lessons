@@ -3,7 +3,7 @@ name: code-review
 description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
 
-**Follow precedent.** Invoke [/follow-precedent](../follow-precedent/SKILL.md) before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
+**Follow precedent.** Invoke `/follow-precedent` before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
 
 Two-axis review of a GitHub PR or the diff between `HEAD` and a fixed point the user supplies:
 
@@ -85,7 +85,7 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke `/spellbinding-sentences` and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 Inspect the pinned diff and supporting source for the [manual review priorities](review-summary.md#manual-review-priorities), including changes with no Standards or Spec findings. Trace affected contracts, consumers, database operations, and request call sites far enough to explain their consequences. Record changed, unchanged, or unverified status for every applicable category, with source evidence for each changed area.
 
@@ -101,7 +101,7 @@ For a GitHub PR, follow [GitHub PR review — Stage pending comments](github-pr-
 
 ### 7. Deliver the review overview and manual review guide
 
-Apply [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) to the whole final response and follow the [review summary format](review-summary.md#final-response). Use the evidence from step 5 and delivery status from step 6. Deliver this response even when both axes have no findings.
+Apply `/spellbinding-sentences` to the whole final response and follow the [review summary format](review-summary.md#final-response). Use the evidence from step 5 and delivery status from step 6. Deliver this response even when both axes have no findings.
 
 **Complete when:** the user has received an overview of what the change accomplishes, a manual review guide with source snippets and concrete checks for every changed priority area, explicit coverage limits, the separate Standards and Spec reports, and any GitHub delivery status.
 

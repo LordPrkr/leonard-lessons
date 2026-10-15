@@ -7,7 +7,7 @@ description: "Plan approval-first work in Code Brain from applicable precedent, 
 
 Use this for implementation work that needs a durable, user-approved plan. Complete step 1 before reconnaissance, wayfinding, or invoking supporting skills. Follow `/code-brain` for vault resolution, repository identity, vocabulary, and evidence; use `/code-brain-writeback` as findings emerge. Do not edit implementation files until the user explicitly approves the current plan.
 
-**Follow precedent.** After step 1 and before reconnaissance, invoke [/follow-precedent](../follow-precedent/SKILL.md). The plan must identify the patterns it reuses and disclose every necessary departure before approval.
+**Follow precedent.** After step 1 and before reconnaissance, invoke `/follow-precedent`. The plan must identify the patterns it reuses and disclose every necessary departure before approval.
 
 Use `/code-brain-wayfinder` before planning when material decisions still obscure the implementation route. A clear route does not by itself require managed planning.
 

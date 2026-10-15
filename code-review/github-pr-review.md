@@ -54,7 +54,7 @@ Compare each finding by the affected behavior, triggering condition, and underly
 
 ## Comment body
 
-Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) on the exact bodies that will be saved, including review-body findings, after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
+Invoke `/spellbinding-sentences` on the exact bodies that will be saved, including review-body findings, after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
 
 Use this order: explanation, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the explanation and note visible outside the collapsed block. Give individual comments no title, heading, severity prefix, or axis label; retain axis assessments in the review summary. For review-body findings, use a file-and-line link to locate the concern before the same prose-first body.
 
