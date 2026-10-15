@@ -1,11 +1,13 @@
 ---
 name: code-brain-planning
-description: "Plan approval-first work in Code Brain, choosing a lightweight plan or managed lifecycle from the work's actual coordination needs."
+description: "Plan approval-first work in Code Brain from applicable precedent, choosing a lightweight plan or managed lifecycle from the work's actual coordination needs."
 ---
 
 # Code Brain Planning
 
 Use this for implementation work that needs a durable, user-approved plan. Complete step 1 before reconnaissance, wayfinding, or invoking supporting skills. Follow `/code-brain` for vault resolution, repository identity, vocabulary, and evidence; use `/code-brain-writeback` as findings emerge. Do not edit implementation files until the user explicitly approves the current plan.
+
+**Follow precedent.** After step 1 and before reconnaissance, read and apply [Follow precedent](../effective-engineer/follow-precedent.md). The plan must identify the patterns it reuses and disclose every necessary departure before approval.
 
 Use `/code-brain-wayfinder` before planning when material decisions still obscure the implementation route. A clear route does not by itself require managed planning.
 
@@ -29,11 +31,13 @@ State the selected shape and why. If shape selection yields a material finding, 
 
 Done when the route is clear and the plan shape is justified by concrete coordination needs rather than the task's apparent importance, or the work has been handed to `/code-brain-wayfinder` because a material decision still blocks planning.
 
-## 3. Create the plan
+## 3. Create the plan from precedent
 
 Ensure the Code Brain project is initialized; invoke `/code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `/code-brain`'s plan authoring contract before writing `plan.md`. For Lightweight, use [the lightweight layout](./references/LIGHTWEIGHT.md); for Managed, read [`TEMPLATE.md`](./references/TEMPLATE.md).
 
 Capture each affected source repository's full `HEAD`, then link every non-closed `plan.md` from `AGENTS.md` under Active plans. Write only the sections and sibling artifacts that the selected shape needs. Every created artifact has a relative link from `plan.md`. For managed work, create and link `notes.md` with `Exploration` and `Documentation candidates` sections before recording its first material finding. Lightweight plans use their layout's sections and omit `notes.md` unless exploration outgrows them.
+
+Before drafting implementation diffs, establish applicable precedent from the planning checkout. In `Precedent`, map each substantive implementation, validation, and testing choice to paths and symbols with the source revision and why the example applies. In `Deviations`, record each departure using the shared contract's disclosure fields and identify existing authorization or the decision requested. Record search gaps and conflicting examples explicitly. Carry these references into the implementation steps and test strategy so a fresh worker can adapt the same patterns.
 
 Invoke supporting skills only for their concrete artifact or decision:
 
@@ -43,20 +47,20 @@ Invoke supporting skills only for their concrete artifact or decision:
 
 For managed work, follow the lifecycle reference for the board card, review, slices, and receipt. Lightweight plans remain in `plans/` without a board card.
 
-Done when `plan.md` stands alone for a fresh worker, every material claim has evidence or an explicit question, and no artifact exists without serving the selected plan shape.
+Done when `plan.md` stands alone for a fresh worker, every substantive choice maps to applicable precedent or a disclosed necessary deviation, every material claim has evidence or an explicit question, and no artifact exists without serving the selected plan shape.
 
 ## 4. Review and approve
 
-Apply `/spellbinding-sentences` to the plan. Label every proposed diff and give it an explicit `WHY` tied to the observed behavior or requested outcome. Adversarially review meaningful risks; use a read-only second opinion for an irreversible migration, external contract, ownership or security boundary, unresolved architectural choice, or cross-repository coordination.
+Apply `/spellbinding-sentences` to the plan. Label every proposed diff and give it an explicit `WHY` tied to the observed behavior or requested outcome. Audit all proposed diffs against `Precedent` and `Deviations`; remove departures without demonstrated necessity. Adversarially review meaningful risks; use a read-only second opinion for an irreversible migration, external contract, ownership or security boundary, unresolved architectural choice, or cross-repository coordination.
 
-Incorporate accepted findings, then present the exact standalone plan and wait. Explicit approval sets `status: approved`; a substantive revision restores `draft` and repeats review. For managed work, use the lifecycle reference's board transition. An implemented plan is immutable; later work receives a new folder.
+Incorporate accepted findings, then present the exact standalone plan, including its deviations and their consequences, and wait. Approval covers disclosed departures only. Explicit approval sets `status: approved`; a substantive revision restores `draft` and repeats review. For managed work, use the lifecycle reference's board transition. An implemented plan is immutable; later work receives a new folder.
 
-Done when the plan is approved and ready to execute, or its status honestly records abandonment or supersession.
+Done when the plan is approved with every departure explicitly authorized and no unresolved precedent conflict, or its status honestly records abandonment or supersession.
 
 ## 5. Implement, verify, and close
 
-Code Brain owns delivery for its approved plans. Invoke `/feature-branch` once before implementation to establish the feature branch and independently provisioned worktree. A lightweight plan is one fresh worker; managed work follows its execution slices. Give each worker only the approved `plan.md`, its assigned execution-slice identifier when applicable, and an instruction to invoke `/effective-engineer`; state that Code Brain owns workspace provisioning, finalization, lifecycle writeback, and plan closure. A managed worker implements only its assigned slice and returns its reviewed diff, verification evidence, deviations, residual risks, and blockers. Review the delivered diff against the approved plan, repository standards, correctness, simplicity, and verification evidence. A design change requires a revised plan and approval.
+Code Brain owns delivery for its approved plans. Invoke `/feature-branch` once before implementation to establish the feature branch and independently provisioned worktree. A lightweight plan is one fresh worker; managed work follows its execution slices. Give each worker only the approved `plan.md`, its assigned execution-slice identifier when applicable, and an instruction to invoke `/effective-engineer`; state that Code Brain owns workspace provisioning, finalization, lifecycle writeback, and plan closure. A managed worker implements only its assigned slice and returns its reviewed diff, verification evidence, deviations, residual risks, and blockers. Review the delivered diff against the approved plan, its cited precedent and authorized deviations, repository standards, correctness, simplicity, and verification evidence. A design change requires a revised plan and approval.
 
 Invoke `/finalize-implementation` once for verified work. Record the outcome, changed files, verification, deviations, residual risks, and blockers in `plan.md` or `notes.md`; managed work also follows the receipt contract. Set `status: implemented` only after verified delivery and finalization succeed.
 
-Done when every retained diff hunk is justified by the approved plan, delivery evidence is durable, and the plan status matches the result.
+Done when every retained diff hunk follows the approved plan and its cited precedent or authorized deviations, delivery evidence is durable, and the plan status matches the result.

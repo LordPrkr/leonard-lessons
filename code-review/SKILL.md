@@ -1,11 +1,13 @@
 ---
 name: code-review
-description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Runs independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
+description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
+
+**Follow precedent.** Read and apply [Follow precedent](../effective-engineer/follow-precedent.md) before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
 
 Two-axis review of a GitHub PR or the diff between `HEAD` and a fixed point the user supplies:
 
-- **Standards**: does the code conform to this repo's documented coding standards?
+- **Standards**: does the code conform to applicable precedent and documented repository standards, with every departure justified and authorized?
 - **Spec**: does the code faithfully implement the originating issue / spec?
 
 Both axes run as **parallel sub-agents** so they don't pollute each other's context, then this skill aggregates their findings.
@@ -33,13 +35,15 @@ For a PR, start with its captured description and linked issues. Look for any re
 
 **Complete when:** the spec path or fetched contents are available, or the user has confirmed there is no spec and the Spec axis will be skipped.
 
-### 3. Identify the standards sources
+### 3. Identify the standards and precedent sources
 
 Read guidance at the pinned review revision that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
-On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
+Locate the closest applicable implementations, callers, and tests in the pre-change source at the pinned merge-base or PR diff base. Record paths, symbols, revisions, and why each example applies. Capture disclosed deviations and their task or approval evidence. The Standards reviewer must verify applicability and search gaps across the full diff; code introduced by the reviewed change cannot establish its own precedent.
 
-- **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
+On top of these sources, the Standards axis carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3). Two rules bind it:
+
+- **Standards and precedent override smells.** Suppress a smell recommendation that conflicts with an applicable documented rule, applicable precedent, or an explicitly authorized task requirement. A general refactoring preference cannot justify a departure.
 - **Always a judgement call.** Each smell is a labelled heuristic ("possible Feature Envy"), never a hard violation. Like any standard here, skip anything tooling already enforces.
 
 Each smell reads *what it is* → *how to fix*; match it against the diff:
@@ -57,17 +61,17 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-**Complete when:** the applicable standards sources are listed, or their absence is recorded, and the smell baseline is ready to include in the Standards prompt.
+**Complete when:** documented standards and candidate precedent sources are listed with pinned references, any search gaps or conflicts are explicit, disclosed deviations have authorization evidence or an explicit gap, and the shared contract and smell baseline are ready to include in the Standards prompt.
 
 ### 4. Spawn both sub-agents in parallel
 
-Give both sub-agents the pinned review scope from step 1 and paste the [finding format](#finding-format) below into their prompts. For a PR, pass the saved diff and PR metadata rather than a command against local `HEAD`. Each brief's word limit applies to prose; proposed diffs are additional.
+Give both sub-agents the pinned review scope from step 1 and paste the full Follow precedent contract and [finding format](#finding-format) below into their prompts. For a PR, pass the saved diff and PR metadata rather than a command against local `HEAD`. Each brief's word limit applies to prose; proposed diffs are additional.
 
 **Standards sub-agent prompt** should include:
 
 - The saved diff or full diff command using pinned SHAs, and the commit list.
-- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
-- The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- The standards and precedent sources, pinned pre-change revision, disclosed deviations, and authorization evidence from step 3, **plus the smell baseline** pasted into the prompt (the sub-agent has no other access to it).
+- The brief: "Apply Follow precedent to every substantive implementation, validation, and test choice in the pinned diff, including the affected module's test conventions. Report every documented-standard violation with its source and rule. For each unjustified or unauthorized pattern departure, cite the pre-change path and symbol, explain applicability, identify the difference, and propose the smallest correction. Verify authorization against the task or an approved decision. Demonstrated pattern breaches are Standards violations even without a written rule. Report baseline smells as judgement calls subject to the precedence rules. Apply the shared contract to proposed fixes too. Skip anything tooling enforces. Return all findings, precedent coverage, and inspection limits; keep prose concise without truncating findings to meet a word budget."
 
 **Spec sub-agent prompt** should include:
 
@@ -77,17 +81,17 @@ Give both sub-agents the pinned review scope from step 1 and paste the [finding 
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
-**Complete when:** every applicable axis has returned its report from a separate sub-agent, or a failed run is explicitly reported; a missing spec is recorded as a skipped Spec axis.
+**Complete when:** every applicable axis has returned its report from a separate sub-agent, or a failed run is explicitly reported; Standards accounts for the full diff against precedent or names inspection limits; a missing spec is recorded as a skipped Spec axis.
 
 ### 5. Aggregate
 
-Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. If a pattern violation exposes an unchecked class of changes, have Standards inspect the remaining instances before completing the report. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 Inspect the pinned diff and supporting source for the [manual review priorities](review-summary.md#manual-review-priorities), including changes with no Standards or Spec findings. Trace affected contracts, consumers, database operations, and request call sites far enough to explain their consequences. Record changed, unchanged, or unverified status for every applicable category, with source evidence for each changed area.
 
-Record each axis's finding count and worst issue, or its skip or failure. Keep these assessments separate.
+Record each axis's finding count and worst issue, or its skip or failure. Include the precedent sources checked, authorized deviations, and unresolved gaps or conflicts in Standards coverage. Keep these assessments separate; inspection limits preclude a claim of full precedent conformance.
 
-**Complete when:** every actionable finding has passed the writing workflow and satisfies the finding format, Standards and Spec reports are ready separately with their counts and assessments, and every applicable manual review category is accounted for with evidence or an explicit inspection limit.
+**Complete when:** every actionable finding and proposed fix satisfies the finding format and shared precedent contract, Standards and Spec reports are ready separately with their counts and assessments, and precedent coverage and every applicable manual review category are accounted for with evidence or an explicit inspection limit.
 
 ### 6. Stage GitHub PR comments
 
@@ -106,7 +110,7 @@ Apply [/spellbinding-sentences](../spellbinding-sentences/SKILL.md) to the whole
 Every actionable finding, on either axis and for every review target, includes:
 
 - The affected repository-relative file path and line or range when present in the reviewed revision.
-- An explanation that leads with the code's current state or behavior under a concrete condition and its consequence for users or maintainers. Explain why that behavior needs further review and name the concrete condition or check the reviewer should confirm. Then describe the intended state or behavior according to the review and how the proposed change closes that gap. Support the recommendation with the cited standard, baseline smell, or spec requirement; a smell label alone is insufficient. Keep the explanation proportional to the issue, with enough context for the author to understand why the change matters and decide what to do.
+- An explanation that leads with the code's current state or behavior under a concrete condition and its consequence for users or maintainers. Explain why that behavior needs further review and name the concrete condition or check the reviewer should confirm. Then describe the intended state or behavior according to the review and how the proposed change closes that gap. Support the recommendation with the cited standard, applicable precedent, baseline smell, or spec requirement; a smell label alone is insufficient. For a precedent violation, cite the pre-change path and symbol, explain its applicability, and identify the unjustified departure. Keep the explanation proportional to the issue, with enough context for the author to understand why the change matters and decide what to do.
 - A concrete proposed unified diff inside a collapsed `<details>` block with `<summary>Suggested diff</summary>` and a blank line before the `diff` fence and before `</details>`. The diff uses `--- a/<path>` and `+++ b/<path>` file headers and hunk ranges. Include every file needed for the correction; use `/dev/null` for added or deleted files. Show replacement code rather than placeholders such as “fix this here.”
 
 Keep proposals consistent with the pinned source and label any unverified assumptions or validation limits. Propose changes for the user to assess; applying them is separate work. If an axis has no findings, say so without inventing a diff.

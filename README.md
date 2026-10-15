@@ -127,7 +127,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `/code-review` | `/effective-engineer`'s shared Follow precedent reference, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 | `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
@@ -172,6 +172,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `effective-engineer` — tight inspect, red-green implementation, validation-repair,
   final-review, and default PR-delivery loop for non-trivial code changes.
+  Establishes implementation and test precedent before editing, extends tests
+  using the affected module's conventions, and audits the complete diff for
+  unauthorized departures. Owns the shared [Follow precedent contract](./effective-engineer/follow-precedent.md)
+  required by planning and review; reading this reference does not invoke its
+  delivery workflow.
 
   ```bash
   bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
@@ -241,7 +246,10 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-review` — review a GitHub PR or committed changes since a supplied
   commit, branch, tag, or merge-base with independent Standards and Spec
-  reviewers. Uses `spellbinding-sentences` to explain the current behavior,
+  reviewers. Standards enforces applicable pre-change implementation and test
+  precedent, checks deviation authorization, and makes smell recommendations
+  defer to established patterns. Uses `spellbinding-sentences` to explain the
+  current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
   diff and file names. PR comments open with the explanation, put suggested
   diffs in a collapsed block, and end with an agent confirmation note. Before
@@ -256,6 +264,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   with its [MIT license notice](./code-review/LICENSE).
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
@@ -277,7 +286,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-brain-planning` — approval-first Code Brain planning that chooses a
   lightweight single-worker plan or a managed lifecycle with board transitions
-  and implementation receipts.
+  and implementation receipts. Both plan shapes map substantive choices to
+  applicable precedent and disclose necessary deviations for approval.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
