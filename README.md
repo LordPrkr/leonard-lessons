@@ -121,7 +121,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
 | `/follow-precedent` | Source repository access |
-| `/effective-engineer`                                                                                                                                 | `/follow-precedent`, `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
+| `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
 | `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
@@ -179,15 +179,12 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   ```
 
-- `effective-engineer` — tight inspect, red-green implementation, validation-repair,
-  final-review, and default PR-delivery loop for non-trivial code changes.
-  Establishes implementation and test precedent before editing, extends tests
-  using the affected module's conventions, and audits the complete diff for
-  unauthorized departures. Uses the shared `/follow-precedent` contract.
+- `effective-engineer` — lightweight implementation guidance that invokes
+  `feature-branch`, `tdd`, and `finalize-implementation`, with proportionate checks
+  and escalation for blocked repairs.
 
   ```bash
   bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
-  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
