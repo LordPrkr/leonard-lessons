@@ -56,7 +56,9 @@ All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `
 
 Plans use concise problem, goal, and request summaries, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
 
-The orchestrator gathers precedent, drafts the plan, and obtains explicit approval before a fresh implementation subagent starts work. Split larger work into separate plans that each fit one subagent. After reviewing and verifying the result, invoke `finalize-implementation` to commit, push, and prepare the pull request.
+Planning uses the latest conversation-established base, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan before the user approves it. Split larger work into separate plans that each fit one subagent.
+
+A worker subagent implements the approved plan through `effective-engineer`, which owns workspace provisioning, verification, and finalization. A separate reviewer subagent then invokes `code-review` with the approved plan as its spec.
 
 After finalization, create `receipt.md` with exactly three sections: Delivery links the finalized PR, Review summarizes findings and their resolution, and Follow-up lists remaining actions. Link the receipt from the plan's Outcome, set the plan to `implemented`, and remove its Active plans link. Blocked or partial work remains `approved`.
 
@@ -109,7 +111,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/follow-precedent` | Source repository access |
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, `/code-brain`, `/spellbinding-sentences`, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
+| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/code-review`, `/feature-branch`, `/finalize-implementation`, `/code-brain`, `/spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review; plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
@@ -261,7 +263,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-brain-planning` — approval-first Code Brain planning grounded in
   applicable precedent. Each plan describes file and definition changes, a test
-  strategy, and authorized deviations; delivery ends with a three-section receipt.
+  strategy, and authorized deviations. Separate subagents review the plan,
+  implement it, and review the delivered changes; closure creates a three-section receipt.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -271,6 +274,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   # Add only when the plan needs the corresponding branch.
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
