@@ -219,7 +219,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
-- `finalize-implementation` — review and commit the delivery-ready branch, rebase
+- `finalize-implementation` — commit the delivery-ready branch, rebase
   onto its latest base, verify and push, then create its labeled pull request with
   a finished description.
 
