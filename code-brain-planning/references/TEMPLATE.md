@@ -27,11 +27,11 @@ status: draft
 
 ## Files
 
-```diff
- <repository>/
-/├── <changed-file>
-+├── <added-file>
--└── <deleted-file>
+```text
+<repository>/
+M ├── <changed-file>
+A ├── <added-file>
+D └── <deleted-file>
 ```
 
 ## Implementation

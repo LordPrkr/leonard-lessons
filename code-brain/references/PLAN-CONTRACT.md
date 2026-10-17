@@ -32,15 +32,15 @@ Resolve implementation choices before approval; keep unanswered decisions visibl
 
 ## Files
 
-Show a high-level tree of the repository-relative files expected to change in a fenced `diff` block. Prefix each affected file with `+` for add, `-` for delete, or `/` for change. Include test files here when they are expected to change. Label repository roots when several repositories are affected.
+Show a high-level tree of the repository-relative files expected to change in a fenced `text` block. Prefix each affected file with `M` for modified, `A` for added, or `D` for deleted. Include test files here when they are expected to change. Label repository roots when several repositories are affected.
 
-```diff
- src/
-/├── service.ts
-+├── policy.ts
--└── legacy.ts
- tests/
-/└── service.test.ts
+```text
+src/
+M ├── service.ts
+A ├── policy.ts
+D └── legacy.ts
+tests/
+M └── service.test.ts
 ```
 
 ## Implementation

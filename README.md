@@ -54,7 +54,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
 
-Plans use concise problem, goal, and request summaries, a file tree marked for adds, deletes, and changes, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
+Plans use concise problem, goal, and request summaries, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
 
 The orchestrator gathers precedent, drafts the plan, and obtains explicit approval before a fresh implementation subagent starts work. Split larger work into separate plans that each fit one subagent. After reviewing and verifying the result, invoke `finalize-implementation` to commit, push, and prepare the pull request.
 
