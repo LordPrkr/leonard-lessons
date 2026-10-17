@@ -46,6 +46,6 @@ Done when the selected ticket has a durable resolution, every material claim has
 
 When no frontier tickets or material fog remain, create a Code Brain plan through `/code-brain-planning`. Link the map from the plan's Precedent and the plan from the map's Outcome.
 
-If the route is already clear during charting, route directly to `/code-brain-planning`; it selects the lightweight or managed shape without creating a map.
+If the route is already clear during charting, route directly to `/code-brain-planning`; it creates the implementation plan without a map.
 
 Done when the map either links to its implementation plan or explains why the destination was abandoned or superseded.

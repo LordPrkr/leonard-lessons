@@ -11,7 +11,7 @@ Ordinary reads may use legacy projects without changing them. Audit the current 
 3. Propose the smallest concrete repair. Never infer a Kanban lane from plan age or design status; ask the user about ambiguous work.
 4. After confirmation, repair navigation and selected cards without rewriting durable content or bulk-migrating unrelated projects.
 
-Done when the user has declined changes or confirmed a project whose spine resolves, active-plan links are current, and each selected managed task appears in one lane.
+Done when the user has declined changes or confirmed a project whose spine resolves, active-plan links are current, and each selected tracked task appears in one lane.
 
 ## Bootstrap a project
 

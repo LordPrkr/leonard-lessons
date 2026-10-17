@@ -61,12 +61,6 @@ status: draft
 
 <!-- Omit empty definition groups. -->
 
-## Execution Slices
-
-<!-- Managed only; omit when the plan fits one implementation subagent's fresh context. -->
-
-1. **<Slice title>** — delivers <observable behavior>; definitions <names from Implementation>; blocked by <slices or None>; test strategy <corresponding checks below>.
-
 ## Test Strategy
 
 - <Change or behavior> — <existing test seam, command, or manual check; explain when automated tests are unwarranted.>
@@ -78,4 +72,4 @@ status: draft
 
 ## Outcome
 
-<Leave empty until implementation; then record delivery, checks performed, deviations, residual risks, and blockers. For managed work, link receipt.md here.>
+<Leave empty until finalization; then link receipt.md.>

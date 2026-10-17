@@ -21,7 +21,7 @@ Read legacy `approved:` through `/code-brain`'s compatibility mapping, but never
 
 ## Plan sections
 
-Use these sections in order: Problem, Goal, Context, Precedent, Deviations, Files, Implementation, Test Strategy, and Questions. The calling workflow may add execution slices and a delivery Outcome. Apply `/spellbinding-sentences` to the explanatory prose.
+Use these sections in order: Problem, Goal, Context, Precedent, Deviations, Files, Implementation, Test Strategy, and Questions. The calling workflow may add an Outcome linking the delivery receipt. Apply `/spellbinding-sentences` to the explanatory prose.
 
 - **Problem:** one or two concise sentences about the problem.
 - **Goal:** one or two concise sentences about the desired outcome.
