@@ -9,6 +9,7 @@ Read [VISION.md](./VISION.md) before changing strategy.
 
 ## Start here
 - [Vision](./VISION.md)
+- [Linear workflow](./ISSUE_TRACKER.md)
 
 ## Active plans
 - [Decoration placement queries](./plans/019_DECORATION_PLACEMENT_QUERIES/plan.md)

@@ -33,6 +33,7 @@ Read [VISION.md](./VISION.md) before changing strategy.
 
 ## Start here
 - [Vision](./VISION.md)
+- [Linear workflow](./ISSUE_TRACKER.md)
 
 ## Active plans
 - <Relative link to each non-closed plan, or `None.`>

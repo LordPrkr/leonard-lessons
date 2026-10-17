@@ -28,7 +28,7 @@ Before delegation, confirm local refs resolve (`git rev-parse <fixed-point>` and
 
 For a PR, start with its captured description and linked issues. Look for any remaining originating spec, in this order:
 
-1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched with the repository’s available issue-tracker tooling. Follow `docs/agents/issue-tracker.md` when that file exists.
+1. Issue references in the commit messages (`#123`, `Closes #45`, GitLab `!67`, etc.), fetched with the available issue-tracker tooling. Resolve the project's Code Brain folder through `/code-brain` and follow its `ISSUE_TRACKER.md` when that file exists.
 2. A path the user passed as an argument.
 3. A spec file under `docs/`, `specs/`, or `.scratch/` matching the branch name or feature.
 4. If nothing is found, ask the user where the spec is. If they say there isn't one, the **Spec** sub-agent will skip and report "no spec available".

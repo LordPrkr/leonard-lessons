@@ -25,7 +25,7 @@ Code Brain keeps durable project memory outside source repositories. Source code
 
 Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts.
 
-Run `setup-linear` before logging work for a project. It asks only for the missing Linear team/project and a short workflow description, saves them in the source repository's `docs/agents/issue-tracker.md`, and links that file from the repository instructions. It uses existing Linear statuses and assumes Code Brain for domain docs.
+Run `setup-linear` before logging work for a project. It asks only for the missing Linear team/project and a short workflow description, saves them in `$CODE_BRAIN_ROOT/<repo>/ISSUE_TRACKER.md` alongside `VISION.md`, and links that file from the Code Brain project's `AGENTS.md`. It uses existing Linear statuses and assumes Code Brain for domain docs.
 
 New tasks and decision tickets live in Linear. Code Brain plans and maps link their issues; descriptions, dependencies, and task status stay in Linear. Existing Markdown tickets remain historical context unless migration is requested.
 
@@ -37,6 +37,7 @@ Each initialized project starts with `VISION.md` and `AGENTS.md`; other artifact
 $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md                 # human-owned strategy and agent authority
 ├── AGENTS.md                 # agent-maintained router to active memory
+├── ISSUE_TRACKER.md          # project Linear destination and workflow, when configured
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps linking Linear issues
@@ -119,7 +120,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; `/code-brain` and issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
 `/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
@@ -268,6 +269,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
 

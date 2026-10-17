@@ -27,6 +27,7 @@ Never infer identity from home-directory layout or generic worktree names.
 $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md
 ├── AGENTS.md
+├── ISSUE_TRACKER.md
 ├── docs/
 ├── plans/<NNN_TOPIC>/
 ├── wayfinding/<NNN_TOPIC>/
@@ -59,7 +60,7 @@ Before a Code-Brain-aware workflow plans or implements, read the relevant `domai
 
 ## Work tracking
 
-Create new tasks and decision tickets in Linear. Before logging or updating work, read `docs/agents/issue-tracker.md` in the target source repository; invoke `/setup-linear` when it is missing or incomplete. Follow its destination, status transitions, and required defaults. If Linear access is unavailable, report the blocker and resume issue work when access returns.
+Create new tasks and decision tickets in Linear. Before logging or updating work, read `$CODE_BRAIN_ROOT/<repo>/ISSUE_TRACKER.md`, alongside `VISION.md`; invoke `/setup-linear` when it is missing or incomplete. Follow its destination, status transitions, and required defaults. If Linear access is unavailable, report the blocker and resume issue work when access returns.
 
 Search for an existing issue before creating one, retain its identifier and URL, and report the URL after creation. Keep task descriptions, dependencies, and workflow status in Linear. Keep domain docs, implementation plans, and reusable findings in Code Brain; link issues from the relevant artifacts and summarize essential context in Linear so issues stand alone. Plan frontmatter describes design approval and delivery, independently of the project's issue statuses.
 
