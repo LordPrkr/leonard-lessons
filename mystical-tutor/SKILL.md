@@ -16,7 +16,7 @@ For work that changes code:
 - **Work requiring a durable plan and approval first** → `/code-brain-planning`; it selects a lightweight or managed shape from the coordination needs.
 - **Broad work with a clear destination but material unresolved decisions** → `/code-brain-wayfinder`.
 
-Keep bounded work in the current session. Durable planning uses Code Brain and fresh workers for context-sized execution slices.
+Keep bounded work in the current session. Durable planning uses Code Brain and fresh implementation subagents for context-sized execution slices.
 
 ## Detour
 

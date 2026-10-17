@@ -1,6 +1,6 @@
 # Plan Authoring Contract
 
-Use this contract for Code Brain implementation plans. A plan is a standalone handoff for a worker with no prior conversation.
+Use this contract for Code Brain implementation plans. A plan is a standalone handoff for an implementation subagent with no prior conversation.
 
 ## Frontmatter and status
 
@@ -27,7 +27,7 @@ Give each observable behavior one red-green implementation step. Resolve impleme
 
 ## Implementation diffs
 
-Every code-changing step names each affected repository-relative path and immediately shows a fenced unified diff. Diffs express human-reviewed design intent; acceptance criteria govern delivery, and workers report evidence-backed implementation deviations.
+Every code-changing step names each affected repository-relative path and immediately shows a fenced unified diff. Diffs express human-reviewed design intent; acceptance criteria govern delivery, and implementation subagents report evidence-backed implementation deviations.
 
 Include enough unchanged context and `-`/`+` lines to distinguish current code from the proposed change. Mark new and deleted files with `/dev/null`, include the full contents of a small new file, and use enough path-labeled diffs to show how connected changes fit together.
 
@@ -42,4 +42,4 @@ Include enough unchanged context and `-`/`+` lines to distinguish current code f
 
 ## Completion
 
-The plan is ready for review when a fresh worker can execute it, every acceptance criterion maps to implementation and verification, every code-changing step has path-labeled before-and-after diffs, and no unresolved choice is hidden in conditional prose.
+The plan is ready for review when a fresh implementation subagent can execute it, every acceptance criterion maps to implementation and verification, every code-changing step has path-labeled before-and-after diffs, and no unresolved choice is hidden in conditional prose.

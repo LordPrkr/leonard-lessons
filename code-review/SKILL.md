@@ -20,7 +20,7 @@ For a GitHub PR, use `gh` and follow [GitHub PR review — Pin the PR](github-pr
 
 For a local review, use the supplied fixed point (a commit SHA, branch name, tag, `main`, `HEAD~5`, etc.). If neither a PR nor a fixed point is specified, ask for the review target. Capture the diff command once: `git diff <fixed-point>...HEAD` (three-dot, so the comparison is against the merge-base). Also note the list of commits via `git log <fixed-point>..HEAD --oneline`.
 
-Before delegation, confirm local refs resolve (`git rev-parse <fixed-point>` and `git rev-parse HEAD`) or the PR snapshot is pinned, and the diff is non-empty. Record both local SHAs so reviewers use the same revisions even if the branch moves. Local comparisons cover committed changes.
+Before delegation, confirm local refs resolve (`git rev-parse <fixed-point>` and `git rev-parse HEAD`) or the PR snapshot is pinned, and the diff is non-empty. Record both local SHAs so both subagents use the same revisions even if the branch moves. Local comparisons cover committed changes.
 
 **Complete when:** the target, pinned revisions, exact non-empty diff or saved PR diff, and commit list are captured, or a resolution failure or empty diff has been reported before delegation.
 
@@ -39,7 +39,7 @@ For a PR, start with its captured description and linked issues. Look for any re
 
 Read guidance at the pinned review revision that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
-Locate the closest applicable implementations, callers, and tests in the pre-change source at the pinned merge-base or PR diff base. Record paths, symbols, revisions, and why each example applies. Capture disclosed deviations and their task or approval evidence. The Standards reviewer must verify applicability and search gaps across the full diff; code introduced by the reviewed change cannot establish its own precedent.
+Locate the closest applicable implementations, callers, and tests in the pre-change source at the pinned merge-base or PR diff base. Record paths, symbols, revisions, and why each example applies. Capture disclosed deviations and their task or approval evidence. The Standards sub-agent must verify applicability and search gaps across the full diff; code introduced by the reviewed change cannot establish its own precedent.
 
 On top of these sources, the Standards axis carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3). Two rules bind it:
 

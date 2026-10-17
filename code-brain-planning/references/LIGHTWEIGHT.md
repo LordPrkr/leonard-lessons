@@ -1,6 +1,6 @@
 # Lightweight layout
 
-Use this layout for a plan that fits one fresh worker and needs an approval gate, not managed coordination. Keep the shared frontmatter and every required element of `/code-brain`'s plan authoring contract, but place them under these four headings:
+Use this layout for a plan that fits one fresh implementation subagent and needs an approval gate, not managed coordination. Keep the shared frontmatter and every required element of `/code-brain`'s plan authoring contract, but place them under these four headings:
 
 ```md
 ---

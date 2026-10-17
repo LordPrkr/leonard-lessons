@@ -1,11 +1,11 @@
 ---
 name: gh-pr-job-triage
-description: Triage GitHub pull-request jobs with parallel scouts. Use when PR checks fail or the user wants CI failures classified as flaky, unrelated, or related to the changes.
+description: Triage GitHub pull-request jobs with parallel scout subagents. Use when PR checks fail or the user wants CI failures classified as flaky, unrelated, or related to the changes.
 ---
 
 # GitHub PR Job Triage
 
-Delegate evidence collection; keep classification with the orchestrator.
+Delegate evidence collection to scout subagents; keep classification with the orchestrator.
 
 ## 1. Establish scope
 
@@ -15,15 +15,15 @@ If there is no linked pull request, stop and report that. If every relevant term
 
 **Complete when:** every relevant terminal failure has its name, conclusion, details URL, and run/job identifier when available.
 
-## 2. Discover scouts
+## 2. Discover scout subagents
 
-Call `subagent({ action: "list" })`. Select an executable `scout`; stop and report the discovery failure if none is available.
+Call `subagent({ action: "list" })`. Select an executable `scout` subagent; stop and report the discovery failure if none is available.
 
-**Complete when:** the scout runtime name is verified.
+**Complete when:** the scout subagent runtime name is verified.
 
 ## 3. Fan out evidence collection
 
-Launch one read-only scout per job in a single parallel `subagent` call with `context: "fresh"`, `async: true`, and bounded concurrency. Scouts must not edit files or launch subagents.
+Launch one read-only scout subagent per job in a single parallel `subagent` call with `context: "fresh"`, `async: true`, and bounded concurrency. Scouts must not edit files or launch subagents.
 
 Give each scout the repository, PR number, head SHA, job name, details URL, and identifiers. Require it to use `gh` to inspect the check, workflow run, job metadata, annotations, and logs. It may inspect the PR diff and nearby repository code only to connect log evidence to changed files. It then attempts the smallest repository-prescribed, non-mutating reproduction; when no such command is safe or available, it reports the exact infeasibility reason.
 
@@ -58,7 +58,7 @@ subagent({
 })
 ```
 
-**Complete when:** one scout is running for every relevant job.
+**Complete when:** one scout subagent is running for every relevant job.
 
 ## 4. Classify from evidence
 

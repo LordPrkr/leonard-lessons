@@ -17,13 +17,13 @@ Verified work → finalize-implementation → GitHub PR
 Delivery → interactive-review (Hunk) → code-review <fixed-point>
 ```
 
-Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh worker with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
+Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh implementation subagent with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
 
 ## Code Brain workflow
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` selects a lightweight single-worker plan or a managed lifecycle from the work's coordination needs; `effective-engineer` handles ordinary work without durable artifacts. Lightweight plans do not need a Kanban card.
+Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` selects a lightweight plan for one implementation subagent or a managed lifecycle from the work's coordination needs; `effective-engineer` handles ordinary work without durable artifacts. Lightweight plans do not need a Kanban card.
 
 ### Project spine
 
@@ -68,7 +68,7 @@ For managed plans:
 1. The orchestrator gathers source context and immediately records each useful finding with repository revisions or external URLs before continuing exploration.
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
-4. Fresh workers implement their assigned slices. Read-only reviewers check correctness, validation, and simplicity.
+4. Fresh implementation subagents implement their assigned slices. Read-only reviewer subagents check correctness, validation, and simplicity.
 5. Accepted work invokes `finalize-implementation` to commit, push, and prepare the pull request.
 6. The orchestrator appends an implementation attempt to `receipt.md`, including source evidence for every changed repository. Accepted work becomes `implemented` and moves to Done; blocked, partial, reverted, or unfinalized work remains `approved` and moves to Blocked.
 
@@ -246,7 +246,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `gh-pr-job-triage` — classify failed pull-request jobs with parallel,
-  evidence-gathering scouts.
+  evidence-gathering scout subagents.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
@@ -254,8 +254,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-review` — review a GitHub PR or committed changes since a supplied
   commit, branch, tag, or merge-base with independent Standards and Spec
-  reviewers. Standards enforces applicable pre-change implementation and test
-  precedent, checks deviation authorization, and makes smell recommendations
+  reviewer subagents. Standards enforces applicable pre-change implementation
+  and test precedent, checks deviation authorization, and makes smell recommendations
   defer to established patterns. Uses `spellbinding-sentences` to explain the
   current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
@@ -293,8 +293,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `code-brain-planning` — approval-first Code Brain planning that chooses a
-  lightweight single-worker plan or a managed lifecycle with board transitions
-  and implementation receipts. Both plan shapes map substantive choices to
+  lightweight plan for one implementation subagent or a managed lifecycle
+  with board transitions and implementation receipts. Both plan shapes map substantive choices to
   applicable precedent and disclose necessary deviations for approval.
 
   ```bash

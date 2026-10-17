@@ -30,7 +30,7 @@ review: passed # passed | findings-recorded | not-run
 
 ### Review
 
-<Reviewer disposition and findings.>
+<Reviewer subagent disposition and findings.>
 
 ### Deviations and residual risks
 
