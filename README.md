@@ -14,7 +14,7 @@ Idea → clarify
        └─ uncertain technical path → tracer-bullet → return to the plan
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
-Delivery → interactive-review (Hunk) → code-review <fixed-point>
+Delivery → code-review <fixed-point>
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh implementation subagent with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -130,7 +130,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
 | `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
-| `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
 
 `/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
 
@@ -273,14 +272,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   changes in a pending review for you to submit. Local reviews require a fixed
   point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.
-
-- `interactive-review` — choose the latest commit or a branch comparison, open
-  it in a Hunk pane beside the caller terminal, and hand off to `hunk-review`.
-
-  ```bash
-  bunx skills@latest add modem-dev/hunk/skills/hunk-review --global
-  bunx skills add LordPrkr/leonard-lessons --skill interactive-review --global
-  ```
 
 - `code-brain-planning` — approval-first Code Brain planning that chooses a
   lightweight plan for one implementation subagent or a managed lifecycle

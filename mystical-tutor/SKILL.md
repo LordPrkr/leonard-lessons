@@ -25,7 +25,6 @@ When a plan or Wayfinder ticket depends on a technical question that conversatio
 ## On-ramps
 
 - **Review a pull request or branch since a fixed point** → `/code-review`.
-- **Review a diff interactively in Hunk** → `/interactive-review`.
 - **Assess human review comments and plan responses** → `/gh-pr-review-plan`.
 - **Triage failed pull-request jobs** → `/gh-pr-job-triage`.
 
