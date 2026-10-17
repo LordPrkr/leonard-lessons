@@ -19,7 +19,7 @@ status: draft
 
 ## Precedent
 
-<Source paths and symbols @ full revision, why each applies, and the patterns to reuse. Link supporting artifacts here when relevant.>
+<Brief summary of the patterns to reuse, referencing repository paths and definitions.>
 
 ## Deviations
 

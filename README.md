@@ -52,11 +52,11 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 ### Durable planning lifecycle
 
-All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
+All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle.
 
-Plans use concise problem, goal, and request summaries, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
+Plans use concise problem, goal, and request summaries, a brief precedent summary referencing repository paths and definitions, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Precedent omits source revisions. Answered questions retain their struck-through wording and documented answers.
 
-Planning uses the latest conversation-established base, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan before the user approves it. Split larger work into separate plans that each fit one subagent.
+Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan. Approval is a separate step for resolving questions with the user and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
 A worker subagent implements the approved plan through `effective-engineer`, which owns workspace provisioning, verification, and finalization. A separate reviewer subagent then invokes `code-review` with the approved plan as its spec.
 
@@ -111,7 +111,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review; plus conditional `$domain-modeling`, `$code-brain-diagramming`, and `$tracer-bullet` |
+| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$draft-message` | `$spellbinding-sentences` and a local clipboard tool |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
@@ -119,7 +119,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-`$code-brain-wayfinder` may route to `$tracer-bullet` or `$code-brain-planning`; install those branches when needed. Install `$domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+`$code-brain-wayfinder` may route to `$tracer-bullet` or `$code-brain-planning`; install those branches when needed. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -268,16 +268,12 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
-  # Add only when the plan needs the corresponding branch.
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
-  bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
