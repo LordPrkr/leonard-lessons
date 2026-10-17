@@ -131,7 +131,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 | `/interactive-review`                                                                                                                                 | cmux and external `/hunk-review`                                                                                                            |
-| `/sessions-search`                                                                                                                                   | Local Pi session transcripts                                                                                                                 |
 
 `/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
 
@@ -140,12 +139,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill mystical-tutor --global
-  ```
-
-- `sessions-search` — locate a topic, decision, implementation detail, or command outcome in local Pi session transcripts.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill sessions-search --global
   ```
 
 - `code-brain` — canonical project spine, Git-native repository resolution,
