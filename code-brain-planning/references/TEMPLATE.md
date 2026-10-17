@@ -19,7 +19,7 @@ status: draft
 
 ## Context
 
-<Current behavior, constraints, and evidence needed by a fresh-context worker.>
+<Current behavior, constraints, and evidence needed by an implementation subagent with fresh context.>
 
 ## Precedent
 
@@ -60,7 +60,7 @@ Follow precedent disclosure fields; record conflicts and search gaps, or "None."
 
 ## Execution Slices
 
-<!-- Omit when the plan fits one fresh worker context. -->
+<!-- Omit when the plan fits one implementation subagent's fresh context. -->
 
 1. **<Slice title>** — delivers <observable behavior>; implementation steps <N–N>; acceptance criteria <items>; blocked by <slices or None>; verify with `<command>`.
 
