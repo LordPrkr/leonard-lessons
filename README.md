@@ -9,7 +9,7 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 ```text
 Idea → clarify
        ├─ ordinary implementation → effective-engineer → reviewable PR
-       ├─ approval-first work → code-brain-planning (lightweight or managed)
+       ├─ approval-first work → code-brain-planning
        ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
        └─ uncertain technical path → tracer-bullet → return to the plan
 Approved plan → feature-branch → effective-engineer
@@ -17,13 +17,13 @@ Verified work → finalize-implementation → GitHub PR
 Delivery → code-review <fixed-point>
 ```
 
-Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Approved bounded plans and durable execution slices each run in a fresh implementation subagent with only their plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
+Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Each approved plan runs in a fresh implementation subagent with only its plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
 
 ## Code Brain workflow
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` selects a lightweight plan for one implementation subagent or a managed lifecycle from the work's coordination needs; `effective-engineer` handles ordinary work without durable artifacts. Lightweight plans do not need a Kanban card.
+Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a Kanban card.
 
 ### Project spine
 
@@ -33,7 +33,7 @@ Each initialized project has three entry points:
 $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md                 # human-owned strategy and agent authority
 ├── AGENTS.md                 # agent-maintained router to active memory
-├── KANBAN.md                 # durable managed-work state
+├── KANBAN.md                 # tracked task state
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
@@ -54,25 +54,11 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
 
-Lightweight plans record their exploration and delivery outcome in `plan.md`; they have no card or receipt. Managed plans additionally map that lifecycle onto the board:
+Plans use concise problem, goal, and request summaries, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
 
-```text
-Inbox → In Progress → Review → Ready → In Progress → Review → Done
-                      approval      implementation
+The orchestrator gathers precedent, drafts the plan, and obtains explicit approval before a fresh implementation subagent starts work. Split larger work into separate plans that each fit one subagent. After reviewing and verifying the result, invoke `finalize-implementation` to commit, push, and prepare the pull request.
 
-Blocked or partial implementation → receipt → Blocked
-```
-
-For managed plans:
-
-1. The orchestrator gathers source context and immediately records each useful finding with repository revisions or external URLs before continuing exploration.
-2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
-3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
-4. Fresh implementation subagents implement their assigned slices. Read-only reviewer subagents check correctness, validation, and simplicity.
-5. Accepted work invokes `finalize-implementation` to commit, push, and prepare the pull request.
-6. The orchestrator appends an implementation attempt to `receipt.md`, including source evidence for every changed repository. Accepted work becomes `implemented` and moves to Done; blocked, partial, reverted, or unfinalized work remains `approved` and moves to Blocked.
-
-Receipts record the actual commit SHA or a deterministic hash of the complete uncommitted Git change set. Plans preserve design intent, Kanban lanes preserve managed-work state, and receipts preserve what actually happened.
+After finalization, create `receipt.md` with exactly three sections: Delivery links the finalized PR, Review summarizes findings and their resolution, and Follow-up lists remaining actions. Link the receipt from the plan's Outcome, set the plan to `implemented`, and remove its Active plans link. Blocked or partial work remains `approved`.
 
 ### Supporting workflows
 
@@ -123,7 +109,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/follow-precedent` | Source repository access |
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
+| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, `/code-brain`, `/spellbinding-sentences`, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
@@ -273,14 +259,12 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.
 
-- `code-brain-planning` — approval-first Code Brain planning that chooses a
-  lightweight plan for one implementation subagent or a managed lifecycle
-  with board transitions and implementation receipts. Both plan shapes map substantive choices to
-  applicable precedent and disclose necessary deviations for approval.
+- `code-brain-planning` — approval-first Code Brain planning grounded in
+  applicable precedent. Each plan describes file and definition changes, a test
+  strategy, and authorized deviations; delivery ends with a three-section receipt.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global

@@ -53,11 +53,11 @@ Use these as a Diátaxis compass, not a mandatory four-folder scheme: create onl
 
 - `VISION.md` is human-owned strategic intent. Read it before durable planning and ask the user before changing it.
 - `AGENTS.md` is the short agent-maintained router to canonical memory, active plans, the board, and project-specific Code Brain rules. It is not a backlog.
-- `KANBAN.md` is the authoritative workflow state for durable Code Brain-managed work. Ordinary work that needs no durable artifact may remain outside it. Its lanes are Inbox, Ready, In Progress, Review, Blocked, and Done.
+- `KANBAN.md` holds task state for work tracked on the board; implementation plans use their own frontmatter status. Its lanes are Inbox, Ready, In Progress, Review, Blocked, and Done.
 - `wayfinding/` holds decision maps and ticket notes for uncertain work; `KANBAN.md` holds their status.
 - `todo/` holds durable context for unplanned work, not one-line task stubs. Simple tasks stay inline on the board.
 - `review/` holds review feedback and evidence-backed lessons. Use `review/pr-<number>-<short-head-sha>-feedback.md` for human feedback assessment, `review/pr-<number>-<short-head-sha>-review.md` for code review, and `review/branch-<short-head-sha>-review.md` for local branch review. Update the same immutable-target artifact across repeated runs of a workflow instead of creating session copies.
-- Plans preserve approved design. Appendable `receipt.md` files preserve execution truth.
+- Plans preserve approved design. `receipt.md` links the finalized PR and summarizes review findings and follow-up.
 
 Before a Code-Brain-aware workflow plans or implements, read the relevant `domain/` context and ADRs, use their canonical vocabulary, and surface any conflict with source evidence or the requested direction.
 
@@ -69,11 +69,11 @@ Cards are plain Markdown tasks with an optional wikilink:
 - [ ] [[plans/020_AUTH_REFACTOR/plan|Implement auth refactor]]
 ```
 
-Each managed task appears in exactly one lane. The card lane is its only task-status source; task notes do not copy lane state into frontmatter, and plan status describes design lifecycle rather than board lane. When promoting a todo note, move its useful context into the plan folder, delete the todo note, and replace the card target with the plan. Direct block links are exceptional.
+Each tracked task appears in exactly one lane. The card lane is its only task-status source; task notes do not copy lane state into frontmatter, and plan status describes design lifecycle rather than board lane. When promoting a todo note, move its useful context into the plan folder, delete the todo note, and replace the card target with the plan. Direct block links are exceptional.
 
 ## Plan authoring
 
-When a Code Brain workflow creates or revises an implementation plan, read and apply the [plan authoring contract](./references/PLAN-CONTRACT.md). The calling workflow owns approval, lifecycle, execution slices, and receipts.
+When a Code Brain workflow creates or revises an implementation plan, read and apply the [plan authoring contract](./references/PLAN-CONTRACT.md). The calling workflow owns approval, plan status, and receipts.
 
 ## Initialization and reconciliation
 
@@ -95,7 +95,7 @@ Never infer implementation from plan age or approval.
 
 ## Evidence
 
-When a durable artifact makes a source-backed or external claim, use:
+Cite source-backed or external claims beside the relevant statement in implementation plans, following the plan authoring contract. For other durable artifacts, use:
 
 ```md
 ## Evidence
