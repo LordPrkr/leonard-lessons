@@ -6,9 +6,9 @@ disable-model-invocation: true
 
 # Code Brain Wayfinder
 
-Use this before `/code-brain-planning` when the destination is clear but the route is not: the work has material decisions that cannot responsibly become one implementation plan yet. It is a decision workflow, not feature delivery.
+Use this before `$code-brain-planning` when the destination is clear but the route is not: the work has material decisions that cannot responsibly become one implementation plan yet. It is a decision workflow, not feature delivery.
 
-`KANBAN.md` is the local issue tracker. A ticket's lane is its only workflow status; its note holds its question, evidence, and resolution. Use the repository identity and evidence conventions from `/code-brain`.
+`KANBAN.md` is the local issue tracker. A ticket's lane is its only workflow status; its note holds its question, evidence, and resolution. Use the repository identity and evidence conventions from `$code-brain`.
 
 Read [map and ticket formats](./references/FORMATS.md) before creating or changing a map or ticket.
 
@@ -35,7 +35,7 @@ Done when the destination, initial frontier, known blockers, fog, and out-of-sco
 2. Resolve according to type:
    - **Grilling:** ask the user one decision at a time. Do not answer on their behalf.
    - **Research:** use primary sources and record cited findings in the ticket note.
-   - **Prototype:** invoke `/tracer-bullet`; link the runnable evidence and its finding.
+   - **Prototype:** invoke `$tracer-bullet`; link the runnable evidence and its finding.
    - **Task:** perform only the narrow manual work needed to unblock a decision.
 3. Record the answer, evidence, and consequences in the ticket note. Add a one-line linked gist to the map's Decisions section.
 4. Close the ticket by moving its card to `Done`. Promote newly precise fog into ticket notes and cards; update or close tickets invalidated by the decision.
@@ -44,8 +44,8 @@ Done when the selected ticket has a durable resolution, every material claim has
 
 ## 3. Hand off to planning
 
-When no frontier tickets or material fog remain, create a Code Brain plan through `/code-brain-planning`. Link the map from the plan's Precedent and the plan from the map's Outcome.
+When no frontier tickets or material fog remain, create a Code Brain plan through `$code-brain-planning`. Link the map from the plan's Precedent and the plan from the map's Outcome.
 
-If the route is already clear during charting, route directly to `/code-brain-planning`; it creates the implementation plan without a map.
+If the route is already clear during charting, route directly to `$code-brain-planning`; it creates the implementation plan without a map.
 
 Done when the map either links to its implementation plan or explains why the destination was abandoned or superseded.

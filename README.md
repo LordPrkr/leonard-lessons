@@ -106,20 +106,20 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
-| `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
-| `/follow-precedent` | Source repository access |
-| `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
-| `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/code-review`, `/feature-branch`, `/finalize-implementation`, `/code-brain`, `/spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review; plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
-| `/clarity` | `/spellbinding-sentences` |
-| `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
-| `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
-| `/gh-pr-review-plan` | `gh`, `/code-brain`, and `/code-brain-writeback` |
-| `/code-review` | `/follow-precedent`, `/spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
-| `/gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
+| `$code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
+| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-wayfinder`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming`, `$tracer-bullet` | `$code-brain`                                                                                                                               |
+| `$follow-precedent` | Source repository access |
+| `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
+| `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
+| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review; plus conditional `$domain-modeling`, `$code-brain-diagramming`, and `$tracer-bullet` |
+| `$clarity` | `$spellbinding-sentences` |
+| `$draft-message` | `$spellbinding-sentences` and a local clipboard tool |
+| `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
+| `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
+| `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-`/code-brain-wayfinder` may route to `/tracer-bullet` or `/code-brain-planning`; install those branches when needed. Install `/domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `/mystical-tutor` should route to.
+`$code-brain-wayfinder` may route to `$tracer-bullet` or `$code-brain-planning`; install those branches when needed. Install `$domain-modeling` with planning or dreaming when they must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -254,9 +254,9 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
   ```
 
-  Invoke `/code-review main` to compare committed changes with the merge-base
+  Invoke `$code-review main` to compare committed changes with the merge-base
   of `main` and `HEAD`; staged and unstaged changes are outside that comparison.
-  Invoke `/code-review <PR URL>` to review the PR's own diff and save suggested
+  Invoke `$code-review <PR URL>` to review the PR's own diff and save suggested
   changes in a pending review for you to submit. Local reviews require a fixed
   point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.

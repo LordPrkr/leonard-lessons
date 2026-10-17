@@ -11,7 +11,7 @@ Make the explanation readable without the source code open. Apply this workflow 
 
 ### 1. Invoke spellbinding-sentences
 
-Invoke `/spellbinding-sentences` and apply its explanatory-writing workflow. Use the steps below to make the concrete references and evidence visible to the reader.
+Invoke `$spellbinding-sentences` and apply its explanatory-writing workflow. Use the steps below to make the concrete references and evidence visible to the reader.
 
 Done when the draft satisfies that workflow and preserves the distinction between observed behavior, inference, and proposed changes.
 

@@ -12,38 +12,38 @@ A tutor finds the next spell; it does not cast it. Recommend the route, then sto
 
 For work that changes code:
 
-- **Ordinary implementation** → `/effective-engineer`.
-- **Work requiring a durable plan and approval first** → `/code-brain-planning`.
-- **Broad work with a clear destination but material unresolved decisions** → `/code-brain-wayfinder`.
+- **Ordinary implementation** → `$effective-engineer`.
+- **Work requiring a durable plan and approval first** → `$code-brain-planning`.
+- **Broad work with a clear destination but material unresolved decisions** → `$code-brain-wayfinder`.
 
 Keep bounded work in the current session. Durable planning uses Code Brain and a fresh implementation subagent for each approved plan.
 
 ## Detour
 
-When a plan or Wayfinder ticket depends on a technical question that conversation cannot answer, route to `/tracer-bullet`. Its runnable evidence returns to that target; the prototype is not the deliverable.
+When a plan or Wayfinder ticket depends on a technical question that conversation cannot answer, route to `$tracer-bullet`. Its runnable evidence returns to that target; the prototype is not the deliverable.
 
 ## On-ramps
 
-- **Review a pull request or branch since a fixed point** → `/code-review`.
-- **Assess human review comments and plan responses** → `/gh-pr-review-plan`.
-- **Triage failed pull-request jobs** → `/gh-pr-job-triage`.
+- **Review a pull request or branch since a fixed point** → `$code-review`.
+- **Assess human review comments and plan responses** → `$gh-pr-review-plan`.
+- **Triage failed pull-request jobs** → `$gh-pr-job-triage`.
 
-Use `/gh-pr-review-plan` for reviewer feedback and `/code-review` for source review since a supplied fixed point.
+Use `$gh-pr-review-plan` for reviewer feedback and `$code-review` for source review since a supplied fixed point.
 
 ## Supporting skills
 
 Route directly when the named artifact or discipline is the user's goal:
 
-- **Initialize, audit, or reconcile Code Brain** → `/code-brain`.
-- **Capture domain terms, bounded contexts, or ADRs** → `/domain-modeling`.
-- **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
-- **Create or refactor AGENTS.md** → `/agents-md`.
-- **Draft or revise explanatory technical writing** → `/spellbinding-sentences`.
-- **Commit, push, and prepare verified work for review** → `/finalize-implementation`.
-- **Curate Pi sessions into durable memory** → `/dreaming`.
-- **Distill plan, review, or dream artifacts into repo-wide documentation** → `/code-brain-distill`.
+- **Initialize, audit, or reconcile Code Brain** → `$code-brain`.
+- **Capture domain terms, bounded contexts, or ADRs** → `$domain-modeling`.
+- **Add diagrams to an existing Code Brain plan** → `$code-brain-diagramming`.
+- **Create or refactor AGENTS.md** → `$agents-md`.
+- **Draft or revise explanatory technical writing** → `$spellbinding-sentences`.
+- **Commit, push, and prepare verified work for review** → `$finalize-implementation`.
+- **Curate Pi sessions into durable memory** → `$dreaming`.
+- **Distill plan, review, or dream artifacts into repo-wide documentation** → `$code-brain-distill`.
 
-`/domain-modeling` and `/code-brain-diagramming` support another flow unless their artifact is the requested outcome. `/code-brain` prepares or repairs the workspace; use `/code-brain-planning` for the work itself.
+`$domain-modeling` and `$code-brain-diagramming` support another flow unless their artifact is the requested outcome. `$code-brain` prepares or repairs the workspace; use `$code-brain-planning` for the work itself.
 
 ## Answer
 

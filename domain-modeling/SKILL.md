@@ -5,7 +5,7 @@ description: "Direct Code Brain glossary and terse ADR work, plus domain capture
 
 # Domain Modeling
 
-Build the domain model in `/code-brain`'s project folder under `domain/`, not in the source repository. Treat code as evidence and follow `/code-brain`'s evidence convention for source-backed or external claims.
+Build the domain model in `$code-brain`'s project folder under `domain/`, not in the source repository. Treat code as evidence and follow `$code-brain`'s evidence convention for source-backed or external claims.
 
 ## Files
 

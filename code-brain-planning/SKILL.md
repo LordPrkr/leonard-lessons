@@ -18,7 +18,7 @@ Done when each affected repository's planning checkout reflects the latest versi
 
 Invoke `$follow-precedent` to establish applicable patterns and `$spellbinding-sentences` for the plan's prose.
 
-Ensure the Code Brain project is initialized; invoke `/code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `/code-brain`'s plan authoring contract before writing `plan.md`. Use [the plan template](./references/TEMPLATE.md). Keep each plan small enough for one implementation subagent; split larger work into separate plans before approval.
+Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `$code-brain`'s plan authoring contract before writing `plan.md`. Use [the plan template](./references/TEMPLATE.md). Keep each plan small enough for one implementation subagent; split larger work into separate plans before approval.
 
 Capture each affected source repository's full `HEAD` in its Precedent citations, then link every non-closed `plan.md` from `AGENTS.md` under Active plans. Use the shared contract's concise sections, file tree, definition overview, and test strategy. Link supporting artifacts from the relevant plan section when needed.
 
@@ -26,9 +26,9 @@ Before drafting the definition overview, establish applicable precedent from the
 
 Invoke supporting skills only for their concrete artifact or decision:
 
-- `/domain-modeling` when the plan settles shared language, a bounded context, or an ADR-worthy decision.
-- `/code-brain-diagramming` when a diagram makes a material flow, boundary, or choice easier to verify than prose.
-- `/tracer-bullet` when runnable evidence is required to choose an implementation path.
+- `$domain-modeling` when the plan settles shared language, a bounded context, or an ADR-worthy decision.
+- `$code-brain-diagramming` when a diagram makes a material flow, boundary, or choice easier to verify than prose.
+- `$tracer-bullet` when runnable evidence is required to choose an implementation path.
 
 Done when `plan.md` stands alone for a fresh implementation subagent, every substantive choice maps to applicable precedent or a disclosed necessary deviation, every material claim has evidence or an explicit question, and the plan fits one implementation subagent.
 

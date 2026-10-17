@@ -7,7 +7,7 @@ description: "Use for direct code changes or implementation delegated from an ap
 
 ## Delivery
 
-Invoke /feature-branch before changing implementation files.
+Invoke $feature-branch before changing implementation files.
 
 Ask for help before proceeding when repair requires credentials or private-registry access, unexpectedly changes the lockfile or package source, needs a privileged or destructive command, or conflicts with the approved plan's design or scope.
 
@@ -17,7 +17,7 @@ Complete when: the work has a delivery owner and an independently provisioned wo
 
 ### 1. Implement
 
-Invoke /tdd
+Invoke $tdd
 
 Done when the requested behavior is implemented with the smallest diff consistent with applicable precedent and authorized deviations.
 

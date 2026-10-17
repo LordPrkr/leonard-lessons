@@ -9,19 +9,19 @@ When a delivery blocker requires a user decision, report the exact failed comman
 
 ## 1. Confirm the delivery workspace
 
-Confirm the intended work is on the current feature branch in an independently provisioned worktree. Invoke `/feature-branch` only when that branch or workspace has not already been established.
+Confirm the intended work is on the current feature branch in an independently provisioned worktree. Invoke `$feature-branch` only when that branch or workspace has not already been established.
 
 **Complete when:** the intended work is assigned to the current feature branch in its provisioned worktree.
 
 ## 2. Commit the intended changes
 
-Invoke `/conventional-commit-message`, stage only the intended changes, and create one coherent commit with repository hooks enabled, without amending any existing commit. If the work is already committed, do not create an empty commit.
+Invoke `$conventional-commit-message`, stage only the intended changes, and create one coherent commit with repository hooks enabled, without amending any existing commit. If the work is already committed, do not create an empty commit.
 
 **Complete when:** the intended changes are committed and the worktree is clean.
 
 ## 3. Rebase onto the latest base branch
 
-Identify the pull request's base branch, using the repository's default branch when no pull request exists. Fetch that branch from `origin`, then rebase the feature branch onto its freshly fetched remote-tracking ref. When merge conflicts occur, invoke `/resolving-merge-conflicts` and finish the rebase before continuing. Review the resulting branch diff and rerun checks affected by the incorporated base changes or conflict resolutions; repair any failures before pushing.
+Identify the pull request's base branch, using the repository's default branch when no pull request exists. Fetch that branch from `origin`, then rebase the feature branch onto its freshly fetched remote-tracking ref. When merge conflicts occur, invoke `$resolving-merge-conflicts` and finish the rebase before continuing. Review the resulting branch diff and rerun checks affected by the incorporated base changes or conflict resolutions; repair any failures before pushing.
 
 **Complete when:** the fetched base commit is an ancestor of `HEAD`, the rebase is finished, the worktree is clean, every retained diff hunk is justified, and affected checks pass.
 
@@ -39,7 +39,7 @@ Use `gh` to find an open pull request for the current branch. If none exists, cr
 
 ## 6. Describe and label the pull request
 
-Invoke `/spellbinding-sentences` before drafting. Infer the body structure from the repository's pull-request guidance; when that guidance does not prescribe one, use recent comparable pull requests as precedent. If neither source supplies a structure, ask the user which body structure to use before drafting. Write from the complete branch diff and update it with `gh`; when the pull request already existed, cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out. Apply every label required by repository guidance.
+Invoke `$spellbinding-sentences` before drafting. Infer the body structure from the repository's pull-request guidance; when that guidance does not prescribe one, use recent comparable pull requests as precedent. If neither source supplies a structure, ask the user which body structure to use before drafting. Write from the complete branch diff and update it with `gh`; when the pull request already existed, cover every substantive newly committed behavior. Mechanical changes with no reviewer impact need not be called out. Apply every label required by repository guidance.
 
 **Complete when:** the pull-request title uses Conventional Commit style, the description matches the branch and selected repository or user-provided structure, neither contains unresolved placeholders, and every required label is applied.
 

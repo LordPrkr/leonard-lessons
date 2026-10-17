@@ -77,7 +77,7 @@ When a Code Brain workflow creates or revises an implementation plan, read and a
 
 ## Initialization and reconciliation
 
-On bare `/code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
+On bare `$code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
 
 ## Numbering and compatibility
 

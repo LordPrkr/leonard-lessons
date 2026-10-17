@@ -7,7 +7,7 @@ description: >-
 
 # Tracer Bullet
 
-Build the shortest disposable path that proves or disproves a plan's technical risk. Use `/code-brain` for durable findings. A tracer is not the final feature.
+Build the shortest disposable path that proves or disproves a plan's technical risk. Use `$code-brain` for durable findings. A tracer is not the final feature.
 
 ## Steps
 
