@@ -23,17 +23,16 @@ Use `domain-modeling` when clarification settles durable terminology or an archi
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a Kanban card.
+Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts.
 
 ### Project spine
 
-Each initialized project has three entry points:
+Each initialized project starts with `VISION.md` and `AGENTS.md`; other artifacts are created as needed:
 
 ```text
 $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md                 # human-owned strategy and agent authority
 ├── AGENTS.md                 # agent-maintained router to active memory
-├── KANBAN.md                 # tracked task state
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
@@ -48,7 +47,7 @@ $CODE_BRAIN_ROOT/<repo>/
 
 Run `code-brain` from the target source repository or one of its worktrees. It resolves `<repo>` from Git so every worktree shares one project folder. A bare invocation audits an existing project and offers a concrete reconciliation without changing the vault first. The first durable workflow bootstraps the spine when `VISION.md` is missing: it reads existing repository and vault context, interviews the user one question at a time, and writes `VISION.md` only after explicit confirmation. Projects are reconciled individually, never bulk-migrated.
 
-`VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links the board, active plans, and canonical notes; it does not hold task state. `KANBAN.md` is a plain-Markdown board rendered by the [Obsidian Kanban plugin](https://github.com/obsidian-community/obsidian-kanban). Install and enable that plugin to use the board UI.
+`VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links active plans and canonical notes; it does not hold task state.
 
 ### Durable planning lifecycle
 
@@ -64,7 +63,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` keeps Mermaid diagrams and canvases beside the plan they explain.
-- `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
+- `code-brain-wayfinder` turns uncertain, multi-session work into a decision map and ticket notes before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
@@ -127,7 +126,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `code-brain` — canonical project spine, Git-native repository resolution,
-  Kanban ownership, and durable evidence conventions.
+  and durable evidence conventions.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -173,8 +172,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
   ```
 
-- `code-brain-wayfinder` — chart uncertain, multi-session work as decision
-  tickets on the Code Brain Kanban board, then hand the resolved route to
+- `code-brain-wayfinder` — chart uncertain, multi-session work through decision
+  maps and ticket notes, then hand the resolved route to
   `code-brain-planning`.
 
   ```bash

@@ -15,6 +15,10 @@
 
 <Relevant domain context, ADRs, source repositories, and skills.>
 
+## Tickets
+
+- [<Ticket title>](./tickets/001-example.md)
+
 ## Decisions
 
 - [<Ticket title>](./tickets/001-example.md) — <one-line answer>
@@ -68,4 +72,4 @@
 - external: <https://example.com> — accessed YYYY-MM-DD
 ```
 
-A ticket's linked card appears exactly once in `KANBAN.md`. Its lane is the ticket state; do not add a duplicate status field to the note.
+A ticket is resolved when its Resolution records an answer or explains why the question was withdrawn, deferred, or superseded. Unresolved tickets with no unresolved blockers form the frontier. Link every ticket from its map's Tickets section; keep the answer and dependencies in the ticket note.

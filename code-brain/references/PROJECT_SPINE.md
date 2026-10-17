@@ -29,11 +29,10 @@ Use these templates when `/code-brain` initializes a project without `VISION.md`
 ```md
 # <Project> Code Brain
 
-Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authoritative for work tracked on the board.
+Read [VISION.md](./VISION.md) before changing strategy.
 
 ## Start here
 - [Vision](./VISION.md)
-- [Work board](./KANBAN.md)
 
 ## Active plans
 - <Relative link to each non-closed plan, or `None.`>
@@ -43,26 +42,5 @@ Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authorita
 
 ## Maintenance
 - Keep this file a router, not a backlog.
-- Keep tracked task status only in `KANBAN.md`.
 - Add plans when work starts; remove them when work closes.
-```
-
-## `KANBAN.md`
-
-```md
----
-kanban-plugin: board
----
-
-## Inbox
-
-## Ready
-
-## In Progress
-
-## Review
-
-## Blocked
-
-## Done
 ```
