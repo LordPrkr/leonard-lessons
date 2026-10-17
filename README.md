@@ -54,7 +54,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
 
-Lightweight plans record their exploration and delivery outcome in `plan.md`; they have no card or receipt. Managed plans additionally map that lifecycle onto the board:
+Both plan shapes use concise problem, goal, and request summaries, a file tree marked for adds, deletes, and changes, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers. Lightweight plans record delivery in Outcome; they have no card or receipt. Managed plans additionally map that lifecycle onto the board:
 
 ```text
 Inbox → In Progress → Review → Ready → In Progress → Review → Done
@@ -65,7 +65,7 @@ Blocked or partial implementation → receipt → Blocked
 
 For managed plans:
 
-1. The orchestrator gathers source context and immediately records each useful finding with repository revisions or external URLs before continuing exploration.
+1. The orchestrator gathers applicable precedent and records source citations beside the relevant plan claims.
 2. It writes a numbered `plan.md` with `status: draft`, links it from `AGENTS.md`, and moves its card through drafting and review.
 3. Explicit user approval changes the plan to `approved` and moves the card to Ready. Approval does not automatically start implementation.
 4. Fresh implementation subagents implement their assigned slices. Read-only reviewer subagents check correctness, validation, and simplicity.
@@ -123,7 +123,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `/follow-precedent` | Source repository access |
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
 | `/finalize-implementation`                                                                                                                            | `/feature-branch`, `/conventional-commit-message`, `/spellbinding-sentences`, `gh`, and external `/resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, core dependencies, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
+| `/code-brain-planning`                                                                                                                                | `/follow-precedent`, `/effective-engineer`, `/feature-branch`, `/finalize-implementation`, `/code-brain`, `/spellbinding-sentences`, plus conditional `/domain-modeling`, `/code-brain-diagramming`, and `/tracer-bullet` |
 | `/clarity` | `/spellbinding-sentences` |
 | `/draft-message` | `/spellbinding-sentences` and a local clipboard tool |
 | `/technical-design-proposal`                                                                                                                          | `/spellbinding-sentences`                                                                                                               |
@@ -291,12 +291,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 - `code-brain-planning` — approval-first Code Brain planning that chooses a
   lightweight plan for one implementation subagent or a managed lifecycle
-  with board transitions and implementation receipts. Both plan shapes map substantive choices to
-  applicable precedent and disclose necessary deviations for approval.
+  with board transitions and implementation receipts. Both shapes use a file tree,
+  definition summaries, and a test strategy, with cited precedent and disclosed deviations.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global

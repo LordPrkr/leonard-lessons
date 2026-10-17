@@ -22,7 +22,7 @@ Add `plan.md` to `AGENTS.md` under Active plans. Move an existing card to In Pro
 
 ## Managed review and execution
 
-Use execution slices only when work exceeds one implementation subagent's fresh context. Each slice delivers observable behavior and names its implementation steps, acceptance criteria, blockers, and verification. Work unblocked slices first; wide mechanical migrations may use explicit expand–migrate–contract slices.
+Use execution slices only when work exceeds one implementation subagent's fresh context. Each slice delivers observable behavior and names its affected definitions, blockers, and corresponding test strategy. Work unblocked slices first; wide mechanical migrations may use explicit expand–migrate–contract slices.
 
 Move the card to Review after drafting. Spawn a read-only reviewer subagent to check the standalone plan, including whether every project-specific phrase has a recoverable referent. After approval, move the card to Ready; implementation starts only when it moves to In Progress. A blocked, partial, or reverted result moves to Blocked and persists its receipt immediately.
 

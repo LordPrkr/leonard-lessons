@@ -19,27 +19,73 @@ Set `date` once when creating the plan. Use `draft`, `approved`, `implemented`, 
 
 Read legacy `approved:` through `/code-brain`'s compatibility mapping, but never write it.
 
-## Required content
+## Plan sections
 
-State the problem, goal, out-of-scope boundary, relevant context, observable acceptance criteria, exact repository-relative files, the highest existing public test seam, tests, verification commands, risks, blocking questions, and artifact links. Apply `/spellbinding-sentences` to the plan's explanatory prose.
+Use these sections in order: Problem, Goal, Context, Precedent, Deviations, Files, Implementation, Test Strategy, and Questions. The calling workflow may add execution slices and a delivery Outcome. Apply `/spellbinding-sentences` to the explanatory prose.
 
-Give each observable behavior one red-green implementation step. Resolve implementation branches before approval; record any unresolved choice as a blocking question. Present the current plan without superseded alternatives.
+- **Problem:** one or two concise sentences about the problem.
+- **Goal:** one or two concise sentences about the desired outcome.
+- **Context:** one or two concise sentences summarizing the user's specific ask.
+- **Precedent** and **Deviations:** the applicable patterns, source revisions, and authorized or requested departures required by `/follow-precedent`. Cite evidence beside the claim it supports and link sibling artifacts where relevant.
 
-## Implementation diffs
+Resolve implementation choices before approval; keep unanswered decisions visible in Questions. Present the current design without superseded alternatives.
 
-Every code-changing step names each affected repository-relative path and immediately shows a fenced unified diff. Diffs express human-reviewed design intent; acceptance criteria govern delivery, and implementation subagents report evidence-backed implementation deviations.
+## Files
 
-Include enough unchanged context and `-`/`+` lines to distinguish current code from the proposed change. Mark new and deleted files with `/dev/null`, include the full contents of a small new file, and use enough path-labeled diffs to show how connected changes fit together.
-
-````md
-**`src/example.ts`**
+Show a high-level tree of the repository-relative files expected to change in a fenced `diff` block. Prefix each affected file with `+` for add, `-` for delete, or `/` for change. Include test files here when they are expected to change. Label repository roots when several repositories are affected.
 
 ```diff
--export const example = "current"
-+export const example = "proposed"
+ src/
+/├── service.ts
++├── policy.ts
+-└── legacy.ts
+ tests/
+/└── service.test.ts
 ```
-````
+
+## Implementation
+
+Group the overview by top-level definitions being **Added**, **Changed**, and **Deleted**, using fenced `diff` blocks. Put a concise comment immediately above each definition's signature or name explaining the intended behavior and why it is needed. Use `+` for additions, `-` for deletions, and paired old/new lines for changes; omit empty groups.
+
+Show signatures or names only, without fleshed-out bodies or per-file patches. Qualify names only as needed to locate them. For configuration or prose, use top-level keys or headings as the definitions. Keep test-file changes in Test Strategy.
+
+### Added
+
+```diff
++// Choose the applicable policy so callers share one decision rule.
++export function selectPolicy(input: Input): Policy
+```
+
+### Changed
+
+```diff
+-// Always use the default policy.
+-export function run(input: Input): Result
++// Apply the selected policy before running the operation.
++export function run(input: Input, policy: Policy): Result
+```
+
+### Deleted
+
+```diff
+-// Remove the obsolete entry point now that run handles policy selection.
+-export function runLegacy(input: Input): Result
+```
+
+## Test Strategy
+
+Summarize how each proposed change will be checked, following the closest existing tests, fixtures, and commands. Name the behavior and test seam or manual check; include commands only when they help carry out the check.
+
+When a change does not deserve an automated test, say so with a short reason. Examples include tautological checks of constants or styles, or a new test that would depart from repository precedent without a concrete coverage need. Use a proportionate existing check or manual inspection instead.
+
+## Questions
+
+List open questions, or write `None.` As answers arrive in chat, strike through the original question and record its answer on the same item:
+
+- ~~Should the operation retry?~~ Answer: No; preserve the existing single-attempt behavior.
+
+Apply each answer to the affected plan sections. A question is resolved only when its answer is documented and the plan agrees with it.
 
 ## Completion
 
-The plan is ready for review when a fresh implementation subagent can execute it, every acceptance criterion maps to implementation and verification, every code-changing step has path-labeled before-and-after diffs, and no unresolved choice is hidden in conditional prose.
+The plan is ready for review when a fresh implementation subagent can identify the intended file and definition changes, each change has a proportionate test strategy or a reason for omitting tests, and every blocking question has a documented answer reflected in the design.

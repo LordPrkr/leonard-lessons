@@ -7,87 +7,75 @@ status: draft
 
 ## Problem
 
-<The current user or system problem this plan resolves.>
+<One or two concise sentences about the problem.>
 
 ## Goal
 
-<The outcome this plan must deliver.>
-
-## Out of Scope
-
-- <Consciously excluded work, or "None.">
+<One or two concise sentences about the desired outcome.>
 
 ## Context
 
-<Current behavior, constraints, and evidence needed by an implementation subagent with fresh context.>
+<One or two concise sentences summarizing the user's specific ask.>
 
 ## Precedent
 
-<For each substantive choice: source path and symbol @ revision, why it applies,
-and the implementation, validation, or test pattern to reuse.>
+<Source paths and symbols @ full revision, why each applies, and the patterns to reuse. Link supporting artifacts here when relevant.>
 
 ## Deviations
 
-<Necessary departures and authorization or requested decisions, using the
-Follow precedent disclosure fields; record conflicts and search gaps, or "None.">
-
-## Acceptance Criteria
-
-- <Observable condition that must hold when the plan is complete.>
+<Necessary departures and authorization or requested decisions, using the Follow precedent disclosure fields; record conflicts and search gaps, or "None.">
 
 ## Files
 
-- `<path>` — <change and reason>
+```diff
+ <repository>/
+/├── <changed-file>
++├── <added-file>
+-└── <deleted-file>
+```
 
 ## Implementation
 
-### 1. <Step name>
-
-**Seam:** <Highest existing public seam that observes this behavior.>
-
-**Red:** <Test that fails for the intended reason.>
-
-**Green:** <Smallest implementation that passes the test.>
-
-<Add the path-labeled unified diffs required by /code-brain's plan authoring contract.>
-
-**`<repository-relative/path.ext>`**
+### Added
 
 ```diff
--<current code, API shape, schema, query, configuration, or component tree>
-+<proposed replacement>
++// <Intended behavior and reason.>
++<top-level definition signature or name>
 ```
+
+### Changed
+
+```diff
+-// <Current behavior.>
+-<current top-level definition signature or name>
++// <Proposed behavior and reason.>
++<proposed top-level definition signature or name>
+```
+
+### Deleted
+
+```diff
+-// <Reason for removal.>
+-<top-level definition signature or name>
+```
+
+<!-- Omit empty definition groups. -->
 
 ## Execution Slices
 
-<!-- Omit when the plan fits one implementation subagent's fresh context. -->
+<!-- Managed only; omit when the plan fits one implementation subagent's fresh context. -->
 
-1. **<Slice title>** — delivers <observable behavior>; implementation steps <N–N>; acceptance criteria <items>; blocked by <slices or None>; verify with `<command>`.
+1. **<Slice title>** — delivers <observable behavior>; definitions <names from Implementation>; blocked by <slices or None>; test strategy <corresponding checks below>.
 
 ## Test Strategy
 
-<Coverage required beyond the TDD steps.>
-
-## Verification
-
-```bash
-<commands with expected outcomes>
-```
-
-## Risks
-
-- <Risk and mitigation.>
+- <Change or behavior> — <existing test seam, command, or manual check; explain when automated tests are unwarranted.>
 
 ## Questions
 
-- <Question that must be answered before implementation, or "None.">
+- <Open question, or "None.">
+- ~~<Answered question>~~ Answer: <Answer established in chat and reflected in the plan.>
 
-## Evidence
+## Outcome
 
-- repo: `relative/path.ts` @ `<full SHA>` — inspected YYYY-MM-DD
-- external: <https://example.com/spec> — accessed YYYY-MM-DD
-
-## References
-
-- <When notes.md exists, include a relative Context notes link.>
-- <Relevant Code Brain ADR or sibling artifact.>
+<Leave empty until implementation; then record delivery, checks performed, deviations, residual risks, and blockers. For managed work, link receipt.md here.>

@@ -1,65 +1,7 @@
 # Lightweight layout
 
-Use this layout for a plan that fits one fresh implementation subagent and needs an approval gate, not managed coordination. Keep the shared frontmatter and every required element of `/code-brain`'s plan authoring contract, but place them under these four headings:
+Use [the plan template](./TEMPLATE.md) and `/code-brain`'s plan authoring contract for a plan that fits one fresh implementation subagent and needs an approval gate.
 
-```md
----
-date: YYYY-MM-DD
-status: draft
----
+Omit Execution Slices. Leave Outcome empty until implementation, then record delivery and the checks performed there. A lightweight plan needs no board card, receipt, or sibling notes.
 
-# <Plan title>
-
-## Exploration
-
-<Observed flow, source evidence, and relevant constraints.>
-
-## Documentation candidates
-
-<Reusable candidate and evidence, or "None.">
-
-## Plan
-
-### Problem
-
-### Goal
-
-### Out of Scope
-
-### Context
-
-### Precedent
-
-<For each substantive choice: source path and symbol @ revision, why it
-applies, and the implementation, validation, or test pattern to reuse.>
-
-### Deviations
-
-<Necessary departures and authorization or requested decisions, using the
-Follow precedent disclosure fields; record conflicts and search gaps, or "None.">
-
-### Acceptance Criteria
-
-### Files
-
-### Implementation
-
-### Test Strategy
-
-### Verification
-
-### Risks
-
-### Questions
-
-### Evidence
-
-### References
-
-## Outcome
-
-<Leave empty until implementation; then record delivery, verification,
-deviations, residual risks, and blockers.>
-```
-
-Do not add a board card, execution slices, receipt, or sibling note unless the work gains the coordination need that makes it Managed.
+Done when `plan.md` contains the shared plan sections and Outcome, with no managed coordination artifacts.

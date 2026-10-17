@@ -95,7 +95,7 @@ Never infer implementation from plan age or approval.
 
 ## Evidence
 
-When a durable artifact makes a source-backed or external claim, use:
+Cite source-backed or external claims beside the relevant statement in implementation plans, following the plan authoring contract. For other durable artifacts, use:
 
 ```md
 ## Evidence
