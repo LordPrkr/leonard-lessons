@@ -17,11 +17,11 @@
 
 ## Tickets
 
-- [<Ticket title>](./tickets/001-example.md)
+- [<ISSUE-ID>: <Ticket title>](<Linear issue URL>)
 
 ## Decisions
 
-- [<Ticket title>](./tickets/001-example.md) — <one-line answer>
+- [<ISSUE-ID>: <Ticket title>](<Linear issue URL>) — <one-line answer>
 
 ## Fog
 
@@ -42,7 +42,7 @@
 
 ## Ticket
 
-`wayfinding/<NNN_TOPIC>/tickets/<NNN_SLUG>.md` is the detailed, durable record for one decision.
+A ticket is a Linear issue in the configured team and project. Use the following sections in its description; store blockers as Linear issue relations and status through the project's workflow.
 
 ```md
 # <Ticket title>
@@ -54,10 +54,6 @@
 ## Type
 
 <Grilling | Research | Prototype | Task>
-
-## Blocked By
-
-- <Relative link to each blocking ticket, or `None.`>
 
 ## Resolution
 
@@ -72,4 +68,4 @@
 - external: <https://example.com> — accessed YYYY-MM-DD
 ```
 
-A ticket is resolved when its Resolution records an answer or explains why the question was withdrawn, deferred, or superseded. Unresolved tickets with no unresolved blockers form the frontier. Link every ticket from its map's Tickets section; keep the answer and dependencies in the ticket note.
+A ticket is resolved when its Resolution records an answer or explains why the question was withdrawn, deferred, or superseded. Link reusable findings in Code Brain from the issue and keep enough context in the description to understand the decision without vault access.

@@ -30,7 +30,6 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── docs/
 ├── plans/<NNN_TOPIC>/
 ├── wayfinding/<NNN_TOPIC>/
-├── todo/
 ├── domain/
 ├── notes/
 ├── resources/
@@ -52,14 +51,19 @@ Use these as a Diátaxis compass, not a mandatory four-folder scheme: create onl
 
 - `VISION.md` is human-owned strategic intent. Read it before durable planning and ask the user before changing it.
 - `AGENTS.md` is the short agent-maintained router to canonical memory, active plans, and project-specific Code Brain rules. It is not a backlog.
-- `wayfinding/` holds decision maps and ticket notes for uncertain work.
-- `todo/` holds durable context for unplanned work, not one-line task stubs.
+- `wayfinding/` holds decision maps linking Linear issues for uncertain work.
 - `review/` holds review feedback and evidence-backed lessons. Use `review/pr-<number>-<short-head-sha>-feedback.md` for human feedback assessment, `review/pr-<number>-<short-head-sha>-review.md` for code review, and `review/branch-<short-head-sha>-review.md` for local branch review. Update the same immutable-target artifact across repeated runs of a workflow instead of creating session copies.
 - Plans preserve approved design. `receipt.md` links the finalized PR and summarizes review findings and follow-up.
 
 Before a Code-Brain-aware workflow plans or implements, read the relevant `domain/` context and ADRs, use their canonical vocabulary, and surface any conflict with source evidence or the requested direction.
 
-When promoting a todo note, move its useful context into the plan folder, update links to the plan, and delete the todo note.
+## Work tracking
+
+Create new tasks and decision tickets in Linear. Before logging or updating work, read `docs/agents/issue-tracker.md` in the target source repository; invoke `/setup-linear` when it is missing or incomplete. Follow its destination, status transitions, and required defaults. If Linear access is unavailable, report the blocker and resume issue work when access returns.
+
+Search for an existing issue before creating one, retain its identifier and URL, and report the URL after creation. Keep task descriptions, dependencies, and workflow status in Linear. Keep domain docs, implementation plans, and reusable findings in Code Brain; link issues from the relevant artifacts and summarize essential context in Linear so issues stand alone. Plan frontmatter describes design approval and delivery, independently of the project's issue statuses.
+
+Read historical Markdown tickets as context; migrate them only when requested.
 
 ## Plan authoring
 

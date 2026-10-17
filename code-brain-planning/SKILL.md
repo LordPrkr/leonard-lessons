@@ -25,6 +25,8 @@ Ensure the Code Brain project is initialized; invoke `/code-brain` when `VISION.
 
 Capture each affected source repository's full `HEAD` in its Precedent citations, then link every non-closed `plan.md` from `AGENTS.md` under Active plans. Use the shared contract's concise sections, file tree, definition overview, and test strategy. Link supporting artifacts from the relevant plan section when needed.
 
+Follow `/code-brain`'s work-tracking contract to create or reuse the implementation's Linear issue and link it from Context. The parent maintains the issue through the project's configured workflow as approval, implementation, review, and delivery occur; plan approval alone does not complete the issue.
+
 Before drafting the definition overview, establish applicable precedent from the planning checkout. In `Precedent`, map each substantive implementation, validation, and testing choice to paths and symbols with the source revision and why the example applies. In `Deviations`, record each departure using the shared contract's disclosure fields and identify existing authorization or the decision requested. Record search gaps and conflicting examples explicitly. Carry these references into the definition overview and test strategy so a fresh implementation subagent can adapt the same patterns.
 
 Invoke supporting skills only for their concrete artifact or decision:
@@ -33,7 +35,7 @@ Invoke supporting skills only for their concrete artifact or decision:
 - `/code-brain-diagramming` when a diagram makes a material flow, boundary, or choice easier to verify than prose.
 - `/tracer-bullet` when runnable evidence is required to choose an implementation path.
 
-Done when `plan.md` stands alone for a fresh implementation subagent, every substantive choice maps to applicable precedent or a disclosed necessary deviation, every material claim has evidence or an explicit question, and the plan fits one implementation subagent.
+Done when `plan.md` stands alone for a fresh implementation subagent, every substantive choice maps to applicable precedent or a disclosed necessary deviation, every material claim has evidence or an explicit question, the plan fits one implementation subagent, and its Linear issue is linked.
 
 ## 3. Review and approve
 
@@ -49,4 +51,6 @@ Code Brain owns delivery for its approved plans. Invoke `/feature-branch` once b
 
 Invoke `/finalize-implementation` once for verified work. After finalization, create `receipt.md` using [the receipt format](./references/RECEIPT.md) and link it from Outcome. Set `status: implemented` and remove the plan from Active plans only after verified delivery, finalization, and the receipt are complete. Blocked or partial work remains `approved`; report its blockers in chat.
 
-Done when every retained diff hunk follows the approved plan and its cited precedent or authorized deviations, the receipt links the finalized PR, and the plan status matches the result.
+Link the finalized PR from the Linear issue and apply the configured delivery transition. Record blocked or partial outcomes there; use the project's completion rule when a PR still awaits review or merge.
+
+Done when every retained diff hunk follows the approved plan and its cited precedent or authorized deviations, the receipt links the finalized PR, and the plan status and Linear issue reflect their respective completion rules.

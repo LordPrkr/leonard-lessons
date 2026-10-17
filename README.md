@@ -2,7 +2,7 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
-These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
+These skills use Linear for work tracking and Pi + Obsidian for durable project memory. Code Brain stores that memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
 
 ## Main flow
 
@@ -25,6 +25,10 @@ Code Brain keeps durable project memory outside source repositories. Source code
 
 Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts.
 
+Run `setup-linear` before logging work for a project. It asks only for the missing Linear team/project and a short workflow description, saves them in the source repository's `docs/agents/issue-tracker.md`, and links that file from the repository instructions. It uses existing Linear statuses and assumes Code Brain for domain docs.
+
+New tasks and decision tickets live in Linear. Code Brain plans and maps link their issues; descriptions, dependencies, and task status stay in Linear. Existing Markdown tickets remain historical context unless migration is requested.
+
 ### Project spine
 
 Each initialized project starts with `VISION.md` and `AGENTS.md`; other artifacts are created as needed:
@@ -35,8 +39,7 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── AGENTS.md                 # agent-maintained router to active memory
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
-├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
-├── todo/                     # durable context for unplanned work
+├── wayfinding/<NNN_TOPIC>/   # decision maps linking Linear issues
 ├── domain/                   # glossary, context maps, and ADRs
 ├── notes/                    # reusable project knowledge
 ├── resources/                # references and checklists
@@ -51,7 +54,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 ### Durable planning lifecycle
 
-All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`.
+All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle. Every non-closed plan is linked from `AGENTS.md`, and its Context links the implementation's Linear issue. Plan status describes design approval and delivery; the issue follows the configured project workflow.
 
 Plans use concise problem, goal, and request summaries, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Answered questions retain their struck-through wording and documented answers.
 
@@ -59,11 +62,13 @@ The orchestrator gathers precedent, drafts the plan, and obtains explicit approv
 
 After finalization, create `receipt.md` with exactly three sections: Delivery links the finalized PR, Review summarizes findings and their resolution, and Follow-up lists remaining actions. Link the receipt from the plan's Outcome, set the plan to `implemented`, and remove its Active plans link. Blocked or partial work remains `approved`.
 
+Link the finalized PR from the Linear issue and use the project's delivery transition. An issue that requires PR review or merge stays open until that condition is met.
+
 ### Supporting workflows
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` keeps Mermaid diagrams and canvases beside the plan they explain.
-- `code-brain-wayfinder` turns uncertain, multi-session work into a decision map and ticket notes before it becomes a plan.
+- `code-brain-wayfinder` turns uncertain, multi-session work into a decision map and Linear issues before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
@@ -103,7 +108,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
+| `/setup-linear` | `/code-brain` and Linear access |
+| `/code-brain` | Pi and Obsidian; Linear access for tracked work, plus `/setup-linear` when the project workflow is missing |
 | `/code-brain-distill`, `/code-brain-writeback`, `/code-brain-wayfinder`, `/code-brain-diagramming`, `/domain-modeling`, `/dreaming`, `/tracer-bullet` | `/code-brain`                                                                                                                               |
 | `/follow-precedent` | Source repository access |
 | `/effective-engineer`                                                                                                                                 | `/feature-branch`, `/finalize-implementation`, and external `/tdd` skill                                                                  |
@@ -126,16 +132,26 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `code-brain` — canonical project spine, Git-native repository resolution,
-  and durable evidence conventions.
+  Linear work tracking, and durable evidence conventions.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  ```
+
+- `setup-linear` — record a project's Linear team, project, and issue workflow
+  with only the missing setup questions; domain docs stay in Code Brain.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   ```
 
 - `code-brain-writeback` — write material findings through to a Code Brain
   activity artifact before continuing exploration or assessment.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   ```
@@ -144,6 +160,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   the Diátaxis compass and promote them into canonical Code Brain documentation.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-distill --global
   ```
@@ -173,10 +190,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `code-brain-wayfinder` — chart uncertain, multi-session work through decision
-  maps and ticket notes, then hand the resolved route to
+  maps and Linear issues, then hand the resolved route to
   `code-brain-planning`.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-wayfinder --global
   ```
@@ -192,6 +210,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   technical path, then recording findings in Code Brain notes.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
@@ -214,6 +233,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   or fixes.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
@@ -263,6 +283,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   strategy, and authorized deviations; delivery ends with a three-section receipt.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
@@ -280,6 +301,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   existing Code Brain plan.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
@@ -322,6 +344,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   and durable decisions.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   ```
@@ -331,6 +354,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   owners.
 
   ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill setup-linear --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
   bunx skills add LordPrkr/leonard-lessons --skill dreaming --global

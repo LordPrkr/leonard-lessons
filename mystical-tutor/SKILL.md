@@ -35,6 +35,7 @@ Use `/gh-pr-review-plan` for reviewer feedback and `/code-review` for source rev
 Route directly when the named artifact or discipline is the user's goal:
 
 - **Initialize, audit, or reconcile Code Brain** → `/code-brain`.
+- **Set up a project's Linear tracker and workflow** → `/setup-linear`.
 - **Capture domain terms, bounded contexts, or ADRs** → `/domain-modeling`.
 - **Add diagrams to an existing Code Brain plan** → `/code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `/agents-md`.
