@@ -6,7 +6,7 @@ description: "Distill plan, review, and dream artifacts into discoverable repo-w
 
 # Code Brain Distill
 
-Turn activity-scoped evidence into canonical project documentation. Follow `/code-brain` for repository identity, evidence, and documentation ownership. Source artifacts remain unchanged provenance; `docs/` holds the maintained result.
+Turn activity-scoped evidence into canonical project documentation. Follow `$code-brain` for repository identity, evidence, and documentation ownership. Source artifacts remain unchanged provenance; `docs/` holds the maintained result.
 
 ## 1. Select sources
 
@@ -37,7 +37,7 @@ Done when each candidate has exactly one destination or an explicit skip reason.
 
 ## 4. Promote
 
-Write or update the canonical document in place. Preserve useful existing content, remove duplication, apply `/code-brain` evidence, and link the source artifact as provenance. Ask before replacing contradicted canonical memory. When at least one canonical `docs/` document exists after promotion, create or update `docs/README.md` with short, reader-oriented links grouped by the categories that actually exist. When `AGENTS.md` exists, keep one Canonical memory link to that landing page. Preserve the existing project spine; initialization owns any missing spine files.
+Write or update the canonical document in place. Preserve useful existing content, remove duplication, apply `$code-brain` evidence, and link the source artifact as provenance. Ask before replacing contradicted canonical memory. When at least one canonical `docs/` document exists after promotion, create or update `docs/README.md` with short, reader-oriented links grouped by the categories that actually exist. When `AGENTS.md` exists, keep one Canonical memory link to that landing page. Preserve the existing project spine; initialization owns any missing spine files.
 
 Done when every promoted claim has one source of truth, current material evidence, source provenance, and—when canonical docs exist—a route from `docs/README.md`.
 

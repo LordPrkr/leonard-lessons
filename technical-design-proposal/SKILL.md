@@ -13,7 +13,7 @@ Turn an ambiguous change into an executable decision. A proposal is complete whe
 
 Identify the reader, decision owner, current behavior, proposed behavior, and decision that the document asks them to make. Name the invariants: the source of truth, behavior, ownership, or capability that must remain unchanged. State the mechanism in the opening Proposal paragraph: name the systems, direction of data or authority, and the resulting boundary.
 
-Use `/spellbinding-sentences` to draft or revise every explanatory section.
+Use `$spellbinding-sentences` to draft or revise every explanatory section.
 
 Done when the Proposal and Executive summary state what changes, the invariants, why the change is needed, and its primary cost or tradeoff.
 

@@ -7,7 +7,7 @@ description: "Add Mermaid diagrams and Obsidian canvases to an existing Code Bra
 # Code Brain Diagramming
 
 Enrich an existing plan with the smallest set of diagrams that makes its
-behavior easier to understand. Use `/code-brain` to resolve the project folder
+behavior easier to understand. Use `$code-brain` to resolve the project folder
 and plan numbering. Keep every artifact beside the target `plan.md`.
 
 ## Steps

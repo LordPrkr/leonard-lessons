@@ -17,16 +17,17 @@ Set `date` once when creating the plan. Use `draft`, `approved`, `implemented`, 
 
 `implemented` is immutable: after setting that status, preserve the entire plan unchanged. Capture later corrections, outcomes, or changed design in a new artifact; a changed implementation requires a new plan.
 
-Read legacy `approved:` through `/code-brain`'s compatibility mapping, but never write it.
+Read legacy `approved:` through `$code-brain`'s compatibility mapping, but never write it.
 
 ## Plan sections
 
-Use these sections in order: Problem, Goal, Context, Precedent, Deviations, Files, Implementation, Test Strategy, and Questions. The calling workflow may add an Outcome linking the delivery receipt. Apply `/spellbinding-sentences` to the explanatory prose.
+Use these sections in order: Problem, Goal, Context, Precedent, Deviations, Files, Implementation, Test Strategy, and Questions. The calling workflow may add an Outcome linking the delivery receipt. Apply `$spellbinding-sentences` to the explanatory prose.
 
 - **Problem:** one or two concise sentences about the problem.
 - **Goal:** one or two concise sentences about the desired outcome.
 - **Context:** one or two concise sentences summarizing the user's specific ask.
-- **Precedent** and **Deviations:** the applicable patterns, source revisions, and authorized or requested departures required by `/follow-precedent`. Cite evidence beside the claim it supports and link sibling artifacts where relevant.
+- **Precedent:** briefly summarize applicable patterns with references to repository paths and definitions. Omit source revisions.
+- **Deviations:** record necessary departures and their authorization or requested decisions using `$follow-precedent`'s disclosure fields, including conflicts and search gaps.
 
 Resolve implementation choices before approval; keep unanswered decisions visible in Questions. Present the current design without superseded alternatives.
 
@@ -88,4 +89,4 @@ Apply each answer to the affected plan sections. A question is resolved only whe
 
 ## Completion
 
-The plan is ready for review when a fresh implementation subagent can identify the intended file and definition changes, each change has a proportionate test strategy or a reason for omitting tests, and every blocking question has a documented answer reflected in the design.
+The plan is ready for review when a fresh implementation subagent can identify the intended file and definition changes, each change has a proportionate test strategy or a reason for omitting tests, and unanswered questions are explicit.

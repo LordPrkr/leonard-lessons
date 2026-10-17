@@ -6,7 +6,7 @@ description: "Idempotently curate local Pi session transcripts into evidence-bac
 
 # Dreaming
 
-A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into evidence-backed Code Brain provenance. Use `/code-brain` for repository identity, vault location, and evidence. Transcripts and dream notes are not canonical memory.
+A dream synthesizes past Pi sessions from `~/.pi/agent/sessions/` into evidence-backed Code Brain provenance. Use `$code-brain` for repository identity, vault location, and evidence. Transcripts and dream notes are not canonical memory.
 
 Invoke `domain-modeling` when a dream surfaces domain language, bounded contexts, or ADR-worthy decisions.
 
@@ -32,7 +32,7 @@ Done when every retained insight has evidence, an applicability boundary, and ev
 
 Read [`references/TEMPLATE.md`](references/TEMPLATE.md). Create or merge `notes/dreams/YYYY-MM-DD Dream.md`; never replace a same-day note wholesale. Regenerate only the marked managed entries keyed by stable session or insight ID; preserve all text outside those entries as human-owned.
 
-Apply `/code-brain`'s evidence convention when the note makes source-backed or external claims. Session evidence uses stable session IDs as local-only leads, with durable claims summarized in the note.
+Apply `$code-brain`'s evidence convention when the note makes source-backed or external claims. Session evidence uses stable session IDs as local-only leads, with durable claims summarized in the note.
 
 Done when the note covers the complete same-day set and every insight points to deduplicated evidence.
 
@@ -40,9 +40,9 @@ Done when the note covers the complete same-day set and every insight points to 
 
 Route only high-confidence insights to their durable owner:
 
-- invoke `/domain-modeling` for domain terms and qualifying decisions;
+- invoke `$domain-modeling` for domain terms and qualifying decisions;
 - update `resources/Agent Memory.md` for user or repository workflow preferences;
-- send reusable repository architecture, behavior, procedures, hazards, and explanations through `/code-brain-distill` into canonical `docs/`.
+- send reusable repository architecture, behavior, procedures, hazards, and explanations through `$code-brain-distill` into canonical `docs/`.
 
 Keep scoped context that does not justify canonical documentation in the dream note as provenance. Before replacing or removing contradicted high-confidence memory, show the user the exact existing text, proposed replacement or removal, and supporting evidence. Apply the change only after confirmation. Update glossary definitions in place and use `domain-modeling` for ADR supersession. Low-confidence and one-off insights remain only in the dream note.
 

@@ -10,7 +10,7 @@ Prepare a message for the user to send. Sending or posting is outside this workf
 
 ## 1. Draft
 
-Invoke `/spellbinding-sentences` and apply its writing workflow to the message.
+Invoke `$spellbinding-sentences` and apply its writing workflow to the message.
 
 Use the supplied draft, facts, and conversation context to identify the recipient, what they already know, and the intended outcome. Ask a focused question if missing information would materially change the message; otherwise draft immediately. Match the user's requested tone, length, and channel, using a concise collegial tone by default.
 
@@ -20,7 +20,7 @@ Done when the proposed message satisfies the writing workflow and the user can r
 
 ## 2. Revise until approved
 
-Wait for the user's response. Incorporate feedback into the latest draft, reapply `/spellbinding-sentences`, and present the complete revised message. Preserve accepted wording and substance outside the requested changes. Repeat this step after each revision.
+Wait for the user's response. Incorporate feedback into the latest draft, reapply `$spellbinding-sentences`, and present the complete revised message. Preserve accepted wording and substance outside the requested changes. Repeat this step after each revision.
 
 Approval must explicitly accept the latest displayed version, such as “approved,” “looks good,” or “copy it.” A response that also requests edits is feedback: show the edited version and wait for fresh approval. If approval is ambiguous, ask whether to copy the current version. If the user cancels, stop.
 

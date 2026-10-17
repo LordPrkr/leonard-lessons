@@ -77,7 +77,7 @@ When a Code Brain workflow creates or revises an implementation plan, read and a
 
 ## Initialization and reconciliation
 
-On bare `/code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
+On bare `$code-brain`, audit the existing project and offer the smallest reconciliation. When `VISION.md` is missing, or the user asks to initialize, audit, repair, or reconcile a project, read [`references/INIT.md`](./references/INIT.md) and follow that branch.
 
 ## Numbering and compatibility
 
@@ -106,4 +106,4 @@ Cite source-backed or external claims beside the relevant statement in implement
 - code-brain: [source artifact](../relative/path.md) — distilled YYYY-MM-DD
 ```
 
-Before relying on a material repository claim, compare the recorded path at its source revision with current `HEAD`. Code Brain artifact links preserve provenance but never replace the underlying repository or external evidence for a material claim. Re-read changed or unavailable evidence. Temporary or absolute machine paths may remain as labeled local leads, but never as the sole evidence for a durable claim. Do not add freshness timers, generated manifests, or automatic rewriting.
+Before relying on a material repository claim, verify it against current source. When evidence records a source revision, compare the path at that revision with current `HEAD`. Code Brain artifact links preserve provenance but never replace the underlying repository or external evidence for a material claim. Re-read changed or unavailable evidence. Temporary or absolute machine paths may remain as labeled local leads, but never as the sole evidence for a durable claim. Do not add freshness timers, generated manifests, or automatic rewriting.

@@ -1,6 +1,6 @@
 # Project Spine
 
-Use these templates when `/code-brain` initializes a project without `VISION.md`. See [`EXAMPLE_AGENTS.md`](./EXAMPLE_AGENTS.md) for a filled router. Do not bulk-create project files. Replace placeholders, omit router links to notes that do not exist, and obtain the user's explicit confirmation before writing `VISION.md`.
+Use these templates when `$code-brain` initializes a project without `VISION.md`. See [`EXAMPLE_AGENTS.md`](./EXAMPLE_AGENTS.md) for a filled router. Do not bulk-create project files. Replace placeholders, omit router links to notes that do not exist, and obtain the user's explicit confirmation before writing `VISION.md`.
 
 ## `VISION.md`
 
