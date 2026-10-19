@@ -45,7 +45,7 @@ D └── <deleted-file>
 - **Why:** <Motivation, when it is not already clear.>
 
 <!-- Repeat for each behavior change using the shared Implementation contract.
-     Place any diagrams supplied by code-brain-diagramming beside their entries. -->
+     Place any diagrams supplied by $code-brain-diagramming beside their entries. -->
 
 ## Test Strategy
 
