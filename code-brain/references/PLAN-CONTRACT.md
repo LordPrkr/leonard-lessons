@@ -46,32 +46,27 @@ M └── service.test.ts
 
 ## Implementation
 
-Group the overview by top-level definitions being **Added**, **Changed**, and **Deleted**, using fenced `diff` blocks. Put a concise comment immediately above each definition's signature or name explaining the intended behavior and why it is needed. Use `+` for additions, `-` for deletions, and paired old/new lines for changes; omit empty groups.
+Organize the overview by behavior change, with a descriptive heading for each
+entry. Name the repository-relative paths and affected definitions once per
+entry; for configuration or prose, identify the relevant keys or headings.
 
-Show signatures or names only, without fleshed-out bodies or per-file patches. Qualify names only as needed to locate them. For configuration or prose, use top-level keys or headings as the definitions. Keep test-file changes in Test Strategy.
+For changed behavior, use concise **Before** and **After** statements. For
+additions or deletions, use **Add** or **Remove** and explain the reason. Add
+**Why** when the motivation is not already clear. Include exact signatures or
+small code excerpts only when their syntax matters to the design. Keep
+test-file changes in Test Strategy.
 
-### Added
+### Apply the selected policy
 
-```diff
-+// Choose the applicable policy so callers share one decision rule.
-+export function selectPolicy(input: Input): Policy
-```
+`src/runner.ts` — `run`
 
-### Changed
+- **Before:** Always use the default policy.
+- **After:** Accept the caller's selected policy and apply it before running
+  the operation.
+- **Why:** Callers need to choose a policy for each operation.
 
-```diff
--// Always use the default policy.
--export function run(input: Input): Result
-+// Apply the selected policy before running the operation.
-+export function run(input: Input, policy: Policy): Result
-```
-
-### Deleted
-
-```diff
--// Remove the obsolete entry point now that run handles policy selection.
--export function runLegacy(input: Input): Result
-```
+Diagrams supplement these entries; preserve the implementation choices a
+fresh agent needs even when the diagram omits them for readability.
 
 ## Test Strategy
 

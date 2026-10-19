@@ -1,48 +1,60 @@
 ---
 name: code-brain-diagramming
-disable-model-invocation: true
-description: "Add Mermaid diagrams and Obsidian canvases to an existing Code Brain plan."
+description: "Use when a Code Brain plan needs an inline Mermaid diagram to clarify behavior changes, execution order, states, or dependencies."
 ---
 
 # Code Brain Diagramming
 
-Enrich an existing plan with the smallest set of diagrams that makes its
-behavior easier to understand. Use `$code-brain` to resolve the project folder
-and plan numbering. Keep every artifact beside the target `plan.md`.
+Make a Code Brain plan skimmable with the smallest set of inline Mermaid
+diagrams that explains its behavior. Use `$code-brain` for project resolution
+and the [plan authoring contract](../code-brain/references/PLAN-CONTRACT.md)
+for revisions and approval status.
 
 ## Steps
 
-### 1. Ground the Diagram
+### 1. Ground the diagram
 
-Use the plan named by the user. Without a named plan, list active plans and
-continue automatically only when exactly one exists; otherwise ask the user to
-choose. Exclude implemented, abandoned, and superseded plans from automatic
-selection. Read the selected `plan.md`, linked context notes, and relevant source
-files before choosing a diagram.
+Use the plan supplied by the user or calling workflow. Without a named plan,
+list active plans and continue automatically only when exactly one exists;
+otherwise ask the user to choose. Exclude implemented, abandoned, and superseded
+plans from automatic selection. Read the selected `plan.md`, linked context
+notes, and relevant source files before choosing a diagram.
 
-Done when the target plan exists and every flow, state, ownership boundary, or
-comparison to depict is grounded in the plan or source.
+Distinguish observed current behavior from proposed behavior; keep unresolved
+design choices visible in the plan's Questions.
 
-### 2. Draw
+Done when the target plan is unambiguous and every behavior or relationship to
+depict is supported by the plan or inspected source.
 
-Create only artifacts that answer a distinct question:
+### 2. Choose the view
 
-- `call-stack.diagram.md` for runtime execution order
-- a descriptive `*.diagram.md` Mermaid file for state, data, or other flows
-- `current.canvas` and `proposed.canvas` for a clarifying structural comparison
-- a descriptive `*.canvas` for another spatial view
+Choose a diagram only when it answers a question more clearly than prose:
 
-Create Mermaid Markdown or Obsidian Canvas artifacts beside the plan with
-`obsidian_create_mermaid` and `obsidian_create_canvas`. Use descriptive
-kebab-case names for additional artifacts.
+- Use a flowchart for routing, data flow, ownership, or dependencies.
+- Use a sequence diagram when interactions and execution order matter.
+- Use a state diagram when allowed transitions are the subject.
+- For behavior changes, use a before-and-after view following
+  [the comparison example](./references/COMPARISON.md).
 
-Done when each artifact is legible on its own, matches the grounded evidence,
-and contributes information not already clear from another artifact.
+Group by behavior rather than file. Give each diagram a descriptive heading
+and one question to answer; keep independent changes in separate views. Leave
+simple edits as prose when a diagram would only repeat the change entry.
 
-### 3. Link
+Done when every selected view has a distinct purpose and changes that need
+only prose remain understandable without a diagram.
 
-Add one relative Markdown link for every created artifact to `plan.md`,
-preserving the plan's existing content and organization.
+### 3. Draw inline
 
-Done when every created artifact is linked exactly once and every link resolves
-from `plan.md`.
+Write fenced `mermaid` blocks directly in `plan.md`, beside the behavior they
+explain. Use short, concrete node labels and label edges when their condition
+or meaning would otherwise be unclear. State the intended outcome in a short
+caption. Put repository-relative paths and affected definitions immediately
+below the diagram so implementation details do not crowd the nodes.
+
+Prefer top-to-bottom flows at ordinary document width. Keep each view small
+enough to scan without zooming; split dense diagrams by behavior. Use text
+labels to distinguish current, proposed, added, or removed behavior so meaning
+does not depend on color.
+
+Done when every diagram is inline, readable on its own, and accompanied by
+enough location detail for a fresh implementation agent to find the change.

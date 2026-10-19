@@ -36,30 +36,16 @@ D └── <deleted-file>
 
 ## Implementation
 
-### Added
+### <Behavior change>
 
-```diff
-+// <Intended behavior and reason.>
-+<top-level definition signature or name>
-```
+`<repository-relative path>` — `<affected definitions, keys, or headings>`
 
-### Changed
+- **Before:** <Current behavior.>
+- **After:** <Proposed behavior.>
+- **Why:** <Motivation, when it is not already clear.>
 
-```diff
--// <Current behavior.>
--<current top-level definition signature or name>
-+// <Proposed behavior and reason.>
-+<proposed top-level definition signature or name>
-```
-
-### Deleted
-
-```diff
--// <Reason for removal.>
--<top-level definition signature or name>
-```
-
-<!-- Omit empty definition groups. -->
+<!-- Repeat for each behavior change using the shared Implementation contract.
+     Place any diagrams supplied by $code-brain-diagramming beside their entries. -->
 
 ## Test Strategy
 

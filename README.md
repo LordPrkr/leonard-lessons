@@ -54,7 +54,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle.
 
-Plans use concise problem, goal, and request summaries, a brief precedent summary referencing repository paths and definitions, a file tree marked `M` for modified, `A` for added, and `D` for deleted, an overview of top-level definitions, and a proportionate test strategy. Precedent omits source revisions. Answered questions retain their struck-through wording and documented answers.
+Plans use concise problem, goal, and request summaries, a brief precedent summary referencing repository paths and definitions, a file tree marked `M` for modified, `A` for added, and `D` for deleted, behavior change entries with implementation locations, and a proportionate test strategy. Planning invokes `code-brain-diagramming` for inline Mermaid diagrams when a visual clarifies the design. Precedent omits source revisions. Answered questions retain their struck-through wording and documented answers.
 
 Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan. Approval is a separate step for resolving questions with the user and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
@@ -65,7 +65,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 ### Supporting workflows
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
-- `code-brain-diagramming` keeps Mermaid diagrams and canvases beside the plan they explain.
+- `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
@@ -111,7 +111,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
+| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$draft-message` | `$spellbinding-sentences` and a local clipboard tool |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
@@ -262,9 +262,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   locally installed `parallel-pr-review` skill.
 
 - `code-brain-planning` — approval-first Code Brain planning grounded in
-  applicable precedent. Each plan describes file and definition changes, a test
-  strategy, and authorized deviations. Separate subagents review the plan,
-  implement it, and review the delivered changes; closure creates a three-section receipt.
+  applicable precedent. Each plan describes behavior changes and implementation
+  locations, a test strategy, and authorized deviations, invoking
+  `code-brain-diagramming` when a diagram clarifies the design. Separate subagents
+  review the plan, implement it, and review the delivered changes; closure creates
+  a three-section receipt.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -274,11 +276,12 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
-- `code-brain-diagramming` — add Mermaid diagrams and Obsidian canvases to an
-  existing Code Brain plan.
+- `code-brain-diagramming` — make Code Brain plans skimmable with inline
+  Mermaid diagrams for behavior changes, flows, states, and dependencies.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
