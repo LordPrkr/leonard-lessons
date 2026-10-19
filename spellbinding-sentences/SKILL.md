@@ -5,33 +5,41 @@ description: "Draft or revise explanatory technical writing, including design do
 
 # Spellbinding Sentences
 
+Explain what happens, why it happens, and what the reader should do next.
+
 ## Steps
 
-### 1. Establish the facts and audience
+### 1. Establish what the reader needs
 
-Write for the named audience; otherwise assume technical readers with strong engineering fundamentals who may not know the local domain or codebase. When revising, preserve the original claims, scope, and uncertainty unless the user requests new substance.
+Write for the audience the user names. Otherwise assume readers with strong engineering fundamentals who may not know the local domain or codebase. Explain the unfamiliar concepts they need to follow the argument.
 
-Reuse supplied evidence and established verification status. Inspect relevant sources when adding factual claims, resolving ambiguity, or finding contradictions. Label assumptions and unverified claims.
+When revising, preserve the original claims, scope, and uncertainty unless the user requests new substance.
 
-Done when material claims have supporting evidence or explicit uncertainty, and revisions preserve the requested substance.
+Use the evidence already available, keeping clear which claims have been verified. Inspect relevant sources when adding factual claims or resolving ambiguous or conflicting evidence. Label assumptions and claims that remain unverified.
 
-### 2. Explain the point and mechanism
+Done when the draft addresses the chosen audience, each factual claim has evidence or explicit uncertainty, and revisions preserve the requested scope.
 
-Lead each section with the conclusion, change, or proposal. Establish the context and unfamiliar concepts the audience needs, then explain the concrete behavior and its consequences. Anchor important claims in a code path, dependency, metric, or observable condition.
+### 2. Explain how it works
 
-When the reader must choose, explain what each relevant option buys, what it costs, and which conditions favor it. When explaining a bug or proposing a fix, apply [Explaining failures and fixes](references/FAILURES.md).
+Start each section with its conclusion, change, or proposal. Explain the behavior that supports that point: who or what acts, what it does, and what follows. Name the code path, service, dependency, or condition behind important claims so the reader can connect the explanation to the system.
 
-Done when the reader can follow each conclusion and make any required choice without supplying missing context or causal reasoning.
+When the reader must choose, explain each relevant option's benefits, costs, and the conditions that favor it.
 
-### 3. Edit for clarity
+For a bug or proposed fix, apply [Explaining failures and fixes](references/FAILURES.md).
 
-Keep one claim per paragraph; each sentence should support, qualify, or advance it. Reduce dense sentences to their simplest true claim, then restore the conditions and causal relationships needed to explain it. Let sentence length follow the reasoning.
+Done when the reader can explain why the system behaves as described and has enough information to make any required choice.
 
-Use active voice, plain words, explicit clauses, and numbers or observable conditions for claims about scale or speed. Retain technical precision where it changes the reader's understanding or decision. State mechanisms and consequences directly, keeping words that add meaning and context the audience needs.
+### 3. Remove what adds no meaning
 
-Done when the explanation preserves its facts and causal chain, each sentence supports its paragraph's claim, and removing more would lose necessary meaning.
+Keep one claim per paragraph. Each sentence should support, qualify, or advance that claim. Remove background the audience already knows.
 
-## Example: mechanism, consequence, and trade-off
+Untangle a dense sentence by stating its simplest true claim, then restoring the conditions and reasons needed to explain it. Use as many sentences as the explanation needs.
+
+Use active verbs and familiar words. Replace invented labels with the behavior they describe. For claims about scale or speed, give numbers or conditions the reader could observe. Keep technical detail that changes what the reader understands or chooses.
+
+Done when each sentence supports its paragraph's claim and the edits preserve the facts, conditions, and reasons behind the conclusion.
+
+## Example: explain why the choice matters
 
 Too compressed:
 
