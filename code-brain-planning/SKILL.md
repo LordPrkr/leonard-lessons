@@ -22,7 +22,7 @@ Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.
 
 Summarize applicable precedent using the shared authoring contract. In `Deviations`, record necessary departures and their authorization or the decision requested, including search gaps and conflicting examples.
 
-Invoke `$code-brain-diagramming` when a diagram would clarify behavior changes, routing, execution order, states, or dependencies. Supply the draft plan and source repository locations; that skill owns diagram selection, inline Mermaid authoring, and diagram verification.
+Invoke `$code-brain-diagramming` when a diagram would clarify behavior changes, routing, execution order, states, or dependencies. Supply the draft plan and source repository locations; that skill owns diagram selection and inline Mermaid authoring.
 
 Done when `plan.md` stands alone for a fresh implementation subagent, summarizes applicable precedent and necessary deviations, identifies unanswered questions, includes diagrams where they clarify the design, and fits one implementation subagent.
 

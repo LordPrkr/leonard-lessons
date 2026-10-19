@@ -65,7 +65,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 ### Supporting workflows
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
-- `code-brain-diagramming` selects, authors, and verifies inline Mermaid diagrams in the plan they explain.
+- `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
 - `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.

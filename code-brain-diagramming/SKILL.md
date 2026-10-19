@@ -58,14 +58,3 @@ does not depend on color.
 
 Done when every diagram is inline, readable on its own, and accompanied by
 enough location detail for a fresh implementation agent to find the change.
-
-### 4. Verify
-
-Check every node, edge, condition, and omission against the grounded evidence.
-Ensure diagrams and change entries agree and preserve the plan's unrelated
-content. Render with an available Mermaid preview or validator and inspect
-labels, layout, and syntax; report the limitation if no renderer is available.
-Apply the linked plan contract when the revision changes the approved design.
-
-Done when every diagram matches the plan and source, rendering has been checked
-or its absence reported, and the plan's status reflects any design revision.
