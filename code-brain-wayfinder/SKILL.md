@@ -35,7 +35,7 @@ Done when the destination, initial frontier, known blockers, fog, and out-of-sco
 2. Resolve according to type:
    - **Grilling:** ask the user one decision at a time. Do not answer on their behalf.
    - **Research:** use primary sources and record cited findings in the ticket note.
-   - **Prototype:** invoke `$tracer-bullet`; link the runnable evidence and its finding.
+   - **Prototype:** build and run the smallest disposable prototype that answers the ticket's question; record the command and observed result in the ticket note, then remove prototype-only changes.
    - **Task:** perform only the narrow manual work needed to unblock a decision.
 3. Record the answer, evidence, and consequences in the ticket note. Add a one-line linked gist to the map's Decisions section.
 4. Close the ticket by moving its card to `Done`. Promote newly precise fog into ticket notes and cards; update or close tickets invalidated by the decision.
