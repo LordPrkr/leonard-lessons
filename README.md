@@ -10,8 +10,7 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 Idea → clarify
        ├─ ordinary implementation → effective-engineer → reviewable PR
        ├─ approval-first work → code-brain-planning
-       ├─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
-       └─ uncertain technical path → tracer-bullet → return to the plan
+       └─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
 Delivery → code-review <fixed-point>
@@ -67,7 +66,6 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
-- `tracer-bullet` proves a risky technical path in an isolated worktree and stores only its durable findings.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -107,7 +105,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
-| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-wayfinder`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming`, `$tracer-bullet` | `$code-brain`                                                                                                                               |
+| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-wayfinder`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
@@ -119,7 +117,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-`$code-brain-wayfinder` may route to `$tracer-bullet` or `$code-brain-planning`; install those branches when needed. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+Install `$code-brain-planning` for the handoff from `$code-brain-wayfinder`. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -189,14 +187,6 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill agents-md --global
-  ```
-
-- `tracer-bullet` — disposable prototype workflow for proving a plan's
-  technical path, then recording findings in Code Brain notes.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill tracer-bullet --global
   ```
 
 - `finalize-implementation` — commit the delivery-ready branch, rebase

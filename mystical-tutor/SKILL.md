@@ -18,10 +18,6 @@ For work that changes code:
 
 Keep bounded work in the current session. Durable planning uses Code Brain and a fresh implementation subagent for each approved plan.
 
-## Detour
-
-When a plan or Wayfinder ticket depends on a technical question that conversation cannot answer, route to `$tracer-bullet`. Its runnable evidence returns to that target; the prototype is not the deliverable.
-
 ## On-ramps
 
 - **Review a pull request or branch since a fixed point** → `$code-review`.
