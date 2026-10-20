@@ -1,6 +1,6 @@
 # Project Spine
 
-Use these templates when `$code-brain` initializes a project without `VISION.md`. See [`EXAMPLE_AGENTS.md`](./EXAMPLE_AGENTS.md) for a filled router. Do not bulk-create project files. Replace placeholders, omit router links to notes that do not exist, and obtain the user's explicit confirmation before writing `VISION.md`.
+Use these templates when `$code-brain` initializes a project without `VISION.md`. See [`EXAMPLE_AGENTS.md`](./EXAMPLE_AGENTS.md) for a filled router. Do not bulk-create project files. Replace placeholders, omit router links to notes that do not exist, obtain the user's explicit confirmation before writing `VISION.md`, and follow [issue-tracker setup](./ISSUE-TRACKER.md) before writing tracker configuration.
 
 ## `VISION.md`
 
@@ -29,11 +29,11 @@ Use these templates when `$code-brain` initializes a project without `VISION.md`
 ```md
 # <Project> Code Brain
 
-Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authoritative for work tracked on the board.
+Read [VISION.md](./VISION.md) before changing strategy. [ISSUE_TRACKER.md](./ISSUE_TRACKER.md) defines where work is tracked and how to use that tracker.
 
 ## Start here
 - [Vision](./VISION.md)
-- [Work board](./KANBAN.md)
+- [Issue tracker](./ISSUE_TRACKER.md)
 
 ## Active plans
 - <Relative link to each non-closed plan, or `None.`>
@@ -43,26 +43,25 @@ Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authorita
 
 ## Maintenance
 - Keep this file a router, not a backlog.
-- Keep tracked task status only in `KANBAN.md`.
+- Keep tracked task status in the configured issue tracker.
 - Add plans when work starts; remove them when work closes.
 ```
 
-## `KANBAN.md`
+## `ISSUE_TRACKER.md`
 
 ```md
----
-kanban-plugin: board
----
+# <Project> Issue Tracker
 
-## Inbox
+## Location and access
+<Tracker, exact repository/project/team URL or identifier, and available tools or commands.>
 
-## Ready
+## Workflow
+<Confirmed conventions for finding and creating issues, issue structure, ownership, ordering, status transitions, dependencies, and resolution or cancellation.>
 
-## In Progress
+## Code Brain context
+<How issues reference durable context and how notes record issue URLs or stable IDs.>
 
-## Review
-
-## Blocked
-
-## Done
+## Evidence
+- <Representative issue or workflow-guidance link, observed convention, and inspection date.>
+- <User-confirmed choice or explicit evidence gap, when applicable.>
 ```

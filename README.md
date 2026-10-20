@@ -22,7 +22,7 @@ Use `domain-modeling` when clarification settles durable terminology or an archi
 
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
-Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a Kanban card.
+Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a tracker issue.
 
 ### Project spine
 
@@ -32,7 +32,7 @@ Each initialized project has three entry points:
 $CODE_BRAIN_ROOT/<repo>/
 ├── VISION.md                 # human-owned strategy and agent authority
 ├── AGENTS.md                 # agent-maintained router to active memory
-├── KANBAN.md                 # tracked task state
+├── ISSUE_TRACKER.md          # project-specific tracker and confirmed workflow
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
 ├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
@@ -47,7 +47,9 @@ $CODE_BRAIN_ROOT/<repo>/
 
 Run `code-brain` from the target source repository or one of its worktrees. It resolves `<repo>` from Git so every worktree shares one project folder. A bare invocation audits an existing project and offers a concrete reconciliation without changing the vault first. The first durable workflow bootstraps the spine when `VISION.md` is missing: it reads existing repository and vault context, interviews the user one question at a time, and writes `VISION.md` only after explicit confirmation. Projects are reconciled individually, never bulk-migrated.
 
-`VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links the board, active plans, and canonical notes; it does not hold task state. `KANBAN.md` is a plain-Markdown board rendered by the [Obsidian Kanban plugin](https://github.com/obsidian-community/obsidian-kanban). Install and enable that plugin to use the board UI.
+`VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links issue-tracker configuration, active plans, and canonical notes; it does not hold task state. `ISSUE_TRACKER.md` records where this project tracks work and how agents should use that tracker. Task status stays in the configured tracker.
+
+When the user supplies or changes tracker information, `code-brain` inspects representative issues and workflow precedent in that tracker, presents a concrete workflow for confirmation, then saves the confirmed configuration to `$CODE_BRAIN_ROOT/<repo>/ISSUE_TRACKER.md`. It also performs setup when a workflow needs missing or incomplete configuration. Setup records the selected workflow without defining triage labels or setting up domain documentation. This follows the explore, confirm, then write approach of [Matt Pocock's setup skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md).
 
 ### Durable planning lifecycle
 
@@ -65,7 +67,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
-- `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets tracked on the Code Brain Kanban board before it becomes a plan.
+- `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets linked to issues in the configured tracker before it becomes a plan.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -104,7 +106,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$code-brain`                                                                                                                                         | Pi and Obsidian                                                                                                                             |
+| `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
 | `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-wayfinder`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
@@ -117,7 +119,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-Install `$code-brain-planning` for the handoff from `$code-brain-wayfinder`. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+`$code-brain-wayfinder` requires the project's configured issue-tracker tooling. Install `$code-brain-planning` for its planning handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -127,7 +129,7 @@ Install `$code-brain-planning` for the handoff from `$code-brain-wayfinder`. Ins
   ```
 
 - `code-brain` — canonical project spine, Git-native repository resolution,
-  Kanban ownership, and durable evidence conventions.
+  confirmed issue-tracker configuration, and durable evidence conventions.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
@@ -174,7 +176,7 @@ Install `$code-brain-planning` for the handoff from `$code-brain-wayfinder`. Ins
   ```
 
 - `code-brain-wayfinder` — chart uncertain, multi-session work as decision
-  tickets on the Code Brain Kanban board, then hand the resolved route to
+  tickets in the project's configured tracker, then hand the resolved route to
   `code-brain-planning`.
 
   ```bash
