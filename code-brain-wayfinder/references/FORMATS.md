@@ -43,6 +43,10 @@
 ```md
 # <Ticket title>
 
+## Issue
+
+<URL or stable ID of the issue in the project's configured tracker.>
+
 ## Question
 
 <The precise decision or investigation this ticket resolves.>
@@ -68,4 +72,4 @@
 - external: <https://example.com> — accessed YYYY-MM-DD
 ```
 
-A ticket's linked card appears exactly once in `KANBAN.md`. Its lane is the ticket state; do not add a duplicate status field to the note.
+The linked issue owns workflow status under the project's `ISSUE_TRACKER.md`. Keep the note's Blocked By links aligned with tracker dependencies; record workflow status only in the tracker.

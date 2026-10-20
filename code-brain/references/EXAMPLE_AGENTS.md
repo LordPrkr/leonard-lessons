@@ -5,11 +5,11 @@ This filled example shows the intended router shape. Use project-relative Markdo
 ```md
 # Habit Hatchery Code Brain
 
-Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authoritative for work tracked on the board.
+Read [VISION.md](./VISION.md) before changing strategy. [ISSUE_TRACKER.md](./ISSUE_TRACKER.md) defines where work is tracked and how to use that tracker.
 
 ## Start here
 - [Vision](./VISION.md)
-- [Work board](./KANBAN.md)
+- [Issue tracker](./ISSUE_TRACKER.md)
 
 ## Active plans
 - [Decoration placement queries](./plans/019_DECORATION_PLACEMENT_QUERIES/plan.md)
@@ -20,6 +20,6 @@ Read [VISION.md](./VISION.md) before changing strategy. `KANBAN.md` is authorita
 
 ## Maintenance
 - Keep this file a router, not a backlog.
-- Keep tracked task status only in `KANBAN.md`.
+- Keep tracked task status in the configured issue tracker.
 - Add plans when work starts; remove them when work closes.
 ```
