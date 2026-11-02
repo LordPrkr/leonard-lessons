@@ -11,7 +11,7 @@ Idea → clarify
        ├─ ordinary implementation → effective-engineer → reviewable PR
        ├─ approval-first work → code-brain-planning
        └─ broad work with unresolved decisions → code-brain-wayfinder → handoff
-New session from handoff → code-brain-planning → approve and implement first slice
+New session from handoff → code-brain-slicing (when needed) → code-brain-planning
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
 Delivery → code-scry <fixed-point>
@@ -24,6 +24,8 @@ Use `domain-modeling` when clarification settles durable terminology or an archi
 Code Brain keeps durable project memory outside source repositories. Source code remains the implementation and evidence surface; the vault holds strategic intent, plans, domain language, reusable findings, and execution receipts.
 
 Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a tracker issue.
+
+For a settled effort that needs multiple implementation plans, `code-brain-slicing` defines user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the breakdown with the user before publishing delivery issues in the configured tracker. A compact index lives beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. The receiving session uses this skill when needed, then plans the first unblocked story. A clear, bounded slice goes directly to planning.
 
 ### Project spine
 
@@ -69,6 +71,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to plan and implement the first slice.
+- `code-brain-slicing` turns settled scope and decisions into approved delivery stories in the configured tracker, with a Code Brain index and a first slice ready for planning.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -109,7 +112,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
 | `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
-| `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-planning` in the next session |
+| `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` when needed and `$code-brain-planning` in the next session |
+| `$code-brain-slicing` | `$code-brain` and the project's configured issue-tracker tooling; `$code-brain-planning` for the resulting slice |
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
@@ -121,7 +125,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-scry` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-Install `$code-brain-planning` and its dependencies for the session that receives Wayfinder's handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+Install `$code-brain-slicing`, `$code-brain-planning`, and their dependencies for the session that receives Wayfinder's handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -185,6 +189,15 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   bunx skills@latest add mattpocock/skills/skills/productivity/handoff --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-wayfinder --global
+  ```
+
+- `code-brain-slicing` — define and confirm delivery stories, acceptance
+  criteria, tasks, and dependencies from settled scope; publish them to the
+  configured tracker and return the first slice for implementation planning.
+
+  ```bash
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-brain-slicing --global
   ```
 
 - `agents-md` — create or refactor AGENTS.md files with progressive
