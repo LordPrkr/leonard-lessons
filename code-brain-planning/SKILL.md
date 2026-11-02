@@ -20,6 +20,8 @@ Invoke `$follow-precedent` to establish applicable patterns and `$spellbinding-s
 
 Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `$code-brain`'s plan authoring contract before writing `plan.md`. Use [the plan template](./references/TEMPLATE.md). Keep each plan small enough for one implementation subagent; split larger work into separate plans before approval.
 
+When planning a delivery story, read its full acceptance criteria and current dependencies. Link the story from Context, account for every criterion in Implementation and Test Strategy, and record unresolved prerequisites in Questions. Link the resulting plan beside the story in its slice index when one exists.
+
 Summarize applicable precedent using the shared authoring contract. In `Deviations`, record necessary departures and their authorization or the decision requested, including search gaps and conflicting examples.
 
 Invoke `$code-brain-diagramming` when a diagram would clarify behavior changes, routing, execution order, states, or dependencies. Supply the draft plan and source repository locations; that skill owns diagram selection and inline Mermaid authoring.
