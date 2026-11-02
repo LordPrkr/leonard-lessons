@@ -14,7 +14,7 @@ Idea → clarify
 New session from handoff → code-brain-planning → approve and implement first slice
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
-Delivery → code-review <fixed-point>
+Delivery → code-scry <fixed-point>
 ```
 
 Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Each approved plan runs in a fresh implementation subagent with only its plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
@@ -60,7 +60,7 @@ Plans use concise problem, goal, and request summaries, a brief precedent summar
 
 Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan. Approval is a separate step for resolving questions with the user and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
-A worker subagent implements the approved plan through `effective-engineer`, which owns workspace provisioning, verification, and finalization. A separate reviewer subagent then invokes `code-review` with the approved plan as its spec.
+A worker subagent implements the approved plan through `effective-engineer`, which owns workspace provisioning, verification, and finalization. A separate reviewer subagent then invokes `code-scry` with the approved plan as its spec.
 
 After finalization, create `receipt.md` with exactly three sections: Delivery links the finalized PR, Review summarizes findings and their resolution, and Follow-up lists remaining actions. Link the receipt from the plan's Outcome, set the plan to `implemented`, and remove its Active plans link. Blocked or partial work remains `approved`.
 
@@ -72,7 +72,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
-- `code-review` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
+- `code-scry` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
@@ -113,12 +113,12 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-review`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
+| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$draft-message` | `$spellbinding-sentences` and a local clipboard tool |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
 | `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
-| `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `$code-scry` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
 Install `$code-brain-planning` and its dependencies for the session that receives Wayfinder's handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
@@ -224,7 +224,7 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
   ```
 
-- `code-review` — review a GitHub PR or committed changes since a supplied
+- `code-scry` — review a GitHub PR or committed changes since a supplied
   commit, branch, tag, or merge-base with independent Standards and Spec
   reviewer subagents. Standards enforces applicable pre-change implementation
   and test precedent, checks deviation authorization, and makes smell recommendations
@@ -241,18 +241,18 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   frontend package contracts, and new network requests, with source snippets
   and concrete checks. GitHub reviews use `gh` to stage pending comments on
   relevant lines or files. Skips Spec when the user confirms no spec exists.
-  Adapted from [Matt Pocock’s code-review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
-  with its [MIT license notice](./code-review/LICENSE).
+  Adapted from [Matt Pocock’s original review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
+  with its [MIT license notice](./code-scry/LICENSE).
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
   ```
 
-  Invoke `$code-review main` to compare committed changes with the merge-base
+  Invoke `$code-scry main` to compare committed changes with the merge-base
   of `main` and `HEAD`; staged and unstaged changes are outside that comparison.
-  Invoke `$code-review <PR URL>` to review the PR's own diff and save suggested
+  Invoke `$code-scry <PR URL>` to review the PR's own diff and save suggested
   changes in a pending review for you to submit. Local reviews require a fixed
   point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.
@@ -271,7 +271,7 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-review --global
+  bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```

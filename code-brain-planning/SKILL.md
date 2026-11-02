@@ -48,7 +48,7 @@ Done when the worker returns the finalized pull request and verification results
 
 ## 6. Verify
 
-Delegate review to a reviewer subagent with the delivered pull request or committed branch comparison, the approved plan as its spec, and an instruction to invoke `$code-review`.
+Delegate review to a reviewer subagent with the delivered pull request or committed branch comparison, the approved plan as its spec, and an instruction to invoke `$code-scry`.
 
 Done when review is complete and actionable findings are resolved, or remaining blockers are reported.
 
