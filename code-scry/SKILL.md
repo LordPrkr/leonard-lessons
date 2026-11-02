@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: code-scry
 description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
 
