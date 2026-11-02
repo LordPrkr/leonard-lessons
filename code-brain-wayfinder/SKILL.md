@@ -48,10 +48,18 @@ Check the current tracker state for every ticket. Proceed when every in-scope ti
 
 Identify the first implementation slice: a bounded behavior with a verifiable outcome, small enough for one implementation plan. When a map exists, record its goal and scope in the map's Outcome with planning pending.
 
-Invoke `$handoff` with this next-session focus: use `$code-brain-planning` to plan the first slice, obtain explicit approval, then implement and verify it through that workflow. Supply the source repository path and established base, Code Brain project and map paths, and references to the first slice's scope, supporting ticket notes, and ADRs. Instruct the next session to link the map from the plan's Precedent and the plan from the map's Outcome once the plan exists. Leave later slices for subsequent work.
+Invoke `$handoff` to write a document for a separate session. Supply the source repository path and established base, Code Brain project and map paths, and references to the first slice's scope, supporting ticket notes, and ADRs. Include the following as instructions inside the handoff document:
+
+```md
+## Instructions for the next session
+
+Invoke `$code-brain-planning` to plan the first slice identified in this handoff. Follow that workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
+
+When a wayfinding map exists, link it from the plan's Precedent and link the plan from the map's Outcome once the plan exists.
+```
 
 If the route is already clear during charting, use the same handoff without creating a map; supply the agreed destination and first slice directly.
 
-Report the handoff document's absolute path and end the session. Planning and implementation belong to the new session.
+The session that performed wayfinding reports the handoff document's absolute path and stops. Do not invoke `$code-brain-planning` or draft an implementation plan in that session; the instructions above are handoff content for the new session to execute.
 
-Done when the handoff document exists, its absolute path has been reported, and the map records the next slice when a map exists; or the map explains why the destination was abandoned or superseded.
+Done when the handoff document contains the next-session instructions, its absolute path has been reported, the map records the next slice when a map exists, and planning has not started in the wayfinding session; or the map explains why the destination was abandoned or superseded.
