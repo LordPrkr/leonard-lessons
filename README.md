@@ -11,7 +11,7 @@ Idea → clarify
        ├─ ordinary implementation → effective-engineer → reviewable PR
        ├─ approval-first work → code-brain-planning
        └─ broad work with unresolved decisions → code-brain-wayfinder → handoff
-New session from handoff → code-brain-slicing (when needed) → code-brain-planning
+New session → follow the single route selected in the handoff
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
 Delivery → code-scry <fixed-point>
@@ -25,7 +25,7 @@ Code Brain keeps durable project memory outside source repositories. Source code
 
 Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a tracker issue.
 
-For a settled effort that needs a scoped tracker project or multiple delivery stories, `code-brain-slicing` drafts a project brief and user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the project and backlog together before reusing or creating the tracker project and publishing its story issues. A compact index records the project URL or ID and story links beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. The receiving session uses this skill when needed, then plans the first unblocked story. A clear, bounded slice with no project setup needed goes directly to planning.
+For a settled effort that needs a scoped tracker project or multiple delivery stories, `code-brain-slicing` drafts a project brief and user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the project and backlog together before reusing or creating the tracker project and publishing its story issues. A compact index records the project URL or ID and story links beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. Wayfinder selects the next session's entry skill before writing the handoff: slicing for remaining project or backlog setup, or planning for an already agreed, bounded slice. The handoff contains only the selected route's instructions; the receiving session follows that route.
 
 ### Project spine
 

@@ -29,7 +29,7 @@
 
 ## Outcome
 
-- <First slice's goal and scope, with planning pending; add the durable implementation-plan link once created, or explain why this effort ended.>
+- <First slice's goal and scope, selected next-session entry skill and reason, with planning pending; add the durable implementation-plan link once created, or explain why this effort ended.>
 
 ## Evidence
 
