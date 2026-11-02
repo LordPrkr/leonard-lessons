@@ -61,9 +61,9 @@ Use this order: Conventional Comments opening and discussion, collapsed suggeste
 Example layout for a hypothetical retry configuration finding:
 
 ````markdown
-issue (blocking): Setting `options.retries` to `0` still enables retries.
+issue (blocking): Setting `options.retries` to `0` still retries the request three times.
 
-This fallback replaces `0` with `3`, so a caller trying to disable retries still sends repeated requests. The caller contract defines zero as disabling retries. A nullish fallback preserves that setting while keeping the default for an omitted value.
+`0` should turn retries off.
 
 <details>
 <summary>Suggested diff</summary>
@@ -81,7 +81,7 @@ This fallback replaces `0` with `3`, so a caller trying to disable retries still
 *This feedback was provided by an agent; please confirm the reasoning and suggested change.*
 ````
 
-**Complete when:** each exact body passes the writing workflow and shared finding format, explains the current behavior and review check, contains its complete suggested diff in a collapsed block, and ends with the agent confirmation note.
+**Complete when:** each exact body passes the writing workflow and shared finding format, explains the problem and expected behavior in plain language, contains its complete suggested diff in a collapsed block, and ends with the agent confirmation note.
 
 ## API references
 
