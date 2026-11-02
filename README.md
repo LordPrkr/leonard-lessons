@@ -240,7 +240,9 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   manual review to backend API contracts, database queries and schemas,
   frontend package contracts, and new network requests, with source snippets
   and concrete checks. GitHub reviews use `gh` to stage pending comments on
-  relevant lines or files. Skips Spec when the user confirms no spec exists.
+  relevant lines or files. The root review comment gives only a short Standards
+  and Spec outcome; reruns replace the previous agent summary. Skips Spec when
+  the user confirms no spec exists.
   Adapted from [Matt Pocock’s original review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
   with its [MIT license notice](./code-scry/LICENSE).
 
