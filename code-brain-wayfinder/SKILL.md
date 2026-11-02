@@ -53,13 +53,15 @@ Invoke `$handoff` to write a document for a separate session. Supply the source 
 ```md
 ## Instructions for the next session
 
-Invoke `$code-brain-planning` to plan the first slice identified in this handoff. Follow that workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
+If the effort needs multiple delivery slices and their stories and acceptance criteria are not yet defined, invoke `$code-brain-slicing` to define and confirm them first. Otherwise, use the already defined first slice.
+
+Invoke `$code-brain-planning` to plan the first unblocked, agreed slice. Follow that workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
 
 When a wayfinding map exists, link it from the plan's Precedent and link the plan from the map's Outcome once the plan exists.
 ```
 
 If the route is already clear during charting, use the same handoff without creating a map; supply the agreed destination and first slice directly.
 
-The session that performed wayfinding reports the handoff document's absolute path and stops. Do not invoke `$code-brain-planning` or draft an implementation plan in that session; the instructions above are handoff content for the new session to execute.
+The session that performed wayfinding reports the handoff document's absolute path and stops. Do not invoke `$code-brain-slicing` or `$code-brain-planning` or draft an implementation plan in that session; the instructions above are handoff content for the new session to execute.
 
 Done when the handoff document contains the next-session instructions, its absolute path has been reported, the map records the next slice when a map exists, and planning has not started in the wayfinding session; or the map explains why the destination was abandoned or superseded.
