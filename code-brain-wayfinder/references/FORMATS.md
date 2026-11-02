@@ -29,7 +29,7 @@
 
 ## Outcome
 
-- <Link to the implementation plan, or why this effort ended.>
+- <First slice's goal and scope, with planning pending; add the durable implementation-plan link once created, or explain why this effort ended.>
 
 ## Evidence
 

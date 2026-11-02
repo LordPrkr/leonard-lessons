@@ -42,10 +42,16 @@ Done when the destination, initial frontier, known blockers, fog, and out-of-sco
 
 Done when the selected ticket has a durable resolution, every material claim has evidence, its issue is resolved, and tracker availability and dependencies reflect the newly known route.
 
-## 3. Hand off to planning
+## 3. Hand off to a new session
 
-Check the current tracker state for every ticket. When every in-scope ticket is resolved or explicitly cancelled and no material fog remains, create a Code Brain plan through `$code-brain-planning`. Blocked tickets and tickets claimed by another session remain pending until their issues reach one of those outcomes. Link the map from the plan's Precedent and the plan from the map's Outcome.
+Check the current tracker state for every ticket. Proceed when every in-scope ticket is resolved or explicitly cancelled and no material fog remains. Blocked tickets and tickets claimed by another session remain pending until their issues reach one of those outcomes.
 
-If the route is already clear during charting, route directly to `$code-brain-planning`; it creates the implementation plan without a map.
+Identify the first implementation slice: a bounded behavior with a verifiable outcome, small enough for one implementation plan. When a map exists, record its goal and scope in the map's Outcome with planning pending.
 
-Done when the map either links to its implementation plan or explains why the destination was abandoned or superseded.
+Invoke `$handoff` with this next-session focus: use `$code-brain-planning` to plan the first slice, obtain explicit approval, then implement and verify it through that workflow. Supply the source repository path and established base, Code Brain project and map paths, and references to the first slice's scope, supporting ticket notes, and ADRs. Instruct the next session to link the map from the plan's Precedent and the plan from the map's Outcome once the plan exists. Leave later slices for subsequent work.
+
+If the route is already clear during charting, use the same handoff without creating a map; supply the agreed destination and first slice directly.
+
+Report the handoff document's absolute path and end the session. Planning and implementation belong to the new session.
+
+Done when the handoff document exists, its absolute path has been reported, and the map records the next slice when a map exists; or the map explains why the destination was abandoned or superseded.
