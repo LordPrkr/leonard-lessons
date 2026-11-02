@@ -53,7 +53,7 @@ Invoke `$handoff` to write a document for a separate session. Supply the source 
 ```md
 ## Instructions for the next session
 
-If the effort needs multiple delivery slices and their stories and acceptance criteria are not yet defined, invoke `$code-brain-slicing` to define and confirm them first. Otherwise, use the already defined first slice.
+If a scoped tracker project or delivery-story breakdown is still needed, invoke `$code-brain-slicing` to define and confirm it first. Otherwise, use the existing project and already defined first slice.
 
 Invoke `$code-brain-planning` to plan the first unblocked, agreed slice. Follow that workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
 

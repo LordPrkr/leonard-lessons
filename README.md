@@ -25,7 +25,7 @@ Code Brain keeps durable project memory outside source repositories. Source code
 
 Use Code Brain for work that needs a durable plan and approval gate. `code-brain-planning` creates one plan per implementation subagent; `effective-engineer` handles ordinary work without durable artifacts. Planning does not require a tracker issue.
 
-For a settled effort that needs multiple implementation plans, `code-brain-slicing` defines user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the breakdown with the user before publishing delivery issues in the configured tracker. A compact index lives beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. The receiving session uses this skill when needed, then plans the first unblocked story. A clear, bounded slice goes directly to planning.
+For a settled effort that needs a scoped tracker project or multiple delivery stories, `code-brain-slicing` drafts a project brief and user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the project and backlog together before reusing or creating the tracker project and publishing its story issues. A compact index records the project URL or ID and story links beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. The receiving session uses this skill when needed, then plans the first unblocked story. A clear, bounded slice with no project setup needed goes directly to planning.
 
 ### Project spine
 
@@ -52,7 +52,7 @@ Run `code-brain` from the target source repository or one of its worktrees. It r
 
 `VISION.md` defines purpose, principles, non-goals, and what agents may do without asking. `AGENTS.md` links issue-tracker configuration, active plans, and canonical notes; it does not hold task state. `ISSUE_TRACKER.md` records where this project tracks work and how agents should use that tracker. Task status stays in the configured tracker.
 
-When the user supplies or changes tracker information, `code-brain` inspects representative issues and workflow precedent in that tracker, presents a concrete workflow for confirmation, then saves the confirmed configuration to `$CODE_BRAIN_ROOT/<repo>/ISSUE_TRACKER.md`. It also performs setup when a workflow needs missing or incomplete configuration. Setup records the selected workflow without defining triage labels or setting up domain documentation. This follows the explore, confirm, then write approach of [Matt Pocock's setup skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md).
+When the user supplies or changes tracker information, `code-brain` inspects representative issues, scoped projects, and workflow precedent in that tracker, presents a concrete workflow for confirmation, then saves the confirmed configuration to `$CODE_BRAIN_ROOT/<repo>/ISSUE_TRACKER.md`. Configuration records allowed scope, defaults, and how bounded efforts use projects, epics, or parent issues, including creation and membership operations. Each effort's project reference lives in its slice index; the repository keeps its shared Code Brain folder and tracker defaults. Setup also handles missing or incomplete configuration, without defining triage labels or setting up domain documentation. This follows the explore, confirm, then write approach of [Matt Pocock's setup skill](https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md).
 
 ### Durable planning lifecycle
 
@@ -71,7 +71,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to plan and implement the first slice.
-- `code-brain-slicing` turns settled scope and decisions into approved delivery stories in the configured tracker, with a Code Brain index and a first slice ready for planning.
+- `code-brain-slicing` defines an approved scoped tracker project and its delivery stories, with a Code Brain index and a first slice ready for planning.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -191,9 +191,9 @@ Install `$code-brain-slicing`, `$code-brain-planning`, and their dependencies fo
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-wayfinder --global
   ```
 
-- `code-brain-slicing` — define and confirm delivery stories, acceptance
-  criteria, tasks, and dependencies from settled scope; publish them to the
-  configured tracker and return the first slice for implementation planning.
+- `code-brain-slicing` — define and confirm a scoped tracker project and its
+  delivery stories, acceptance criteria, tasks, and dependencies; publish the
+  project and backlog, then return the first slice for implementation planning.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global

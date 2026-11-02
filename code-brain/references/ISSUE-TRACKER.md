@@ -6,21 +6,25 @@ Use this branch when the user supplies or changes issue-tracker information, or 
 
 Read existing `ISSUE_TRACKER.md`, repository instructions, remotes, and relevant tracker configuration. Start with the tracker and project the user names. If none is named, propose the tracker supported by project evidence and ask the user to identify it when evidence is inconclusive.
 
-Done when the tracker and exact repository, project, or team scope are identified, with an access method available for inspection or an explicit access gap.
+Done when the tracker, allowed parent scope, and any default project are identified, with an access method available for inspection or an explicit access gap.
 
 ## 2. Inspect precedent
 
 Inspect representative open and completed issues in that scope, their histories, and any linked workflow guidance. Look for how people actually find and create work, structure issues, claim ownership, record dependencies, change status, and close or cancel work. Distinguish observed conventions from proposed changes; a remote URL alone does not establish a workflow.
 
+Inspect how bounded efforts are grouped and which project operations the available tools support. Establish how to find or create the configured project, epic, or parent issue, associate story and task issues, and query membership. Record where creation is allowed and any access or capability limits. Use observed conventions or a user-confirmed alternative when the tracker lacks a native project grouping.
+
 When access is unavailable or precedent is absent or inconsistent, report the gap and ask the user for the missing workflow details. Keep unverified claims explicit rather than substituting a default workflow.
 
-Done when the proposed workflow is grounded in cited tracker examples and guidance, with every evidence gap identified for confirmation.
+Done when the proposed issue and scoped-project operations are grounded in cited tracker examples and guidance, with every evidence or capability gap identified for confirmation.
 
 ## 3. Confirm the workflow
 
-Show the proposed `ISSUE_TRACKER.md` contents: tracker location and scope, available tools or commands, issue conventions, ownership and status transitions, dependency handling, and links between issues and Code Brain context. Cite the examples supporting the proposal and identify choices supplied by the user. Ask the user to confirm or correct this concrete workflow before writing it to Code Brain. If corrections change the tracker or scope, inspect precedent there before presenting the revised draft.
+Show the proposed `ISSUE_TRACKER.md` contents: tracker location and allowed scope, defaults, available tools or commands, scoped-project operations and creation limits, issue conventions, ownership and status transitions, dependency handling, and links between issues and Code Brain context. Cite the examples supporting the proposal and identify choices supplied by the user. Ask the user to confirm or correct this concrete workflow before writing it to Code Brain. If corrections change the tracker or scope, inspect precedent there before presenting the revised draft.
 
 This setup records the project's existing workflow and agreed changes. It does not define triage labels, change tracker settings, or set up domain documentation.
+
+Setup saves the configuration; the calling workflow creates delivery projects under those confirmed rules.
 
 Done when the user explicitly confirms the complete proposed workflow and any unresolved evidence gaps are recorded as such in the draft.
 

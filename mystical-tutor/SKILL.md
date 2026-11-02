@@ -14,7 +14,7 @@ For work that changes code:
 
 - **Ordinary implementation** → `$effective-engineer`.
 - **Work requiring a durable plan and approval first** → `$code-brain-planning`.
-- **Settled work needing multiple delivery stories with acceptance criteria and tasks** → `$code-brain-slicing`.
+- **Settled work needing a scoped tracker project or delivery stories with acceptance criteria and tasks** → `$code-brain-slicing`.
 - **Broad work with a clear destination but material unresolved decisions** → `$code-brain-wayfinder`.
 
 Keep bounded work in the current session. Durable planning uses Code Brain and a fresh implementation subagent for each approved plan.

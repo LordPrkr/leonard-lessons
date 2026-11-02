@@ -53,7 +53,10 @@ Read [VISION.md](./VISION.md) before changing strategy. [ISSUE_TRACKER.md](./ISS
 # <Project> Issue Tracker
 
 ## Location and access
-<Tracker, exact repository/project/team URL or identifier, and available tools or commands.>
+<Tracker, allowed parent scope such as a repository or team URL/identifier, default project when present, and available tools or commands.>
+
+## Scoped delivery projects
+<Confirmed grouping for a bounded effort: project, epic, parent issue, or agreed alternative. Record how to find or create it, where creation is allowed, how story/task issues are associated, how membership is queried, and any access or capability limits.>
 
 ## Workflow
 <Confirmed conventions for finding and creating issues, issue structure, ownership, ordering, status transitions, dependencies, and resolution or cancellation.>
