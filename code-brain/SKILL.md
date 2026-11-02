@@ -65,6 +65,8 @@ Keep tracked task status in the configured tracker and reference issues from the
 
 ## Issue tracker
 
+A scoped delivery project groups one effort in the tracker using its confirmed project, epic, or parent-issue convention. Reuse the repository's Code Brain folder and tracker defaults across efforts. Keep shared access and project-grouping rules in `ISSUE_TRACKER.md`; record each effort's project URL or stable ID in its slice index.
+
 Read `ISSUE_TRACKER.md` before using a project's tracker. When the user supplies or changes issue-tracker information, or a workflow needs tracker configuration that is missing or incomplete, follow [issue-tracker setup](./references/ISSUE-TRACKER.md): inspect tracker precedent, confirm the proposed workflow with the user, then persist it. Existing confirmed configuration can be used without repeating setup.
 
 ## Plan authoring

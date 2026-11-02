@@ -1,4 +1,32 @@
-# Story and Index Formats
+# Project, Story, and Index Formats
+
+## Scoped project brief
+
+Publish this brief in the tracker's project description or configured equivalent. Adapt the fields to its confirmed conventions.
+
+```md
+# <Scoped delivery project name>
+
+## Objective
+
+<What becomes possible when this effort is delivered and who benefits.>
+
+## Scope
+
+- <Included capability or outcome.>
+
+## Exclusions
+
+- <Explicit boundary or deferral and why, or None.>
+
+## Completion
+
+<Observable conditions establishing that the scoped objective is delivered.>
+
+## Evidence
+
+- <Source goal, specification, wayfinding map, or decision reference.>
+```
 
 ## Delivery story
 
@@ -41,6 +69,10 @@ Store the index at the location selected by the skill's publication step. Reuse 
 ## Goal
 
 <One-line destination and link to the source goal, specification, or map.>
+
+## Tracker Project
+
+<Project name, URL or stable ID, and parent repository/team scope needed to locate it. The tracker holds the brief and membership.>
 
 ## Stories
 
