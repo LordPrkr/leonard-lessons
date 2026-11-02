@@ -107,6 +107,12 @@ Apply `$spellbinding-sentences` to the whole final response and follow the [revi
 
 ## Finding format
 
+Use [Conventional Comments](https://conventionalcomments.org/) for each finding in both axis reports and GitHub comments. Begin the body with `<label> (<decorations>): <subject>`, followed by a blank line and supporting discussion. Write a concrete subject that states the concern; keep file locations outside that opening line.
+
+Choose the label by intent: `issue` for a demonstrated problem, `suggestion` for an improvement, `question` for an unresolved concern, `todo` for a small required edit, and `chore` for a required process task. Use `nitpick` for a preference, `thought` for an exploratory idea, `note` for information, and `praise` for a specific positive observation. Keep praise, informational notes, and exploratory thoughts outside actionable finding counts and proposed-diff requirements.
+
+Include either `blocking` or `non-blocking` as a decoration so acceptance expectations are explicit. Tie blocking feedback to a concrete defect, unmet requirement, applicable standard or precedent, or required process. Preferences, smell recommendations, `nitpick`, `thought`, `note`, and `praise` are non-blocking. Keep uncertainty explicit in questions; a blocking question must identify what needs resolving before acceptance. Add other comma-separated decorations only when they clarify the concern.
+
 Every actionable finding, on either axis and for every review target, includes:
 
 - The affected repository-relative file path and line or range when present in the reviewed revision.
