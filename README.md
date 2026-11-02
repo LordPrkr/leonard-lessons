@@ -231,8 +231,9 @@ Install `$code-brain-planning` and its dependencies for the session that receive
   defer to established patterns. Uses `spellbinding-sentences` to explain the
   current behavior,
   its consequence, and the intended behavior for each finding, with a proposed
-  diff and file names. PR comments open with the explanation, put suggested
-  diffs in a collapsed block, and end with an agent confirmation note. Before
+  diff and file names. Findings use [Conventional Comments](https://conventionalcomments.org/)
+  labels with explicit blocking status. PR comments put suggested diffs in a
+  collapsed block and end with an agent confirmation note. Before
   staging comments, the skill checks feedback from all reviewers and excludes concerns
   already raised, with links to the existing feedback. The final response opens
   with an overview and directs

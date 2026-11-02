@@ -56,12 +56,14 @@ Compare each finding by the affected behavior, triggering condition, and underly
 
 Invoke `$spellbinding-sentences` on the exact bodies that will be saved, including review-body findings, after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
 
-Use this order: explanation, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the explanation and note visible outside the collapsed block. Give individual comments no title, heading, severity prefix, or axis label; retain axis assessments in the review summary. For review-body findings, use a file-and-line link to locate the concern before the same prose-first body.
+Use this order: Conventional Comments opening and discussion, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the opening, discussion, and note visible outside the collapsed block. Keep titles, headings, severity prefixes, and axis labels outside individual comment bodies; retain axis assessments in the review summary. For review-body findings, use a file-and-line link to locate the concern before the same body.
 
 Example layout for a hypothetical retry configuration finding:
 
 ````markdown
-When `options.retries` is `0`, this fallback sets the retry count to `3`. A caller trying to disable retries therefore still sends repeated requests. Please confirm that zero is intended to disable retries; if it is, a nullish fallback preserves that setting while keeping the default for an omitted value.
+issue (blocking): Setting `options.retries` to `0` still retries the request three times.
+
+`0` should turn retries off.
 
 <details>
 <summary>Suggested diff</summary>
@@ -79,7 +81,7 @@ When `options.retries` is `0`, this fallback sets the retry count to `3`. A call
 *This feedback was provided by an agent; please confirm the reasoning and suggested change.*
 ````
 
-**Complete when:** each exact body passes the writing workflow, explains the current behavior and review check without a title, contains its complete suggested diff in a collapsed block, and ends with the agent confirmation note.
+**Complete when:** each exact body passes the writing workflow and shared finding format, explains the problem and expected behavior in plain language, contains its complete suggested diff in a collapsed block, and ends with the agent confirmation note.
 
 ## API references
 
