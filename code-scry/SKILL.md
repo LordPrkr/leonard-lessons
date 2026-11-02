@@ -85,7 +85,7 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Invoke `$spellbinding-sentences` and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke `$spellbinding-sentences` and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings for the final chat response. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 Inspect the pinned diff and supporting source for the [manual review priorities](review-summary.md#manual-review-priorities), including changes with no Standards or Spec findings. Trace affected contracts, consumers, database operations, and request call sites far enough to explain their consequences. Record changed, unchanged, or unverified status for every applicable category, with source evidence for each changed area.
 
@@ -97,7 +97,7 @@ Record each axis's finding count and worst issue, or its skip or failure. Includ
 
 For a GitHub PR, follow [GitHub PR review — Stage pending comments](github-pr-review.md#stage-pending-comments) with the completed findings. Capture the pending review link and delivery status for the final response. For local reviews, skip posting.
 
-**Complete when:** every PR finding is accounted for in a verified pending review, a linked duplicate already raised by a reviewer, or an explicit delivery failure, or there are no actionable PR findings or the review is local and posting is skipped.
+**Complete when:** every PR finding is accounted for in a verified pending review, a linked duplicate already raised by a reviewer, a finding kept in chat because its file is outside the PR, or an explicit delivery failure, or there are no actionable PR findings or the review is local and posting is skipped.
 
 ### 7. Deliver the review overview and manual review guide
 

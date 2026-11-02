@@ -14,35 +14,35 @@ Use `gh pr view`, `gh pr diff`, and `gh api` for GitHub review work. Resolve the
 
 ## Stage pending comments
 
-If there are no actionable findings, report that result and skip posting.
+If there are no actionable findings, skip new threads. Refresh an existing agent-authored pending summary when its outcome has changed or it does not match the summary format; otherwise skip posting.
 
-1. Follow [Check existing feedback](#check-existing-feedback) and exclude findings already raised by any reviewer. Map each remaining finding to the reviewed PR. Compose bodies using [Comment body](#comment-body); keep axis labels in the review summary. Use the repository-relative `path`, file `line`, and diff `side`: `RIGHT` for added/current lines and `LEFT` for removed lines. For ranges, supply the first line and side as well as the final line and side. Anchor to the smallest relevant range in the saved diff. For a changed file without a suitable line anchor, use a file-level thread; findings about files outside the PR belong in the review body with their file names and proposed diffs.
+1. Follow [Check existing feedback](#check-existing-feedback) and exclude findings already raised by any reviewer. Map each remaining finding to the reviewed PR. Compose bodies using [Comment body](#comment-body); keep axis labels in the review summary. Use the repository-relative `path`, file `line`, and diff `side`: `RIGHT` for added/current lines and `LEFT` for removed lines. For ranges, supply the first line and side as well as the final line and side. Anchor to the smallest relevant range in the saved diff. For a changed file without a suitable line anchor, use a file-level thread; findings about files outside the PR belong in the final chat response with their file names and proposed diffs.
 
    For a self-contained replacement of an anchored `RIGHT` range, also include a GitHub `suggestion` fenced block inside the same collapsed block, containing exactly the replacement for that entire range. Broader changes retain their proposed unified diffs.
 
-   **Complete when:** each finding is either excluded with a link to existing feedback or has a valid line or file anchor or review-body placement; every retained body meets the comment format and every suggestion matches its anchored range. If all findings are duplicates, skip writing and report their links.
+   **Complete when:** each finding is either excluded with a link to existing feedback, has a valid line or file anchor, or is retained for chat because its file is outside the PR; every retained body meets the comment format and every suggestion matches its anchored range. If all findings are duplicates, skip new threads and report their links in chat.
 
-2. Re-read the PR base and head SHAs before writing. If either moved, refresh the review and revalidate findings and anchors. Refresh the existing-feedback check immediately before writing, excluding any newly raised duplicates. If no new findings remain, skip writing and report the existing feedback links. If the check is incomplete or fails, report the delivery failure and keep findings local until duplicate coverage can be verified. Use `gh api user` and paginated `gh api repos/<owner>/<repo>/pulls/<number>/reviews` to check for the authenticated user's existing `PENDING` review. Read its body and all comments before adding findings; preserve existing content. Apply the same existing-feedback check to this draft to make retries idempotent. Reuse it when its `commit_id` matches the reviewed head; report a conflicting pending review instead of replacing another draft.
+2. Re-read the PR base and head SHAs before writing. If either moved, refresh the review and revalidate findings and anchors. Refresh the existing-feedback check immediately before writing, excluding any newly raised duplicates. If the check is incomplete or fails, report the delivery failure and keep findings local until duplicate coverage can be verified. Use `gh api user` and paginated `gh api repos/<owner>/<repo>/pulls/<number>/reviews` to check for the authenticated user's existing `PENDING` review. Read its body and all comments before adding findings; preserve existing threads and user-authored content. Apply the same existing-feedback check to this draft to make retries idempotent. Reuse it when its `commit_id` matches the reviewed head; report a conflicting pending review instead of replacing another draft. If no new anchored findings remain, create no new review; refresh an existing agent-authored summary only when needed, and report existing feedback links in chat.
 
    **Complete when:** the PR still matches the reviewed snapshot, every retained finding has passed the refreshed existing-feedback check, and any existing draft is accounted for, or a feedback-fetch failure, revision conflict, or draft conflict is reported.
 
-3. If no pending review exists, write a JSON payload containing the pinned `commit_id` and a `body` with the two-axis summary and any unanchorable findings. Create the draft using:
+3. Compose the root `body` using [GitHub review body](review-summary.md#github-review-body), counting each finding once within its axis whether it is new or already raised. If new anchored findings remain and no pending review exists, write a JSON payload containing the pinned `commit_id` and that `body`. Create the draft using:
 
    ```bash
    gh api --method POST repos/<owner>/<repo>/pulls/<number>/reviews --input <payload.json>
    ```
 
-   Omit `event` to leave the review `PENDING`. Save its REST `id`, GraphQL `node_id`, and URL. For an existing draft, append this run's summary and body findings while preserving prior content, using `gh api --method PUT repos/<owner>/<repo>/pulls/<number>/reviews/<review-id> --input <payload.json>` with a `body` payload.
+   Omit `event` to leave the review `PENDING`. Save its REST `id`, GraphQL `node_id`, and URL. For an existing draft, replace the previous agent-authored summary with the current summary, removing superseded assessments while preserving user-authored content. Use `gh api --method PUT repos/<owner>/<repo>/pulls/<number>/reviews/<review-id> --input <payload.json>` with a `body` payload. Keep any still-relevant finding previously stored in the root body in a review thread, or in chat if its file is outside the PR, before replacing that text.
 
    Add each anchored finding using `gh api graphql` with the `addPullRequestReviewThread` mutation and `pullRequestReviewId` set to that draft's `node_id`. For line threads supply `body`, `path`, `line`, `side`, and, for ranges, `startLine` and `startSide`. For file threads supply `body`, `path`, and `subjectType: FILE`. Store Markdown bodies in JSON files passed with `--input` so newlines, code fences, and shell characters stay literal.
 
    Keep the review pending for the user to submit. `gh pr review`, review submission endpoints, and standalone comment endpoints are not substitutes for staging draft comments.
 
-   **Complete when:** every new finding is written into the pending review, or each failed write is recorded with its unsaved comment and proposed diff.
+   **Complete when:** the root body follows the brief summary format, every new anchored finding is written into the pending review or its failed write is recorded, and findings about files outside the PR remain available for chat.
 
-4. Verify the review using `gh api repos/<owner>/<repo>/pulls/<number>/reviews/<review-id>` and its paginated `/comments` endpoint. Check `PENDING`, the reviewed `commit_id`, the review body findings, and every expected comment's body, path, line/range, or file subject. Recheck PR SHAs and report any movement during posting. Verify that newly saved finding bodies still follow [Comment body](#comment-body). Return the review URL, saved finding count, and links for excluded duplicates; include unsaved findings and the failure reason if delivery was partial or blocked.
+4. Verify the review using `gh api repos/<owner>/<repo>/pulls/<number>/reviews/<review-id>` and its paginated `/comments` endpoint. Check `PENDING`, the reviewed `commit_id`, the root body's brief summary and counts, and every expected comment's body, path, line/range, or file subject. Recheck PR SHAs and report any movement during posting. Verify that newly saved finding bodies still follow [Comment body](#comment-body). Return the review URL, saved finding count, and links for excluded duplicates in chat; include findings kept in chat and the reason, including any delivery failure.
 
-   **Complete when:** all findings are accounted for in verified saved content or explicit failures, and the final report distinguishes pending comments from submitted reviews.
+   **Complete when:** all findings are accounted for in verified saved content, linked existing feedback, findings kept in chat, or explicit failures, and the final report distinguishes pending comments from submitted reviews.
 
 ## Check existing feedback
 
@@ -54,9 +54,9 @@ Compare each finding by the affected behavior, triggering condition, and underly
 
 ## Comment body
 
-Invoke `$spellbinding-sentences` on the exact bodies that will be saved, including review-body findings, after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
+Invoke `$spellbinding-sentences` on the exact finding bodies that will be saved after formatting them. Apply the main skill's [finding format](SKILL.md#finding-format) to the explanations and diffs.
 
-Use this order: Conventional Comments opening and discussion, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the opening, discussion, and note visible outside the collapsed block. Keep titles, headings, severity prefixes, and axis labels outside individual comment bodies; retain axis assessments in the review summary. For review-body findings, use a file-and-line link to locate the concern before the same body.
+Use this order: Conventional Comments opening and discussion, collapsed suggested diff, then the final note: *This feedback was provided by an agent; please confirm the reasoning and suggested change.* Keep the opening, discussion, and note visible outside the collapsed block. Keep titles, headings, severity prefixes, and axis labels outside individual comment bodies; retain axis assessments in the review summary.
 
 Example layout for a hypothetical retry configuration finding:
 

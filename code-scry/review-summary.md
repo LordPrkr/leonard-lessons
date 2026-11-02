@@ -1,5 +1,25 @@
 # Review summary
 
+## GitHub review body
+
+Keep the root review comment to `## Standards` and `## Spec`, with one short sentence for each. State the blocking and non-blocking finding counts when present, or say "No findings." Say plainly when an axis was skipped or could not finish; an incomplete review is not a zero-finding result.
+
+Include a limitation only when it changes how the reader should interpret that result, in the same sentence. Keep reviewer identities, coverage inventories, test logs, delivery status, and earlier assessments in working notes or the final chat response. Full findings and suggested diffs belong in review threads or chat.
+
+For example:
+
+```markdown
+## Standards
+
+1 blocking finding.
+
+## Spec
+
+No findings.
+```
+
+**Complete when:** the root body contains only the current, brief outcome for each axis, with any skipped or incomplete review stated honestly.
+
 ## Manual review priorities
 
 Use these categories to direct the user's manual review. Cover the backend categories for backend changes, frontend categories for frontend changes, and both for a mixed change. Classify by the behavior affected rather than directory names. Keep Standards and Spec findings complete; these priorities govern the manual review guide.
@@ -15,6 +35,8 @@ Use these categories to direct the user's manual review. Cover the backend categ
 Order manual review areas by the concrete consequence and difficulty of reversing the change: persisted data changes, deployed consumer dependencies, and external effects can survive a code revert. Explain the actual consequence and recovery requirement supported by the source. Label operational assumptions and missing evidence explicitly.
 
 ## Final response
+
+This format is for the final chat response. The GitHub root comment uses [GitHub review body](#github-review-body).
 
 1. **Explain what the PR accomplishes.** Open with the resulting behavior, who or what benefits, and the implementation path that makes it possible. For a local review, describe the compared changes. Ground the overview in the reviewed source and distinguish implemented behavior from the spec's intent.
 
