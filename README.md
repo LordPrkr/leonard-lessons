@@ -10,7 +10,8 @@ These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain s
 Idea → clarify
        ├─ ordinary implementation → effective-engineer → reviewable PR
        ├─ approval-first work → code-brain-planning
-       └─ broad work with unresolved decisions → code-brain-wayfinder → code-brain-planning
+       └─ broad work with unresolved decisions → code-brain-wayfinder → handoff
+New session from handoff → code-brain-planning → approve and implement first slice
 Approved plan → feature-branch → effective-engineer
 Verified work → finalize-implementation → GitHub PR
 Delivery → code-review <fixed-point>
@@ -67,7 +68,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 
 - `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
-- `code-brain-wayfinder` turns uncertain, multi-session work into decision tickets linked to issues in the configured tracker before it becomes a plan.
+- `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to plan and implement the first slice.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -107,7 +108,8 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
-| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-wayfinder`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
+| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
+| `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-planning` in the next session |
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
@@ -119,7 +121,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-review` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-`$code-brain-wayfinder` requires the project's configured issue-tracker tooling. Install `$code-brain-planning` for its planning handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+Install `$code-brain-planning` and its dependencies for the session that receives Wayfinder's handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -176,10 +178,11 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
   ```
 
 - `code-brain-wayfinder` — chart uncertain, multi-session work as decision
-  tickets in the project's configured tracker, then hand the resolved route to
-  `code-brain-planning`.
+  tickets in the project's configured tracker, then invoke `handoff` to prepare
+  a new session to plan and implement the first slice with `code-brain-planning`.
 
   ```bash
+  bunx skills@latest add mattpocock/skills/skills/productivity/handoff --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-wayfinder --global
   ```
@@ -343,6 +346,12 @@ bunx skills@latest add modem-dev/hunk/skills/hunk-review
 ```
 
 ### [mattpocock/skills](https://github.com/mattpocock/skills)
+
+- [`handoff`](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) - create a temporary handoff document for a fresh session, referencing existing artifacts and naming suggested skills. Required by `code-brain-wayfinder`.
+
+```bash
+bunx skills@latest add mattpocock/skills/skills/productivity/handoff --global
+```
 
 - `tdd` - test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 

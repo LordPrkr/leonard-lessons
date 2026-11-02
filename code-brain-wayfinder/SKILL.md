@@ -15,7 +15,7 @@ Read [map and ticket formats](./references/FORMATS.md) before creating or changi
 ## Terms
 
 - **Map:** one `wayfinding/<NNN_TOPIC>/map.md` file that names the destination and indexes resolved decisions.
-- **Ticket:** one note under its map's `tickets/` directory linked to one issue in the configured tracker; it resolves one decision or directly unblocks one.
+- **Ticket:** one note under its map's `tickets/` directory linked to one issue in the configured tracker; it resolves one focused decision or directly unblocks one, sized to one agent session. Split questions that exceed that bound into linked tickets with explicit dependencies, including when their scope grows during investigation.
 - **Frontier:** unresolved, unblocked tickets available to work under the confirmed tracker workflow.
 - **Fog:** in-scope uncertainty that cannot yet be stated as a ticket question.
 
@@ -35,17 +35,31 @@ Done when the destination, initial frontier, known blockers, fog, and out-of-sco
 2. Resolve according to type:
    - **Grilling:** ask the user one decision at a time. Do not answer on their behalf.
    - **Research:** use primary sources and record cited findings in the ticket note.
-   - **Prototype:** build and run the smallest disposable prototype that answers the ticket's question; record the command and observed result in the ticket note, then remove prototype-only changes.
+   - **Prototype:** follow the [prototype workflow](./references/PROTOTYPES.md) for an experiment or a discussion that requires human feedback.
    - **Task:** perform only the narrow manual work needed to unblock a decision.
 3. Record the answer, evidence, and consequences in the ticket note. Add a one-line linked gist to the map's Decisions section.
 4. Resolve the issue through the confirmed workflow. Promote newly precise fog into ticket notes and linked issues; update or close issues invalidated by the decision, distinguishing cancellation from resolution according to tracker conventions.
 
 Done when the selected ticket has a durable resolution, every material claim has evidence, its issue is resolved, and tracker availability and dependencies reflect the newly known route.
 
-## 3. Hand off to planning
+## 3. Hand off to a new session
 
-When no frontier tickets or material fog remain, create a Code Brain plan through `$code-brain-planning`. Link the map from the plan's Precedent and the plan from the map's Outcome.
+Check the current tracker state for every ticket. Proceed when every in-scope ticket is resolved or explicitly cancelled and no material fog remains. Blocked tickets and tickets claimed by another session remain pending until their issues reach one of those outcomes.
 
-If the route is already clear during charting, route directly to `$code-brain-planning`; it creates the implementation plan without a map.
+Identify the first implementation slice: a bounded behavior with a verifiable outcome, small enough for one implementation plan. When a map exists, record its goal and scope in the map's Outcome with planning pending.
 
-Done when the map either links to its implementation plan or explains why the destination was abandoned or superseded.
+Invoke `$handoff` to write a document for a separate session. Supply the source repository path and established base, Code Brain project and map paths, and references to the first slice's scope, supporting ticket notes, and ADRs. Include the following as instructions inside the handoff document:
+
+```md
+## Instructions for the next session
+
+Invoke `$code-brain-planning` to plan the first slice identified in this handoff. Follow that workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
+
+When a wayfinding map exists, link it from the plan's Precedent and link the plan from the map's Outcome once the plan exists.
+```
+
+If the route is already clear during charting, use the same handoff without creating a map; supply the agreed destination and first slice directly.
+
+The session that performed wayfinding reports the handoff document's absolute path and stops. Do not invoke `$code-brain-planning` or draft an implementation plan in that session; the instructions above are handoff content for the new session to execute.
+
+Done when the handoff document contains the next-session instructions, its absolute path has been reported, the map records the next slice when a map exists, and planning has not started in the wayfinding session; or the map explains why the destination was abandoned or superseded.
