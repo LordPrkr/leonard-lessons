@@ -15,7 +15,7 @@ Read [map and ticket formats](./references/FORMATS.md) before creating or changi
 ## Terms
 
 - **Map:** one `wayfinding/<NNN_TOPIC>/map.md` file that names the destination and indexes resolved decisions.
-- **Ticket:** one note under its map's `tickets/` directory linked to one issue in the configured tracker; it resolves one decision or directly unblocks one.
+- **Ticket:** one note under its map's `tickets/` directory linked to one issue in the configured tracker; it resolves one focused decision or directly unblocks one, sized to one agent session. Split questions that exceed that bound into linked tickets with explicit dependencies, including when their scope grows during investigation.
 - **Frontier:** unresolved, unblocked tickets available to work under the confirmed tracker workflow.
 - **Fog:** in-scope uncertainty that cannot yet be stated as a ticket question.
 
@@ -35,7 +35,7 @@ Done when the destination, initial frontier, known blockers, fog, and out-of-sco
 2. Resolve according to type:
    - **Grilling:** ask the user one decision at a time. Do not answer on their behalf.
    - **Research:** use primary sources and record cited findings in the ticket note.
-   - **Prototype:** build and run the smallest disposable prototype that answers the ticket's question; record the command and observed result in the ticket note, then remove prototype-only changes.
+   - **Prototype:** follow the [prototype workflow](./references/PROTOTYPES.md) for an experiment or a discussion that requires human feedback.
    - **Task:** perform only the narrow manual work needed to unblock a decision.
 3. Record the answer, evidence, and consequences in the ticket note. Add a one-line linked gist to the map's Decisions section.
 4. Resolve the issue through the confirmed workflow. Promote newly precise fog into ticket notes and linked issues; update or close issues invalidated by the decision, distinguishing cancellation from resolution according to tracker conventions.
@@ -44,7 +44,7 @@ Done when the selected ticket has a durable resolution, every material claim has
 
 ## 3. Hand off to planning
 
-When no frontier tickets or material fog remain, create a Code Brain plan through `$code-brain-planning`. Link the map from the plan's Precedent and the plan from the map's Outcome.
+Check the current tracker state for every ticket. When every in-scope ticket is resolved or explicitly cancelled and no material fog remains, create a Code Brain plan through `$code-brain-planning`. Blocked tickets and tickets claimed by another session remain pending until their issues reach one of those outcomes. Link the map from the plan's Precedent and the plan from the map's Outcome.
 
 If the route is already clear during charting, route directly to `$code-brain-planning`; it creates the implementation plan without a map.
 
