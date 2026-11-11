@@ -27,6 +27,8 @@ Use Code Brain for work that needs a durable plan and approval gate. `code-brain
 
 For a settled effort that needs a scoped tracker project or multiple delivery stories, `code-brain-slicing` drafts a project brief and user stories or technical outcomes with acceptance criteria, tasks, dependencies, and decision references. It confirms the project and backlog together before reusing or creating the tracker project and publishing its story issues. A compact index records the project URL or ID and story links beside the wayfinding map as `slices.md`, or in `notes/<topic>-slices.md` without a map. Wayfinder selects the next session's entry skill before writing the handoff: slicing for remaining project or backlog setup, or planning for an already agreed, bounded slice. The handoff contains only the selected route's instructions; the receiving session follows that route.
 
+After slicing, invoke `code-brain-dispatch` with the slice index or tracker project to launch a fresh T3 Code thread for each ready ticket. The coordinator prepares temporary handoffs, assigns isolated T3 worktrees, and rechecks the graph as work finishes so newly unblocked tickets receive their own threads. Each ticket enters `code-brain-planning` and retains its explicit plan approval gate. Dependencies unlock under the tracker's completion rules and required integration evidence. Dispatch resumes through supported T3 notifications or an explicit invocation when a needed transition has no notification; it does not install background schedules.
+
 ### Project spine
 
 Each initialized project has three entry points:
@@ -72,6 +74,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to plan and implement the first slice.
 - `code-brain-slicing` defines an approved scoped tracker project and its delivery stories, with a Code Brain index and a first slice ready for planning.
+- `code-brain-dispatch` hands each ready story to a fresh T3 Code thread and coordinates newly unblocked stories without duplicating existing assignments.
 - `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
@@ -114,6 +117,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
 | `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` when needed and `$code-brain-planning` in the next session |
 | `$code-brain-slicing` | `$code-brain` and the project's configured issue-tracker tooling; `$code-brain-planning` for the resulting slice |
+| `$code-brain-dispatch` | `$code-brain`, `$code-brain-planning` and its dependencies, T3 Code thread tools, and the project's configured issue-tracker tooling; `$code-brain-slicing` when publication is incomplete |
 | `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
@@ -198,6 +202,15 @@ Install `$code-brain-slicing`, `$code-brain-planning`, and their dependencies fo
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-slicing --global
+  ```
+
+- `code-brain-dispatch` — hand ready delivery tickets to isolated T3 Code
+  threads, then dispatch newly unblocked tickets as prerequisites finish.
+  Ticket threads retain planning approval and delivery review requirements.
+
+  ```bash
+  # Install the collection for planning and delivery dependencies; see the table above for external tools.
+  bunx skills add LordPrkr/leonard-lessons --global --all
   ```
 
 - `agents-md` — create or refactor AGENTS.md files with progressive
