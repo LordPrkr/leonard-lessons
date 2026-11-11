@@ -9,14 +9,14 @@ The session that performed wayfinding selects one route before invoking `$handof
 
 ## Write the selected route
 
-Create one `Instructions for the next session` section using exactly one entry block below, followed by the shared continuation. Replace placeholders with inspected references and the concrete scope. Omit the unused entry block and the selection rules from the generated document. Order suggested skills to match the selected entry and its fixed continuation.
+Create one `Instructions for the next session` section using exactly one entry block below. Replace placeholders with inspected references and the concrete scope. Omit the unused entry block and the selection rules from the generated document. Order suggested skills to match the selected entry and its continuation.
 
 ### Slicing entry
 
 ```md
 ## Instructions for the next session
 
-Invoke `$code-brain-slicing` for <effort and source references> to define and confirm the scoped tracker project and delivery stories. Once publication is complete and slicing returns the first unblocked, agreed story and its index, invoke `$code-brain-planning` with those inputs to plan that slice.
+Invoke `$code-brain-slicing` for <effort and source references> to define and confirm the scoped tracker project and delivery stories. After publication, follow slicing's prompt asking whether the user is ready to dispatch. On confirmation, invoke `$code-brain-dispatch` with the published index and project so each ready slice begins implementation planning in its own T3 Code thread. If dispatch is deferred, stop with the published references.
 ```
 
 ### Planning entry
@@ -27,12 +27,12 @@ Invoke `$code-brain-slicing` for <effort and source references> to define and co
 Invoke `$code-brain-planning` for <named first slice and its concrete references> to create its implementation plan.
 ```
 
-### Shared continuation
+### Planning continuation
 
-Append this to the selected entry block:
+Append this only to the planning entry block; the slicing route follows its dispatch decision instead:
 
 ```md
 Follow the planning workflow's review and explicit user approval steps, then implement and verify the approved slice through the same workflow. Leave later slices for subsequent work.
 ```
 
-When a wayfinding map exists, also append a direct instruction naming its actual path: link that map from the plan's Precedent and link the resulting plan from the map's Outcome. Without a map, omit that instruction.
+When a wayfinding map exists, also append a direct instruction naming its actual path: link that map from each resulting plan's Precedent and link the plan from the map's Outcome. For the slicing route, carry this instruction into dispatched handoffs. Without a map, omit that instruction.
