@@ -4,7 +4,7 @@ Include these instructions in each ticket's launch message along with its handof
 
 Work on the assigned ticket only, in the worktree bound by T3. Read the repository instructions, handoff references, canonical issue, and current prerequisites before planning. If readiness or the selected base is stale, report the discrepancy to the coordinator and hold affected work.
 
-Invoke `$code-brain-planning` with the ticket and slice index. Preserve its review, explicit plan approval, implementation, review, and receipt requirements. The user-approved backlog authorizes the slice's scope; implementation still requires approval of its concrete plan. Continue an existing applicable plan through its remaining gates rather than duplicating it.
+Begin implementation planning now by invoking `$code-brain-planning` with the ticket and slice index; receiving this handoff is the instruction to start, without another readiness confirmation. Preserve its review, explicit plan approval, implementation, review, and receipt requirements. The user-approved backlog authorizes the slice's scope; implementation still requires approval of its concrete plan. Continue an existing applicable plan through its remaining gates rather than duplicating it.
 
 Parallel ticket threads share the Code Brain project. When allocating a new numbered plan folder, create it exclusively; if another thread claims that number first, rescan and choose the next number. Preserve other tickets' index and router links when writing shared artifacts.
 

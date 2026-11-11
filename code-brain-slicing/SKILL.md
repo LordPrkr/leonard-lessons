@@ -39,7 +39,7 @@ This approval authorizes the agreed project and backlog. Implementation still re
 
 Done when the user has approved the project brief, tracker destination, reuse or creation, breakdown, and initial ordering, every exclusion or deferral is explicit, and all remaining blockers are recorded against the affected stories.
 
-## 4. Publish and return the first slice
+## 4. Publish the slices
 
 Recheck for the selected or matching scoped project before creating one, then reuse it or create the approved grouping through the configured workflow. Publish the approved brief in the project description or equivalent, preserving unrelated content, and retain its URL or stable ID. If project operations are unavailable, report the access or capability gap and keep publication pending.
 
@@ -49,6 +49,14 @@ Find or create one delivery issue per approved story, reusing an issue for the s
 
 If publication is partial, report the retained project and issue references and remaining work, and leave planning pending.
 
-Once publication is complete, check the current tracker state and return the first unblocked, available story and the index path as inputs for `$code-brain-planning`. If no story is available, report the blockers and leave planning pending.
+Once publication is complete, check the current tracker state and identify every unblocked, available story. If no story is available, report the blockers and leave dispatch pending.
 
-Done when the approved project exists, every approved story is published in it with verified membership, dependencies, and evidence, the discoverable index records the project reference and its absolute path has been reported, and the next slice is ready for planning or its blockers are explicit. Planning and implementation have not started as part of slicing.
+Done when the approved project exists, every approved story is published in it with verified membership, dependencies, and evidence, the discoverable index records the project reference and its absolute path has been reported, and ready stories or their blockers are explicit.
+
+## 5. Offer dispatch
+
+When stories are ready, present them and ask: "Are you ready to dispatch these slices to T3 Code threads for implementation planning?" Wait for the user's answer before launching threads. Approval of the project and backlog in step 3 does not answer this question. If the user has already explicitly requested dispatch after publication, use that authorization without asking again.
+
+On confirmation, invoke `$code-brain-dispatch` with the published slice index and tracker project. Each dispatched thread begins `$code-brain-planning` for its assigned slice; the slicing session becomes the graph coordinator. Implementation retains the separate plan approval gate. If the user declines or defers, return the index and project references and stop before planning or dispatch. If no story is available, retain those references and report what must unblock before dispatch can begin.
+
+Done when dispatch has been explicitly authorized and entered with the published references, or the user has deferred it or no story is ready and the next action is clear. Slicing itself has not planned or implemented a slice.
