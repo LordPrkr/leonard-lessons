@@ -17,7 +17,7 @@ Verified work → finalize-implementation → GitHub PR
 Delivery → code-scry <fixed-point>
 ```
 
-Use `domain-modeling` when clarification settles durable terminology or an architectural decision. Each approved plan runs in a fresh implementation subagent with only its plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
+Each approved plan runs in a fresh implementation subagent with only its plan, never the preceding conversation. If the route is unclear, invoke `mystical-tutor`.
 
 ## Code Brain workflow
 
@@ -70,12 +70,10 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 
 ### Supporting workflows
 
-- `domain-modeling` promotes stable terms and hard-to-reverse decisions into the glossary or terse ADRs.
 - `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
 - `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to slice the effort or plan an already bounded slice.
 - `code-brain-slicing` defines an approved scoped tracker project and its delivery stories, with a Code Brain index, then asks whether to dispatch ready slices to T3 Code threads for implementation planning.
 - `code-brain-dispatch` hands each ready story to a fresh T3 Code thread and coordinates newly unblocked stories without duplicating existing assignments.
-- `dreaming` deduplicates session transcripts into reviewable memories before promoting high-confidence knowledge.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
 - `code-scry` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
@@ -114,22 +112,20 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
-| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming`, `$domain-modeling`, `$dreaming` | `$code-brain`                                                                                                                               |
+| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming` | `$code-brain`                                                                                                                               |
 | `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` and confirmed `$code-brain-dispatch` when needed, or `$code-brain-planning` in the next session |
 | `$code-brain-slicing` | `$code-brain` and the project's configured issue-tracker tooling; `$code-brain-dispatch` and its dependencies for confirmed dispatch, `$code-brain-planning` for a bounded slice without project setup |
 | `$code-brain-dispatch` | `$code-brain`, `$code-brain-planning` and its dependencies, T3 Code thread tools, and the project's configured issue-tracker tooling; `$code-brain-slicing` when publication is incomplete |
-| `$follow-precedent` | Source repository access |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$follow-precedent`, `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
+| `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
-| `$draft-message` | `$spellbinding-sentences` and a local clipboard tool |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
 | `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
-| `$code-scry` | `$follow-precedent`, `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
+| `$code-scry` | `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
 
-Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, and their dependencies for the session that receives Wayfinder's handoff. Install `$domain-modeling` with dreaming when it must capture glossary terms or ADRs. Install the skills that `$mystical-tutor` should route to.
+Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, and their dependencies for the session that receives Wayfinder's handoff. Install the skills that `$mystical-tutor` should route to.
 
 - `mystical-tutor` — recommend the next Leonard Lessons skill and show where
   it leads without starting the work.
@@ -153,20 +149,12 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-writeback --global
   ```
 
-- `code-brain-distill` — classify reusable plan, review, and dream findings with
+- `code-brain-distill` — classify reusable plan and review findings with
   the Diátaxis compass and promote them into canonical Code Brain documentation.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-distill --global
-  ```
-
-- `follow-precedent` — shared contract for establishing applicable implementation
-  and test patterns, disclosing necessary deviations, and auditing plans, code,
-  and proposed review fixes.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   ```
 
 - `effective-engineer` — lightweight implementation guidance that invokes
@@ -274,7 +262,6 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   with its [MIT license notice](./code-scry/LICENSE).
 
   ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
   ```
@@ -297,7 +284,6 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill feature-branch --global
-  bunx skills add LordPrkr/leonard-lessons --skill follow-precedent --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
@@ -321,14 +307,6 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill clarity --global
   ```
 
-- `draft-message` — draft a technical message, iterate on your feedback, and
-  copy the exact approved version to your clipboard without sending it.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
-  bunx skills add LordPrkr/leonard-lessons --skill draft-message --global
-  ```
-
 - `spellbinding-sentences` — write explanatory technical docs for readers with
   strong engineering fundamentals. Verify facts, explain failures through a
   concrete scenario, and state trade-offs when the reader needs to choose.
@@ -346,25 +324,6 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill spellbinding-sentences --global
   bunx skills add LordPrkr/leonard-lessons --skill technical-design-proposal --global
   ```
-
-- `domain-modeling` — Code Brain glossary and ADR capture for domain language
-  and durable decisions.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
-  ```
-
-- `dreaming` — synthesize local Pi session transcripts into evidence-backed
-  Code Brain provenance, then route high-confidence findings to their durable
-  owners.
-
-  ```bash
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
-  bunx skills add LordPrkr/leonard-lessons --skill domain-modeling --global
-  bunx skills add LordPrkr/leonard-lessons --skill dreaming --global
-  ```
-
 ## Other Useful Skills
 
 ### [t3dotgg/tstack](https://github.com/t3dotgg/tstack)

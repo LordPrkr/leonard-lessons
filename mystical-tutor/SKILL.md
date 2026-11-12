@@ -32,15 +32,13 @@ Use `$gh-pr-review-plan` for reviewer feedback and `$code-scry` for source revie
 Route directly when the named artifact or discipline is the user's goal:
 
 - **Initialize, audit, or reconcile Code Brain** → `$code-brain`.
-- **Capture domain terms, bounded contexts, or ADRs** → `$domain-modeling`.
 - **Add diagrams to an existing Code Brain plan** → `$code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `$agents-md`.
 - **Draft or revise explanatory technical writing** → `$spellbinding-sentences`.
 - **Commit, push, and prepare verified work for review** → `$finalize-implementation`.
-- **Curate Pi sessions into durable memory** → `$dreaming`.
-- **Distill plan, review, or dream artifacts into repo-wide documentation** → `$code-brain-distill`.
+- **Distill plan or review artifacts into repo-wide documentation** → `$code-brain-distill`.
 
-`$domain-modeling` and `$code-brain-diagramming` support another flow unless their artifact is the requested outcome. `$code-brain` prepares or repairs the workspace; use `$code-brain-planning` for the work itself.
+`$code-brain-diagramming` supports another flow unless its artifact is the requested outcome. `$code-brain` prepares or repairs the workspace; use `$code-brain-planning` for the work itself.
 
 ## Answer
 

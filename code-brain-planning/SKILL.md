@@ -16,7 +16,7 @@ Done when each affected repository's planning checkout reflects the latest versi
 
 ## 2. Create the plan from precedent
 
-Invoke `$follow-precedent` to establish applicable patterns and `$spellbinding-sentences` for the plan's prose.
+Establish precedent from the closest existing implementations, callers, and tests with the same responsibility, trust boundary, and lifecycle. Invoke `$spellbinding-sentences` for the plan's prose.
 
 Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `$code-brain`'s plan authoring contract before writing `plan.md`. Use [the plan template](./references/TEMPLATE.md). Keep each plan small enough for one implementation subagent; split larger work into separate plans before approval.
 
@@ -30,7 +30,7 @@ Done when `plan.md` stands alone for a fresh implementation subagent, summarizes
 
 ## 3. Review
 
-Always spawn a read-only reviewer subagent to adversarially review the plan. Give it the standalone plan and source repository locations. Instruct it to look for security concerns, invoke `$follow-precedent` to identify deviations from repository style and precedent, and confirm that an agent with no prior knowledge can understand and implement the plan.
+Always spawn a read-only reviewer subagent to adversarially review the plan. Give it the standalone plan and source repository locations. Instruct it to look for security concerns, identify undisclosed or unjustified deviations from repository style and precedent, and confirm that an agent with no prior knowledge can understand and implement the plan.
 
 Incorporate accepted findings into the plan.
 
