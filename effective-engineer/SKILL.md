@@ -17,7 +17,7 @@ Complete when: the work has a delivery owner and an independently provisioned wo
 
 ### 1. Implement
 
-Invoke $tdd
+Implement the requested behavior with the tests that applicable precedent expects.
 
 Done when the requested behavior is implemented with the smallest diff consistent with applicable precedent and authorized deviations.
 
