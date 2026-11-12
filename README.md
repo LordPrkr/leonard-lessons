@@ -367,6 +367,35 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
 
 ## Other Useful Skills
 
+### [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
+
+- `council` - gather feedback from three models across different providers and repeat reviews until they agree.
+- `sol-loop` - review changes with GPT Sol until both agents agree.
+- `full-send` - verify, review, file, monitor, and merge a pull request.
+- `full-stop` - follow the full-send workflow and stop when the pull request is ready for you to merge.
+- `file-pr` - create a concise pull request description that explains the problem.
+- `takeover` - finish an existing pull request, branch, or agent thread while preserving attribution.
+- `babysit-pr` - monitor pull request checks and reviews and fix actionable findings.
+- `modernize` - rebase an old pull request and assess whether it should still proceed.
+- `leaving-pr-comments` - format comments posted on your behalf on GitHub.
+
+Install all nine skills globally to include their dependencies:
+
+```bash
+bunx skills add t3dotgg/tstack --skill '*' --global --yes
+```
+
+To install only council:
+
+```bash
+bunx skills add t3dotgg/tstack --skill council --global --yes
+```
+
+The GitHub workflows require an authenticated `gh` CLI; `babysit-pr` also
+requires `python3`. Council and Sol Loop require a harness that can delegate
+to the requested models. Council needs three different providers; T3 Code
+supports this through `delegate_task`.
+
 ### [modem-dev/hunk](https://github.com/modem-dev/hunk)
 
 - `hunk-review` - walk through a changeset or review code using Hunk.
