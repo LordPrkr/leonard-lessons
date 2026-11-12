@@ -335,6 +335,14 @@ bunx skills add t3dotgg/tstack --skill council --global --yes
 Council requires a harness that can delegate to models from three different
 providers. T3 Code supports this through `delegate_task`.
 
+### [humanlayer/skills](https://github.com/humanlayer/skills)
+
+- `show-me` - explain the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.
+
+```bash
+bunx skills add humanlayer/skills --skill show-me --global --yes
+```
+
 ### [modem-dev/hunk](https://github.com/modem-dev/hunk)
 
 - `hunk-review` - walk through a changeset or review code using Hunk.
