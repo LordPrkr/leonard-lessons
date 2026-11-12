@@ -21,7 +21,7 @@ status: draft
 
 - `<package or package subdirectory>` — <What changes there, in one line.>
 
-<!-- Place any diagrams supplied by $code-brain-diagramming beside the section they clarify. -->
+<!-- Link explanation.md here when $code-brain-diagramming records one. -->
 
 ## Outcome
 

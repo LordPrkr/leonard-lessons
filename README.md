@@ -39,7 +39,7 @@ $CODE_BRAIN_ROOT/<repo>/
 ├── AGENTS.md                 # agent-maintained router to active memory
 ├── ISSUE_TRACKER.md          # project-specific tracker and confirmed workflow
 ├── docs/                     # distilled tutorials, how-to, reference, and explanation
-├── plans/<NNN_TOPIC>/        # plan, notes, diagrams, and receipt
+├── plans/<NNN_TOPIC>/        # plan, notes, explanation, and receipt
 ├── wayfinding/<NNN_TOPIC>/   # decision maps and tickets
 ├── todo/                     # durable context for unplanned work
 ├── domain/                   # glossary, context maps, and ADRs
@@ -60,7 +60,7 @@ When the user supplies or changes tracker information, `code-brain` inspects rep
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle.
 
-Plans use concise problem and goal summaries, a brief precedent summary referencing repository paths and definitions, and a Scope listing the affected packages or package subdirectories. Planning invokes `code-brain-diagramming` for inline Mermaid diagrams when a visual clarifies the design. Precedent omits source revisions.
+Plans use concise problem and goal summaries, a brief precedent summary referencing repository paths and definitions, and a Scope listing the affected packages or package subdirectories. Planning invokes `code-brain-diagramming` when a visual clarifies the design; it records a `show-me` explanation as `explanation.md` beside the plan. Precedent omits source revisions.
 
 Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. Approval is a separate step for resolving questions and departures from precedent with the user in chat and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
@@ -70,7 +70,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 
 ### Supporting workflows
 
-- `code-brain-diagramming` selects and authors inline Mermaid diagrams in the plan they explain.
+- `code-brain-diagramming` invokes `show-me` on a plan and records the result in `explanation.md` beside it.
 - `code-brain-wayfinder` resolves uncertain, multi-session work as decision tickets linked to tracker issues, then invokes `handoff` for a new session to slice the effort or plan an already bounded slice.
 - `code-brain-slicing` defines an approved scoped tracker project and its delivery stories, with a Code Brain index, then asks whether to dispatch ready slices to T3 Code threads for implementation planning.
 - `code-brain-dispatch` hands each ready story to a fresh T3 Code thread and coordinates newly unblocked stories without duplicating existing assignments.
@@ -112,13 +112,14 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
-| `$code-brain-distill`, `$code-brain-writeback`, `$code-brain-diagramming` | `$code-brain`                                                                                                                               |
+| `$code-brain-distill`, `$code-brain-writeback` | `$code-brain`                                                                                                                               |
+| `$code-brain-diagramming` | `$code-brain` and external `$show-me` |
 | `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` and confirmed `$code-brain-dispatch` when needed, or `$code-brain-planning` in the next session |
 | `$code-brain-slicing` | `$code-brain` and the project's configured issue-tracker tooling; `$code-brain-dispatch` and its dependencies for confirmed dispatch, `$code-brain-planning` for a bounded slice without project setup |
 | `$code-brain-dispatch` | `$code-brain`, `$code-brain-planning` and its dependencies, T3 Code thread tools, and the project's configured issue-tracker tooling; `$code-brain-slicing` when publication is incomplete |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch` and `$finalize-implementation`                                                                                            |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
+| `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming` and its external `$show-me`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
 | `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
@@ -274,7 +275,7 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
 
 - `code-brain-planning` — approval-first Code Brain planning grounded in
   applicable precedent. Each plan states the problem, goal, precedent, and
-  affected package scope, invoking `code-brain-diagramming` when a diagram
+  affected package scope, invoking `code-brain-diagramming` when a visual
   clarifies the design. Separate subagents implement the approved plan and
   review the delivered changes; closure creates a three-section receipt.
 
@@ -285,15 +286,17 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
+  bunx skills add humanlayer/skills --skill show-me --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
-- `code-brain-diagramming` — make Code Brain plans skimmable with inline
-  Mermaid diagrams for behavior changes, flows, states, and dependencies.
+- `code-brain-diagramming` — invoke `show-me` on a Code Brain plan and record
+  the visual explanation in `explanation.md` beside `plan.md`.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
+  bunx skills add humanlayer/skills --skill show-me --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-diagramming --global
   ```
 
@@ -337,7 +340,7 @@ providers. T3 Code supports this through `delegate_task`.
 
 ### [humanlayer/skills](https://github.com/humanlayer/skills)
 
-- `show-me` - explain the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.
+- `show-me` - explain the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts. Required by `code-brain-diagramming`.
 
 ```bash
 bunx skills add humanlayer/skills --skill show-me --global --yes

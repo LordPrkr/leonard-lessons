@@ -32,7 +32,7 @@ Use `$gh-pr-review-plan` for reviewer feedback and `$code-scry` for source revie
 Route directly when the named artifact or discipline is the user's goal:
 
 - **Initialize, audit, or reconcile Code Brain** → `$code-brain`.
-- **Add diagrams to an existing Code Brain plan** → `$code-brain-diagramming`.
+- **Explain an existing Code Brain plan visually** → `$code-brain-diagramming`.
 - **Create or refactor AGENTS.md** → `$agents-md`.
 - **Draft or revise explanatory technical writing** → `$spellbinding-sentences`.
 - **Commit, push, and prepare verified work for review** → `$finalize-implementation`.

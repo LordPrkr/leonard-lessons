@@ -1,60 +1,42 @@
 ---
 name: code-brain-diagramming
-description: "Use when a Code Brain plan needs an inline Mermaid diagram to clarify behavior changes, execution order, states, or dependencies."
+description: "Use when a Code Brain plan needs a visual explanation of behavior changes, execution order, states, or dependencies."
 ---
 
 # Code Brain Diagramming
 
-Make a Code Brain plan skimmable with the smallest set of inline Mermaid
-diagrams that explains its behavior. Use `$code-brain` for project resolution
-and the [plan authoring contract](../code-brain/references/PLAN-CONTRACT.md)
-for revisions and approval status.
+Record a visual explanation of a Code Brain plan beside it. Use `$code-brain`
+for project resolution and the
+[plan authoring contract](../code-brain/references/PLAN-CONTRACT.md) for
+revisions and approval status.
 
 ## Steps
 
-### 1. Ground the diagram
+### 1. Ground the explanation
 
 Use the plan supplied by the user or calling workflow. Without a named plan,
 list active plans and continue automatically only when exactly one exists;
 otherwise ask the user to choose. Exclude implemented, abandoned, and superseded
 plans from automatic selection. Read the selected `plan.md`, linked context
-notes, and relevant source files before choosing a diagram.
+notes, and relevant source files.
 
 Distinguish observed current behavior from proposed behavior; raise unresolved
-design choices with the user instead of drawing them.
+design choices with the user instead of depicting them.
 
 Done when the target plan is unambiguous and every behavior or relationship to
 depict is supported by the plan or inspected source.
 
-### 2. Choose the view
+### 2. Invoke show-me
 
-Choose a diagram only when it answers a question more clearly than prose:
+Invoke `$show-me` with the plan as the current topic.
 
-- Use a flowchart for routing, data flow, ownership, or dependencies.
-- Use a sequence diagram when interactions and execution order matter.
-- Use a state diagram when allowed transitions are the subject.
-- For behavior changes, use a before-and-after view following
-  [the comparison example](./references/COMPARISON.md).
+Done when `$show-me` has produced its explanation of the plan.
 
-Group by behavior rather than file. Give each diagram a descriptive heading
-and one question to answer; keep independent changes in separate views. Leave
-simple edits as prose when a diagram would only repeat the plan's Goal or Scope.
+### 3. Record the explanation
 
-Done when every selected view has a distinct purpose and changes that need
-only prose remain understandable without a diagram.
+Write the explanation to `explanation.md` in the plan's folder, replacing any
+previous version. Save any HTML artifact in the same folder and link it from
+`explanation.md`. Link `explanation.md` from `plan.md`.
 
-### 3. Draw inline
-
-Write fenced `mermaid` blocks directly in `plan.md`, beside the behavior they
-explain. Use short, concrete node labels and label edges when their condition
-or meaning would otherwise be unclear. State the intended outcome in a short
-caption. Put the affected packages or package subdirectories immediately below
-the diagram so location details do not crowd the nodes.
-
-Prefer top-to-bottom flows at ordinary document width. Keep each view small
-enough to scan without zooming; split dense diagrams by behavior. Use text
-labels to distinguish current, proposed, added, or removed behavior so meaning
-does not depend on color.
-
-Done when every diagram is inline, readable on its own, and accompanied by
-enough location detail for a fresh implementation agent to find the change.
+Done when `explanation.md` sits beside `plan.md`, contains the complete
+explanation, and is linked from the plan.
