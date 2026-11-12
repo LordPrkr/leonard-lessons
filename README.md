@@ -367,6 +367,17 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
 
 ## Other Useful Skills
 
+### [t3dotgg/tstack](https://github.com/t3dotgg/tstack)
+
+- `council` - gather feedback from three models across different providers and repeat reviews until they agree.
+
+```bash
+bunx skills add t3dotgg/tstack --skill council --global --yes
+```
+
+Council requires a harness that can delegate to models from three different
+providers. T3 Code supports this through `delegate_task`.
+
 ### [modem-dev/hunk](https://github.com/modem-dev/hunk)
 
 - `hunk-review` - walk through a changeset or review code using Hunk.
