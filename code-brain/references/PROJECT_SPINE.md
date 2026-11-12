@@ -1,6 +1,6 @@
 # Project Spine
 
-Use these templates when `$code-brain` initializes a project without `VISION.md`. See [`EXAMPLE_AGENTS.md`](./EXAMPLE_AGENTS.md) for a filled router. Do not bulk-create project files. Replace placeholders, omit router links to notes that do not exist, obtain the user's explicit confirmation before writing `VISION.md`, and follow [issue-tracker setup](./ISSUE-TRACKER.md) before writing tracker configuration.
+Replace placeholders and omit links to notes that do not exist.
 
 ## `VISION.md`
 
@@ -29,22 +29,13 @@ Use these templates when `$code-brain` initializes a project without `VISION.md`
 ```md
 # <Project> Code Brain
 
-Read [VISION.md](./VISION.md) before changing strategy. [ISSUE_TRACKER.md](./ISSUE_TRACKER.md) defines where work is tracked and how to use that tracker.
-
-## Start here
-- [Vision](./VISION.md)
-- [Issue tracker](./ISSUE_TRACKER.md)
+Read [VISION.md](./VISION.md) before changing strategy and [ISSUE_TRACKER.md](./ISSUE_TRACKER.md) before tracker work.
 
 ## Active plans
-- <Relative link to each non-closed plan, or `None.`>
+- <Relative link to each open plan, or `None.`>
 
 ## Canonical memory
-- <Relative links to existing context, notes, or resources; omit this section when empty.>
-
-## Maintenance
-- Keep this file a router, not a backlog.
-- Keep tracked task status in the configured issue tracker.
-- Add plans when work starts; remove them when work closes.
+- [Docs](./docs/README.md)
 ```
 
 ## `ISSUE_TRACKER.md`
@@ -53,18 +44,14 @@ Read [VISION.md](./VISION.md) before changing strategy. [ISSUE_TRACKER.md](./ISS
 # <Project> Issue Tracker
 
 ## Location and access
-<Tracker, allowed parent scope such as a repository or team URL/identifier, default project when present, and available tools or commands.>
+<Tracker, allowed scope, default project, and tools or commands.>
 
 ## Scoped delivery projects
-<Confirmed grouping for a bounded effort: project, epic, parent issue, or agreed alternative. Record how to find or create it, where creation is allowed, how story/task issues are associated, how membership is queried, and any access or capability limits.>
+<How a bounded effort is grouped (project, epic, or parent issue), created, and queried for membership.>
 
 ## Workflow
-<Confirmed conventions for finding and creating issues, issue structure, ownership, ordering, status transitions, dependencies, and resolution or cancellation.>
-
-## Code Brain context
-<How issues reference durable context and how notes record issue URLs or stable IDs.>
+<Confirmed conventions for creating, claiming, ordering, linking, and closing issues.>
 
 ## Evidence
-- <Representative issue or workflow-guidance link, observed convention, and inspection date.>
-- <User-confirmed choice or explicit evidence gap, when applicable.>
+- <Representative issue link or user-confirmed choice.>
 ```

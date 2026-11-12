@@ -1,21 +1,21 @@
 ---
 date: "<YYYY-MM-DD>"
-status: draft
+status: draft # draft | approved | implemented | abandoned | superseded
 ---
 
 # <Plan title>
 
 ## Problem
 
-<One or two concise sentences about the problem.>
+<One or two sentences.>
 
 ## Goal
 
-<One or two concise sentences about the desired outcome.>
+<One or two sentences.>
 
 ## Precedent
 
-<Brief summary of the patterns to reuse, referencing repository paths and definitions.>
+<Patterns to reuse, referencing repository paths and definitions.>
 
 ## Scope
 
@@ -23,4 +23,4 @@ status: draft
 
 ## Outcome
 
-<Leave empty until finalization; then link receipt.md.>
+<Empty until closing; then link receipt.md.>
