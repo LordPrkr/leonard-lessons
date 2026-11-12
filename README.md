@@ -116,7 +116,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` and confirmed `$code-brain-dispatch` when needed, or `$code-brain-planning` in the next session |
 | `$code-brain-slicing` | `$code-brain` and the project's configured issue-tracker tooling; `$code-brain-dispatch` and its dependencies for confirmed dispatch, `$code-brain-planning` for a bounded slice without project setup |
 | `$code-brain-dispatch` | `$code-brain`, `$code-brain-planning` and its dependencies, T3 Code thread tools, and the project's configured issue-tracker tooling; `$code-brain-slicing` when publication is incomplete |
-| `$effective-engineer`                                                                                                                                 | `$feature-branch`, `$finalize-implementation`, and external `$tdd` skill                                                                  |
+| `$effective-engineer`                                                                                                                                 | `$feature-branch` and `$finalize-implementation`                                                                                            |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
 | `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-diagramming`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
@@ -158,11 +158,10 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   ```
 
 - `effective-engineer` — lightweight implementation guidance that invokes
-  `feature-branch`, `tdd`, and `finalize-implementation`, with proportionate checks
+  `feature-branch` and `finalize-implementation`, with proportionate checks
   and escalation for blocked repairs.
 
   ```bash
-  bunx skills@latest add mattpocock/skills/skills/engineering/tdd --global
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   ```
 
@@ -351,12 +350,6 @@ bunx skills@latest add modem-dev/hunk/skills/hunk-review
 
 ```bash
 bunx skills@latest add mattpocock/skills/skills/productivity/handoff --global
-```
-
-- `tdd` - test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
-
-```bash
-bunx skills@latest add mattpocock/skills/skills/engineering/tdd
 ```
 
 - `resolving-merge-conflicts` - use when you need to resolve an in-progress git merge/rebase conflict.
