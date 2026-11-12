@@ -27,7 +27,7 @@ Use these sections in order: Problem, Goal, Context, Precedent, Deviations, File
 - **Goal:** one or two concise sentences about the desired outcome.
 - **Context:** one or two concise sentences summarizing the user's specific ask.
 - **Precedent:** briefly summarize applicable patterns with references to repository paths and definitions. Omit source revisions.
-- **Deviations:** record necessary departures and their authorization or requested decisions using `$follow-precedent`'s disclosure fields, including conflicts and search gaps.
+- **Deviations:** for each necessary departure, state the existing pattern or recorded search gap, the requirement or concrete failure it cannot accommodate, the smallest departure, its behavior and compatibility consequences, and its authorization or requested decision. Include conflicting examples.
 
 Resolve implementation choices before approval; keep unanswered decisions visible in Questions. Present the current design without superseded alternatives.
 

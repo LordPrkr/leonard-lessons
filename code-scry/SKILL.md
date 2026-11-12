@@ -3,7 +3,7 @@ name: code-scry
 description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
 ---
 
-**Follow precedent.** Invoke `$follow-precedent` before reviewing. Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them.
+**Follow precedent.** Existing implementation and test patterns are enforceable Standards sources even when no prose standard documents them. A precedent applies only when it matches the change's responsibility, trust boundary, and lifecycle. A departure is justified only by a task requirement or concrete failure the pattern cannot accommodate, limited to the smallest necessary difference, and authorized by the task or an approved decision.
 
 Two-axis review of a GitHub PR or the diff between `HEAD` and a fixed point the user supplies:
 
@@ -61,17 +61,17 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 - **Middle Man**: a class or function that mostly just delegates onward. → cut it, call the real target direct.
 - **Refused Bequest**: a subclass or implementer that ignores or overrides most of what it inherits. → drop the inheritance, use composition.
 
-**Complete when:** documented standards and candidate precedent sources are listed with pinned references, any search gaps or conflicts are explicit, disclosed deviations have authorization evidence or an explicit gap, and the shared contract and smell baseline are ready to include in the Standards prompt.
+**Complete when:** documented standards and candidate precedent sources are listed with pinned references, any search gaps or conflicts are explicit, disclosed deviations have authorization evidence or an explicit gap, and the Follow precedent rule and smell baseline are ready to include in the Standards prompt.
 
 ### 4. Spawn both sub-agents in parallel
 
-Give both sub-agents the pinned review scope from step 1 and paste the full Follow precedent contract and [finding format](#finding-format) below into their prompts. For a PR, pass the saved diff and PR metadata rather than a command against local `HEAD`. Each brief's word limit applies to prose; proposed diffs are additional.
+Give both sub-agents the pinned review scope from step 1 and paste the Follow precedent rule above and the [finding format](#finding-format) below into their prompts. For a PR, pass the saved diff and PR metadata rather than a command against local `HEAD`. Each brief's word limit applies to prose; proposed diffs are additional.
 
 **Standards sub-agent prompt** should include:
 
 - The saved diff or full diff command using pinned SHAs, and the commit list.
 - The standards and precedent sources, pinned pre-change revision, disclosed deviations, and authorization evidence from step 3, **plus the smell baseline** pasted into the prompt (the sub-agent has no other access to it).
-- The brief: "Apply Follow precedent to every substantive implementation, validation, and test choice in the pinned diff, including the affected module's test conventions. Report every documented-standard violation with its source and rule. For each unjustified or unauthorized pattern departure, cite the pre-change path and symbol, explain applicability, identify the difference, and propose the smallest correction. Verify authorization against the task or an approved decision. Demonstrated pattern breaches are Standards violations even without a written rule. Report baseline smells as judgement calls subject to the precedence rules. Apply the shared contract to proposed fixes too. Skip anything tooling enforces. Return all findings, precedent coverage, and inspection limits; keep prose concise without truncating findings to meet a word budget."
+- The brief: "Apply Follow precedent to every substantive implementation, validation, and test choice in the pinned diff, including the affected module's test conventions. Report every documented-standard violation with its source and rule. For each unjustified or unauthorized pattern departure, cite the pre-change path and symbol, explain applicability, identify the difference, and propose the smallest correction. Verify authorization against the task or an approved decision. Demonstrated pattern breaches are Standards violations even without a written rule. Report baseline smells as judgement calls subject to the precedence rules. Apply Follow precedent to proposed fixes too. Skip anything tooling enforces. Return all findings, precedent coverage, and inspection limits; keep prose concise without truncating findings to meet a word budget."
 
 **Spec sub-agent prompt** should include:
 
@@ -85,13 +85,13 @@ If the spec is missing, skip the Spec sub-agent and note this in the final repor
 
 ### 5. Aggregate
 
-Invoke `$spellbinding-sentences` and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns completion of the complete-diff audit required by Follow precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings for the final chat response. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+Invoke `$spellbinding-sentences` and apply its writing workflow to each finding's explanation. Check each actionable finding against the [finding format](#finding-format), completing any missing proposed diff from the pinned source. Verify that each proposed correction follows cited precedent or an authorized deviation. Standards owns the complete-diff audit against precedent. Preserve the evidence, uncertainty, and proposed correction while revising the prose. Prepare the two reports under `## Standards` and `## Spec` headings for the final chat response. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
 
 Inspect the pinned diff and supporting source for the [manual review priorities](review-summary.md#manual-review-priorities), including changes with no Standards or Spec findings. Trace affected contracts, consumers, database operations, and request call sites far enough to explain their consequences. Record changed, unchanged, or unverified status for every applicable category, with source evidence for each changed area.
 
 Record each axis's finding count and worst issue, or its skip or failure. Include the precedent sources checked, authorized deviations, and unresolved gaps or conflicts in Standards coverage. Keep these assessments separate; inspection limits preclude a claim of full precedent conformance.
 
-**Complete when:** every actionable finding and proposed fix satisfies the finding format and shared precedent contract, Standards and Spec reports are ready separately with their counts and assessments, and precedent coverage and every applicable manual review category are accounted for with evidence or an explicit inspection limit.
+**Complete when:** every actionable finding and proposed fix satisfies the finding format and Follow precedent, Standards and Spec reports are ready separately with their counts and assessments, and precedent coverage and every applicable manual review category are accounted for with evidence or an explicit inspection limit.
 
 ### 6. Stage GitHub PR comments
 

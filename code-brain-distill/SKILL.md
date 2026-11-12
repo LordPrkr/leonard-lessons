@@ -1,7 +1,7 @@
 ---
 name: code-brain-distill
 disable-model-invocation: true
-description: "Distill plan, review, and dream artifacts into discoverable repo-wide Code Brain documentation."
+description: "Distill plan and review artifacts into discoverable repo-wide Code Brain documentation."
 ---
 
 # Code Brain Distill
@@ -10,7 +10,7 @@ Turn activity-scoped evidence into canonical project documentation. Follow `$cod
 
 ## 1. Select sources
 
-Use explicit artifact paths when supplied. Otherwise scan `plans/**/plan.md`, `plans/**/notes.md`, `review/*.md`, and `notes/dreams/*.md`. Read existing `docs/`, relevant `domain/` context and ADRs, and `resources/` before extracting candidates.
+Use explicit artifact paths when supplied. Otherwise scan `plans/**/plan.md`, `plans/**/notes.md`, and `review/*.md`. Read existing `docs/`, relevant `domain/` context and ADRs, and `resources/` before extracting candidates.
 
 Done when every selected artifact and existing canonical destination that could already own its lessons is known.
 
@@ -18,7 +18,7 @@ Done when every selected artifact and existing canonical destination that could 
 
 Retain only evidence-backed findings reusable beyond the originating task: repository conventions, stable architecture or behavior, recurring procedures, operational hazards, and explanations of constraints or tradeoffs. Reject task status, one-off implementation detail, transient failures, guesses, and claims whose repository evidence no longer matches `HEAD`.
 
-Deduplicate by normalized claim and applicability boundary. Treat `Documentation candidates`, review `Lessons`, and high-confidence dream memories as strong leads, not automatic truth.
+Deduplicate by normalized claim and applicability boundary. Treat `Documentation candidates` and review `Lessons` as strong leads, not automatic truth.
 
 Done when every retained candidate is current, reusable, evidence-backed, and absent from or materially improves canonical memory.
 
