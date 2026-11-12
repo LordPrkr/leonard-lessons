@@ -124,7 +124,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
 | `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
 | `$code-scry` | `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
-| `$gh-pr-job-triage`                                                                                                                                   | `gh` and Pi subagents                                                                                                                       |
+| `$gh-pr-job-triage`                                                                                                                                   | `gh`, `awk`, and `rg`; optional read-only subagents for parallel jobs |
 
 Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, and their dependencies for the session that receives Wayfinder's handoff. Install the skills that `$mystical-tutor` should route to.
 
@@ -232,8 +232,8 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-review-plan --global
   ```
 
-- `gh-pr-job-triage` — classify failed pull-request jobs with parallel,
-  evidence-gathering scout subagents.
+- `gh-pr-job-triage` — classify failed pull-request jobs from annotations
+  and failing-step log excerpts pulled with token-lean `gh` commands.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill gh-pr-job-triage --global
