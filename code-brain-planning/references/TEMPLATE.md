@@ -21,10 +21,6 @@ status: draft
 
 - `<package or package subdirectory>` — <What changes there, in one line.>
 
-## Explanation
-
-See [explanation.md](./explanation.md) for an illustration of the problem and proposed solution.
-
 ## Outcome
 
 <Leave empty until finalization; then link receipt.md.>

@@ -38,7 +38,7 @@ Route directly when the named artifact or discipline is the user's goal:
 - **Commit, push, and prepare verified work for review** → `$finalize-implementation`.
 - **Distill plan or review artifacts into repo-wide documentation** → `$code-brain-distill`.
 
-`$code-brain-explain` supports another flow unless its artifact is the requested outcome. `$code-brain` prepares or repairs the workspace; use `$code-brain-planning` for the work itself.
+`$code-brain` prepares or repairs the workspace; use `$code-brain-planning` for the work itself.
 
 ## Answer
 

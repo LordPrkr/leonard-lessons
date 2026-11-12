@@ -60,7 +60,7 @@ When the user supplies or changes tracker information, `code-brain` inspects rep
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle.
 
-Plans use concise problem and goal summaries, a brief precedent summary referencing repository paths and definitions, and a Scope listing the affected packages or package subdirectories. Planning always invokes `code-brain-explain`, which records a `show-me` illustration of the problem and proposed solution as `explanation.md` beside the plan. Precedent omits source revisions.
+Plans use concise problem and goal summaries, a brief precedent summary referencing repository paths and definitions, and a Scope listing the affected packages or package subdirectories. Invoke `code-brain-explain` on a plan to record a `show-me` illustration of its problem and proposed solution as `explanation.md` beside it. Precedent omits source revisions.
 
 Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. Approval is a separate step for resolving questions and departures from precedent with the user in chat and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
@@ -119,7 +119,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-brain-dispatch` | `$code-brain`, `$code-brain-planning` and its dependencies, T3 Code thread tools, and the project's configured issue-tracker tooling; `$code-brain-slicing` when publication is incomplete |
 | `$effective-engineer`                                                                                                                                 | `$feature-branch` and `$finalize-implementation`                                                                                            |
 | `$finalize-implementation`                                                                                                                            | `$feature-branch`, `$conventional-commit-message`, `$spellbinding-sentences`, `gh`, and external `$resolving-merge-conflicts` when a rebase conflicts                                                   |
-| `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$code-brain-explain` and its external `$show-me`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
+| `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
 | `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
@@ -275,8 +275,7 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
 
 - `code-brain-planning` — approval-first Code Brain planning grounded in
   applicable precedent. Each plan states the problem, goal, precedent, and
-  affected package scope, with a `code-brain-explain` illustration of the
-  problem and proposed solution. Separate subagents implement the approved plan and
+  affected package scope. Separate subagents implement the approved plan and
   review the delivered changes; closure creates a three-section receipt.
 
   ```bash
@@ -286,8 +285,6 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills add LordPrkr/leonard-lessons --skill effective-engineer --global
   bunx skills add LordPrkr/leonard-lessons --skill finalize-implementation --global
   bunx skills add LordPrkr/leonard-lessons --skill code-scry --global
-  bunx skills add humanlayer/skills --skill show-me --global
-  bunx skills add LordPrkr/leonard-lessons --skill code-brain-explain --global
   bunx skills add LordPrkr/leonard-lessons --skill code-brain-planning --global
   ```
 
