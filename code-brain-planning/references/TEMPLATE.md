@@ -21,8 +21,6 @@ status: draft
 
 - `<package or package subdirectory>` — <What changes there, in one line.>
 
-<!-- Place any diagrams supplied by $code-brain-diagramming beside the section they clarify. -->
-
 ## Outcome
 
 <Leave empty until finalization; then link receipt.md.>

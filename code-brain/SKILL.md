@@ -38,7 +38,7 @@ $CODE_BRAIN_ROOT/<repo>/
 └── review/
 ```
 
-Create optional directories and artifacts lazily. Keep each plan and its notes, diagrams, canvases, and receipt in its numbered folder.
+Create optional directories and artifacts lazily. Keep each plan and its notes, explanation, canvases, and receipt in its numbered folder.
 
 Whenever any workflow creates a Code Brain artifact, immediately report its resolved absolute filesystem path to the user. Report every path when one step creates several artifacts. Keep links inside Code Brain portable and relative; absolute paths belong in the user-facing creation report. An artifact-creation step is complete only after every new artifact's absolute path has been reported.
 

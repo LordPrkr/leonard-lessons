@@ -22,9 +22,7 @@ Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.
 
 When planning a delivery story, read its full acceptance criteria and current dependencies. Link the story from Problem and make Goal cover every criterion. Link the resulting plan beside the story in its slice index when one exists.
 
-Invoke `$code-brain-diagramming` when a diagram would clarify behavior changes, routing, execution order, states, or dependencies. Supply the draft plan and source repository locations; that skill owns diagram selection and inline Mermaid authoring.
-
-Done when `plan.md` stands alone for a fresh implementation subagent, summarizes applicable precedent, lists the affected scope, includes diagrams where they clarify the design, and fits one implementation subagent.
+Done when `plan.md` stands alone for a fresh implementation subagent, summarizes applicable precedent, lists the affected scope, and fits one implementation subagent.
 
 ## 3. Approval
 
