@@ -20,41 +20,31 @@ Establish precedent from the closest existing implementations, callers, and test
 
 Ensure the Code Brain project is initialized; invoke `$code-brain` when `VISION.md` is absent. Scan `plans/`, create the next `plans/<NNN_TOPIC>/` folder, and read `$code-brain`'s plan authoring contract before writing `plan.md`. Use [the plan template](./references/TEMPLATE.md). Keep each plan small enough for one implementation subagent; split larger work into separate plans before approval.
 
-When planning a delivery story, read its full acceptance criteria and current dependencies. Link the story from Context, account for every criterion in Implementation and Test Strategy, and record unresolved prerequisites in Questions. Link the resulting plan beside the story in its slice index when one exists.
-
-Summarize applicable precedent using the shared authoring contract. In `Deviations`, record necessary departures and their authorization or the decision requested, including search gaps and conflicting examples.
+When planning a delivery story, read its full acceptance criteria and current dependencies. Link the story from Problem and make Goal cover every criterion. Link the resulting plan beside the story in its slice index when one exists.
 
 Invoke `$code-brain-diagramming` when a diagram would clarify behavior changes, routing, execution order, states, or dependencies. Supply the draft plan and source repository locations; that skill owns diagram selection and inline Mermaid authoring.
 
-Done when `plan.md` stands alone for a fresh implementation subagent, summarizes applicable precedent and necessary deviations, identifies unanswered questions, includes diagrams where they clarify the design, and fits one implementation subagent.
+Done when `plan.md` stands alone for a fresh implementation subagent, summarizes applicable precedent, lists the affected scope, includes diagrams where they clarify the design, and fits one implementation subagent.
 
-## 3. Review
+## 3. Approval
 
-Always spawn a read-only reviewer subagent to adversarially review the plan. Give it the standalone plan and source repository locations. Instruct it to look for security concerns, identify undisclosed or unjustified deviations from repository style and precedent, and confirm that an agent with no prior knowledge can understand and implement the plan.
+Raise open questions, unresolved story prerequisites, and any necessary departure from precedent with the user, and reflect each answer in the plan. Present the exact standalone plan and wait for explicit approval. Explicit approval sets `status: approved`; a substantive revision restores `draft` and requires approval again. Remove abandoned or superseded plans from Active plans. An implemented plan is immutable; later work receives a new folder.
 
-Incorporate accepted findings into the plan.
+Done when the plan is approved with every question resolved and every departure explicitly authorized, or its status honestly records abandonment or supersession.
 
-Done when the reviewer has returned its findings and accepted findings are reflected in the plan.
-
-## 4. Approval
-
-Resolve Questions with the user and record their answers following the shared contract. Present the exact standalone plan, including its deviations and their consequences, and wait for explicit approval. Approval covers disclosed departures only. Explicit approval sets `status: approved`; a substantive revision restores `draft` and repeats review. Remove abandoned or superseded plans from Active plans. An implemented plan is immutable; later work receives a new folder.
-
-Done when the plan is approved with every departure explicitly authorized and no unresolved precedent conflict, or its status honestly records abandonment or supersession.
-
-## 5. Implement
+## 4. Implement
 
 Delegate implementation to a worker subagent with the approved plan and an instruction to invoke `$effective-engineer`.
 
 Done when the worker returns the finalized pull request and verification results, or reports its blockers.
 
-## 6. Verify
+## 5. Verify
 
 Delegate review to a reviewer subagent with the delivered pull request or committed branch comparison, the approved plan as its spec, and an instruction to invoke `$code-scry`.
 
 Done when review is complete and actionable findings are resolved, or remaining blockers are reported.
 
-## 7. Close
+## 6. Close
 
 Create `receipt.md` using [the receipt format](./references/RECEIPT.md) and link it from Outcome. Set `status: implemented` and remove the plan from Active plans only after verified delivery, finalization, and the receipt are complete. Blocked or partial work remains `approved`; report its blockers in chat.
 
