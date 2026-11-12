@@ -28,9 +28,6 @@ flowchart LR
 Irrelevant events stay outside the release queue, so they cannot displace a
 queued publish.
 
-**Location:** `path/to/workflow.yml` — workflow routing and publish-job
-concurrency. Replace this illustrative path and behavior with the target
-plan's inspected locations and conditions.
-
-The diagram explains the behavior; the accompanying change entry records any
-implementation choices that the picture leaves implicit.
+**Scope:** `.github/workflows` — workflow routing and publish-job concurrency.
+Replace this illustrative scope and behavior with the target plan's affected
+packages and inspected conditions.

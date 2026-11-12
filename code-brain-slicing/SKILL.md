@@ -35,7 +35,7 @@ Done when the project brief defines the effort's boundaries and completion condi
 
 Present the project brief, target tracker scope, proposed project reuse or creation, complete stories, acceptance criteria, tasks, dependencies, deferrals, and recommended first slice or blockers. Resolve questions about scope, granularity, and ordering with the user, then obtain explicit approval for the project and backlog together before creating or changing tracker projects or issues.
 
-This approval authorizes the agreed project and backlog. Implementation still requires the separate plan review and approval in `$code-brain-planning`.
+This approval authorizes the agreed project and backlog. Implementation still requires the separate plan approval in `$code-brain-planning`.
 
 Done when the user has approved the project brief, tracker destination, reuse or creation, breakdown, and initial ordering, every exclusion or deferral is explicit, and all remaining blockers are recorded against the affected stories.
 

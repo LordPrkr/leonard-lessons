@@ -60,9 +60,9 @@ When the user supplies or changes tracker information, `code-brain` inspects rep
 
 All `code-brain-planning` plans live under `plans/<NNN_TOPIC>/plan.md` and use `date` and `status` frontmatter with the shared `draft`, `approved`, `implemented`, `abandoned`, and `superseded` lifecycle.
 
-Plans use concise problem, goal, and request summaries, a brief precedent summary referencing repository paths and definitions, a file tree marked `M` for modified, `A` for added, and `D` for deleted, behavior change entries with implementation locations, and a proportionate test strategy. Planning invokes `code-brain-diagramming` for inline Mermaid diagrams when a visual clarifies the design. Precedent omits source revisions. Answered questions retain their struck-through wording and documented answers.
+Plans use concise problem and goal summaries, a brief precedent summary referencing repository paths and definitions, and a Scope listing the affected packages or package subdirectories. Planning invokes `code-brain-diagramming` for inline Mermaid diagrams when a visual clarifies the design. Precedent omits source revisions.
 
-Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. A read-only reviewer subagent checks security, repository precedent, and whether an agent with no prior knowledge can implement the plan. Approval is a separate step for resolving questions with the user and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
+Planning uses the latest base established in the conversation, or a clean `main` checkout updated with `git pull --ff-only origin main` when no base is known. The orchestrator gathers precedent and drafts the plan with `spellbinding-sentences`. Approval is a separate step for resolving questions and departures from precedent with the user in chat and obtaining explicit approval. Split larger work into separate plans that each fit one subagent.
 
 A worker subagent implements the approved plan through `effective-engineer`, which owns workspace provisioning, verification, and finalization. A separate reviewer subagent then invokes `code-scry` with the approved plan as its spec.
 
@@ -273,11 +273,10 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   locally installed `parallel-pr-review` skill.
 
 - `code-brain-planning` — approval-first Code Brain planning grounded in
-  applicable precedent. Each plan describes behavior changes and implementation
-  locations, a test strategy, and authorized deviations, invoking
-  `code-brain-diagramming` when a diagram clarifies the design. Separate subagents
-  review the plan, implement it, and review the delivered changes; closure creates
-  a three-section receipt.
+  applicable precedent. Each plan states the problem, goal, precedent, and
+  affected package scope, invoking `code-brain-diagramming` when a diagram
+  clarifies the design. Separate subagents implement the approved plan and
+  review the delivered changes; closure creates a three-section receipt.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global

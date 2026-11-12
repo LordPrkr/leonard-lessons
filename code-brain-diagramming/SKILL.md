@@ -20,8 +20,8 @@ otherwise ask the user to choose. Exclude implemented, abandoned, and superseded
 plans from automatic selection. Read the selected `plan.md`, linked context
 notes, and relevant source files before choosing a diagram.
 
-Distinguish observed current behavior from proposed behavior; keep unresolved
-design choices visible in the plan's Questions.
+Distinguish observed current behavior from proposed behavior; raise unresolved
+design choices with the user instead of drawing them.
 
 Done when the target plan is unambiguous and every behavior or relationship to
 depict is supported by the plan or inspected source.
@@ -38,7 +38,7 @@ Choose a diagram only when it answers a question more clearly than prose:
 
 Group by behavior rather than file. Give each diagram a descriptive heading
 and one question to answer; keep independent changes in separate views. Leave
-simple edits as prose when a diagram would only repeat the change entry.
+simple edits as prose when a diagram would only repeat the plan's Goal or Scope.
 
 Done when every selected view has a distinct purpose and changes that need
 only prose remain understandable without a diagram.
@@ -48,8 +48,8 @@ only prose remain understandable without a diagram.
 Write fenced `mermaid` blocks directly in `plan.md`, beside the behavior they
 explain. Use short, concrete node labels and label edges when their condition
 or meaning would otherwise be unclear. State the intended outcome in a short
-caption. Put repository-relative paths and affected definitions immediately
-below the diagram so implementation details do not crowd the nodes.
+caption. Put the affected packages or package subdirectories immediately below
+the diagram so location details do not crowd the nodes.
 
 Prefer top-to-bottom flows at ordinary document width. Keep each view small
 enough to scan without zooming; split dense diagrams by behavior. Use text
