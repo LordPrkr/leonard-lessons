@@ -5,28 +5,20 @@ description: "Use for direct code changes or implementation delegated from an ap
 
 # Effective Engineer
 
-## Delivery
+Invoke `$feature-branch` before editing, and ask the user before anything needing credentials, private-registry access, an unexpected lockfile change, a destructive command, or a departure from the approved plan.
 
-Invoke $feature-branch before changing implementation files.
+## 1. Implement
 
-Ask for help before proceeding when repair requires credentials or private-registry access, unexpectedly changes the lockfile or package source, needs a privileged or destructive command, or conflicts with the approved plan's design or scope.
+Implement the request with the smallest diff and the tests that applicable precedent expects.
 
-Complete when: the work has a delivery owner and an independently provisioned workspace.
+Done when the behavior and its tests exist.
 
-## Steps
+## 2. Verify
 
-### 1. Implement
+Run targeted checks, then the repository-mandated aggregate checks proportionate to the blast radius.
 
-Implement the requested behavior with the tests that applicable precedent expects.
+Done when required checks pass, or a blocker is reported with the failed command and the decision needed.
 
-Done when the requested behavior is implemented with the smallest diff consistent with applicable precedent and authorized deviations.
+## 3. Deliver
 
-### 2. Verify
-
-Run targeted checks first, then repository-mandated aggregate checks or the full suite when feasible and proportionate to the blast radius.
-
-Done when required checks pass, or a hard boundary has been escalated with the failed command, attempted repair, and smallest decision needed.
-
-### 3. Deliver
-
-Invoke $finalize-implementation
+Invoke `$finalize-implementation`.

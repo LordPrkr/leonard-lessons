@@ -5,41 +5,16 @@ description: "Draft or revise explanatory technical writing, including design do
 
 # Spellbinding Sentences
 
-Explain what happens, why it happens, and what the reader should do next.
+Explain what happens, why, and what the reader should do next, for strong engineers who may not know this codebase unless the user names another audience.
 
-## Steps
+1. Ground every factual claim in inspected evidence or label it unverified, and preserve the original claims and scope when revising.
+2. Lead each section with its conclusion, then explain the mechanism by naming who or what acts, the code path involved, and what follows. When the reader must choose, give each option's costs and the conditions that favor it.
+3. Explain a bug through one concrete scenario that first establishes the distinction it depends on, and keep untested status beside any proposed fix.
+4. Keep one claim per paragraph in active voice with familiar words, replacing coined labels with the behavior they describe and vague scale with observable numbers.
 
-### 1. Establish what the reader needs
+Done when a reader could explain why the system behaves as described, and every sentence supports its paragraph's claim.
 
-Write for the audience the user names. Otherwise assume readers with strong engineering fundamentals who may not know the local domain or codebase. Explain the unfamiliar concepts they need to follow the argument.
-
-When revising, preserve the original claims, scope, and uncertainty unless the user requests new substance.
-
-Use the evidence already available, keeping clear which claims have been verified. Inspect relevant sources when adding factual claims or resolving ambiguous or conflicting evidence. Label assumptions and claims that remain unverified.
-
-Done when the draft addresses the chosen audience, each factual claim has evidence or explicit uncertainty, and revisions preserve the requested scope.
-
-### 2. Explain how it works
-
-Start each section with its conclusion, change, or proposal. Explain the behavior that supports that point: who or what acts, what it does, and what follows. Name the code path, service, dependency, or condition behind important claims so the reader can connect the explanation to the system.
-
-When the reader must choose, explain each relevant option's benefits, costs, and the conditions that favor it.
-
-For a bug or proposed fix, apply [Explaining failures and fixes](references/FAILURES.md).
-
-Done when the reader can explain why the system behaves as described and has enough information to make any required choice.
-
-### 3. Remove what adds no meaning
-
-Keep one claim per paragraph. Each sentence should support, qualify, or advance that claim. Remove background the audience already knows.
-
-Untangle a dense sentence by stating its simplest true claim, then restoring the conditions and reasons needed to explain it. Use as many sentences as the explanation needs.
-
-Use active verbs and familiar words. Replace invented labels with the behavior they describe. For claims about scale or speed, give numbers or conditions the reader could observe. Keep technical detail that changes what the reader understands or chooses.
-
-Done when each sentence supports its paragraph's claim and the edits preserve the facts, conditions, and reasons behind the conclusion.
-
-## Example: explain why the choice matters
+## Example
 
 Too compressed:
 
@@ -47,4 +22,4 @@ Too compressed:
 
 Explanatory:
 
-> A cache makes reads faster by keeping a second copy of data closer to the caller. Once that copy exists, an update to the primary store and an update to the cache may occur at different times or one may fail. Expiration limits how long stale data can survive, but shorter expiration also sends more traffic to the primary store. The right policy depends on the consequence of staleness: an old profile photo may be acceptable, while an old account balance may not be.
+> A cache makes reads faster by keeping a second copy of data closer to the caller. An update to the primary store and to the cache can land at different times, or one can fail. Expiration limits how long stale data survives, but shorter expiration sends more traffic to the primary store. The right policy depends on the cost of staleness: an old profile photo may be fine, while an old account balance may not.

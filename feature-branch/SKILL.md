@@ -5,12 +5,6 @@ description: "Feature-branch selection and independently provisioned worktree se
 
 # Feature Branch
 
-## Choose the delivery workspace
+Keep the current feature branch when the work belongs to it; otherwise create a branch named after repository precedent, asking only when ownership of the branch or existing changes is unclear. Work in an independently provisioned worktree for that branch, running the repository's documented install command there and using only its dependencies.
 
-Inspect the intended work, repository status, current and default branches, any open pull request, and recent local, remote, and merged-pull-request branch names. Classify existing changes as related, unrelated, or unclear. Keep related changes with the intended work. For unrelated changes, use a clean worktree or ask before switching or creating branches; ask for ownership when the relationship is unclear.
-
-If the current branch is the default branch and the worktree boundary is safe, create a feature branch whose name follows repository precedent and describes the work. If the current branch is already a feature branch and the work clearly belongs to its commits or pull request, keep it. If ownership is unclear, ask whether to use the current branch or create a new one. Ask for a branch name only when repository precedent and the work provide no clear name.
-
-Create or select an independently provisioned worktree for that branch. Use the repository-documented package-manager setup command there, preserve the lockfile, and use only that worktree's dependencies and generated artifacts for builds and tests.
-
-**Complete when:** every intended change and no unrelated change is assigned to a feature branch in an independently provisioned worktree, ready to validate against its own dependencies and artifacts.
+**Complete when:** every intended change, and no unrelated change, is on a feature branch in its own provisioned worktree.
