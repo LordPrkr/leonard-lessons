@@ -122,7 +122,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 | `$code-brain-planning`                                                                                                                                | `$effective-engineer`, `$code-scry`, `$feature-branch`, `$finalize-implementation`, `$code-brain`, `$spellbinding-sentences`, Git and reviewer subagents; `gh` for PR review |
 | `$clarity` | `$spellbinding-sentences` |
 | `$technical-design-proposal`                                                                                                                          | `$spellbinding-sentences`                                                                                                               |
-| `$gh-pr-review-plan` | `gh`, `$code-brain`, and `$code-brain-writeback` |
+| `$gh-pr-review-plan` | Git, `gh`, `$code-brain`, and `$code-brain-writeback` |
 | `$code-scry` | `$spellbinding-sentences`, Git and parallel subagents; `gh` for GitHub PRs; repository issue-tracker tooling when fetching an issue |
 | `$gh-pr-job-triage`                                                                                                                                   | `gh`, `awk`, and `rg`; optional read-only subagents for parallel jobs |
 
@@ -222,9 +222,9 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills@latest add mattpocock/skills/skills/engineering/resolving-merge-conflicts --global
   ```
 
-- `gh-pr-review-plan` — use `gh` to collect human reviewer PR comments,
-  persist each assessment and reusable lesson in Code Brain, and plan replies
-  or fixes.
+- `gh-pr-review-plan` — collect and group human review feedback, reuse
+  assessments with matching evidence on reruns, and save a response plan in
+  Code Brain.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
