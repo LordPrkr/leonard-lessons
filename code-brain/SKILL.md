@@ -5,7 +5,7 @@ description: "Code Brain conventions and project spine. Use when initializing or
 
 # Code Brain
 
-Code Brain is durable project memory at `$CODE_BRAIN_ROOT/<repo>/` (default root `~/Documents/Code Brain`); source repositories stay the evidence and implementation surface. Use Pi's Obsidian tools for vault work.
+Code Brain is durable project memory at `$CODE_BRAIN_ROOT/<repo>/` (default root `~/Documents/Code Brain`). Read and write vault Markdown directly through the filesystem. Use the source repository for evidence and implementation.
 
 ## Repository identity
 

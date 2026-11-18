@@ -2,7 +2,7 @@
 
 Public agent skills from Leonard the Orange 🐦‍🔥
 
-These skills provide a bespoke, local-first Pi + Obsidian workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
+These skills provide a local-first workflow. Code Brain stores durable project memory separately from source repositories. Set `CODE_BRAIN_ROOT` to a non-empty vault path or use the default `~/Documents/Code Brain`.
 
 ## Main flow
 
@@ -111,7 +111,7 @@ Install the full repository to satisfy dependencies between Leonard Lessons skil
 
 | Skill or workflow                                                                                                                                     | Required skills and tools                                                                                                                   |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$code-brain`                                                                                                                                         | Pi and Obsidian; access to the selected issue tracker when configuring its workflow                                                        |
+| `$code-brain`                                                                                                                                         | Read and write access to the Code Brain vault; access to the selected issue tracker when configuring its workflow                                                        |
 | `$code-brain-distill`, `$code-brain-writeback` | `$code-brain`                                                                                                                               |
 | `$code-brain-explain` | `$code-brain` and external `$show-me` |
 | `$code-brain-wayfinder` | `$code-brain`, external `$handoff`, and the project's configured issue-tracker tooling; `$code-brain-slicing` and confirmed `$code-brain-dispatch` when needed, or `$code-brain-planning` in the next session |
