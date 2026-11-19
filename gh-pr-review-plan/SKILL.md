@@ -1,11 +1,11 @@
 ---
 name: gh-pr-review-plan
-description: "Assess GitHub pull-request feedback with gh. Use when human reviewers request changes, ask implementation questions, or need evidence-backed replies."
+description: "Assess GitHub pull-request feedback with gh. Use when human or automated reviewers raise findings, request changes, or ask implementation questions."
 ---
 
 # GH PR Review Plan
 
-Turn human review feedback on the current branch's PR into a response plan without implementing fixes. Use `$code-brain` for the `review/pr-<number>-<short-head-sha>-feedback.md` artifact and `$code-brain-writeback` for evidence and revisions. For this workflow, write once after collection, once after assessing each group, and once for the finished plan.
+Turn review feedback on the current branch's PR into a response plan without implementing fixes. Use `$code-brain` for the `review/pr-<number>-<short-head-sha>-feedback.md` artifact and `$code-brain-writeback` for evidence and revisions. For this workflow, write once after collection, once after assessing each group, and once for the finished plan.
 
 ## 1. Pin the PR
 
@@ -17,9 +17,9 @@ Done when the PR number, URL, base, head, and merge base are known.
 
 Use one `gh api graphql` request for the first pages of `reviewThreads` (including each thread's first `comments` page), `reviews`, and PR `comments`. Request `pageInfo { hasNextPage endCursor }` on every connection and follow cursors only where `hasNextPage` is true.
 
-Treat human requests for a change, answer, or decision as actionable, and keep author and bot replies as context. Group requests that share a claim or requested outcome and can be decided using the same evidence. Keep every source URL and its context in the group. Follow [Reuse prior assessments](reuse-assessments.md) to record each group's fingerprint and check any existing assessments for this PR head.
+Evaluate every comment and review summary for findings or requests for a change, answer, or decision, regardless of who posted it. Carry those items forward as actionable; keep routine status updates and purely informational replies as context. Group items that share a claim or requested outcome and can be decided using the same evidence. Keep every source URL and its context in the group. Follow [Reuse prior assessments](reuse-assessments.md) to record each group's fingerprint and check any existing assessments for this PR head.
 
-Done when all connections are exhausted, every actionable request belongs to a group with its full context, and the target and grouped inventory are saved.
+Done when all connections are exhausted, every comment and review summary has been screened, every actionable item belongs to a group with its full context, and the target and grouped inventory are saved.
 
 ## 3. Assess
 
@@ -40,4 +40,4 @@ Acceptance check: <command or observation, when valid>
 Reply: <concise evidence-backed response>
 ```
 
-Done when every actionable request appears in exactly one entry.
+Done when every actionable item appears in exactly one entry.

@@ -75,7 +75,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `code-brain-slicing` defines an approved scoped tracker project and its delivery stories, with a Code Brain index, then asks whether to dispatch ready slices to T3 Code threads for implementation planning.
 - `code-brain-dispatch` hands each ready story to a fresh T3 Code thread and coordinates newly unblocked stories without duplicating existing assignments.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
-- `gh-pr-review-plan` persists human review feedback and evidence-backed lessons under `review/`.
+- `gh-pr-review-plan` persists human and automated review feedback alongside evidence-backed lessons under `review/`.
 - `code-scry` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
@@ -222,9 +222,9 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   bunx skills@latest add mattpocock/skills/skills/engineering/resolving-merge-conflicts --global
   ```
 
-- `gh-pr-review-plan` — collect and group human review feedback, reuse
-  assessments with matching evidence on reruns, and save a response plan in
-  Code Brain.
+- `gh-pr-review-plan` — collect and group review feedback from humans and bots,
+  reuse assessments with matching evidence on reruns, and save a response plan
+  in Code Brain.
 
   ```bash
   bunx skills add LordPrkr/leonard-lessons --skill code-brain --global
