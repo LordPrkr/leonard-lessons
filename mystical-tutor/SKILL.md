@@ -13,7 +13,7 @@ Recommend the next skill and stop, asking one question only when the answer chan
 - **Settled work needing a tracker project or delivery stories** → `$code-brain-slicing`
 - **Clear destination, unresolved decisions** → `$code-brain-wayfinder`
 - **Review a PR or branch since a fixed point** → `$code-scry`
-- **Plan responses to human review comments** → `$gh-pr-review-plan`
+- **Plan responses to PR review feedback** → `$gh-pr-review-plan`
 - **Triage failed PR jobs** → `$gh-pr-job-triage`
 - **Initialize or repair Code Brain** → `$code-brain`
 - **Explain a Code Brain plan visually** → `$code-brain-explain`
