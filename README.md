@@ -76,7 +76,7 @@ After finalization, create `receipt.md` with exactly three sections: Delivery li
 - `code-brain-dispatch` hands each ready story to a fresh T3 Code thread and coordinates newly unblocked stories without duplicating existing assignments.
 - `code-brain-writeback` writes material findings through to activity artifacts as they emerge.
 - `gh-pr-review-plan` persists human and automated review feedback alongside evidence-backed lessons under `review/`.
-- `code-scry` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and stages pending PR comments through `gh`.
+- `code-scry` explains what a PR or committed change accomplishes, directs manual review to contracts, database changes, and new frontend requests with source snippets, reports Standards and Spec findings with proposed diffs, and delivers inline PR comments through `gh`.
 - `code-brain-distill` promotes reusable findings from activity artifacts into canonical, discoverable documentation under `docs/`.
 
 ## Install
@@ -254,9 +254,11 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
   with an overview and directs
   manual review to backend API contracts, database queries and schemas,
   frontend package contracts, and new network requests, with source snippets
-  and concrete checks. GitHub reviews use `gh` to stage pending comments on
-  relevant lines or files. The root review comment gives only a short Standards
-  and Spec outcome; reruns replace the previous agent summary. Skips Spec when
+  and concrete checks. GitHub reviews use `gh` to comment on relevant lines or
+  files. Code-scry immediately submits the review when the authenticated
+  account authored the PR and leaves it pending otherwise. The root review
+  comment gives only a short Standards and Spec outcome. Reruns replace the
+  previous agent summary on pending reviews. Skips Spec when
   the user confirms no spec exists.
   Adapted from [Matt Pocock’s original review skill](https://github.com/mattpocock/skills/blob/5c89081d4bbeb3d039a42093653f90bb698d780e/skills/engineering/code-review/SKILL.md),
   with its [MIT license notice](./code-scry/LICENSE).
@@ -268,8 +270,8 @@ Install `$code-brain-slicing`, `$code-brain-dispatch`, `$code-brain-planning`, a
 
   Invoke `$code-scry main` to compare committed changes with the merge-base
   of `main` and `HEAD`; staged and unstaged changes are outside that comparison.
-  Invoke `$code-scry <PR URL>` to review the PR's own diff and save suggested
-  changes in a pending review for you to submit. Local reviews require a fixed
+  Invoke `$code-scry <PR URL>` to review the PR's own diff and comment on
+  suggested changes in GitHub. Local reviews require a fixed
   point. Reinstall the replacement and remove any old
   locally installed `parallel-pr-review` skill.
 
