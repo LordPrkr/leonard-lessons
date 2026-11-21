@@ -1,6 +1,6 @@
 ---
 name: code-scry
-description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and stages pending inline comments for GitHub PRs through gh."
+description: "Use when reviewing a GitHub PR, a branch, or committed changes since a commit, tag, or merge-base. Enforces applicable precedent through independent Standards and Spec reviews, proposes diffs, and delivers inline comments for GitHub PRs through gh."
 ---
 
 # Code Scry
@@ -33,15 +33,15 @@ Polish each finding with `$spellbinding-sentences` and complete any missing prop
 
 **Complete when:** every actionable finding meets the finding format and every priority category has a status.
 
-## 5. Stage PR comments
+## 5. Deliver PR comments
 
-For a PR, follow [Stage pending comments](github-pr-review.md#stage-pending-comments); skip this for local reviews.
+Follow [Deliver PR comments](github-pr-review.md#deliver-pr-comments) for GitHub reviews.
 
-**Complete when:** every finding is in a verified pending review, linked as already raised, kept in chat, or reported as a delivery failure.
+**Complete when:** every finding is in a verified submitted or pending review, linked as already raised, kept in chat, or reported as a delivery failure.
 
 ## 6. Respond
 
-Open with what the change accomplishes and how. Then give a manual review guide for each changed priority area with a source link, a short real excerpt, its consequence, and a concrete check. End with the separate Standards and Spec reports, their counts, and the pending review link.
+Open with what the change accomplishes and how. Then give a manual review guide for each changed priority area with a source link, a short real excerpt, its consequence, and a concrete check. End with the separate Standards and Spec reports, their counts, and the review link and status when available.
 
 **Complete when:** the user has the overview, manual review guide, both reports, and delivery status.
 
